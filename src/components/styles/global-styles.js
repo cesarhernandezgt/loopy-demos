@@ -1,0 +1,39 @@
+import { createGlobalStyle } from "styled-components"
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background: #282a36;
+    color: #ff80bf;
+  }
+
+  * {
+    font-family: "Source Sans Pro", "Arial", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Source Sans Pro", "Arial Black", sans-serif;
+    color: #ffff80;
+    font-weight: 900;
+  }
+
+  button {
+    outline: none;
+    background: #9580ff;
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+`
+
+export default GlobalStyles
