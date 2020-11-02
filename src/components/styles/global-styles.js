@@ -27,12 +27,8 @@ const GlobalStyles = createGlobalStyle`
 
   button {
     outline: none;
-    background: #9580ff;
     border: none;
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    font-weight: bold;
+    background: none;
   }
 `
 

@@ -18,13 +18,24 @@ const levelToRotationMap = [
   "150deg",
 ]
 
+/**
+ * For the knobs to align with their respective centers,
+ * the label (1rem) and its top margin (0.5rem) need to be
+ * offset.
+ */
+const marginTop = "1.5rem"
+
 const StyledKnobContainer = styled.div`
+  --rotation: ${({ rotation }) => rotation};
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  position: relative;
 
   > svg {
-    transform: rotate(${({ rotation }) => rotation});
+    transform: rotate(var(--rotation));
+    margin-top: ${marginTop};
+    transition: transform 0.2s ease-in;
   }
 
   > span {
@@ -33,7 +44,41 @@ const StyledKnobContainer = styled.div`
   }
 `
 
-const Knob = ({ size = 64, label = "", level = 5, type = "bakelit" }) => (
+const StyledDot = styled.div`
+  --parentSize: ${({ parentSize }) => parentSize}px;
+  --dotSize: 0.5rem;
+  --rotation: ${({ level }) => level};
+  border-radius: 50%;
+  width: var(--dotSize);
+  height: var(--dotSize);
+  background: #80ffea;
+  position: absolute;
+  top: calc(var(--dotSize) / 2);
+  left: calc(50% - (var(--dotSize) / 2));
+  transform-origin: calc(var(--dotSize) / 2)
+    calc((var(--parentSize) - var(--dotSize)) / 2 + ${marginTop});
+  transform: rotate(var(--rotation));
+
+  :after {
+    content: " ";
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #80ffea;
+    box-sizing: border-box;
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+  }
+`
+
+const Knob = ({
+  size = 64,
+  label = "",
+  level = 5,
+  type = "bakelit",
+  levelOptions = [],
+}) => (
   <StyledKnobContainer rotation={levelToRotationMap[level]}>
     {
       {
@@ -42,6 +87,9 @@ const Knob = ({ size = 64, label = "", level = 5, type = "bakelit" }) => (
       }[type]
     }
     <span>{label}</span>
+    {levelOptions.map(levelOption => (
+      <StyledDot parentSize={size} level={levelToRotationMap[levelOption]} />
+    ))}
   </StyledKnobContainer>
 )
 
