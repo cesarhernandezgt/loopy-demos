@@ -62,20 +62,28 @@ const StyledControlsGrid = styled.div`
   }
 `
 
-const Pedal = ({ config = { knobs: [] }, settings = {} }) => {
+const Pedal = ({
+  config = { knobs: [] },
+  settings = {},
+  sweep = {},
+  onSelectSweep = () => {},
+}) => {
   const [isOn, setIsOn] = useState(false)
 
   return (
     <StyledPedalContainer>
       <StyledControlsGrid>
         {config.knobs.map(({ label, size, id }) => (
-          <Knob key={label} label={label} size={size} level={settings[id]} />
+          <Knob
+            id={id}
+            key={id}
+            label={label}
+            size={size}
+            level={settings[id]}
+            onSelectOption={onSelectSweep}
+            levelOptions={sweep?.target === id ? sweep.values : []}
+          />
         ))}
-        {/* <Knob label="Gain" level={5} levelOptions={[0, 4, 5, 7, 9, 10]} />
-        <Knob label="Volume" level={5} levelOptions={[0, 5, 8]} />
-        <Knob label="Bias" level={8} size={48} levelOptions={[3, 5, 8]} />
-        <Knob label="Bass" level={0} size={48} />
-        <Knob label="Treble" size={48} /> */}
         <Led isOn={isOn} />
         <StompSwitch
           onClick={() => {

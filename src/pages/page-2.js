@@ -33,6 +33,14 @@ const presets = [
   },
   { id: "treble_boost", label: "Treble Boost" },
   { id: "low_gain_sparkle", label: "Low Gain Sparkle" },
+  {
+    id: "gain_sweep",
+    label: "Gain Sweep",
+    isSweep: true,
+    target: "gain",
+    values: [0, 3, 5, 7, 8, 10],
+    initialValue: 0,
+  },
 ]
 
 const SecondPage = () => (
@@ -41,7 +49,6 @@ const SecondPage = () => (
     <h1>Pedal Config Prototype</h1>
     <p>This is me trying to configure a pedal demo</p>
     <Demo config={pedalConfig} presets={presets} />
-    <Link to="/">Go back to the homepage</Link>
   </Layout>
 )
 

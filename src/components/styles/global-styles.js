@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
 
     background: #282a36;
-    color: #ff80bf;
+    color: white;
   }
 
   * {
@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
   h5,
   h6 {
     font-family: "Source Sans Pro", "Arial Black", sans-serif;
-    color: #ffff80;
+    color:#FFFF80;
     font-weight: 900;
   }
 

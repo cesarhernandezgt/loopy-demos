@@ -44,7 +44,7 @@ const StyledKnobContainer = styled.div`
   }
 `
 
-const StyledDot = styled.div`
+const StyledDotButton = styled.div`
   --parentSize: ${({ parentSize }) => parentSize}px;
   --dotSize: 0.5rem;
   --rotation: ${({ level }) => level};
@@ -58,6 +58,7 @@ const StyledDot = styled.div`
   transform-origin: calc(var(--dotSize) / 2)
     calc((var(--parentSize) - var(--dotSize)) / 2 + ${marginTop});
   transform: rotate(var(--rotation));
+  cursor: pointer;
 
   :after {
     content: " ";
@@ -73,10 +74,12 @@ const StyledDot = styled.div`
 `
 
 const Knob = ({
+  id = "",
   size = 64,
   label = "",
   level = 5,
   type = "bakelit",
+  onSelectOption = () => {},
   levelOptions = [],
 }) => (
   <StyledKnobContainer rotation={levelToRotationMap[level]}>
@@ -88,7 +91,13 @@ const Knob = ({
     }
     <span>{label}</span>
     {levelOptions.map(levelOption => (
-      <StyledDot parentSize={size} level={levelToRotationMap[levelOption]} />
+      <StyledDotButton
+        parentSize={size}
+        onClick={() => {
+          onSelectOption({ [id]: levelOption })
+        }}
+        level={levelToRotationMap[levelOption]}
+      />
     ))}
   </StyledKnobContainer>
 )

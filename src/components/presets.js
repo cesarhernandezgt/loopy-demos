@@ -15,12 +15,13 @@ const Presets = ({
   activePresetId = "",
 }) => (
   <StyledPresetsContainer>
-    {presets.map(({ label, settings, id }) => (
+    {presets.map(({ label, settings, id, isSweep }) => (
       <Preset
         key={id}
         id={id}
         label={label}
         active={id === activePresetId}
+        isSweep={isSweep}
         settings={settings}
         onSelect={onSelect}
       />
