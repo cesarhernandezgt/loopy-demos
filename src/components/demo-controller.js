@@ -9,6 +9,8 @@ const DemoController = ({ config = {}, presets = [] }) => {
   useEffect(() => {
     if (activePreset.isSweep) {
       setSweepSetting({ [activePreset.target]: activePreset.initialValue })
+    } else {
+      setSweepSetting({})
     }
   }, [activePreset])
 
