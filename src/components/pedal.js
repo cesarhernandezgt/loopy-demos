@@ -7,19 +7,20 @@ import StompSwitch from "./svg/stomp-switch"
 
 const StyledPedalContainer = styled.div`
   padding: 0.5rem 1rem 2rem;
-  width: 300px;
+  width: 250px;
   box-sizing: border-box;
   margin: 1rem auto;
   border-radius: 10px;
+  position: relative;
 
-  background: #0b4c74;
+  background: #1a72a8;
 `
 
 const StyledControlsGrid = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 33.33%);
-  grid-template-rows: repeat(3, 90px) 150px;
+  grid-template-rows: repeat(3, 70px) 180px;
 
   > :nth-child(1) {
     grid-column: 1 / span 1;
@@ -53,6 +54,7 @@ const StyledControlsGrid = styled.div`
   > * {
     align-self: center;
     justify-self: center;
+    z-index: 1;
   }
 
   > :last-child {
@@ -60,17 +62,20 @@ const StyledControlsGrid = styled.div`
   }
 `
 
-const Pedal = () => {
+const Pedal = ({ config = { knobs: [] }, settings = {} }) => {
   const [isOn, setIsOn] = useState(false)
 
   return (
     <StyledPedalContainer>
       <StyledControlsGrid>
-        <Knob label="Gain" level={5} levelOptions={[0, 4, 5, 7, 9, 10]} />
+        {config.knobs.map(({ label, size, id }) => (
+          <Knob key={label} label={label} size={size} level={settings[id]} />
+        ))}
+        {/* <Knob label="Gain" level={5} levelOptions={[0, 4, 5, 7, 9, 10]} />
         <Knob label="Volume" level={5} levelOptions={[0, 5, 8]} />
         <Knob label="Bias" level={8} size={48} levelOptions={[3, 5, 8]} />
         <Knob label="Bass" level={0} size={48} />
-        <Knob label="Treble" size={48} />
+        <Knob label="Treble" size={48} /> */}
         <Led isOn={isOn} />
         <StompSwitch
           onClick={() => {

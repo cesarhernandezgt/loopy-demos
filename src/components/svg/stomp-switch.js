@@ -7,7 +7,7 @@ const StyledBlinkingCircle = styled.circle`
       opacity: 0;
     }
     50% {
-      opacity: 1;
+      opacity: 0.8;
     }
     100% {
       opacity: 0;
@@ -26,26 +26,19 @@ const StompSwitch = ({ onClick = () => {}, isOn = false }) => (
     >
       <g fill="none" fillRule="evenodd" transform="translate(8, 8)">
         {!isOn && (
-          <StyledBlinkingCircle
-            cx="32"
-            cy="32"
-            r="32"
-            stroke="#80FFEA"
-            strokeOpacity="1"
-            strokeWidth="6"
-          />
+          <StyledBlinkingCircle cx="32" cy="32" r="28" fill="#80FFEA" />
         )}
         <polygon
-          fill="#A7A8AE"
+          fill="#7f989e"
           points="32 8 52.785 20 52.785 44 32 56 11.215 44 11.215 20"
           transform="rotate(90 32 32)"
         />
         <circle
           cx="32"
           cy="32"
-          r="15"
-          fill="#D2D1D6"
-          stroke="#8C8C8C"
+          r="16"
+          fill="#d2e1e9"
+          stroke="#bcc6cc"
           strokeWidth="2"
         />
       </g>

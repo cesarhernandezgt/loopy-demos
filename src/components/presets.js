@@ -1,0 +1,31 @@
+import React from "react"
+import styled from "styled-components"
+
+import Preset from "./preset"
+
+const StyledPresetsContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+`
+
+const Presets = ({
+  presets = [],
+  onSelect = () => {},
+  activePresetId = "",
+}) => (
+  <StyledPresetsContainer>
+    {presets.map(({ label, settings, id }) => (
+      <Preset
+        key={id}
+        id={id}
+        label={label}
+        active={id === activePresetId}
+        settings={settings}
+        onSelect={onSelect}
+      />
+    ))}
+  </StyledPresetsContainer>
+)
+
+export default Presets
