@@ -70,6 +70,7 @@ const StyledDotButton = styled.div`
     position: absolute;
     top: -0.25rem;
     left: -0.25rem;
+    animation: var(--blinkAnimation);
   }
 `
 

@@ -2,18 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 const StyledBlinkingCircle = styled.circle`
-  @keyframes blink {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.8;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-  animation: blink 2s ease-in-out infinite;
+  animation: var(--blinkAnimation);
 `
 
 const StompSwitch = ({ onClick = () => {}, isOn = false }) => (

@@ -1,6 +1,23 @@
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyles = createGlobalStyle`
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  html {
+    --blinkAnimation: blink 2s ease-in-out infinite;
+  }
+
+
   body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
