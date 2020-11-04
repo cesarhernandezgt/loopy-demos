@@ -1,83 +1,70 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "gatsby"
+import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Pedal from "../components/pedal"
+import Demo from "../components/demo-controller"
 
-const audioFiles = ["/riff-without-drums.wav", "/riff-with-drums.wav"]
-
-const IndexPage = () => {
-  const [riffs] = useState(
-    audioFiles.map(file => {
-      const riff = new Audio(file)
-      riff.loop = true
-      riff.muted = true
-      return riff
-    })
-  )
-  const [riffIndex, setRiffIndex] = useState(1)
-
-  useEffect(() => {
-    if (riffs[riffIndex]) {
-      riffs.forEach(riff => {
-        riff.muted = true
-      })
-      riffs[riffIndex].muted = false
-    }
-  }, [riffIndex, riffs])
-
-  const play = () => {
-    riffs.forEach(riff => {
-      riff.play()
-    })
-  }
-
-  const stop = () => {
-    riffs.forEach(riff => {
-      riff.pause()
-    })
-  }
-
-  const changeRiff = () => {
-    setRiffIndex(riffIndex === 0 ? 1 : 0)
-  }
-
-  return (
-    <Layout>
-      <SEO title="Home" />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <Pedal />
-      <button
-        type="button"
-        onClick={() => {
-          play()
-        }}
-      >
-        Play Riff!
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          stop()
-        }}
-      >
-        Stop Riff!
-      </button>
-      <button
-        type="button"
-        onMouseDown={() => {
-          changeRiff()
-        }}
-      >
-        Change Riff!
-      </button>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </Layout>
-  )
+const pedalConfig = {
+  knobs: [
+    { id: "gain", label: "Gain" },
+    { id: "volume", label: "Volume" },
+    { id: "bias", label: "Bias", size: 48 },
+    { id: "bass", label: "Bass", size: 48 },
+    { id: "treble", label: "Treble", size: 48 },
+  ],
 }
 
-export default IndexPage
+const presets = [
+  {
+    id: "high_gain",
+    label: "High Gain",
+    settings: { gain: 9, bass: 6, treble: 7, bias: 7 },
+  },
+  {
+    id: "spitty_starved",
+    label: "Spitty Starved",
+    settings: { gain: 8, treble: 8, bias: 3 },
+  },
+  {
+    id: "lo_fi",
+    label: "Lo-fi",
+    settings: { gain: 6, bass: 3, treble: 4, bias: 2 },
+  },
+  {
+    id: "treble_boost",
+    label: "Treble Boost",
+    settings: { bass: 3, treble: 7, volume: 9, gain: 2 },
+  },
+  {
+    id: "low_gain_sparkle",
+    label: "Low Gain Sparkle",
+    settings: { gain: 3, bias: 6, treble: 6 },
+  },
+  {
+    id: "gain_sweep",
+    label: "Gain Sweep",
+    isSweep: true,
+    target: "gain",
+    values: [0, 3, 5, 7, 8, 10],
+    initialValue: 0,
+  },
+  {
+    id: "bias_sweep",
+    label: "Bias Sweep",
+    isSweep: true,
+    target: "bias",
+    values: [0, 2, 3, 5, 7, 9],
+    initialValue: 3,
+  },
+]
+
+const SecondPage = () => (
+  <Layout>
+    <SEO title="Pedal Config Prototype" />
+    <h1>Pedal Config Prototype</h1>
+    <p>This is me trying to configure a pedal demo</p>
+    <Demo config={pedalConfig} presets={presets} />
+  </Layout>
+)
+
+export default SecondPage

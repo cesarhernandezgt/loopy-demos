@@ -16,6 +16,14 @@ const DemoController = ({ config = {}, presets = [] }) => {
 
   return (
     <>
+      <div>
+        {/* We'll map the audio files with the preset IDs and sweep values */}
+        <h3>Audio Player</h3>
+        <p>Current prest ID: {activePreset?.id}</p>
+        {activePreset?.isSweep && (
+          <p>Gain sweep value: {sweepSetting[activePreset.target]}</p>
+        )}
+      </div>
       <Presets
         activePresetId={activePreset?.id}
         presets={presets}
