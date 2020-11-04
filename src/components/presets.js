@@ -7,6 +7,7 @@ const StyledPresetsContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  /* max-width: 320px; */
 `
 
 const Presets = ({

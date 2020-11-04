@@ -27,6 +27,11 @@ const GlobalStyles = createGlobalStyle`
     color: white;
   }
 
+  p {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+
   * {
     font-family: "Source Sans Pro", "Arial", sans-serif;
   }
