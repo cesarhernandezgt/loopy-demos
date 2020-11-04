@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
+
 import Pedal from "./pedal"
 import Presets from "./presets"
+import AudioPlayer from "./audio-player"
 
 const DemoController = ({ config = {}, presets = [] }) => {
   const [activePreset, setActivePreset] = useState(presets[0])
@@ -16,14 +18,7 @@ const DemoController = ({ config = {}, presets = [] }) => {
 
   return (
     <>
-      <div>
-        {/* We'll map the audio files with the preset IDs and sweep values */}
-        <h3>Audio Player</h3>
-        <p>Current prest ID: {activePreset?.id}</p>
-        {activePreset?.isSweep && (
-          <p>Gain sweep value: {sweepSetting[activePreset.target]}</p>
-        )}
-      </div>
+      <AudioPlayer preset={activePreset} sweepSetting={sweepSetting} />
       <Presets
         activePresetId={activePreset?.id}
         presets={presets}

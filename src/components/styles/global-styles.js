@@ -51,6 +51,7 @@ const GlobalStyles = createGlobalStyle`
     outline: none;
     border: none;
     background: none;
+    padding: 0;
   }
 `
 

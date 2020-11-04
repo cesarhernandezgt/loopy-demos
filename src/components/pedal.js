@@ -9,7 +9,7 @@ const StyledPedalContainer = styled.div`
   padding: 0.5rem 1rem 2rem;
   width: 250px;
   box-sizing: border-box;
-  margin: 1rem 0;
+  margin: 0.5rem auto 1rem;
   border-radius: 10px;
   position: relative;
 
