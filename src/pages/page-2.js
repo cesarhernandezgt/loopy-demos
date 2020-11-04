@@ -41,6 +41,14 @@ const presets = [
     values: [0, 3, 5, 7, 8, 10],
     initialValue: 0,
   },
+  {
+    id: "bias_sweep",
+    label: "Bias Sweep",
+    isSweep: true,
+    target: "bias",
+    values: [0, 2, 3, 5, 7, 9],
+    initialValue: 3,
+  },
 ]
 
 const SecondPage = () => (
