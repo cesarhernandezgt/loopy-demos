@@ -1,16 +1,16 @@
 import React from "react"
 
-const PlayButtonIcon = ({ isPlaying }) => (
+const PlayButtonIcon = ({ isPlaying = false }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="100"
     height="100"
     viewBox="0 0 100 100"
   >
-    {!isPlaying ? (
+    {isPlaying ? (
       <g>
         <rect
-          width="12"
+          width="10"
           height="32"
           x="21"
           y="19"
@@ -20,9 +20,9 @@ const PlayButtonIcon = ({ isPlaying }) => (
           strokeLinejoin="round"
         />
         <rect
-          width="12"
+          width="10"
           height="32"
-          x="40"
+          x="37"
           y="19"
           fill="#FFFF80"
           strokeWidth="4"

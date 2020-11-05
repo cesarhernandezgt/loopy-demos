@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 
 import PlayButtonIcon from "./svg/play-button-icon"
@@ -12,24 +12,36 @@ const StyledPlayerContainer = styled.div`
 `
 
 const StyledPlayButton = styled.button`
-  border: 1px solid #80ffea;
   width: 70px;
+  cursor: pointer;
 `
 
-const AudioPlayer = ({ preset = {}, sweepSetting = {} }) => {
+const AudioPlayer = ({
+  presets = [],
+  activePreset = {},
+  sweepSetting = {},
+}) => {
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying)
+  }
+
   return (
     <>
       <div>
-        {/* We'll map the audio files with the preset IDs and sweep values */}
-        <h3>Audio Player</h3>
-        <p>Current prest ID: {preset?.id}</p>
-        {preset?.isSweep && (
-          <p>Gain sweep value: {sweepSetting[preset.target]}</p>
-        )}
+        <span>{`${activePreset.id}${
+          activePreset.isSweep ? `_${sweepSetting[activePreset.target]}` : ""
+        }.mp3`}</span>
       </div>
       <StyledPlayerContainer>
-        <StyledPlayButton>
-          <PlayButtonIcon isPlaying />
+        <StyledPlayButton
+          type="button"
+          onClick={() => {
+            togglePlay()
+          }}
+        >
+          <PlayButtonIcon isPlaying={isPlaying} />
         </StyledPlayButton>
         <div />
       </StyledPlayerContainer>
