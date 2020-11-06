@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 
 import PlayButtonIcon from "./svg/play-button-icon"
@@ -16,14 +16,51 @@ const StyledPlayButton = styled.button`
   cursor: pointer;
 `
 
+const CLEAN_TONE = "CLEAN_TONE"
+
 const AudioPlayer = ({
   presets = [],
   activePreset = {},
   sweepSetting = {},
+  isPedalOn = false,
+  clean = "",
 }) => {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [audioData] = useState(
+    [...presets, { id: CLEAN_TONE, audio: clean }]
+      .filter(({ isSweep }) => !isSweep)
+      .map(({ id, audio }) => {
+        const audioElement = new Audio(audio)
+        audioElement.muted = true
+        audioElement.loop = true
+
+        return { id, audio: audioElement }
+      })
+  )
+
+  const unmutePreset = presetId => {
+    audioData.forEach(({ id, audio }) => {
+      audio.muted = id !== presetId
+    })
+  }
+
+  useEffect(() => {
+    if (isPedalOn) {
+      unmutePreset(activePreset?.id)
+    } else {
+      unmutePreset(CLEAN_TONE)
+    }
+  }, [activePreset, audioData, isPedalOn])
 
   const togglePlay = () => {
+    audioData.forEach(({ audio }) => {
+      if (isPlaying) {
+        audio.pause()
+      } else {
+        audio.play()
+      }
+    })
+
     setIsPlaying(!isPlaying)
   }
 

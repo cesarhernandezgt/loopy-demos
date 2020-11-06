@@ -13,7 +13,7 @@ const StyledPedalContainer = styled.div`
   border-radius: 10px;
   position: relative;
 
-  background: #1a72a8;
+  background: #1660b4;
 `
 
 const StyledControlsGrid = styled.div`
@@ -67,33 +67,31 @@ const Pedal = ({
   settings = {},
   sweep = {},
   onSelectSweep = () => {},
-}) => {
-  const [isOn, setIsOn] = useState(false)
-
-  return (
-    <StyledPedalContainer>
-      <StyledControlsGrid>
-        {config.knobs.map(({ label, size, id }) => (
-          <Knob
-            id={id}
-            key={id}
-            label={label}
-            size={size}
-            level={settings[id]}
-            onSelectOption={onSelectSweep}
-            levelOptions={sweep?.target === id ? sweep.values : []}
-          />
-        ))}
-        <Led isOn={isOn} />
-        <StompSwitch
-          onClick={() => {
-            setIsOn(!isOn)
-          }}
-          isOn={isOn}
+  isOn = false,
+  onToggleOn = () => {},
+}) => (
+  <StyledPedalContainer>
+    <StyledControlsGrid>
+      {config.knobs.map(({ label, size, id }) => (
+        <Knob
+          id={id}
+          key={id}
+          label={label}
+          size={size}
+          level={settings[id]}
+          onSelectOption={onSelectSweep}
+          levelOptions={sweep?.target === id ? sweep.values : []}
         />
-      </StyledControlsGrid>
-    </StyledPedalContainer>
-  )
-}
+      ))}
+      <Led isOn={isOn} />
+      <StompSwitch
+        onClick={() => {
+          onToggleOn(!isOn)
+        }}
+        isOn={isOn}
+      />
+    </StyledControlsGrid>
+  </StyledPedalContainer>
+)
 
 export default Pedal

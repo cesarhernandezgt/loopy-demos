@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
-  <g fill="none" fill-rule="evenodd">
-    <circle cx="24" cy="24" r="21" fill="maroon" stroke="gray" stroke-width="6" transform="translate(16 16)"/>
-    <circle cx="40" cy="40" r="32" fill="#D50000" fill-opacity=".202"/>
-    <circle cx="40" cy="40" r="16" fill="#D50000" fill-opacity=".8"/>
-    <circle cx="40" cy="40" r="40" fill="#D50000" fill-opacity=".3"/>
-  </g>
-</svg>

@@ -7,7 +7,7 @@ const StyledPresetTag = styled.button`
   font-size: 1rem;
   font-weight: 900;
   padding: 0.5rem;
-  margin: 0.25rem 0.25rem 0.25rem 0;
+  margin: 0 0.25rem 0.25rem 0;
   cursor: pointer;
   opacity: ${props => (props.active ? "1" : "0.5")};
 

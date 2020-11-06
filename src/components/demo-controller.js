@@ -4,9 +4,10 @@ import Pedal from "./pedal"
 import Presets from "./presets"
 import AudioPlayer from "./audio-player"
 
-const DemoController = ({ config = {}, presets = [] }) => {
+const DemoController = ({ config = {}, presets = [], clean = "" }) => {
   const [activePreset, setActivePreset] = useState(presets[0] || {})
   const [sweepSetting, setSweepSetting] = useState({})
+  const [isPedalOn, setIsPedalOn] = useState(false)
 
   useEffect(() => {
     if (activePreset.isSweep) {
@@ -22,6 +23,8 @@ const DemoController = ({ config = {}, presets = [] }) => {
         presets={presets}
         activePreset={activePreset}
         sweepSetting={sweepSetting}
+        clean={clean}
+        isPedalOn={isPedalOn}
       />
       <Presets
         activePresetId={activePreset.id}
@@ -35,6 +38,8 @@ const DemoController = ({ config = {}, presets = [] }) => {
         sweep={activePreset.isSweep && activePreset}
         settings={activePreset.settings || sweepSetting}
         onSelectSweep={setSweepSetting}
+        isOn={isPedalOn}
+        onToggleOn={setIsPedalOn}
       />
     </>
   )
