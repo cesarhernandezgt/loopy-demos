@@ -40,6 +40,7 @@ const AudioPlayer = ({
 
   const unmutePreset = presetId => {
     audioData.forEach(({ id, audio }) => {
+      // eslint-disable-next-line no-param-reassign
       audio.muted = id !== presetId
     })
   }
@@ -65,24 +66,16 @@ const AudioPlayer = ({
   }
 
   return (
-    <>
-      <div>
-        <span>{`${activePreset.id}${
-          activePreset.isSweep ? `_${sweepSetting[activePreset.target]}` : ""
-        }.mp3`}</span>
-      </div>
-      <StyledPlayerContainer>
-        <StyledPlayButton
-          type="button"
-          onClick={() => {
-            togglePlay()
-          }}
-        >
-          <PlayButtonIcon isPlaying={isPlaying} />
-        </StyledPlayButton>
-        <div />
-      </StyledPlayerContainer>
-    </>
+    <StyledPlayerContainer>
+      <StyledPlayButton
+        type="button"
+        onClick={() => {
+          togglePlay()
+        }}
+      >
+        <PlayButtonIcon isPlaying={isPlaying} />
+      </StyledPlayButton>
+    </StyledPlayerContainer>
   )
 }
 
