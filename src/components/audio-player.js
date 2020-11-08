@@ -23,14 +23,15 @@ const AudioPlayer = ({
   activePreset = {},
   sweepSetting = {},
   isPedalOn = false,
-  clean = "",
+  slug = "",
 }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [audioData] = useState(
-    [...presets, { id: CLEAN_TONE, audio: clean }]
+    [...presets, { id: CLEAN_TONE, audio: "clean.mp3" }]
       .filter(({ isSweep }) => !isSweep)
       .map(({ id, audio }) => {
-        const audioElement = new Audio(audio)
+        console.log({ file: `/${slug}_${audio}` })
+        const audioElement = new Audio(`/${slug}_${audio}`)
         audioElement.muted = true
         audioElement.loop = true
 

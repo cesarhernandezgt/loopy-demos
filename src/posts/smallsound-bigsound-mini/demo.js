@@ -61,6 +61,7 @@ const StyledControlsGrid = styled.div`
 `
 
 const pedalConfig = {
+  slug: "smallsound_bigsound_mini",
   knobs: [
     { id: "gain", label: "Gain" },
     { id: "volume", label: "Volume" },
@@ -77,31 +78,31 @@ const presets = [
     id: "spitty_starved",
     label: "Spitty Starved",
     settings: { gain: 6, treble: 7, bass: 4, bias: 2, volume: 4 },
-    audio: "/spitty_starved.mp3",
+    audio: "spitty_starved.mp3",
   },
   {
     id: "lo_fi",
     label: "Lo-fi",
     settings: { gain: 4, bass: 1, treble: 0, bias: 3, volume: 6 },
-    audio: "/lo_fi.mp3",
+    audio: "lo_fi.mp3",
   },
   {
     id: "high_gain",
     label: "High Gain",
     settings: { gain: 10, bass: 8, treble: 6, bias: 6, volume: 4 },
-    audio: "/high_gain.mp3",
+    audio: "high_gain.mp3",
   },
   {
     id: "treble_boost",
     label: "Treble Boost",
     settings: { bass: 3, treble: 7, volume: 9, gain: 2 },
-    audio: "/treble_boost.mp3",
+    audio: "treble_boost.mp3",
   },
   {
     id: "low_gain_sparkle",
     label: "Low Gain Sparkle",
     settings: { gain: 4, treble: 7 },
-    audio: "/low_gain_sparkle.mp3",
+    audio: "low_gain_sparkle.mp3",
   },
   {
     id: "gain_sweep",
@@ -121,8 +122,6 @@ const presets = [
   },
 ]
 
-const Demo = () => (
-  <DemoController config={pedalConfig} presets={presets} clean="/clean.mp3" />
-)
+const Demo = () => <DemoController config={pedalConfig} presets={presets} />
 
 export default Demo
