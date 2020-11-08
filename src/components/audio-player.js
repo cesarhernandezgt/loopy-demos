@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Helmet } from "react-helmet"
 import styled from "styled-components"
 
 import PlayButtonIcon from "./svg/play-button-icon"
@@ -17,6 +18,7 @@ const StyledPlayButton = styled.button`
 `
 
 const CLEAN_TONE = "CLEAN_TONE"
+const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
 const AudioPlayer = ({
   presets = [],
@@ -25,19 +27,10 @@ const AudioPlayer = ({
   isPedalOn = false,
   slug = "",
 }) => {
+  const presetsWithClean = [...presets, { id: CLEAN_TONE, audio: "clean.mp3" }]
+  const [isLoading, setIsLoading] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [audioData] = useState(
-    [...presets, { id: CLEAN_TONE, audio: "clean.mp3" }]
-      .filter(({ isSweep }) => !isSweep)
-      .map(({ id, audio }) => {
-        console.log({ file: `/${slug}_${audio}` })
-        const audioElement = new Audio(`/${slug}_${audio}`)
-        audioElement.muted = true
-        audioElement.loop = true
-
-        return { id, audio: audioElement }
-      })
-  )
+  const [audioData, setAudioData] = useState([])
 
   const unmutePreset = presetId => {
     audioData.forEach(({ id, audio }) => {
@@ -45,6 +38,32 @@ const AudioPlayer = ({
       audio.muted = id !== presetId
     })
   }
+
+  useEffect(() => {
+    let numberOfTracksLoaded = 0
+    setAudioData(
+      presetsWithClean
+        .filter(({ isSweep }) => !isSweep)
+        .map(({ id, audio }) => {
+          const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
+          const audioElement = new Audio(url)
+          audioElement.muted = true
+          audioElement.loop = true
+
+          audioElement.oncanplay = () => {
+            numberOfTracksLoaded += 1
+            if (
+              numberOfTracksLoaded >=
+              presetsWithClean.filter(({ isSweep }) => !isSweep).length
+            ) {
+              setIsLoading(false)
+            }
+          }
+
+          return { id, url, audio: audioElement }
+        })
+    )
+  }, [])
 
   useEffect(() => {
     if (isPedalOn) {
@@ -55,6 +74,7 @@ const AudioPlayer = ({
   }, [activePreset, audioData, isPedalOn])
 
   const togglePlay = () => {
+    // TODO: only start playing when all ready
     audioData.forEach(({ audio }) => {
       if (isPlaying) {
         audio.pause()
@@ -67,16 +87,28 @@ const AudioPlayer = ({
   }
 
   return (
-    <StyledPlayerContainer>
-      <StyledPlayButton
-        type="button"
-        onClick={() => {
-          togglePlay()
-        }}
-      >
-        <PlayButtonIcon isPlaying={isPlaying} />
-      </StyledPlayButton>
-    </StyledPlayerContainer>
+    <>
+      <Helmet>
+        <link rel="dns-prefetch" href={MEDIA_ROOT_URL} />
+        <link rel="preconnect" href={MEDIA_ROOT_URL} />
+        {audioData.map(({ id, url }) => (
+          <link rel="prefetch" href={url} key={id} />
+        ))}
+        {audioData.map(({ id, url }) => (
+          <link rel="preload" href={url} key={id} as="audio" />
+        ))}
+      </Helmet>
+      <StyledPlayerContainer>
+        <StyledPlayButton
+          type="button"
+          onClick={() => {
+            togglePlay()
+          }}
+        >
+          <PlayButtonIcon isPlaying={isPlaying} isLoading={isLoading} />
+        </StyledPlayButton>
+      </StyledPlayerContainer>
+    </>
   )
 }
 
