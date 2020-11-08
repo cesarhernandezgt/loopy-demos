@@ -13,7 +13,7 @@ const StyledPresetTag = styled.button`
 
   transition: opacity ease-in 0.2s;
 
-  @media (min-width: 992px) {
+  @media (min-width: 1024px) {
     font-size: 1.2rem;
   }
 `
