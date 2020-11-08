@@ -12,6 +12,10 @@ const StyledPresetTag = styled.button`
   opacity: ${props => (props.active ? "1" : "0.5")};
 
   transition: opacity ease-in 0.2s;
+
+  @media (min-width: 992px) {
+    font-size: 1.2rem;
+  }
 `
 
 const Preset = ({

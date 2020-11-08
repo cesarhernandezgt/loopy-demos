@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  html {
+  :root {
     --blinkAnimation: blink 2s ease-in-out infinite;
   }
 
@@ -27,9 +27,17 @@ const GlobalStyles = createGlobalStyle`
     color: white;
   }
 
+
   p {
     font-size: 1.2rem;
     line-height: 1.5rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    p {
+      font-size: 1.4rem;
+      line-height: 1.7rem;
+    }
   }
 
   * {
@@ -45,7 +53,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Source Sans Pro", "Arial Black", sans-serif;
     color:#FFFF80;
     font-weight: 900;
+    overflow-wrap: break-word;
+    line-height: 2rem;
   }
+
 
   button {
     outline: none;
