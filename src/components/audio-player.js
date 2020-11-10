@@ -17,6 +17,35 @@ const StyledPlayButton = styled.button`
   cursor: pointer;
 `
 
+const StyledLoadingContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: stretch;
+
+  > span {
+    text-align: center;
+  }
+`
+
+const StyledLoadingBar = styled.div`
+  height: 1.5rem;
+  border-radius: 2px;
+  border: 1px solid #80ffea;
+  margin: 0.5rem 1rem 0 1rem;
+  display: flex;
+
+  :before {
+    content: " ";
+    height: 100%;
+    border-radius: 2px;
+    background: #80ffea;
+    width: ${({ ratio }) => ratio}%;
+    transition: width 0.4s ease-in;
+  }
+`
+
 const CLEAN_TONE = "CLEAN_TONE"
 const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
@@ -27,10 +56,16 @@ const AudioPlayer = ({
   isPedalOn = false,
   slug = "",
 }) => {
-  const presetsWithClean = [...presets, { id: CLEAN_TONE, audio: "clean.mp3" }]
-  const [isLoading, setIsLoading] = useState(true)
+  const presetsWithClean = [
+    ...presets,
+    { id: CLEAN_TONE, audio: "clean.mp3" },
+  ].filter(({ isSweep }) => !isSweep)
   const [isPlaying, setIsPlaying] = useState(false)
   const [audioData, setAudioData] = useState([])
+  const [numberOfTracksLoaded, setNumberOfTracksLoaded] = useState(0)
+
+  const tracksAreLoading = numberOfTracksLoaded < presetsWithClean.length
+  const isWaitingToPlay = isPlaying && tracksAreLoading
 
   const unmutePreset = presetId => {
     audioData.forEach(({ id, audio }) => {
@@ -40,28 +75,22 @@ const AudioPlayer = ({
   }
 
   useEffect(() => {
-    let numberOfTracksLoaded = 0
+    let scopedNumberOfTracksLoaded = 0
     setAudioData(
-      presetsWithClean
-        .filter(({ isSweep }) => !isSweep)
-        .map(({ id, audio }) => {
-          const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
-          const audioElement = new Audio(url)
-          audioElement.muted = true
-          audioElement.loop = true
+      presetsWithClean.map(({ id, audio }) => {
+        const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
+        const audioElement = new Audio(url)
+        audioElement.muted = true
+        audioElement.loop = true
 
-          audioElement.oncanplay = () => {
-            numberOfTracksLoaded += 1
-            if (
-              numberOfTracksLoaded >=
-              presetsWithClean.filter(({ isSweep }) => !isSweep).length
-            ) {
-              setIsLoading(false)
-            }
-          }
+        audioElement.oncanplay = () => {
+          scopedNumberOfTracksLoaded += 1
+          setNumberOfTracksLoaded(scopedNumberOfTracksLoaded)
+          console.log({ scopedNumberOfTracksLoaded })
+        }
 
-          return { id, url, audio: audioElement }
-        })
+        return { id, url, audio: audioElement }
+      })
     )
   }, [])
 
@@ -105,8 +134,16 @@ const AudioPlayer = ({
             togglePlay()
           }}
         >
-          <PlayButtonIcon isPlaying={isPlaying} isLoading={isLoading} />
+          <PlayButtonIcon isPlaying={isPlaying} isLoading={isWaitingToPlay} />
         </StyledPlayButton>
+        {/* {isWaitingToPlay && ( */}
+        <StyledLoadingContainer>
+          <span>Waiting for tracks</span>
+          <StyledLoadingBar
+            ratio={(numberOfTracksLoaded / presetsWithClean.length) * 100}
+          />
+        </StyledLoadingContainer>
+        {/* )} */}
       </StyledPlayerContainer>
     </>
   )
