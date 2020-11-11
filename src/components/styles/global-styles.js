@@ -13,8 +13,18 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  @keyframes spin {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   :root {
     --blinkAnimation: blink 2s ease-in-out infinite;
+    --spinAnimation: spin 1s linear infinite;
   }
 
 

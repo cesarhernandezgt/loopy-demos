@@ -6,6 +6,7 @@ import PlayButtonIcon from "./svg/play-button-icon"
 
 const StyledPlayerContainer = styled.div`
   background: #9580ff;
+  border-radius: 12px;
   width: 100%;
   height: 70px;
   margin-bottom: 0.5rem;
@@ -17,31 +18,39 @@ const StyledPlayButton = styled.button`
   cursor: pointer;
 `
 
-const StyledLoadingContainer = styled.div`
+const StyledPlayerContent = styled.div`
   flex: 1;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #282a36;
+  border-radius: 12px;
+  border: 4px solid #9580ff;
 
   > span {
     text-align: center;
+    color: #80ffea;
   }
 `
 
 const StyledLoadingBar = styled.div`
-  height: 1.5rem;
-  border-radius: 2px;
-  border: 1px solid #80ffea;
-  margin: 0.5rem 1rem 0 1rem;
+  height: 1.2rem;
+  border-radius: 12px;
+  border: 2px solid #80ffea;
+  margin-top: 0.5rem;
   display: flex;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
 
   :before {
     content: " ";
     height: 100%;
-    border-radius: 2px;
     background: #80ffea;
     width: ${({ ratio }) => ratio}%;
+    min-width: 5%;
     transition: width 0.4s ease-in;
   }
 `
@@ -56,16 +65,70 @@ const AudioPlayer = ({
   isPedalOn = false,
   slug = "",
 }) => {
+  // TODO: decide what to do with sweep
   const presetsWithClean = [
     ...presets,
     { id: CLEAN_TONE, audio: "clean.mp3" },
   ].filter(({ isSweep }) => !isSweep)
+
   const [isPlaying, setIsPlaying] = useState(false)
   const [audioData, setAudioData] = useState([])
-  const [numberOfTracksLoaded, setNumberOfTracksLoaded] = useState(0)
+  const [tracksLoaded, setTracksLoaded] = useState(
+    presetsWithClean.map(({ id }) => ({ id, isLoaded: false }))
+  )
 
-  const tracksAreLoading = numberOfTracksLoaded < presetsWithClean.length
-  const isWaitingToPlay = isPlaying && tracksAreLoading
+  /**
+   * Initialize tracks
+   */
+  useEffect(() => {
+    setAudioData(
+      presetsWithClean.map(({ id, audio }) => {
+        const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
+        const audioElement = new Audio(url)
+        audioElement.muted = true
+        audioElement.loop = true
+
+        return { id, url, audio: audioElement }
+      })
+    )
+  }, [])
+
+  /**
+   * Check if we have enough data to play without interruption
+   */
+  useEffect(() => {
+    const mapReadyState = () => {
+      setTracksLoaded(
+        audioData.map(({ id, audio }) => ({
+          id,
+          isLoaded: audio.readyState === 4,
+        }))
+      )
+    }
+
+    if (audioData.length > 0) {
+      // we might already have all the data if network
+      // is fast
+      mapReadyState()
+      // but also check every 3 seconds if something changed
+      setInterval(mapReadyState, 3000)
+    }
+  }, [audioData])
+
+  /**
+   * When play button was pressed, we play all tracks at once,
+   * but only if all tracks are loaded
+   */
+  useEffect(() => {
+    const allTracksLoaded = tracksLoaded.every(({ isLoaded }) => isLoaded)
+    audioData.forEach(({ audio }) => {
+      if (isPlaying && allTracksLoaded) {
+        audio.play()
+      } else {
+        audio.pause()
+      }
+    })
+  }, [isPlaying, tracksLoaded])
 
   const unmutePreset = presetId => {
     audioData.forEach(({ id, audio }) => {
@@ -74,26 +137,9 @@ const AudioPlayer = ({
     })
   }
 
-  useEffect(() => {
-    let scopedNumberOfTracksLoaded = 0
-    setAudioData(
-      presetsWithClean.map(({ id, audio }) => {
-        const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
-        const audioElement = new Audio(url)
-        audioElement.muted = true
-        audioElement.loop = true
-
-        audioElement.oncanplay = () => {
-          scopedNumberOfTracksLoaded += 1
-          setNumberOfTracksLoaded(scopedNumberOfTracksLoaded)
-          console.log({ scopedNumberOfTracksLoaded })
-        }
-
-        return { id, url, audio: audioElement }
-      })
-    )
-  }, [])
-
+  /**
+   * Changing presets means unmuting one preset and muting the rest
+   */
   useEffect(() => {
     if (isPedalOn) {
       unmutePreset(activePreset?.id)
@@ -103,20 +149,12 @@ const AudioPlayer = ({
   }, [activePreset, audioData, isPedalOn])
 
   const togglePlay = () => {
-    // TODO: only start playing when all ready
-    audioData.forEach(({ audio }) => {
-      if (isPlaying) {
-        audio.pause()
-      } else {
-        audio.play()
-      }
-    })
-
     setIsPlaying(!isPlaying)
   }
 
   return (
     <>
+      {/* Optimization of preloading all tracks */}
       <Helmet>
         <link rel="dns-prefetch" href={MEDIA_ROOT_URL} />
         <link rel="preconnect" href={MEDIA_ROOT_URL} />
@@ -134,16 +172,27 @@ const AudioPlayer = ({
             togglePlay()
           }}
         >
-          <PlayButtonIcon isPlaying={isPlaying} isLoading={isWaitingToPlay} />
-        </StyledPlayButton>
-        {/* {isWaitingToPlay && ( */}
-        <StyledLoadingContainer>
-          <span>Waiting for tracks</span>
-          <StyledLoadingBar
-            ratio={(numberOfTracksLoaded / presetsWithClean.length) * 100}
+          <PlayButtonIcon
+            isPlaying={isPlaying}
+            isLoading={
+              isPlaying && tracksLoaded.some(({ isLoaded }) => !isLoaded)
+            }
           />
-        </StyledLoadingContainer>
-        {/* )} */}
+        </StyledPlayButton>
+        <StyledPlayerContent>
+          {isPlaying && tracksLoaded.some(({ isLoaded }) => !isLoaded) && (
+            <>
+              <span>Waiting for tracks</span>
+              <StyledLoadingBar
+                ratio={
+                  (tracksLoaded.filter(({ isLoaded }) => isLoaded).length /
+                    presetsWithClean.length) *
+                  100
+                }
+              />
+            </>
+          )}
+        </StyledPlayerContent>
       </StyledPlayerContainer>
     </>
   )
