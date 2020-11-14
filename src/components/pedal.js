@@ -18,11 +18,10 @@ const Pedal = ({
 }) => (
   <Enclosure>
     <ControlsLayout>
-      {knobs.map(({ label, size, id }) => (
+      {knobs.map(({ size, id }) => (
         <Knob
           id={id}
           key={id}
-          label={label}
           size={size}
           level={settings[id]}
           onSelectOption={onSelectSweep}

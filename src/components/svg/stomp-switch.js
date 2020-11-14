@@ -6,16 +6,23 @@ const StyledBlinkingCircle = styled.circle`
 `
 
 const StompSwitch = ({ onClick = () => {}, isOn = false }) => (
-  <button type="button" onClick={onClick}>
+  <button type="button" onClick={onClick} id="stomp-switch">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="80"
-      height="80"
-      viewBox="0 0 80 80"
+      width="72"
+      height="72"
+      viewBox="0 0 64 64"
     >
-      <g fill="none" fillRule="evenodd" transform="translate(8, 8)">
+      <g fill="none" fillRule="evenodd">
         {!isOn && (
-          <StyledBlinkingCircle cx="32" cy="32" r="28" fill="#80FFEA" />
+          <StyledBlinkingCircle
+            cx="32"
+            cy="32"
+            r="28"
+            stroke="#80FFEA"
+            strokeWidth="4px"
+            fill="none"
+          />
         )}
         <polygon
           fill="#7f989e"

@@ -23,7 +23,6 @@ const levelToRotationMap = [
  * the label (1rem) and its top margin (0.5rem) need to be
  * offset.
  */
-const marginTop = "1.5rem"
 
 const StyledKnobContainer = styled.div`
   --rotation: ${({ rotation }) => rotation};
@@ -34,7 +33,6 @@ const StyledKnobContainer = styled.div`
 
   > svg {
     transform: rotate(var(--rotation));
-    margin-top: ${marginTop};
     transition: transform 0.2s ease-in;
   }
 
@@ -53,10 +51,10 @@ const StyledDotButton = styled.div`
   height: var(--dotSize);
   background: #80ffea;
   position: absolute;
-  top: calc(var(--dotSize) / 2);
+  top: calc((var(--dotSize) / 2) - 1rem);
   left: calc(50% - (var(--dotSize) / 2));
   transform-origin: calc(var(--dotSize) / 2)
-    calc((var(--parentSize) - var(--dotSize)) / 2 + ${marginTop});
+    calc((var(--parentSize) - var(--dotSize)) / 2 + 1rem);
   transform: rotate(var(--rotation));
   cursor: pointer;
 
@@ -77,20 +75,18 @@ const StyledDotButton = styled.div`
 const Knob = ({
   id = "",
   size = 64,
-  label = "",
   level = 5,
   type = "bakelit",
   onSelectOption = () => {},
   levelOptions = [],
 }) => (
-  <StyledKnobContainer rotation={levelToRotationMap[level]}>
+  <StyledKnobContainer rotation={levelToRotationMap[level]} id={id}>
     {
       {
         bakelit: <BakelitKnob size={size} />,
         offset: <OffsetKnob size={size} />,
       }[type]
     }
-    <span>{label}</span>
     {levelOptions.map(levelOption => (
       <StyledDotButton
         parentSize={size}

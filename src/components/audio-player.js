@@ -32,6 +32,7 @@ const StyledPlayerContent = styled.div`
   > span {
     text-align: center;
     color: #80ffea;
+    font-family: "Minecraft";
   }
 `
 
@@ -54,6 +55,18 @@ const StyledLoadingBar = styled.div`
     transition: width 0.4s ease-in;
   }
 `
+
+const DisplayText = ({
+  activePreset: { description, label },
+  isPlaying,
+  isPedalOn,
+}) => {
+  if (!isPlaying) return "Hit the play button"
+
+  if (!isPedalOn) return "Here's ma clean tone."
+
+  return description || label
+}
 
 const CLEAN_TONE = "CLEAN_TONE"
 const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
@@ -180,7 +193,7 @@ const AudioPlayer = ({
           />
         </StyledPlayButton>
         <StyledPlayerContent>
-          {isPlaying && tracksLoaded.some(({ isLoaded }) => !isLoaded) && (
+          {isPlaying && tracksLoaded.some(({ isLoaded }) => !isLoaded) ? (
             <>
               <span>Waiting for tracks</span>
               <StyledLoadingBar
@@ -191,6 +204,14 @@ const AudioPlayer = ({
                 }
               />
             </>
+          ) : (
+            <span>
+              <DisplayText
+                activePreset={activePreset}
+                isPlaying={isPlaying}
+                isPedalOn={isPedalOn}
+              />
+            </span>
           )}
         </StyledPlayerContent>
       </StyledPlayerContainer>

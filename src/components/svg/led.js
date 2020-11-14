@@ -6,6 +6,7 @@ const Led = ({ isOn = false, withSocket = false }) => (
     width="48"
     height="48"
     viewBox="0 0 48 48"
+    id="led"
   >
     <g fill="none" fillRule="evenodd">
       {withSocket ? (
