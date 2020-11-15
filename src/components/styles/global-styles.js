@@ -74,6 +74,10 @@ const GlobalStyles = createGlobalStyle`
     background: none;
     padding: 0;
   }
+
+  a {
+    text-decoration: none;
+  }
 `
 
 export default GlobalStyles

@@ -14,16 +14,6 @@ const StompSwitch = ({ onClick = () => {}, isOn = false }) => (
       viewBox="0 0 64 64"
     >
       <g fill="none" fillRule="evenodd">
-        {!isOn && (
-          <StyledBlinkingCircle
-            cx="32"
-            cy="32"
-            r="28"
-            stroke="#80FFEA"
-            strokeWidth="4px"
-            fill="none"
-          />
-        )}
         <polygon
           fill="#7f989e"
           points="32 8 52.785 20 52.785 44 32 56 11.215 44 11.215 20"
@@ -37,6 +27,15 @@ const StompSwitch = ({ onClick = () => {}, isOn = false }) => (
           stroke="#bcc6cc"
           strokeWidth="2"
         />
+        {!isOn && (
+          <StyledBlinkingCircle
+            cx="32"
+            cy="32"
+            r="16"
+            stroke="#80FFEA"
+            strokeWidth="2px"
+          />
+        )}
       </g>
     </svg>
   </button>

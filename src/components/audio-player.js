@@ -5,12 +5,13 @@ import styled from "styled-components"
 import PlayButtonIcon from "./svg/play-button-icon"
 
 const StyledPlayerContainer = styled.div`
-  background: #9580ff;
+  background: #ff80bf;
   border-radius: 12px;
   width: 100%;
   height: 70px;
   margin-bottom: 0.5rem;
   display: flex;
+  padding: 4px 4px 4px 0;
 `
 
 const StyledPlayButton = styled.button`
@@ -27,7 +28,6 @@ const StyledPlayerContent = styled.div`
   padding: 0.5rem 1rem;
   background: #282a36;
   border-radius: 12px;
-  border: 4px solid #9580ff;
 
   > span {
     text-align: center;
@@ -61,7 +61,7 @@ const DisplayText = ({
   isPlaying,
   isPedalOn,
 }) => {
-  if (!isPlaying) return "Hit the play button"
+  if (!isPlaying) return "Hit play and wear some headphones d[-_-]b"
 
   if (!isPedalOn) return "Here's ma clean tone."
 

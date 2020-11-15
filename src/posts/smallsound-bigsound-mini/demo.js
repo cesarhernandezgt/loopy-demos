@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import DemoController from "../../components/demo-controller"
-import image from "./mini.png"
+import image from "./smallsound-bigsound-mini.png"
 
 const StyledPedalContainer = styled.div`
   padding: 0.5rem 1rem 2rem;
@@ -21,8 +21,6 @@ const StyledControlsGrid = styled.div`
   position: relative;
 
   > * {
-    /* align-self: center; */
-    /* justify-self: center; */
     z-index: 1;
     position: absolute;
   }
@@ -48,17 +46,19 @@ const StyledControlsGrid = styled.div`
     left: 140px;
   }
   #stomp-switch {
-    top: 314px;
-    left: 74px;
+    top: 312px;
+    left: 72px;
     transform: rotate(18deg);
+
+    > svg {
+      width: 76px;
+      height: 76px;
+    }
   }
   #led {
     top: 152px;
     left: 86px;
   }
-  /* > :last-child {
-    align-self: flex-end;
-  } */
 `
 
 const pedalConfig = {
