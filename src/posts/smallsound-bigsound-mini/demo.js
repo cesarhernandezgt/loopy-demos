@@ -1,77 +1,32 @@
 import React from "react"
-import styled from "styled-components"
 import DemoController from "../../components/demo-controller"
 import image from "./smallsound-bigsound-mini.png"
 
-const StyledPedalContainer = styled.div`
-  padding: 0.5rem 1rem 2rem;
-  width: 250px;
-  height: 412px;
-  box-sizing: border-box;
-  margin: 0.5rem auto 1rem;
-  border-radius: 10px;
-  position: relative;
-
-  background: url(${image}) no-repeat;
-  background-size: contain;
-`
-
-const StyledControlsGrid = styled.div`
-  width: 100%;
-  position: relative;
-
-  > * {
-    z-index: 1;
-    position: absolute;
-  }
-
-  #gain {
-    top: -2px;
-    left: 9px;
-  }
-  #volume {
-    top: 0px;
-    left: 136px;
-  }
-  #bias {
-    top: 76px;
-    left: 80px;
-  }
-  #bass {
-    top: 140px;
-    left: 20px;
-  }
-  #treble {
-    top: 140px;
-    left: 140px;
-  }
-  #stomp-switch {
-    top: 312px;
-    left: 72px;
-    transform: rotate(18deg);
-
-    > svg {
-      width: 76px;
-      height: 76px;
-    }
-  }
-  #led {
-    top: 152px;
-    left: 86px;
-  }
-`
-
 const pedalConfig = {
   slug: "smallsound_bigsound_mini",
+  width: 250,
+  height: 412,
+  image,
   knobs: [
-    { id: "gain", size: 80 },
-    { id: "volume", size: 80 },
-    { id: "bias", size: 64 },
-    { id: "bass", size: 64 },
-    { id: "treble", size: 64 },
+    { id: "gain", size: 80, position: { top: 4, left: 22 } },
+    { id: "volume", size: 80, position: { top: 8, left: 151 } },
+    { id: "bias", size: 64, position: { top: 80, left: 95 } },
+    { id: "bass", size: 64, position: { top: 151, left: 35 } },
+    { id: "treble", size: 64, position: { top: 150, left: 153 } },
   ],
-  Enclosure: StyledPedalContainer,
-  ControlsLayout: StyledControlsGrid,
+  switches: [
+    {
+      id: "on_switch",
+      size: 76,
+      position: { top: 321, left: 88 },
+    },
+  ],
+  leds: [
+    {
+      id: "on_status",
+      position: { top: 160, left: 101 },
+    },
+  ],
 }
 
 const presets = [

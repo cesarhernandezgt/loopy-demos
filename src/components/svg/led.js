@@ -1,12 +1,12 @@
 import React from "react"
 
-const Led = ({ isOn = false, withSocket = false }) => (
+const Led = ({ isOn = false, withSocket = false, id = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="48"
     height="48"
     viewBox="0 0 48 48"
-    id="led"
+    id={id}
   >
     <g fill="none" fillRule="evenodd">
       {withSocket ? (

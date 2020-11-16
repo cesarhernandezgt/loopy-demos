@@ -29,6 +29,7 @@ const StyledKnobContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  z-index: 1;
   position: relative;
 
   > svg {

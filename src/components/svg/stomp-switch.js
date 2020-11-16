@@ -5,12 +5,17 @@ const StyledBlinkingCircle = styled.circle`
   animation: var(--blinkAnimation);
 `
 
-const StompSwitch = ({ onClick = () => {}, isOn = false }) => (
-  <button type="button" onClick={onClick} id="stomp-switch">
+const StompSwitch = ({
+  onClick = () => {},
+  isOn = false,
+  id = "",
+  size = 72,
+}) => (
+  <button type="button" onClick={onClick} id={id}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="72"
-      height="72"
+      width={size}
+      height={size}
       viewBox="0 0 64 64"
     >
       <g fill="none" fillRule="evenodd">
