@@ -24,7 +24,7 @@ const pedalConfig = {
   leds: [
     {
       id: "on_status",
-      position: { top: 160, left: 101 },
+      position: { top: 160, left: 102 },
     },
   ],
 }

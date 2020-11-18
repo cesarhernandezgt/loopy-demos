@@ -33,7 +33,8 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background: #282a36;
+    /* background: #282a36; */
+    background: #383a59;
     color: white;
   }
 
@@ -60,9 +61,8 @@ const GlobalStyles = createGlobalStyle`
   h4,
   h5,
   h6 {
-    font-family: "Source Sans Pro", "Arial Black", sans-serif;
+    font-family: 'Sigmar One', cursive;
     color:#FFFF80;
-    font-weight: 900;
     overflow-wrap: break-word;
     line-height: 2rem;
   }

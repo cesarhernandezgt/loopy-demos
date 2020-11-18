@@ -52,6 +52,7 @@ module.exports = {
       options: {
         fonts: [
           { family: `Source Sans Pro`, variable: true, weights: ["200..900"] },
+          { family: `Sigmar One` },
         ],
       },
     },

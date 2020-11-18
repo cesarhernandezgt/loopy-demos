@@ -6,35 +6,49 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import usePosts from "../helpers/use-posts"
 
-const StyledPostsList = styled.ul`
+const StyledPostsList = styled.section`
   list-style: none;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 0.5rem;
+  grid-column-gap: 0.5rem;
   flex-flow: row wrap;
   align-items: center;
 
-  > li {
-    width: 200px;
+  > article {
+    width: 250px;
     height: 250px;
-    margin: 0.5rem;
+    padding: 1rem;
+    box-sizing: border-box;
     position: relative;
+    background: #9580ff;
   }
 `
 
 const StyledLink = styled(Link)`
   .title {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     font-weight: bold;
     color: #ffff80;
-    background: #9580ffd3;
+    font-size: 1.2rem;
+    background: #323138;
     width: 100%;
+    height: 100%;
     padding: 1rem;
     box-sizing: border-box;
     opacity: 0;
     transition: opacity ease-out 200ms;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > span {
+      text-align: center;
+    }
   }
 
   &:hover {
@@ -53,7 +67,7 @@ const SecondPage = () => {
       <h1>Latest Demos</h1>
       <StyledPostsList>
         {posts.map(({ title, slug, image }) => (
-          <li>
+          <article>
             <StyledLink to={slug}>
               <Img
                 fluid={image}
@@ -65,9 +79,11 @@ const SecondPage = () => {
                   objectFit: "contain",
                 }}
               />
-              <span className="title">{title}</span>
+              <div className="title">
+                <span>{title}</span>
+              </div>
             </StyledLink>
-          </li>
+          </article>
         ))}
       </StyledPostsList>
     </Layout>
