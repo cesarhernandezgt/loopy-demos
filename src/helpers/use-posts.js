@@ -6,7 +6,7 @@ const usePosts = () => {
   } = useStaticQuery(
     graphql`
       query {
-        allMdx {
+        allMdx(filter: { frontmatter: { type: { eq: "post" } } }) {
           edges {
             node {
               frontmatter {
@@ -30,7 +30,7 @@ const usePosts = () => {
   return posts.map(({ node: { frontmatter: { slug, title, image } } }) => ({
     slug,
     title,
-    image: image.childImageSharp.fluid,
+    image: image?.childImageSharp?.fluid,
   }))
 }
 

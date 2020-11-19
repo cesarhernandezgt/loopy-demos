@@ -67,7 +67,6 @@ const GlobalStyles = createGlobalStyle`
     line-height: 2rem;
   }
 
-
   button {
     outline: none;
     border: none;

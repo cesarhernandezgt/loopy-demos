@@ -38,7 +38,7 @@ const StompSwitch = ({
             cy="32"
             r="16"
             stroke="#80FFEA"
-            strokeWidth="2px"
+            strokeWidth="2"
           />
         )}
       </g>
