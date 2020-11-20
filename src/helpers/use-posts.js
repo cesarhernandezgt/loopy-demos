@@ -14,7 +14,7 @@ const usePosts = () => {
                 title
                 image {
                   childImageSharp {
-                    fluid(maxWidth: 250) {
+                    fluid(maxWidth: 200) {
                       ...GatsbyImageSharpFluid
                     }
                   }

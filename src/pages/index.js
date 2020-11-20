@@ -7,33 +7,37 @@ import SEO from "../components/seo"
 import usePosts from "../helpers/use-posts"
 
 const StyledPostsList = styled.section`
-  list-style: none;
-
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: 250px;
   grid-row-gap: 0.5rem;
   grid-column-gap: 0.5rem;
-  flex-flow: row wrap;
-  align-items: center;
 
   > article {
-    width: 250px;
-    height: 250px;
+    height: 100%;
     padding: 1rem;
     box-sizing: border-box;
     position: relative;
     background: #9580ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `
 
 const StyledLink = styled(Link)`
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  max-width: 200px;
+
   .title {
     position: absolute;
     top: 0;
     left: 0;
     font-weight: bold;
-    color: #ffff80;
     font-size: 1.2rem;
+    color: #ffff80;
     background: #9580ffaa;
     width: 100%;
     height: 100%;
