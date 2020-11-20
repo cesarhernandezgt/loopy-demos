@@ -24,6 +24,8 @@ const StyledHeaderLinkWrapper = styled.div`
   justify-content: space-between;
   /* Because svg has 96px height */
   height: 96px;
+  padding: 0.5rem 0;
+  box-sizing: border-box;
 `
 
 const StyledNav = styled.nav`

@@ -1,14 +1,7 @@
 import React from "react"
-import styled from "styled-components"
-
-const AnimatedLogo = styled.svg`
-  /* #right-knob {
-    transform: rotate(90deg);
-  } */
-`
 
 const Logo = () => (
-  <AnimatedLogo
+  <svg
     xmlns="http://www.w3.org/2000/svg"
     width="64"
     height="96"
@@ -49,14 +42,13 @@ const Logo = () => (
         stroke="#ff80bf"
         strokeWidth="2"
         strokeLinecap="round"
-        // transform="rotate(60 32 14)"
       >
         <animateTransform
           id="knob"
           attributeName="transform"
           attributeType="XML"
           type="rotate"
-          values="0 32 14; 60 32 14; 90 32 14; 60 32 14"
+          values="0 32 14; 60 32 14; 150 32 14; 60 32 14"
           keyTimes="0; 0.5; 0.75; 1"
           dur="1s"
           repeatCount="1"
@@ -128,7 +120,7 @@ const Logo = () => (
           keySplines="0.1 0.8 0.2 1"
           calcMode="spline"
           dur="0.5s"
-          begin="leftslide.end"
+          begin="knob.end"
           repeatCount="1"
           fill="freeze"
         />
@@ -139,7 +131,7 @@ const Logo = () => (
           keySplines="0.1 0.8 0.2 1"
           calcMode="spline"
           dur="0.5s"
-          begin="leftslide.end"
+          begin="knob.end"
           repeatCount="1"
           fill="freeze"
         />
@@ -168,7 +160,7 @@ const Logo = () => (
           keySplines="0.1 0.8 0.2 1"
           calcMode="spline"
           dur="0.5s"
-          begin="middleslide.end"
+          begin="knob.end"
           repeatCount="1"
           fill="freeze"
         />
@@ -179,7 +171,7 @@ const Logo = () => (
           keySplines="0.1 0.8 0.2 1"
           calcMode="spline"
           dur="0.5s"
-          begin="middleslide.end"
+          begin="knob.end"
           repeatCount="1"
           fill="freeze"
         />
@@ -220,7 +212,7 @@ const Logo = () => (
         fill="none"
       />
     </g>
-  </AnimatedLogo>
+  </svg>
 )
 
 export default Logo
