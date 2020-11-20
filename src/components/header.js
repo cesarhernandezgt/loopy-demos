@@ -12,12 +12,18 @@ const StyledHeader = styled.header`
 const StyledHeaderContent = styled.div`
   margin: 0 auto;
   max-width: 720px;
-  padding: 1.5rem 1rem;
+  padding: 1rem 1rem;
   display: flex;
+  align-items: center;
 `
 
 const StyledHeaderLinkWrapper = styled.div`
   margin-left: 2rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  /* Because svg has 96px height */
+  height: 96px;
 `
 
 const StyledNav = styled.nav`
@@ -25,6 +31,7 @@ const StyledNav = styled.nav`
     list-style: none;
     display: flex;
     padding: 0;
+    margin: 0;
     align-items: center;
 
     li {
@@ -38,13 +45,23 @@ const StyledNav = styled.nav`
 
         :after {
           content: " ";
+          /* opacity: 0; */
+          width: 0;
+          transition: all 0.2s ease-in;
           position: absolute;
           bottom: 0;
-          left: 0;
-          width: 100%;
+          left: 50%;
+          /* width: 100%; */
           height: 6px;
           background: #ff80bf;
           border-radius: 2px;
+        }
+      }
+
+      &:hover {
+        a:after {
+          left: 0;
+          width: 100%;
         }
       }
     }
@@ -54,7 +71,9 @@ const StyledNav = styled.nav`
 const Header = () => (
   <StyledHeader>
     <StyledHeaderContent>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
       <StyledHeaderLinkWrapper>
         <Link to="/" style={{ display: "flex", alignItems: "center" }}>
           <h1

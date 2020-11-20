@@ -34,7 +34,7 @@ const StyledLink = styled(Link)`
     font-weight: bold;
     color: #ffff80;
     font-size: 1.2rem;
-    background: #323138;
+    background: #9580ffaa;
     width: 100%;
     height: 100%;
     padding: 1rem;
