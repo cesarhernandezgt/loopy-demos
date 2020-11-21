@@ -19,6 +19,7 @@ const StyledPostsList = styled.section`
     box-sizing: border-box;
     position: relative;
     background: #9580ff;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;

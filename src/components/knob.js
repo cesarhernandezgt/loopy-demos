@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 import BakelitKnob from "./svg/bakelit-knob"
 import OffsetKnob from "./svg/offset-knob"
+import WalrusAudioKnob from "./svg/walrus-audio-knob"
 
 const levelToRotationMap = [
   "-150deg",
@@ -18,12 +19,6 @@ const levelToRotationMap = [
   "150deg",
 ]
 
-/**
- * For the knobs to align with their respective centers,
- * the label (1rem) and its top margin (0.5rem) need to be
- * offset.
- */
-
 const StyledKnobContainer = styled.div`
   --rotation: ${({ rotation }) => rotation};
   display: flex;
@@ -32,7 +27,7 @@ const StyledKnobContainer = styled.div`
   z-index: 1;
   position: relative;
 
-  > svg {
+  svg {
     transform: rotate(var(--rotation));
     transition: transform 0.2s ease-in;
   }
@@ -86,6 +81,7 @@ const Knob = ({
       {
         bakelit: <BakelitKnob size={size} />,
         offset: <OffsetKnob size={size} />,
+        walrus: <WalrusAudioKnob size={size} />,
       }[type]
     }
     {levelOptions.map(levelOption => (
