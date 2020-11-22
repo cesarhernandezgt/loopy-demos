@@ -30,7 +30,6 @@ const Layout = ({ children = null, pageContext = {} }) => {
   const { model, builder, title } = pageContext.frontmatter || {}
   const postTitle = builder && model && `${builder} - ${model}`
 
-  console.log({ title, postTitle })
   return (
     <>
       <GlobalStyles />
