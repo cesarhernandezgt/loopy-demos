@@ -25,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     --blinkAnimation: blink 2s ease-in-out infinite;
     --spinAnimation: spin 1s linear infinite;
+    --headlineFont: 'Sigmar One', cursive;
   }
 
 
@@ -61,10 +62,16 @@ const GlobalStyles = createGlobalStyle`
   h4,
   h5,
   h6 {
-    font-family: 'Sigmar One', cursive;
+    font-family: var(--headlineFont);
     color:#FFFF80;
     overflow-wrap: break-word;
     line-height: 2rem;
+  }
+
+  @media (max-width: 599px) {
+    h1 {
+      font-size: 1.5rem;
+    }
   }
 
   button {
@@ -72,10 +79,17 @@ const GlobalStyles = createGlobalStyle`
     border: none;
     background: none;
     padding: 0;
+    cursor: pointer;
   }
 
   a {
     text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 `
 

@@ -5,7 +5,7 @@ import styled from "styled-components"
 import PlayButtonIcon from "./svg/play-button-icon"
 
 const StyledPlayerContainer = styled.div`
-  background: #ff80bf;
+  background: #9580ff;
   border-radius: 12px;
   width: 100%;
   height: 70px;

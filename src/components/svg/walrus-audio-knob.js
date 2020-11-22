@@ -35,7 +35,7 @@ const WalrusAudioKnob = ({ size = 64 }) => (
       viewBox="0 0 64 64"
     >
       <g fill="none" fillRule="evenodd">
-        <circle cx="32" cy="32" r="30" stroke="#484848" strokeWidth="4" />
+        <circle cx="32" cy="32" r="30" stroke="#313131" strokeWidth="4" />
         <rect width="3" height="28" x="31" y="4" fill="#FFF" />
       </g>
     </svg>

@@ -53,6 +53,7 @@ const StyledLink = styled(Link)`
 
     > span {
       text-align: center;
+      font-family: var(--headlineFont);
     }
   }
 

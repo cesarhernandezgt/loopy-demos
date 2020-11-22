@@ -20,8 +20,8 @@ const setPositions = ({ id, position }) =>
     > #${id} {
       z-index: 1;
       position: absolute;
-      top: ${position.top}px;
-      left: ${position.left}px;
+      top: ${position?.top || 0}px;
+      left: ${position?.left || 0}px;
     }
   `
 
@@ -49,12 +49,13 @@ const Pedal = ({
 }) => (
   <Enclosure width={width} height={height} image={image}>
     <ControlsLayout controls={[...knobs, ...switches, ...leds]}>
-      {knobs.map(({ size, id }) => (
+      {knobs.map(({ size, id, type }) => (
         <Knob
           id={id}
           key={id}
           size={size}
           level={settings[id]}
+          type={type}
           onSelectOption={onSelectSweep}
           levelOptions={sweep?.target === id ? sweep.values : []}
         />
