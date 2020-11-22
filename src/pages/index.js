@@ -39,7 +39,7 @@ const StyledLink = styled(Link)`
     font-weight: bold;
     font-size: 1.2rem;
     color: #ffff80;
-    background: #9580ffaa;
+    background: #3a306cab;
     width: 100%;
     height: 100%;
     padding: 1rem;
@@ -48,6 +48,7 @@ const StyledLink = styled(Link)`
     transition: opacity ease-out 200ms;
 
     display: flex;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
 
@@ -72,8 +73,8 @@ const SecondPage = () => {
       <SEO title="Loopy Demos" />
       <h1>Latest Demos</h1>
       <StyledPostsList>
-        {posts.map(({ title, slug, image }) => (
-          <article>
+        {posts.map(({ model, builder, slug, image }) => (
+          <article id={slug}>
             <StyledLink to={slug}>
               <Img
                 fluid={image}
@@ -86,7 +87,9 @@ const SecondPage = () => {
                 }}
               />
               <div className="title">
-                <span>{title}</span>
+                <span>{model}</span>
+                <span>{" - "}</span>
+                <span>{builder}</span>`
               </div>
             </StyledLink>
           </article>

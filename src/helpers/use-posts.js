@@ -11,7 +11,8 @@ const usePosts = () => {
             node {
               frontmatter {
                 slug
-                title
+                builder
+                model
                 image {
                   childImageSharp {
                     fluid(maxWidth: 200) {
@@ -27,11 +28,18 @@ const usePosts = () => {
     `
   )
 
-  return posts.map(({ node: { frontmatter: { slug, title, image } } }) => ({
-    slug,
-    title,
-    image: image?.childImageSharp?.fluid,
-  }))
+  return posts.map(
+    ({
+      node: {
+        frontmatter: { slug, builder, model, image },
+      },
+    }) => ({
+      slug,
+      builder,
+      model,
+      image: image?.childImageSharp?.fluid,
+    })
+  )
 }
 
 export default usePosts
