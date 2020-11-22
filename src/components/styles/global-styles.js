@@ -26,6 +26,14 @@ const GlobalStyles = createGlobalStyle`
     --blinkAnimation: blink 2s ease-in-out infinite;
     --spinAnimation: spin 1s linear infinite;
     --headlineFont: 'Sigmar One', cursive;
+    --pageWidth: 720px;
+    --headerHeight: 80px;
+  }
+
+  @media (min-width: 600px) {
+    :root {
+      --headerHeight: 132px;
+    }
   }
 
 

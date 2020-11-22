@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import styled from "styled-components"
+import styled, { createGlobalStyle, css } from "styled-components"
 import Logo from "./svg/logo"
 import MenuIcon from "./svg/menu-icon"
 
@@ -8,6 +8,9 @@ const StyledHeader = styled.header`
   background: #282a36;
   margin-bottom: 2rem;
   width: 100%;
+  z-index: 100;
+  position: sticky;
+  top: 0;
 `
 
 const StyledHeaderContent = styled.div`
@@ -105,20 +108,39 @@ const StyledTopNav = styled.nav`
   }
 `
 
+const GlobalOverflow = createGlobalStyle`
+body {
+  overflow: ${({ showSideNav }) => (showSideNav ? "hidden" : "overflow")}
+}
+`
+
+const visibleSideNav = css`
+  transition: left 0.2s ease-in 0s, background-color 0.1s ease-in 0.2s,
+    height 0s linear 0s;
+  height: 100vh;
+  left: 0;
+  background-color: #00000080;
+`
+
+const hiddenSideNav = css`
+  transition: left 0.2s ease-out 0.1s, background-color 0.1s ease-out 0s,
+    height 0s linear 0.3s;
+  height: 0;
+  left: -100vw;
+  background-color: #0000;
+`
+
 const StyledSideNav = styled.aside`
   @media (min-width: 600px) {
     display: none;
   }
 
   position: absolute;
-  top: 80px;
-  left: ${({ show }) => (show ? 0 : -100)}vw;
-  height: calc(100vh - 80px);
+  top: var(--headerHeight);
   width: 100vw;
   z-index: 100;
-  transition: left 0.2s ${({ show }) => (show ? "ease-in 0" : "ease-out 0.1")}s,
-    background 0.1s ${({ show }) => (show ? "ease-in 0.2" : "ease-out 0")}s;
-  background: ${({ show }) => (show ? "#00000080" : "#0000")};
+
+  ${({ show }) => (show ? visibleSideNav : hiddenSideNav)}
 
   ul {
     background: #282a36;
@@ -158,6 +180,7 @@ const Header = () => {
 
   return (
     <>
+      <GlobalOverflow showSideNav={showSideNav} />
       <StyledHeader>
         <StyledHeaderContent>
           <Link to="/" id="logo">
@@ -170,7 +193,7 @@ const Header = () => {
               setShowSideNav(!showSideNav)
             }}
           >
-            <MenuIcon rotate={showSideNav} />
+            <MenuIcon open={showSideNav} />
           </button>
           <StyledHeaderLinkWrapper>
             <StyledTitle
@@ -186,15 +209,15 @@ const Header = () => {
             </StyledTopNav>
           </StyledHeaderLinkWrapper>
         </StyledHeaderContent>
+        <StyledSideNav
+          show={showSideNav}
+          onClick={() => {
+            setShowSideNav(false)
+          }}
+        >
+          <NavList />
+        </StyledSideNav>
       </StyledHeader>
-      <StyledSideNav
-        show={showSideNav}
-        onClick={() => {
-          setShowSideNav(false)
-        }}
-      >
-        <NavList />
-      </StyledSideNav>
     </>
   )
 }

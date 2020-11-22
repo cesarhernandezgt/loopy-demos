@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
 import usePosts from "../helpers/use-posts"
 
 const StyledPostsList = styled.section`
@@ -70,7 +69,6 @@ const SecondPage = () => {
 
   return (
     <Layout>
-      <SEO title="Loopy Demos" />
       <h1>Latest Demos</h1>
       <StyledPostsList>
         {posts.map(({ model, builder, slug, image }) => (

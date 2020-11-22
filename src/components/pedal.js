@@ -60,8 +60,8 @@ const Pedal = ({
           levelOptions={sweep?.target === id ? sweep.values : []}
         />
       ))}
-      {leds.map(({ id }) => (
-        <Led isOn={isOn} id={id} />
+      {leds.map(({ id, socket, colors, size }) => (
+        <Led isOn={isOn} id={id} socket={socket} colors={colors} size={size} />
       ))}
       {switches.map(({ id, size }) => (
         <StompSwitch

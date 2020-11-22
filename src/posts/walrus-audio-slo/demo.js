@@ -4,38 +4,45 @@ import image from "./walrus-audio-slo.png"
 
 const pedalConfig = {
   slug: "walrus_audio_slo",
-  width: 250,
-  height: 474,
+  width: 184,
+  height: 350,
   image,
   knobs: [
-    { id: "decay", size: 60, position: { top: 36, left: 14 }, type: "walrus" },
-    { id: "filter", size: 60, position: { top: 38, left: 92 }, type: "walrus" },
-    { id: "mix", size: 60, position: { top: 36, left: 170 }, type: "walrus" },
-    { id: "x", size: 60, position: { top: 140, left: 14 }, type: "walrus" },
+    { id: "decay", size: 46, position: { top: 28, left: 12 }, type: "walrus" },
+    { id: "filter", size: 46, position: { top: 28, left: 72 }, type: "walrus" },
+    { id: "mix", size: 46, position: { top: 28, left: 128 }, type: "walrus" },
+    { id: "x", size: 46, position: { top: 105, left: 12 }, type: "walrus" },
     {
       id: "depth",
-      size: 60,
-      position: { top: 140, left: 170 },
+      size: 46,
+      position: { top: 105, left: 128 },
       type: "walrus",
-    },
-  ],
-  switches: [
-    {
-      id: "bypass",
-      size: 96,
-      position: { top: 370, left: 16 },
-    },
-    {
-      id: "sustain",
-      size: 96,
-      position: { top: 370, left: 145 },
     },
   ],
   leds: [
     {
       id: "on_status",
-      position: { top: 0, left: 0 },
+      size: 44,
+      socket: true,
+      position: { top: 241, left: 20 },
+      colors: {
+        off: "#d2e1e9a1",
+        on: "#d4f9ff",
+        socket: "black",
+      },
     },
+  ],
+  switches: [
+    {
+      id: "bypass",
+      size: 60,
+      position: { top: 278, left: 15 },
+    },
+    // {
+    //   id: "sustain",
+    //   size: 60,
+    //   position: { top: 278, left: 114 },
+    // },
   ],
 }
 

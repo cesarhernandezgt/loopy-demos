@@ -4,27 +4,28 @@ import image from "./smallsound-bigsound-mini.png"
 
 const pedalConfig = {
   slug: "smallsound_bigsound_mini",
-  width: 250,
-  height: 412,
+  width: 212,
+  height: 350,
   image,
   knobs: [
-    { id: "gain", size: 80, position: { top: 4, left: 22 } },
-    { id: "volume", size: 80, position: { top: 8, left: 151 } },
-    { id: "bias", size: 64, position: { top: 80, left: 95 } },
-    { id: "bass", size: 64, position: { top: 151, left: 35 } },
-    { id: "treble", size: 64, position: { top: 150, left: 153 } },
-  ],
-  switches: [
-    {
-      id: "on_switch",
-      size: 76,
-      position: { top: 321, left: 88 },
-    },
+    { id: "gain", size: 72, position: { top: 4, left: 22 } },
+    { id: "volume", size: 72, position: { top: 4, left: 124 } },
+    { id: "bias", size: 56, position: { top: 67, left: 80 } },
+    { id: "bass", size: 56, position: { top: 125, left: 30 } },
+    { id: "treble", size: 56, position: { top: 127, left: 131 } },
   ],
   leds: [
     {
       id: "on_status",
-      position: { top: 160, left: 102 },
+      size: 36,
+      position: { top: 138, left: 89 },
+    },
+  ],
+  switches: [
+    {
+      id: "on_switch",
+      size: 72,
+      position: { top: 268, left: 71 },
     },
   ],
 }
