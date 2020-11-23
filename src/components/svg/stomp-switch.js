@@ -18,32 +18,28 @@ const StompSwitch = ({
       height={size}
       viewBox="0 0 64 64"
     >
+      <defs>
+        <radialGradient id="gradient1">
+          <stop offset="0%" stopColor="aliceblue" />
+          <stop offset="65%" stopColor="aliceblue" />
+          <stop offset="100%" stopColor="slategray" />
+        </radialGradient>
+        <radialGradient id="gradient2">
+          <stop offset="0%" stopColor="aliceblue" />
+          <stop offset="70%" stopColor="aliceblue" />
+          <stop offset="100%" stopColor="lightslategray" />
+        </radialGradient>
+      </defs>
       <g fill="none" fillRule="evenodd">
-        <circle cx="32" cy="32" r="26" fill="#bec1c2" />
+        <circle cx="32" cy="32" r="26" fill="url(#gradient1)" />
         <polygon
-          fill="#e6e9eb"
-          stroke="#adafaf"
-          strokeWidth="2"
+          fill="url(#gradient1)"
+          stroke="slategray"
           points="32 8 52.785 20 52.785 44 32 56 11.215 44 11.215 20"
           transform="rotate(90 32 32)"
         />
-        <circle
-          cx="32"
-          cy="32"
-          r="14"
-          fill="#d2e1e9"
-          stroke="#cad7df"
-          strokeWidth="3"
-        />
-        {!isOn && (
-          <StyledBlinkingCircle
-            cx="32"
-            cy="32"
-            r="20"
-            stroke="#80FFEA"
-            strokeWidth="3"
-          />
-        )}
+        <circle cx="32" cy="32" r="16" fill="url(#gradient2)" />
+        {!isOn && <StyledBlinkingCircle cx="32" cy="32" r="8" fill="#80FFEA" />}
       </g>
     </svg>
   </button>

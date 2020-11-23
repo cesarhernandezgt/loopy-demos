@@ -65,6 +65,7 @@ const StyledDotButton = styled.div`
     top: -0.25rem;
     left: -0.25rem;
     animation: var(--blinkAnimation);
+    animation-iteration-count: 3;
   }
 `
 

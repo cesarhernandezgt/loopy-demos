@@ -3,13 +3,13 @@ import { createGlobalStyle } from "styled-components"
 const GlobalStyles = createGlobalStyle`
   @keyframes blink {
     0% {
-      opacity: 0;
-    }
-    50% {
       opacity: 1;
     }
-    100% {
+    50% {
       opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 
@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   :root {
-    --blinkAnimation: blink 2s ease-in-out infinite;
+    --blinkAnimation: blink 1.3s ease-in-out infinite;
     --spinAnimation: spin 1s linear infinite;
     --headlineFont: 'Sigmar One', cursive;
     --pageWidth: 720px;

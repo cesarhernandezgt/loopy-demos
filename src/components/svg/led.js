@@ -30,8 +30,8 @@ const Led = ({
       {isOn && (
         <>
           <circle cx="24" cy="24" r="8" fill={colors.on} fillOpacity=".8" />
-          <circle cx="24" cy="24" r="16" fill={colors.on} fillOpacity=".20" />
-          <circle cx="24" cy="24" r="24" fill={colors.on} fillOpacity=".3" />
+          <circle cx="24" cy="24" r="16" fill={colors.on} fillOpacity=".2" />
+          <circle cx="24" cy="24" r="24" fill={colors.on} fillOpacity=".4" />
         </>
       )}
     </g>
