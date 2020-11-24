@@ -1,10 +1,13 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import styled, { createGlobalStyle, css } from "styled-components"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import Logo from "./svg/logo"
 import MenuIcon from "./svg/menu-icon"
 
-const StyledHeader = styled.header`
+const HeaderContainer = styled.header`
   background: #282a36;
   width: 100%;
   z-index: 100;
@@ -23,7 +26,7 @@ const StyledHeader = styled.header`
   }
 `
 
-const StyledHeaderContent = styled.div`
+const HeaderContent = styled.div`
   margin: 0 auto;
   max-width: 720px;
   display: flex;
@@ -46,7 +49,7 @@ const StyledHeaderContent = styled.div`
   }
 `
 
-const StyledHeaderLinkWrapper = styled.div`
+const HeaderLinkWrapper = styled.div`
   flex: 1 1 auto;
   margin-left: 1rem;
   display: flex;
@@ -63,17 +66,21 @@ const StyledHeaderLinkWrapper = styled.div`
   }
 `
 
-const StyledTitle = styled(Link)`
+const Title = styled(Link)`
   display: flex;
   align-items: center;
 
   h1 {
     margin: 0;
     color: #9580ff;
+
+    @media (max-width: 400px) {
+      font-size: 1.3rem;
+    }
   }
 `
 
-const StyledTopNav = styled.nav`
+const TopNav = styled.nav`
   display: none;
 
   @media (min-width: 600px) {
@@ -86,35 +93,29 @@ const StyledTopNav = styled.nav`
     justify-content: space-between;
 
     li {
-      margin-right: 1rem;
+      :not(:last-child) {
+        margin-right: 1rem;
+      }
 
       a {
-        color: #ff80bf;
         font-family: var(--headlineFont);
         font-size: 1.3rem;
         position: relative;
+        color: #ff80bf;
+        transition: color 0.1s ease-in;
 
         @media (min-width: 720px) {
           font-size: 1.5rem;
         }
 
-        :after {
-          content: " ";
-          width: 0;
-          transition: all 0.2s ease-in;
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          height: 6px;
-          background: #ff80bf;
-          border-radius: 2px;
+        &.highlight {
+          color: #80ffea;
         }
       }
 
       &:hover {
-        a:after {
-          left: 0;
-          width: 100%;
+        a {
+          color: #80ffea;
         }
       }
     }
@@ -143,7 +144,7 @@ const hiddenSideNav = css`
   background-color: #0000;
 `
 
-const StyledSideNav = styled.aside`
+const SideNav = styled.aside`
   @media (min-width: 600px) {
     display: none;
   }
@@ -170,39 +171,74 @@ const StyledSideNav = styled.aside`
         color: #ff80bf;
         font-family: var(--headlineFont);
         font-size: 1.5rem;
+
+        &.highlight {
+          color: #80ffea;
+        }
       }
     }
   }
 `
+const TitleRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
 
-const NavList = () => (
+const SocialIcons = styled.div`
+  display: flex;
+  align-items: center;
+
+  > a {
+    :not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    font-size: 1rem;
+
+    @media (min-width: 400px) {
+      font-size: 1.2rem;
+    }
+
+    @media (min-width: 600px) {
+      font-size: 1.5rem;
+    }
+
+    color: #80ffea;
+    transition: color 0.1s ease-in;
+
+    :hover {
+      color: #ff80bf;
+    }
+  }
+`
+
+const renderNavList = pathname => (
   <ul>
-    <li>
-      <Link to="/">Demos</Link>
-    </li>
-    <li>
-      <Link to="/posts">Posts</Link>
-    </li>
-    <li>
-      <Link to="/uses">Uses</Link>
-    </li>
-    <li>
-      <Link to="/about">About</Link>
-    </li>
-    <li>
-      <Link to="/contact">Contact</Link>
-    </li>
+    {[
+      { to: "/", title: "Demos" },
+      { to: "/posts", title: "Posts" },
+      { to: "/uses", title: "Uses" },
+      { to: "/about", title: "About" },
+      { to: "/contact", title: "Contact" },
+    ].map(({ to, title }) => (
+      <li>
+        <Link to={to} className={to === pathname ? "highlight" : ""}>
+          {title}
+        </Link>
+      </li>
+    ))}
   </ul>
 )
 
-const Header = () => {
+const Header = ({ pathname = "" }) => {
   const [showSideNav, setShowSideNav] = useState(false)
 
   return (
     <>
       <GlobalOverflow showSideNav={showSideNav} />
-      <StyledHeader>
-        <StyledHeaderContent>
+      <HeaderContainer>
+        <HeaderContent>
           <Link to="/" id="logo">
             <Logo />
           </Link>
@@ -215,29 +251,40 @@ const Header = () => {
           >
             <MenuIcon open={showSideNav} />
           </button>
-          <StyledHeaderLinkWrapper>
-            <StyledTitle
-              to="/"
-              onClick={() => {
-                setShowSideNav(false)
-              }}
-            >
-              <h1>Loopy Demos</h1>
-            </StyledTitle>
-            <StyledTopNav>
-              <NavList />
-            </StyledTopNav>
-          </StyledHeaderLinkWrapper>
-        </StyledHeaderContent>
-        <StyledSideNav
+          <HeaderLinkWrapper>
+            <TitleRow>
+              <Title
+                to="/"
+                onClick={() => {
+                  setShowSideNav(false)
+                }}
+              >
+                <h1>Loopy Demos</h1>
+              </Title>
+              <SocialIcons>
+                <a href="">
+                  <FontAwesomeIcon icon={faGithub} size="1x" />
+                </a>
+                <a href="">
+                  <FontAwesomeIcon icon={faInstagram} size="1x" />
+                </a>
+                <a href="">
+                  <FontAwesomeIcon icon={faEnvelope} size="1x" />
+                </a>
+              </SocialIcons>
+            </TitleRow>
+            <TopNav>{renderNavList(pathname)}</TopNav>
+          </HeaderLinkWrapper>
+        </HeaderContent>
+        <SideNav
           show={showSideNav}
           onClick={() => {
             setShowSideNav(false)
           }}
         >
-          <NavList />
-        </StyledSideNav>
-      </StyledHeader>
+          {renderNavList(pathname)}
+        </SideNav>
+      </HeaderContainer>
     </>
   )
 }

@@ -48,17 +48,16 @@ const GlobalStyles = createGlobalStyle`
   }
 
 
-  p, ul {
+  p, ul, a, span {
     font-size: 1.2rem;
     line-height: 1.5rem;
-  }
 
-  @media screen and (min-width: 600px) {
-    p, ul {
-      font-size: 1.3rem;
-      line-height: 1.6rem;
+    @media screen and (min-width: 600px) {
+        font-size: 1.3rem;
+        line-height: 1.6rem;
     }
   }
+
 
   * {
     font-family: "Source Sans Pro", "Arial", sans-serif;
@@ -92,6 +91,7 @@ const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
+    color: #80FFEA;
   }
 
   main ul {

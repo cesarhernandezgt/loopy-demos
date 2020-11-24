@@ -6,11 +6,21 @@ const AnimatedLine = styled.line`
   transform: translateX(${({ dx }) => dx}px);
 `
 
+const ResponsiveSvg = styled.svg`
+  width: 40px;
+  height: 40px;
+
+  @media (min-width: 400px) {
+    width: 48px;
+    height: 48px;
+  }
+`
+
 const MenuIcon = ({ open = false }) => (
-  <svg
+  <ResponsiveSvg
     xmlns="http://www.w3.org/2000/svg"
-    width="48"
-    height="48"
+    // width="48"
+    // height="48"
     viewBox="0 0 48 48"
   >
     <g fill="none" fillRule="evenodd">
@@ -72,7 +82,7 @@ const MenuIcon = ({ open = false }) => (
         dx={open ? 30 : 0}
       />
     </g>
-  </svg>
+  </ResponsiveSvg>
 )
 
 export default MenuIcon

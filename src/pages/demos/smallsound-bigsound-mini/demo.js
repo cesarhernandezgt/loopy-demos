@@ -1,5 +1,5 @@
 import React from "react"
-import DemoController from "../../components/demo-controller"
+import DemoController from "../../../components/demo-controller"
 import image from "./smallsound-bigsound-mini.png"
 
 const pedalConfig = {

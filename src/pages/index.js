@@ -64,16 +64,16 @@ const StyledLink = styled(Link)`
   }
 `
 
-const SecondPage = () => {
+const Demos = ({ location = {} }) => {
   const demos = useDemos()
 
   return (
-    <Layout>
+    <Layout location={location}>
       <h1>Latest Demos</h1>
       <StyledDemosList>
         {demos.map(({ model, builder, slug, image }) => (
           <article id={slug}>
-            <StyledLink to={slug}>
+            <StyledLink to={`/demos/${slug}`}>
               <Img
                 fluid={image}
                 style={{
@@ -97,4 +97,4 @@ const SecondPage = () => {
   )
 }
 
-export default SecondPage
+export default Demos

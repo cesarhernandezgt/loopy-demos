@@ -24,26 +24,26 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `demos`,
-        path: `${__dirname}/src/demos/`,
+        path: `${__dirname}/src/pages/demos/`,
       },
     },
     {
       resolve: "gatsby-plugin-page-creator",
       options: {
-        path: `${__dirname}/src/demos`,
+        path: `${__dirname}/src/pages/demos`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/posts/`,
+        path: `${__dirname}/src/pages/posts/`,
       },
     },
     {
       resolve: "gatsby-plugin-page-creator",
       options: {
-        path: `${__dirname}/src/posts`,
+        path: `${__dirname}/src/pages/posts`,
       },
     },
     `gatsby-transformer-sharp`,

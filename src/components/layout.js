@@ -30,7 +30,7 @@ const StyledFooter = styled.footer`
   }
 `
 
-const Layout = ({ children = null, pageContext = {} }) => {
+const Layout = ({ children = null, pageContext = {}, location = {} }) => {
   const { model, builder, title } = pageContext.frontmatter || {}
   const postTitle = builder && model && `${builder} - ${model}`
 
@@ -38,7 +38,7 @@ const Layout = ({ children = null, pageContext = {} }) => {
     <>
       <GlobalStyles />
       <SEO title={title || postTitle} />
-      <Header />
+      <Header pathname={location.pathname} />
 
       <StyledMain>{children}</StyledMain>
       <StyledFooter>
