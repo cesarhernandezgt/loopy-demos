@@ -4,6 +4,7 @@ import styled from "styled-components"
 const StyledPresetTag = styled.button`
   background: ${props => (props.isSweep ? "#ff80bf" : "#80FFEA")};
   color: black;
+  border-radius: 3px;
   font-size: 1rem;
   font-weight: 900;
   padding: 0.5rem;
@@ -13,7 +14,7 @@ const StyledPresetTag = styled.button`
 
   transition: opacity 0.2s ease-in;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 600px) {
     font-size: 1.2rem;
   }
 `

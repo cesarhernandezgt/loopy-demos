@@ -6,11 +6,21 @@ import MenuIcon from "./svg/menu-icon"
 
 const StyledHeader = styled.header`
   background: #282a36;
-  margin-bottom: 2rem;
   width: 100%;
   z-index: 100;
   position: sticky;
   top: 0;
+  margin-bottom: 1rem;
+
+  @media (min-width: 600px) {
+    margin-bottom: 2rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 `
 
 const StyledHeaderContent = styled.div`
@@ -37,19 +47,18 @@ const StyledHeaderContent = styled.div`
 `
 
 const StyledHeaderLinkWrapper = styled.div`
+  flex: 1 1 auto;
   margin-left: 1rem;
   display: flex;
   flex-flow: column;
   justify-content: center;
   padding: 0.5rem 0;
   box-sizing: border-box;
-  /* Because menu icon has 64px height */
-  height: 64px;
+  height: 48px;
 
   @media (min-width: 600px) {
     justify-content: space-between;
     margin-left: 2rem;
-    /* Because logo has 96px height */
     height: 96px;
   }
 `
@@ -61,7 +70,6 @@ const StyledTitle = styled(Link)`
   h1 {
     margin: 0;
     color: #9580ff;
-    text-transform: uppercase;
   }
 `
 
@@ -75,15 +83,20 @@ const StyledTopNav = styled.nav`
   ul {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     li {
-      margin-right: 3rem;
+      margin-right: 1rem;
 
       a {
         color: #ff80bf;
         font-family: var(--headlineFont);
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         position: relative;
+
+        @media (min-width: 720px) {
+          font-size: 1.5rem;
+        }
 
         :after {
           content: " ";
@@ -109,13 +122,13 @@ const StyledTopNav = styled.nav`
 `
 
 const GlobalOverflow = createGlobalStyle`
-body {
-  overflow: ${({ showSideNav }) => (showSideNav ? "hidden" : "overflow")}
-}
+  body {
+    overflow: ${({ showSideNav }) => (showSideNav ? "hidden" : "overflow")}
+  }
 `
 
 const visibleSideNav = css`
-  transition: left 0.2s ease-in 0s, background-color 0.1s ease-in 0.2s,
+  transition: left 0.1s ease-in 0s, background-color 0.1s ease-in 0.1s,
     height 0s linear 0s;
   height: 100vh;
   left: 0;
@@ -123,8 +136,8 @@ const visibleSideNav = css`
 `
 
 const hiddenSideNav = css`
-  transition: left 0.2s ease-out 0.1s, background-color 0.1s ease-out 0s,
-    height 0s linear 0.3s;
+  transition: left 0.1s ease-out 0.1s, background-color 0.1s ease-out 0s,
+    height 0s linear 0.2s;
   height: 0;
   left: -100vw;
   background-color: #0000;
@@ -149,9 +162,10 @@ const StyledSideNav = styled.aside`
     display: flex;
     flex-flow: column nowrap;
     padding-left: 1rem;
-    padding-top: 1rem;
+    padding-top: 2rem;
 
     li {
+      margin-bottom: 1rem;
       a {
         color: #ff80bf;
         font-family: var(--headlineFont);
@@ -164,7 +178,13 @@ const StyledSideNav = styled.aside`
 const NavList = () => (
   <ul>
     <li>
-      <Link to="/">Home</Link>
+      <Link to="/">Demos</Link>
+    </li>
+    <li>
+      <Link to="/posts">Posts</Link>
+    </li>
+    <li>
+      <Link to="/uses">Uses</Link>
     </li>
     <li>
       <Link to="/about">About</Link>

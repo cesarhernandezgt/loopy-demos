@@ -3,9 +3,9 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
-import usePosts from "../helpers/use-posts"
+import useDemos from "../helpers/use-demos"
 
-const StyledPostsList = styled.section`
+const StyledDemosList = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: 250px;
@@ -65,13 +65,13 @@ const StyledLink = styled(Link)`
 `
 
 const SecondPage = () => {
-  const posts = usePosts()
+  const demos = useDemos()
 
   return (
     <Layout>
       <h1>Latest Demos</h1>
-      <StyledPostsList>
-        {posts.map(({ model, builder, slug, image }) => (
+      <StyledDemosList>
+        {demos.map(({ model, builder, slug, image }) => (
           <article id={slug}>
             <StyledLink to={slug}>
               <Img
@@ -87,12 +87,12 @@ const SecondPage = () => {
               <div className="title">
                 <span>{model}</span>
                 <span>{" - "}</span>
-                <span>{builder}</span>`
+                <span>{builder}</span>
               </div>
             </StyledLink>
           </article>
         ))}
-      </StyledPostsList>
+      </StyledDemosList>
     </Layout>
   )
 }

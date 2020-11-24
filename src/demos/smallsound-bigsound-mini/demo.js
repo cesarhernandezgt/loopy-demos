@@ -38,10 +38,10 @@ const presets = [
     audio: "spitty_starved.mp3",
   },
   {
-    id: "lo_fi",
-    label: "Lo-fi",
-    settings: { gain: 4, bass: 1, treble: 0, bias: 3, volume: 6 },
-    audio: "lo_fi.mp3",
+    id: "low_gain_sparkle",
+    label: "Low Gain Sparkle",
+    settings: { gain: 4, treble: 7 },
+    audio: "low_gain_sparkle.mp3",
   },
   {
     id: "high_gain",
@@ -58,16 +58,10 @@ const presets = [
     initialValue: 0,
   },
   {
-    id: "treble_boost",
-    label: "Treble Boost",
-    settings: { bass: 3, treble: 7, volume: 9, gain: 2 },
-    audio: "treble_boost.mp3",
-  },
-  {
-    id: "low_gain_sparkle",
-    label: "Low Gain Sparkle",
-    settings: { gain: 4, treble: 7 },
-    audio: "low_gain_sparkle.mp3",
+    id: "lo_fi",
+    label: "Lo-fi",
+    settings: { gain: 4, bass: 1, treble: 0, bias: 3, volume: 6 },
+    audio: "lo_fi.mp3",
   },
   {
     id: "bias_sweep",
@@ -76,6 +70,12 @@ const presets = [
     target: "bias",
     values: [0, 2, 3, 5, 7, 9],
     initialValue: 3,
+  },
+  {
+    id: "treble_boost",
+    label: "Treble Boost",
+    settings: { bass: 3, treble: 7, volume: 9, gain: 2 },
+    audio: "treble_boost.mp3",
   },
 ]
 

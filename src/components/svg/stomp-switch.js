@@ -21,13 +21,13 @@ const StompSwitch = ({
       <defs>
         <radialGradient id="gradient1">
           <stop offset="0%" stopColor="aliceblue" />
-          <stop offset="65%" stopColor="aliceblue" />
-          <stop offset="100%" stopColor="slategray" />
+          <stop offset="70%" stopColor="aliceblue" />
+          <stop offset="95%" stopColor="lightslategray" />
         </radialGradient>
         <radialGradient id="gradient2">
           <stop offset="0%" stopColor="aliceblue" />
-          <stop offset="70%" stopColor="aliceblue" />
-          <stop offset="100%" stopColor="lightslategray" />
+          <stop offset="80%" stopColor="aliceblue" />
+          <stop offset="100%" stopColor="#a3bbd2" />
         </radialGradient>
       </defs>
       <g fill="none" fillRule="evenodd">
@@ -39,7 +39,7 @@ const StompSwitch = ({
           transform="rotate(90 32 32)"
         />
         <circle cx="32" cy="32" r="16" fill="url(#gradient2)" />
-        {!isOn && <StyledBlinkingCircle cx="32" cy="32" r="8" fill="#80FFEA" />}
+        {!isOn && <StyledBlinkingCircle cx="32" cy="32" r="6" fill="#80FFEA" />}
       </g>
     </svg>
   </button>

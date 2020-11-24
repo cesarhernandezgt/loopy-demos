@@ -1,12 +1,12 @@
 import { useStaticQuery, graphql } from "gatsby"
 
-const usePosts = () => {
+const useDemos = () => {
   const {
-    allMdx: { edges: posts },
+    allMdx: { edges: demos },
   } = useStaticQuery(
     graphql`
       query {
-        allMdx(filter: { frontmatter: { type: { eq: "post" } } }) {
+        allMdx(filter: { frontmatter: { type: { eq: "demo" } } }) {
           edges {
             node {
               frontmatter {
@@ -28,7 +28,7 @@ const usePosts = () => {
     `
   )
 
-  return posts.map(
+  return demos.map(
     ({
       node: {
         frontmatter: { slug, builder, model, image },
@@ -42,4 +42,4 @@ const usePosts = () => {
   )
 }
 
-export default usePosts
+export default useDemos

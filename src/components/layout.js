@@ -9,8 +9,12 @@ const StyledMain = styled.main`
     100vh - header height - margin bottom header
     - footer margin top
    */
+  --headerMargin: 1rem;
+  @media (min-width: 600px) {
+    --headerMargin: 2rem;
+  }
 
-  min-height: calc(100vh - var(--headerHeight) - 2rem - 3rem);
+  min-height: calc(100vh - var(--headerHeight) - var(--headerMargin) - 3rem);
   max-width: var(--pageWidth);
   margin: 0 auto;
   padding: 0 1rem;

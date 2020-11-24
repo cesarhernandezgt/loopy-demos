@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Knob from "./knob"
 import Led from "./svg/led"
-import StompSwitch from "./svg/stomp-switch"
+import Switch from "./switch"
 
 const Enclosure = styled.div`
   width: ${props => props.width}px;
@@ -63,10 +63,12 @@ const Pedal = ({
       {leds.map(({ id, socket, colors, size }) => (
         <Led isOn={isOn} id={id} socket={socket} colors={colors} size={size} />
       ))}
-      {switches.map(({ id, size }) => (
-        <StompSwitch
+      {switches.map(({ id, size, type }) => (
+        <Switch
           id={id}
+          type={type}
           size={size}
+          state={settings[id]}
           onClick={() => {
             onToggleOn(!isOn)
           }}

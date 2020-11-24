@@ -27,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
     --spinAnimation: spin 1s linear infinite;
     --headlineFont: 'Sigmar One', cursive;
     --pageWidth: 720px;
-    --headerHeight: 80px;
+    --headerHeight: 64px;
   }
 
   @media (min-width: 600px) {
@@ -48,15 +48,15 @@ const GlobalStyles = createGlobalStyle`
   }
 
 
-  p {
+  p, ul {
     font-size: 1.2rem;
     line-height: 1.5rem;
   }
 
-  @media screen and (min-width: 1024px) {
-    p {
-      font-size: 1.4rem;
-      line-height: 1.7rem;
+  @media screen and (min-width: 600px) {
+    p, ul {
+      font-size: 1.3rem;
+      line-height: 1.6rem;
     }
   }
 
@@ -94,10 +94,12 @@ const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  main ul {
+    list-style-image: url("/list-style.svg");
+
+    li {
+      padding-bottom: 0.5rem;
+    }
   }
 `
 
