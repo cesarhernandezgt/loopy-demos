@@ -8,7 +8,7 @@ import useDemos from "../helpers/use-demos"
 const StyledDemosList = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: 250px;
+  grid-auto-rows: 220px;
   grid-row-gap: 0.5rem;
   grid-column-gap: 0.5rem;
 
@@ -17,7 +17,7 @@ const StyledDemosList = styled.section`
     padding: 1rem;
     box-sizing: border-box;
     position: relative;
-    background: #9580ff;
+    background: var(--purple);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -37,7 +37,7 @@ const StyledLink = styled(Link)`
     left: 0;
     font-weight: bold;
     font-size: 1.2rem;
-    color: #ffff80;
+    color: var(--yellow);
     background: #3a306cab;
     width: 100%;
     height: 100%;

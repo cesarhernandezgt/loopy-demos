@@ -1,4 +1,5 @@
 import React from "react"
+import COLORS from "../styles/colors"
 
 const Logo = () => (
   <svg
@@ -8,8 +9,19 @@ const Logo = () => (
     viewBox="0 0 48 64"
   >
     <g fill="none" fillRule="evenodd">
+      <rect
+        width="44"
+        height="60"
+        x="2"
+        y="2"
+        stroke={COLORS.purple}
+        strokeWidth="2"
+        rx="4"
+        ry="4"
+        fill={COLORS.dark}
+      />
       <circle
-        stroke="#9580ff"
+        stroke={COLORS.purple}
         strokeWidth="2"
         r="6"
         fill="none"
@@ -21,13 +33,13 @@ const Logo = () => (
         y1="8"
         x2="14"
         y2="14"
-        stroke="#9580ff"
+        stroke={COLORS.purple}
         strokeWidth="2"
         strokeLinecap="round"
         transform="rotate(-30 14 14)"
       />
       <circle
-        stroke="#ff80bf"
+        stroke={COLORS.pink}
         strokeWidth="2"
         r="6"
         fill="none"
@@ -39,7 +51,7 @@ const Logo = () => (
         y1="8"
         x2="32"
         y2="14"
-        stroke="#ff80bf"
+        stroke={COLORS.pink}
         strokeWidth="2"
         strokeLinecap="round"
       >
@@ -60,7 +72,7 @@ const Logo = () => (
         y1="26"
         x2="14"
         y2="42"
-        stroke="#9580ff"
+        stroke={COLORS.purple}
         strokeWidth="2"
         strokeLinecap="round"
       />
@@ -69,7 +81,7 @@ const Logo = () => (
         y1="40"
         x2="16"
         y2="40"
-        stroke="#ff80bf"
+        stroke={COLORS.yellow}
         strokeWidth="2"
         strokeLinecap="round"
       >
@@ -101,7 +113,7 @@ const Logo = () => (
         y1="26"
         x2="23"
         y2="42"
-        stroke="#9580ff"
+        stroke={COLORS.purple}
         strokeWidth="2"
         strokeLinecap="round"
       />
@@ -110,7 +122,7 @@ const Logo = () => (
         y1="28"
         x2="25"
         y2="28"
-        stroke="#ff80bf"
+        stroke={COLORS.yellow}
         strokeWidth="2"
         strokeLinecap="round"
       >
@@ -141,7 +153,7 @@ const Logo = () => (
         y1="26"
         x2="32"
         y2="42"
-        stroke="#9580ff"
+        stroke={COLORS.purple}
         strokeWidth="2"
         strokeLinecap="round"
       />
@@ -150,7 +162,7 @@ const Logo = () => (
         y1="40"
         x2="34"
         y2="40"
-        stroke="#ff80bf"
+        stroke={COLORS.yellow}
         strokeWidth="2"
         strokeLinecap="round"
       >
@@ -176,41 +188,30 @@ const Logo = () => (
           fill="freeze"
         />
       </line>
-      <circle r="4" cx="16" cy="52" fill="#9580ff">
+      <circle r="4" cx="16" cy="52" fill={COLORS.purple}>
         <animate
           id="leftstomp"
           attributeName="fill"
-          from="#9580ff"
-          to="#ff80bf"
+          from={COLORS.purple}
+          to={COLORS.cyan}
           dur="0.2s"
           repeatCount="1"
           begin="rightstomp.end"
           fill="freeze"
         />
       </circle>
-      <circle r="4" cx="32" cy="52" fill="#ff80bf">
+      <circle r="4" cx="32" cy="52" fill={COLORS.cyan}>
         <animate
           id="rightstomp"
           attributeName="fill"
-          from="#ff80bf"
-          to="#9580ff"
+          from={COLORS.cyan}
+          to={COLORS.purple}
           dur="0.2s"
           repeatCount="1"
           begin="rightslide.end"
           fill="freeze"
         />
       </circle>
-      <rect
-        width="44"
-        height="60"
-        x="2"
-        y="2"
-        stroke="#9580ff"
-        strokeWidth="2"
-        rx="4"
-        ry="4"
-        fill="none"
-      />
     </g>
   </svg>
 )

@@ -9,8 +9,8 @@ const useDemos = () => {
         allMdx(filter: { frontmatter: { type: { eq: "demo" } } }) {
           edges {
             node {
+              slug
               frontmatter {
-                slug
                 builder
                 model
                 image {
@@ -31,10 +31,11 @@ const useDemos = () => {
   return demos.map(
     ({
       node: {
-        frontmatter: { slug, builder, model, image },
+        slug,
+        frontmatter: { builder, model, image },
       },
     }) => ({
-      slug,
+      slug: slug.split("/")[1],
       builder,
       model,
       image: image?.childImageSharp?.fluid,

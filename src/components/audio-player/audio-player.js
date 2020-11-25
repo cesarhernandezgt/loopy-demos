@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Helmet } from "react-helmet"
 import styled from "styled-components"
-
-import PlayButtonIcon from "./svg/play-button-icon"
+import PlayButton from "./play-button"
+import DisplayText from "./display-text"
+import LoadingBar from "./loading-bar"
 
 const StyledPlayerContainer = styled.div`
-  background: #9580ff;
+  background: var(--purple);
   border-radius: 12px;
   width: 100%;
   height: 78px;
@@ -15,11 +16,6 @@ const StyledPlayerContainer = styled.div`
   box-sizing: border-box;
 `
 
-const StyledPlayButton = styled.button`
-  width: 70px;
-  cursor: pointer;
-`
-
 const StyledPlayerContent = styled.div`
   flex: 1;
   display: flex;
@@ -27,47 +23,16 @@ const StyledPlayerContent = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #282a36;
+  background: var(--dark);
   border-radius: 12px;
 
   > span {
     text-align: center;
-    color: #80ffea;
-    font-family: "Minecraft";
+    color: var(--cyan);
+    font-family: "Share Tech Mono";
+    /* font-size: 1rem; */
   }
 `
-
-const StyledLoadingBar = styled.div`
-  height: 1.2rem;
-  border-radius: 12px;
-  border: 2px solid #80ffea;
-  margin-top: 0.5rem;
-  display: flex;
-  overflow: hidden;
-  width: 100%;
-  max-width: 400px;
-
-  :before {
-    content: " ";
-    height: 100%;
-    background: #80ffea;
-    width: ${({ ratio }) => ratio}%;
-    min-width: 5%;
-    transition: width 0.4s ease-in;
-  }
-`
-
-const DisplayText = ({
-  activePreset: { description, label },
-  isPlaying,
-  isPedalOn,
-}) => {
-  if (!isPlaying) return "Hit play and wear some headphones d[-_-]b"
-
-  if (!isPedalOn) return "Here's ma clean tone."
-
-  return description || label
-}
 
 const CLEAN_TONE = "CLEAN_TONE"
 const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
@@ -75,7 +40,7 @@ const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 const AudioPlayer = ({
   presets = [],
   activePreset = {},
-  sweepSetting = {},
+  // sweepSetting = {},
   isPedalOn = false,
   slug = "",
 }) => {
@@ -180,39 +145,24 @@ const AudioPlayer = ({
         ))}
       </Helmet>
       <StyledPlayerContainer>
-        <StyledPlayButton
-          type="button"
+        <PlayButton
           onClick={() => {
             togglePlay()
           }}
-        >
-          <PlayButtonIcon
-            isPlaying={isPlaying}
-            isLoading={
-              isPlaying && tracksLoaded.some(({ isLoaded }) => !isLoaded)
-            }
-          />
-        </StyledPlayButton>
+          isPlaying={isPlaying}
+          isLoading={
+            isPlaying && tracksLoaded.some(({ isLoaded }) => !isLoaded)
+          }
+        />
         <StyledPlayerContent>
           {isPlaying && tracksLoaded.some(({ isLoaded }) => !isLoaded) ? (
-            <>
-              <span>Waiting for tracks</span>
-              <StyledLoadingBar
-                ratio={
-                  (tracksLoaded.filter(({ isLoaded }) => isLoaded).length /
-                    presetsWithClean.length) *
-                  100
-                }
-              />
-            </>
+            <LoadingBar tracks={presetsWithClean} tracksLoaded={tracksLoaded} />
           ) : (
-            <span>
-              <DisplayText
-                activePreset={activePreset}
-                isPlaying={isPlaying}
-                isPedalOn={isPedalOn}
-              />
-            </span>
+            <DisplayText
+              activePreset={activePreset}
+              isPlaying={isPlaying}
+              isPedalOn={isPedalOn}
+            />
           )}
         </StyledPlayerContent>
       </StyledPlayerContainer>

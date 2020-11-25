@@ -2,11 +2,11 @@ import React from "react"
 import styled from "styled-components"
 
 const StyledPresetTag = styled.button`
-  background: ${props => (props.isSweep ? "#ff80bf" : "#80FFEA")};
-  color: black;
+  background: ${props => (props.isSweep ? "var(--pink)" : "var(--cyan)")};
+  color: var(--dark);
   border-radius: 3px;
   font-size: 1rem;
-  font-weight: 900;
+  font-weight: 700;
   padding: 0.5rem;
   margin: 0 0.25rem 0.25rem 0;
   cursor: pointer;

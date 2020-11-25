@@ -8,7 +8,7 @@ import Logo from "./svg/logo"
 import MenuIcon from "./svg/menu-icon"
 
 const HeaderContainer = styled.header`
-  background: #282a36;
+  background: var(--dark);
   width: 100%;
   z-index: 100;
   position: sticky;
@@ -72,10 +72,12 @@ const Title = styled(Link)`
 
   h1 {
     margin: 0;
-    color: #9580ff;
+    color: var(--purple);
+    text-shadow: 2px 3px var(--yellow);
 
     @media (max-width: 400px) {
       font-size: 1.3rem;
+      text-shadow: 1px 2px var(--yellow);
     }
   }
 `
@@ -101,7 +103,7 @@ const TopNav = styled.nav`
         font-family: var(--headlineFont);
         font-size: 1.3rem;
         position: relative;
-        color: #ff80bf;
+        color: var(--pink);
         transition: color 0.1s ease-in;
 
         @media (min-width: 720px) {
@@ -109,13 +111,13 @@ const TopNav = styled.nav`
         }
 
         &.highlight {
-          color: #80ffea;
+          color: var(--cyan);
         }
       }
 
       &:hover {
         a {
-          color: #80ffea;
+          color: var(--cyan);
         }
       }
     }
@@ -157,7 +159,7 @@ const SideNav = styled.aside`
   ${({ show }) => (show ? visibleSideNav : hiddenSideNav)}
 
   ul {
-    background: #282a36;
+    background: var(--dark);
     width: 200px;
     height: 100%;
     display: flex;
@@ -168,12 +170,12 @@ const SideNav = styled.aside`
     li {
       margin-bottom: 1rem;
       a {
-        color: #ff80bf;
+        color: var(--pink);
         font-family: var(--headlineFont);
         font-size: 1.5rem;
 
         &.highlight {
-          color: #80ffea;
+          color: var(--cyan);
         }
       }
     }
@@ -204,26 +206,31 @@ const SocialIcons = styled.div`
       font-size: 1.5rem;
     }
 
-    color: #80ffea;
+    color: var(--cyan);
     transition: color 0.1s ease-in;
 
     :hover {
-      color: #ff80bf;
+      color: var(--pink);
     }
   }
 `
 
-const renderNavList = pathname => (
+const renderNavList = (pathname = "") => (
   <ul>
     {[
-      { to: "/", title: "Demos" },
-      { to: "/posts", title: "Posts" },
-      { to: "/uses", title: "Uses" },
-      { to: "/about", title: "About" },
-      { to: "/contact", title: "Contact" },
-    ].map(({ to, title }) => (
+      { to: "/", title: "Demos", id: "demos" },
+      { to: "/posts", title: "Posts", id: "posts" },
+      { to: "/uses", title: "Uses", id: "uses" },
+      { to: "/about", title: "About", id: "about" },
+      { to: "/contact", title: "Contact", id: "contact" },
+    ].map(({ to, title, id }) => (
       <li>
-        <Link to={to} className={to === pathname ? "highlight" : ""}>
+        <Link
+          to={to}
+          className={
+            pathname.includes(id) || pathname === to ? "highlight" : ""
+          }
+        >
           {title}
         </Link>
       </li>
@@ -265,7 +272,11 @@ const Header = ({ pathname = "" }) => {
                 <a href="">
                   <FontAwesomeIcon icon={faGithub} size="1x" />
                 </a>
-                <a href="">
+                <a
+                  href="https://www.instagram.com/loopydemos/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <FontAwesomeIcon icon={faInstagram} size="1x" />
                 </a>
                 <a href="">

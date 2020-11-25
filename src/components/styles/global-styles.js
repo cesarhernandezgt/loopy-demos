@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components"
+import COLORS from "./colors"
 
 const GlobalStyles = createGlobalStyle`
   @keyframes blink {
@@ -28,6 +29,17 @@ const GlobalStyles = createGlobalStyle`
     --headlineFont: 'Sigmar One', cursive;
     --pageWidth: 720px;
     --headerHeight: 64px;
+    --yellow: ${COLORS.yellow};
+    --pink: ${COLORS.pink};
+    --cyan: ${COLORS.cyan};
+    --purple: ${COLORS.purple};
+    --darkPurple: ${COLORS.darkPurple};
+    --dark: ${COLORS.dark};
+  }
+
+  ::selection {
+    background: var(--pink);
+    color: var(--dark);
   }
 
   @media (min-width: 600px) {
@@ -42,9 +54,8 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    /* background: #282a36; */
-    background: #383a59;
-    color: white;
+    background: var(--darkPurple);
+    color: ghostwhite;
   }
 
 
@@ -58,9 +69,13 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  strong {
+    font-weight: 900;
+  }
+
 
   * {
-    font-family: "Source Sans Pro", "Arial", sans-serif;
+    font-family: "Source Sans Pro", cursive;
   }
 
   h1,
@@ -70,7 +85,7 @@ const GlobalStyles = createGlobalStyle`
   h5,
   h6 {
     font-family: var(--headlineFont);
-    color:#FFFF80;
+    color: var(--yellow);
     overflow-wrap: break-word;
     line-height: 2rem;
   }
@@ -91,7 +106,7 @@ const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: #80FFEA;
+    color: var(--cyan);
   }
 
   main ul {

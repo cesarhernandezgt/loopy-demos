@@ -60,15 +60,6 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    {
-      resolve: `gatsby-plugin-google-fonts-v2`,
-      options: {
-        fonts: [
-          { family: `Source Sans Pro`, variable: true, weights: ["200..900"] },
-          { family: `Sigmar One` },
-        ],
-      },
-    },
     `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-mdx`,

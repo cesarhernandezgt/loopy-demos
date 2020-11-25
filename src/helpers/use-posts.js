@@ -10,8 +10,8 @@ const usePosts = () => {
           edges {
             node {
               excerpt
+              slug
               frontmatter {
-                slug
                 title
                 date
                 # image {
@@ -33,10 +33,11 @@ const usePosts = () => {
     ({
       node: {
         excerpt,
-        frontmatter: { slug, title, date },
+        slug,
+        frontmatter: { title, date },
       },
     }) => ({
-      slug,
+      slug: slug.split("/")[1],
       title,
       excerpt,
       date,

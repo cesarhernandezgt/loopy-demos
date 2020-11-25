@@ -45,7 +45,7 @@ const StyledDotButton = styled.div`
   border-radius: 50%;
   width: var(--dotSize);
   height: var(--dotSize);
-  background: #80ffea;
+  background: var(--cyan);
   position: absolute;
   top: calc((var(--dotSize) / 2) - 1rem);
   left: calc(50% - (var(--dotSize) / 2));
@@ -59,7 +59,7 @@ const StyledDotButton = styled.div`
     border-radius: 50%;
     width: 1rem;
     height: 1rem;
-    border: 2px solid #80ffea;
+    border: 2px solid var(--cyan);
     box-sizing: border-box;
     position: absolute;
     top: -0.25rem;
