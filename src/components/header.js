@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 import styled, { createGlobalStyle, css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons"
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import Logo from "./svg/logo"
 import MenuIcon from "./svg/menu-icon"
 
@@ -269,7 +268,11 @@ const Header = ({ pathname = "" }) => {
                 <h1>Loopy Demos</h1>
               </Title>
               <SocialIcons>
-                <a href="">
+                <a
+                  href="https://github.com/silvb/loopy-demos"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <FontAwesomeIcon icon={faGithub} size="1x" />
                 </a>
                 <a
@@ -278,9 +281,6 @@ const Header = ({ pathname = "" }) => {
                   rel="noreferrer"
                 >
                   <FontAwesomeIcon icon={faInstagram} size="1x" />
-                </a>
-                <a href="">
-                  <FontAwesomeIcon icon={faEnvelope} size="1x" />
                 </a>
               </SocialIcons>
             </TitleRow>
