@@ -14,7 +14,7 @@ const Led = ({
     viewBox="0 0 48 48"
     id={id}
   >
-    <g fill="none" fillRule="evenodd">
+    <g fill="none">
       {socket ? (
         <circle
           cx="24"

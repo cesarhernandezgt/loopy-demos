@@ -44,10 +44,10 @@ const formatDate = dateString => {
 }
 
 const Posts = ({ location = {} }) => (
-  <Layout location={location}>
+  <Layout location={location} title="Posts">
     <section>
       {usePosts().map(({ title, slug, excerpt, date }) => (
-        <Post id={slug}>
+        <Post id={slug} key={slug}>
           <Link to={`/posts/${slug}`}>
             <h3>{title}</h3>
             <span className="date">{formatDate(date)}</span>

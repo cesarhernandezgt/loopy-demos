@@ -7,7 +7,7 @@ const OffsetKnob = ({ size = 64 }) => (
     height={size}
     viewBox="0 0 132 133"
   >
-    <g fill="none" fillRule="evenodd" transform="translate(-11 -10.073)">
+    <g fill="none" transform="translate(-11 -10.073)">
       <circle cx="77" cy="77" r="66" fill="#1F1B1C" />
       <path
         fill="#1F1B1C"

@@ -27,8 +27,9 @@ const StyledKnobContainer = styled.div`
   z-index: 1;
   position: relative;
 
-  svg {
+  svg g {
     transform: rotate(var(--rotation));
+    transform-origin: 50% 50%;
     transition: transform 0.2s ease-in;
   }
 
@@ -87,6 +88,7 @@ const Knob = ({
     }
     {levelOptions.map(levelOption => (
       <StyledDotButton
+        key={levelOption}
         parentSize={size}
         onClick={() => {
           onSelectOption({ [id]: levelOption })

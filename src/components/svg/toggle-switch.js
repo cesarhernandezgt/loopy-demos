@@ -9,7 +9,6 @@ const ToggleSwitch = ({ size = 64, state = 1, orientation = "vertical" }) => (
   >
     <g
       fill="none"
-      fillRule="evenodd"
       transform={`rotate(${orientation === "vertical" ? 0 : -90} 39 39)`}
     >
       <circle cx="39" cy="39" r="35" fill="lightslategray" />

@@ -23,6 +23,7 @@
     ],
     "rules": {
         "prettier/prettier": "error",
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".mdx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".mdx"] }],
+        "react/jsx-key": 2
     }
 }

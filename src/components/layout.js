@@ -57,9 +57,14 @@ const StyledFooter = styled.footer`
   }
 `
 
-const Layout = ({ children = null, pageContext = {}, location = {} }) => {
-  const { model, builder, title } = pageContext.frontmatter || {}
-  const pageTitle = builder && model && `${builder} - ${model}`
+const Layout = ({
+  children = null,
+  pageContext = {},
+  location = {},
+  title = "",
+}) => {
+  const { model, builder, title: pageTitle } = pageContext.frontmatter || {}
+  const demoTitle = builder && model && `${builder} - ${model}`
 
   const pageType = pageContext?.frontmatter?.type
 
@@ -68,11 +73,11 @@ const Layout = ({ children = null, pageContext = {}, location = {} }) => {
   return (
     <>
       <GlobalStyles />
-      <SEO title={title || pageTitle} />
+      <SEO title={title || demoTitle || pageTitle} />
       <Header pathname={location.pathname} />
       {isSubPage && (
         <Breadcrumbs>
-          <Link to="/">
+          <Link to="../">
             <FontAwesomeIcon icon={faLongArrowAltLeft} />
             <span className="label">{`All ${pageType}s`}</span>
           </Link>

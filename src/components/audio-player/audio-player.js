@@ -85,12 +85,18 @@ const AudioPlayer = ({
       )
     }
 
+    let intervalId = ""
+
     if (audioData.length > 0) {
       // we might already have all the data if network
       // is fast
       mapReadyState()
       // but also check every 3 seconds if something changed
-      setInterval(mapReadyState, 3000)
+      intervalId = setInterval(mapReadyState, 3000)
+    }
+
+    return () => {
+      clearInterval(intervalId)
     }
   }, [audioData])
 
@@ -141,7 +147,7 @@ const AudioPlayer = ({
           <link rel="prefetch" href={url} key={id} />
         ))}
         {audioData.map(({ id, url }) => (
-          <link rel="preload" href={url} key={id} as="audio" />
+          <link rel="preload" href={url} key={id} as="audio" type="audio/mp3" />
         ))}
       </Helmet>
       <StyledPlayerContainer>

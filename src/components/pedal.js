@@ -61,10 +61,18 @@ const Pedal = ({
         />
       ))}
       {leds.map(({ id, socket, colors, size }) => (
-        <Led isOn={isOn} id={id} socket={socket} colors={colors} size={size} />
+        <Led
+          key={id}
+          isOn={isOn}
+          id={id}
+          socket={socket}
+          colors={colors}
+          size={size}
+        />
       ))}
       {switches.map(({ id, size, type }) => (
         <Switch
+          key={id}
           id={id}
           type={type}
           size={size}

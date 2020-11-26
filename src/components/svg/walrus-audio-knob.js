@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 const StyledGradientBackground = styled.div`
-  postion: relative;
+  position: relative;
   --size: ${props => props.size - 2}px;
 
   &:before {
@@ -23,6 +23,7 @@ const StyledGradientBackground = styled.div`
       #8a8a8a
     );
     border-radius: 50%;
+    z-index: -1;
   }
 `
 
@@ -34,7 +35,7 @@ const WalrusAudioKnob = ({ size = 48 }) => (
       height={size}
       viewBox="0 0 64 64"
     >
-      <g fill="none" fillRule="evenodd">
+      <g fill="none">
         <circle cx="32" cy="32" r="30" stroke="#2c2c2c" strokeWidth="4" />
         <rect width="3" height="28" x="31" y="4" fill="#FFF" />
       </g>

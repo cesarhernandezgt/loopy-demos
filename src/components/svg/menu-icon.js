@@ -24,7 +24,7 @@ const MenuIcon = ({ open = false }) => (
     // height="48"
     viewBox="0 0 48 48"
   >
-    <g fill="none" fillRule="evenodd">
+    <g fill="none">
       <line
         x1="4"
         x2="44"

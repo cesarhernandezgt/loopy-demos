@@ -14,19 +14,19 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  @keyframes spin {
+  /* @keyframes spin {
     from {
       transform: rotate(0);
     }
     to {
       transform: rotate(360deg);
     }
-  }
+  } */
 
   :root {
     --blinkAnimation: blink 1.3s ease-in-out infinite;
     --spinAnimation: spin 1s linear infinite;
-    --headlineFont: 'Sigmar One', cursive;
+    --headlineFont: 'Sigmar One', Arial, Helvetica, sans-serif;
     --pageWidth: 720px;
     --headerHeight: 64px;
     --yellow: ${COLORS.yellow};
@@ -75,7 +75,7 @@ const GlobalStyles = createGlobalStyle`
 
 
   * {
-    font-family: "Source Sans Pro", cursive;
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
   }
 
   h1,

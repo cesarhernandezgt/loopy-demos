@@ -31,7 +31,7 @@ const StompSwitch = ({
           <stop offset="100%" stopColor="#a3bbd2" />
         </radialGradient>
       </defs>
-      <g fill="none" fillRule="evenodd">
+      <g fill="none">
         <circle cx="32" cy="32" r="26" fill="url(#gradient1)" />
         <polygon
           fill="url(#gradient1)"

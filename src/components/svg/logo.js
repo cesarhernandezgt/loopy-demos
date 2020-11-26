@@ -8,7 +8,7 @@ const Logo = () => (
     height="96"
     viewBox="0 0 48 64"
   >
-    <g fill="none" fillRule="evenodd">
+    <g fill="none">
       <rect
         width="44"
         height="60"

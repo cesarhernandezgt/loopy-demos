@@ -125,7 +125,7 @@ const TopNav = styled.nav`
 
 const GlobalOverflow = createGlobalStyle`
   body {
-    overflow: ${({ showSideNav }) => (showSideNav ? "hidden" : "overflow")}
+    overflow: ${({ showSideNav }) => (showSideNav ? "hidden" : "auto")}
   }
 `
 
@@ -223,7 +223,7 @@ const renderNavList = (pathname = "") => (
       { to: "/about", title: "About", id: "about" },
       { to: "/contact", title: "Contact", id: "contact" },
     ].map(({ to, title, id }) => (
-      <li>
+      <li key={id}>
         <Link
           to={to}
           className={
