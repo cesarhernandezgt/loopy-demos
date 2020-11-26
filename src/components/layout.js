@@ -3,9 +3,13 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons"
+import { config } from "@fortawesome/fontawesome-svg-core"
 import GlobalStyles from "./styles/global-styles"
 import SEO from "./seo"
 import Header from "./header"
+import "@fortawesome/fontawesome-svg-core/styles.css"
+
+config.autoAddCss = false
 
 const StyledMain = styled.main`
   /**
@@ -58,7 +62,6 @@ const Layout = ({ children = null, pageContext = {}, location = {} }) => {
   const pageTitle = builder && model && `${builder} - ${model}`
 
   const pageType = pageContext?.frontmatter?.type
-  console.log({ pageType })
 
   const isSubPage = ["demo", "post"].includes(pageType)
 
