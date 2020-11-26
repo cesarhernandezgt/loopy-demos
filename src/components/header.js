@@ -70,7 +70,7 @@ const Title = styled(Link)`
   align-items: center;
 
   h1 {
-    margin: 0;
+    margin: 0 0 0.5rem;
     color: var(--purple);
     text-shadow: 2px 3px var(--yellow);
 
