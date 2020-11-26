@@ -69,12 +69,7 @@ function SEO({ description, lang, meta, title = "Demos" }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    >
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Sigmar+One|Source+Sans+Pro:300,400,700,900&display=swap"
-      />
-    </Helmet>
+    />
   )
 }
 
