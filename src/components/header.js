@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import styled, { createGlobalStyle, css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { faInstagram } from "@fortawesome/free-brands-svg-icons"
 import Logo from "./svg/logo"
 import MenuIcon from "./svg/menu-icon"
 
@@ -31,6 +31,11 @@ const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
+
+  #menu-icon {
+    display: flex;
+    align-items: center;
+  }
 
   #logo {
     display: none;
@@ -195,15 +200,15 @@ const SocialIcons = styled.div`
       margin-right: 1rem;
     }
 
-    font-size: 1rem;
+    font-size: 2rem;
 
-    @media (min-width: 400px) {
-      font-size: 1.2rem;
-    }
+    /* @media (min-width: 400px) {
+      font-size: 1.8rem;
+    } */
 
-    @media (min-width: 600px) {
-      font-size: 1.5rem;
-    }
+    /* @media (min-width: 600px) {
+      font-size: 2rem;
+    } */
 
     color: var(--cyan);
     transition: color 0.1s ease-in;
@@ -268,13 +273,6 @@ const Header = ({ pathname = "" }) => {
                 <h1>Loopy Demos</h1>
               </Title>
               <SocialIcons>
-                <a
-                  href="https://github.com/silvb/loopy-demos"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FontAwesomeIcon icon={faGithub} size="1x" />
-                </a>
                 <a
                   href="https://www.instagram.com/loopydemos/"
                   target="_blank"

@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons"
+import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import GlobalStyles from "./styles/global-styles"
 import SEO from "./seo"
@@ -86,6 +87,13 @@ const Layout = ({
       <StyledMain>{children}</StyledMain>
       <StyledFooter>
         <div className="footerContent">
+          <a
+            href="https://github.com/silvb/loopy-demos"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FontAwesomeIcon icon={faGithub} size="1x" />
+          </a>
           <span>{`© ${new Date().getFullYear()}, Built with `}</span>
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </div>
