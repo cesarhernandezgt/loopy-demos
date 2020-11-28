@@ -1,8 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
 import styled from "styled-components"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import { MDXProvider } from "@mdx-js/react"
 import GlobalStyles from "../components/styles/global-styles"
@@ -10,6 +7,7 @@ import SEO from "./seo"
 import Header from "./header"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import MarkdownLink from "../components/markdown-link"
+import Footer from "./footer"
 
 config.autoAddCss = false
 
@@ -29,27 +27,6 @@ const StyledMain = styled.main`
   padding: 0 1rem;
 `
 
-const StyledFooter = styled.footer`
-  background: var(--dark);
-  padding: 1rem;
-  margin-top: 3rem;
-
-  * {
-    font-size: 1rem;
-  }
-
-  .footerContent {
-    display: flex;
-    justify-content: flex-end;
-    max-width: var(--pageWidth);
-    margin: 0 auto;
-
-    > * {
-      flex: 0 0 auto;
-    }
-  }
-`
-
 const Layout = ({ children = null, location = {}, title = "" }) => {
   return (
     <>
@@ -65,19 +42,7 @@ const Layout = ({ children = null, location = {}, title = "" }) => {
           {children}
         </MDXProvider>
       </StyledMain>
-      <StyledFooter>
-        <div className="footerContent">
-          <a
-            href="https://github.com/silvb/loopy-demos"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FontAwesomeIcon icon={faGithub} size="1x" />
-          </a>
-          <span>{`© ${new Date().getFullYear()}, Built with `}</span>
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </div>
-      </StyledFooter>
+      <Footer />
     </>
   )
 }
