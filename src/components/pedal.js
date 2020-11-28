@@ -1,4 +1,5 @@
 import React from "react"
+import Img from "gatsby-image"
 import styled from "styled-components"
 import Knob from "./knob"
 import Led from "./svg/led"
@@ -10,15 +11,11 @@ const Enclosure = styled.div`
   box-sizing: border-box;
   margin: 0.5rem auto 1rem;
   position: relative;
-
-  background: url(${props => props.image}) no-repeat;
-  background-size: contain;
 `
 
 const setPositions = ({ id, position }) =>
   `
     > #${id} {
-      z-index: 1;
       position: absolute;
       top: ${position?.top || 0}px;
       left: ${position?.left || 0}px;
@@ -33,21 +30,35 @@ const ControlsLayout = styled.div`
 `
 
 const Pedal = ({
-  config: { knobs, switches, leds, width, height, image } = {
+  config: { knobs, switches, leds, width, height } = {
     knobs: [],
     switches: [],
     leds: [],
-    width: 250,
-    height: 400,
-    image: "",
+    width: 200,
+    height: 350,
   },
+  image = {},
   settings = {},
   sweep = {},
   onSelectSweep = () => {},
   isOn = false,
   onToggleOn = () => {},
 }) => (
-  <Enclosure width={width} height={height} image={image}>
+  <Enclosure width={width} height={height}>
+    <Img
+      fluid={image}
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        top: "0",
+        left: "0",
+        zIndex: "0",
+      }}
+      imgStyle={{
+        objectFit: "contain",
+      }}
+    />
     <ControlsLayout controls={[...knobs, ...switches, ...leds]}>
       {knobs.map(({ size, id, type }) => (
         <Knob

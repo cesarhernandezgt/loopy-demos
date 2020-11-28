@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons"
-import Layout from "../components/layout"
+import Layout from "../templates/layout"
 import usePosts from "../helpers/use-posts"
 
 const Post = styled.article`

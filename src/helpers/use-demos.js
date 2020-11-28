@@ -35,7 +35,7 @@ const useDemos = () => {
         frontmatter: { builder, model, image },
       },
     }) => ({
-      slug: slug.split("/")[1],
+      slug,
       builder,
       model,
       image: image?.childImageSharp?.fluid,

@@ -2,9 +2,9 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import styled, { createGlobalStyle, css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons"
-import Logo from "./svg/logo"
-import MenuIcon from "./svg/menu-icon"
+import { faInstagram } from "@fortawesome/free-brands-svg-icons"
+import Logo from "../components/svg/logo"
+import MenuIcon from "../components/svg/menu-icon"
 
 const HeaderContainer = styled.header`
   background: var(--dark);
@@ -31,6 +31,11 @@ const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
+
+  #menu-icon {
+    display: flex;
+    align-items: center;
+  }
 
   #logo {
     display: none;
@@ -195,15 +200,7 @@ const SocialIcons = styled.div`
       margin-right: 1rem;
     }
 
-    font-size: 1rem;
-
-    @media (min-width: 400px) {
-      font-size: 1.2rem;
-    }
-
-    @media (min-width: 600px) {
-      font-size: 1.5rem;
-    }
+    font-size: 2rem;
 
     color: var(--cyan);
     transition: color 0.1s ease-in;
@@ -217,19 +214,14 @@ const SocialIcons = styled.div`
 const renderNavList = (pathname = "") => (
   <ul>
     {[
-      { to: "/", title: "Demos", id: "demos" },
-      { to: "/posts", title: "Posts", id: "posts" },
-      { to: "/uses", title: "Uses", id: "uses" },
-      { to: "/about", title: "About", id: "about" },
-      { to: "/contact", title: "Contact", id: "contact" },
-    ].map(({ to, title, id }) => (
-      <li key={id}>
-        <Link
-          to={to}
-          className={
-            pathname.includes(id) || pathname === to ? "highlight" : ""
-          }
-        >
+      { to: "/demos", title: "Demos" },
+      { to: "/posts", title: "Posts" },
+      { to: "/uses", title: "Uses" },
+      { to: "/about", title: "About" },
+      { to: "/contact", title: "Contact" },
+    ].map(({ to, title }) => (
+      <li key={to}>
+        <Link to={to} className={pathname.startsWith(to) ? "highlight" : ""}>
           {title}
         </Link>
       </li>
@@ -268,13 +260,6 @@ const Header = ({ pathname = "" }) => {
                 <h1>Loopy Demos</h1>
               </Title>
               <SocialIcons>
-                <a
-                  href="https://github.com/silvb/loopy-demos"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FontAwesomeIcon icon={faGithub} size="1x" />
-                </a>
                 <a
                   href="https://www.instagram.com/loopydemos/"
                   target="_blank"
