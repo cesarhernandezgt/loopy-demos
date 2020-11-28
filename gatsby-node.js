@@ -30,7 +30,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       createPage({
         path: pathname,
         component: path.resolve(`./src/templates/demo-layout.js`),
-        context: { id: node.id, pathname },
+        context: { id: node.id },
       })
     })
 
@@ -41,7 +41,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       createPage({
         path: pathname,
         component: path.resolve(`./src/templates/post-layout.js`),
-        context: { id: node.id, frontmatter: {title: } },
+        context: { id: node.id },
       })
     })
 }
