@@ -1,9 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { MDXProvider } from "@mdx-js/react"
 import Layout from "./layout"
-import MarkdownLink from "../components/markdown-link"
+import Breadcrumb from "./breadcrumb"
 
 const PostLayout = ({
   data: {
@@ -21,14 +20,9 @@ const PostLayout = ({
 }) => {
   return (
     <Layout location={location} title={title}>
-      <MDXProvider
-        components={{
-          a: MarkdownLink,
-        }}
-      >
-        <h1>{title}</h1>
-        <MDXRenderer>{body}</MDXRenderer>
-      </MDXProvider>
+      <Breadcrumb label="All posts" />
+      <h1>{title}</h1>
+      <MDXRenderer>{body}</MDXRenderer>
     </Layout>
   )
 }

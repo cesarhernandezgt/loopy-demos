@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "./layout"
 import Demo from "../components/demo-controller"
+import Breadcrumb from "./breadcrumb"
 
 const DemoLayout = ({
   data: {
@@ -29,6 +30,7 @@ const DemoLayout = ({
 
   return (
     <Layout location={location} title={title}>
+      <Breadcrumb label="All demos" />
       <h1>{title}</h1>
       <Demo image={image?.childImageSharp?.fluid} config={configData} />
       <MDXRenderer>{body}</MDXRenderer>

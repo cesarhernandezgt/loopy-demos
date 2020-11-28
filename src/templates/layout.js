@@ -2,13 +2,14 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { config } from "@fortawesome/fontawesome-svg-core"
+import { MDXProvider } from "@mdx-js/react"
 import GlobalStyles from "../components/styles/global-styles"
 import SEO from "./seo"
 import Header from "./header"
 import "@fortawesome/fontawesome-svg-core/styles.css"
+import MarkdownLink from "../components/markdown-link"
 
 config.autoAddCss = false
 
@@ -26,15 +27,6 @@ const StyledMain = styled.main`
   max-width: var(--pageWidth);
   margin: 0 auto;
   padding: 0 1rem;
-`
-
-const Breadcrumbs = styled.div`
-  max-width: var(--pageWidth);
-  margin: 0 auto;
-
-  .label {
-    margin-left: 1rem;
-  }
 `
 
 const StyledFooter = styled.footer`
@@ -58,33 +50,21 @@ const StyledFooter = styled.footer`
   }
 `
 
-const Layout = ({
-  children = null,
-  pageContext = {},
-  location = {},
-  title = "",
-}) => {
-  const { model, builder, title: pageTitle } = pageContext.frontmatter || {}
-  const demoTitle = builder && model && `${builder} - ${model}`
-
-  const pageType = pageContext?.frontmatter?.type
-
-  const isSubPage = ["demo", "post"].includes(pageType)
-
+const Layout = ({ children = null, location = {}, title = "" }) => {
   return (
     <>
       <GlobalStyles />
-      <SEO title={title || demoTitle || pageTitle} />
+      <SEO title={title} />
       <Header pathname={location.pathname} />
-      {isSubPage && (
-        <Breadcrumbs>
-          <Link to="../">
-            <FontAwesomeIcon icon={faLongArrowAltLeft} />
-            <span className="label">{`All ${pageType}s`}</span>
-          </Link>
-        </Breadcrumbs>
-      )}
-      <StyledMain>{children}</StyledMain>
+      <StyledMain>
+        <MDXProvider
+          components={{
+            a: MarkdownLink,
+          }}
+        >
+          {children}
+        </MDXProvider>
+      </StyledMain>
       <StyledFooter>
         <div className="footerContent">
           <a
