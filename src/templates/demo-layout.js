@@ -21,13 +21,15 @@ const DemoLayout = ({
       },
     },
   },
+  location = {},
 }) => {
   const configData =
     config?.internal?.content && JSON.parse(config.internal.content)
+  const title = `${builder} - ${model}`
 
   return (
-    <Layout>
-      <h1>{`${builder} - ${model}`}</h1>
+    <Layout location={location} title={title}>
+      <h1>{title}</h1>
       <Demo image={image?.childImageSharp?.fluid} config={configData} />
       <MDXRenderer>{body}</MDXRenderer>
     </Layout>

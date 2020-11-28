@@ -26,20 +26,22 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   demos
     .filter(({ node }) => node.frontmatter.type === "demo")
     .forEach(({ node }) => {
+      const pathname = `/demos/${node.slug}`
       createPage({
-        path: `/demos/${node.slug}`,
+        path: pathname,
         component: path.resolve(`./src/templates/demo-layout.js`),
-        context: { id: node.id },
+        context: { id: node.id, pathname },
       })
     })
 
   demos
     .filter(({ node }) => node.frontmatter.type === "post")
     .forEach(({ node }) => {
+      const pathname = `/posts/${node.slug}`
       createPage({
-        path: `/posts/${node.slug}`,
+        path: pathname,
         component: path.resolve(`./src/templates/post-layout.js`),
-        context: { id: node.id },
+        context: { id: node.id, frontmatter: {title: } },
       })
     })
 }

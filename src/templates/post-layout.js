@@ -17,9 +17,10 @@ const PostLayout = ({
       frontmatter: { title: "" },
     },
   },
+  pageContext = {},
 }) => {
   return (
-    <Layout>
+    <Layout pageContext={pageContext} title={title}>
       <MDXProvider
         components={{
           a: MarkdownLink,

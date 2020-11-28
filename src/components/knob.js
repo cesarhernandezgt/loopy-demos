@@ -24,8 +24,8 @@ const StyledKnobContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  z-index: 1;
   position: relative;
+  z-index: ${props => (props.isSweep ? 1 : 0)};
 
   svg g {
     transform: rotate(var(--rotation));
@@ -54,6 +54,7 @@ const StyledDotButton = styled.div`
     calc((var(--parentSize) - var(--dotSize)) / 2 + 1rem);
   transform: rotate(var(--rotation));
   cursor: pointer;
+  z-index: 99;
 
   :after {
     content: " ";
@@ -67,6 +68,7 @@ const StyledDotButton = styled.div`
     left: -0.25rem;
     animation: var(--blinkAnimation);
     animation-iteration-count: 3;
+    z-index: 99;
   }
 `
 
@@ -78,7 +80,11 @@ const Knob = ({
   onSelectOption = () => {},
   levelOptions = [],
 }) => (
-  <StyledKnobContainer rotation={levelToRotationMap[level]} id={id}>
+  <StyledKnobContainer
+    rotation={levelToRotationMap[level]}
+    id={id}
+    isSweep={levelOptions.length > 0}
+  >
     {
       {
         bakelit: <BakelitKnob size={size} />,

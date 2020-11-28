@@ -16,7 +16,6 @@ const Enclosure = styled.div`
 const setPositions = ({ id, position }) =>
   `
     > #${id} {
-      z-index: 1;
       position: absolute;
       top: ${position?.top || 0}px;
       left: ${position?.left || 0}px;

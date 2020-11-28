@@ -214,19 +214,14 @@ const SocialIcons = styled.div`
 const renderNavList = (pathname = "") => (
   <ul>
     {[
-      { to: "/", title: "Demos", id: "demos" },
-      { to: "/posts", title: "Posts", id: "posts" },
-      { to: "/uses", title: "Uses", id: "uses" },
-      { to: "/about", title: "About", id: "about" },
-      { to: "/contact", title: "Contact", id: "contact" },
-    ].map(({ to, title, id }) => (
-      <li key={id}>
-        <Link
-          to={to}
-          className={
-            pathname.includes(id) || pathname === to ? "highlight" : ""
-          }
-        >
+      { to: "/demos", title: "Demos" },
+      { to: "/posts", title: "Posts" },
+      { to: "/uses", title: "Uses" },
+      { to: "/about", title: "About" },
+      { to: "/contact", title: "Contact" },
+    ].map(({ to, title }) => (
+      <li key={to}>
+        <Link to={to} className={pathname.startsWith(to) ? "highlight" : ""}>
           {title}
         </Link>
       </li>
