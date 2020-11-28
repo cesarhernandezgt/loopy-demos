@@ -14,13 +14,6 @@ const usePosts = () => {
               frontmatter {
                 title
                 date
-                # image {
-                #   childImageSharp {
-                #     fluid(maxWidth: 200) {
-                #       ...GatsbyImageSharpFluid
-                #     }
-                #   }
-                # }
               }
             }
           }
@@ -37,11 +30,10 @@ const usePosts = () => {
         frontmatter: { title, date },
       },
     }) => ({
-      slug: slug.split("/")[1],
+      slug,
       title,
       excerpt,
       date,
-      // image: image?.childImageSharp?.fluid,
     })
   )
 }

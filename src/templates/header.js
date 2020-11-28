@@ -3,8 +3,8 @@ import { Link } from "gatsby"
 import styled, { createGlobalStyle, css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInstagram } from "@fortawesome/free-brands-svg-icons"
-import Logo from "./svg/logo"
-import MenuIcon from "./svg/menu-icon"
+import Logo from "../components/svg/logo"
+import MenuIcon from "../components/svg/menu-icon"
 
 const HeaderContainer = styled.header`
   background: var(--dark);
@@ -201,14 +201,6 @@ const SocialIcons = styled.div`
     }
 
     font-size: 2rem;
-
-    /* @media (min-width: 400px) {
-      font-size: 1.8rem;
-    } */
-
-    /* @media (min-width: 600px) {
-      font-size: 2rem;
-    } */
 
     color: var(--cyan);
     transition: color 0.1s ease-in;
