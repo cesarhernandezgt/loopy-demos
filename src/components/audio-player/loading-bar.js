@@ -21,15 +21,11 @@ const StyledLoadingBar = styled.div`
   }
 `
 
-const LoadingBar = ({ tracks = [], tracksLoaded = [] }) => {
-  const ratio =
-    (tracksLoaded.filter(({ isLoaded }) => isLoaded).length / tracks.length) *
-    100
-
+const LoadingBar = ({ progress = 0 }) => {
   return (
     <>
       <span>Waiting for tracks</span>
-      <StyledLoadingBar ratio={ratio} />
+      <StyledLoadingBar ratio={progress} />
     </>
   )
 }
