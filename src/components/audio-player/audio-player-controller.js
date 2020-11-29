@@ -5,11 +5,11 @@ const CLEAN_TONE = "CLEAN_TONE"
 const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
 const AudioContext =
-  window.AudioContext || // Default
-  window.webkitAudioContext || // Safari and old versions of Chrome
+  (typeof window !== "undefined" && window.AudioContext) || // Default
+  (typeof window !== "undefined" && window.webkitAudioContext) || // Safari and old versions of Chrome
   false
 
-const audioContext = new AudioContext()
+const audioContext = AudioContext ? new AudioContext() : null
 
 const AudioPlayerController = ({
   presets = [],
@@ -51,7 +51,7 @@ const AudioPlayerController = ({
   const togglePlay = () => {
     setIsPlaying(!isPlaying)
 
-    if (audioContext.state === "suspended") {
+    if (audioContext?.state === "suspended") {
       audioContext.resume()
     }
 
@@ -77,7 +77,7 @@ const AudioPlayerController = ({
 
   // Async loading of audio files
   useEffect(() => {
-    if (audioContext.state !== "suspended") hydrateAudioState()
+    if (audioContext?.state !== "suspended") hydrateAudioState()
   }, [])
 
   useEffect(() => {
@@ -97,11 +97,12 @@ const AudioPlayerController = ({
   return (
     <AudioPlayerInterface
       presets={presetsWithClean}
+      tracks={audioData}
       activePreset={activePreset}
       togglePlay={togglePlay}
       isPlaying={isPlaying}
       isPedalOn={isPedalOn}
-      tracks={audioData}
+      isDisabled={!audioContext}
     />
   )
 }

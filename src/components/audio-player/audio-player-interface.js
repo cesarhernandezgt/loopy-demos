@@ -38,6 +38,7 @@ const AudioPlayer = ({
   togglePlay = () => {},
   isPlaying = false,
   isPedalOn = false,
+  isDisabled = false,
 }) => {
   const tracksAreLoading = tracks.length < presets.length
 
@@ -50,6 +51,7 @@ const AudioPlayer = ({
           }}
           isPlaying={isPlaying}
           isLoading={isPlaying && tracksAreLoading}
+          isDisabled={isDisabled}
         />
         <StyledPlayerContent>
           {isPlaying && tracksAreLoading ? (
@@ -59,6 +61,7 @@ const AudioPlayer = ({
               activePreset={activePreset}
               isPlaying={isPlaying}
               isPedalOn={isPedalOn}
+              isDisabled={isDisabled}
             />
           )}
         </StyledPlayerContent>
