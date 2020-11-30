@@ -70,13 +70,21 @@ const AudioPlayerController = ({
 
   // Async loading of audio files
   useEffect(() => {
+    let scopedAudioContext = null
     const AudioContext =
       (typeof window !== "undefined" && window.AudioContext) || // Default
       (typeof window !== "undefined" && window.webkitAudioContext) || // Safari and old versions of Chrome
       false
 
     if (AudioContext) {
-      setAudioContext(new AudioContext())
+      scopedAudioContext = new AudioContext()
+      setAudioContext(scopedAudioContext)
+    }
+
+    return () => {
+      if (scopedAudioContext) {
+        scopedAudioContext.close()
+      }
     }
   }, [])
 
