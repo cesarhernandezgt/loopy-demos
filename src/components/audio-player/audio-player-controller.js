@@ -4,13 +4,6 @@ import AudioPlayerInterface from "./audio-player-interface"
 const CLEAN_TONE = "CLEAN_TONE"
 const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
-const AudioContext =
-  (typeof window !== "undefined" && window.AudioContext) || // Default
-  (typeof window !== "undefined" && window.webkitAudioContext) || // Safari and old versions of Chrome
-  false
-
-const audioContext = AudioContext ? new AudioContext() : null
-
 const AudioPlayerController = ({
   presets = [],
   activePreset = {},
@@ -29,10 +22,10 @@ const AudioPlayerController = ({
   const [audioData, setAudioData] = useState([])
   const [currentPlayingSource, setCurrentPlayingSource] = useState(null)
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false)
+  const [audioContext, setAudioContext] = useState(null)
 
   const hydrateAudioState = () => {
     setLoadingStarted(true)
-    console.log("🔥")
     presetsWithClean.forEach(({ audio, id }) => {
       const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
       fetch(url)
@@ -77,8 +70,19 @@ const AudioPlayerController = ({
 
   // Async loading of audio files
   useEffect(() => {
-    if (audioContext?.state !== "suspended") hydrateAudioState()
+    const AudioContext =
+      (typeof window !== "undefined" && window.AudioContext) || // Default
+      (typeof window !== "undefined" && window.webkitAudioContext) || // Safari and old versions of Chrome
+      false
+
+    if (AudioContext) {
+      setAudioContext(new AudioContext())
+    }
   }, [])
+
+  useEffect(() => {
+    if (audioContext && audioContext.state !== "suspended") hydrateAudioState()
+  }, [audioContext])
 
   useEffect(() => {
     if (hasPlayedOnce && !loadingStarted) hydrateAudioState()
@@ -91,6 +95,7 @@ const AudioPlayerController = ({
       playTrack(activePresetId)
     } else if (currentPlayingSource) {
       currentPlayingSource.stop()
+      setCurrentPlayingSource(null)
     }
   }, [isPlaying, audioData, isPedalOn, activePreset])
 

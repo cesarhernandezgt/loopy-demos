@@ -9,7 +9,7 @@ const StyledPlayButton = styled.button`
   font-size: 2.5rem;
   color: var(--yellow);
 
-  :disabled {
+  &:disabled {
     opacity: 0.5;
   }
 `
