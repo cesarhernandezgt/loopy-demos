@@ -45,10 +45,10 @@ const AudioPlayerController = ({
     setIsPlaying(!isPlaying)
 
     if (audioContext?.state === "suspended") {
-      audioContext.resume()
+      audioContext.resume().then(() => {
+        setHasPlayedOnce(true)
+      })
     }
-
-    setHasPlayedOnce(true)
   }
 
   const playTrack = presetId => {
@@ -89,7 +89,20 @@ const AudioPlayerController = ({
   }, [])
 
   useEffect(() => {
-    if (audioContext && audioContext.state !== "suspended") hydrateAudioState()
+    if (audioContext?.state === "suspended") {
+      audioContext
+        .resume()
+        .then(() => {
+          hydrateAudioState()
+        })
+        .catch(() => {
+          console.warn("That didn't work ...")
+        })
+    }
+
+    if (audioContext && audioContext?.state !== "suspended") {
+      hydrateAudioState()
+    }
   }, [audioContext])
 
   useEffect(() => {
