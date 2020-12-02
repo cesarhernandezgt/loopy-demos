@@ -27,6 +27,11 @@ const AudioPlayerController = ({
   const [endOffset, setEndOffset] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
 
+  /**
+   * -------------------------------------------------------------
+   * LOADING OF AUDIO DATA
+   * -------------------------------------------------------------
+   */
   const hydrateAudioState = () => {
     setLoadingStarted(true)
     presetsWithClean.forEach(({ audio, id }) => {
@@ -44,49 +49,6 @@ const AudioPlayerController = ({
     })
   }
 
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying)
-
-    if (audioContext?.state === "suspended") {
-      audioContext.resume().then(() => {
-        setHasPlayedOnce(true)
-      })
-    }
-  }
-
-  const playTrack = presetId => {
-    const { audioBuffer } = audioData.find(({ id }) => id === presetId)
-    const audioSource = audioContext.createBufferSource()
-    audioSource.buffer = audioBuffer
-    audioSource.loop = true
-    audioSource.connect(audioContext.destination)
-
-    if (currentPlayingSource) {
-      currentPlayingSource.stop()
-    }
-
-    setCurrentPlayingSource(audioSource)
-    const bufferLength = audioBuffer.length / audioBuffer.sampleRate
-
-    /**
-     * If endOffset is older than startOffset, the player was stopped manually.
-     * Then we simply rely on the currentTime state to presume playing.
-     * Otherwise, we are switching presets while playing, so use the last startOffset
-     * and the current time from the audio context to seemlessly play the
-     * other sound
-     */
-    if (endOffset > startOffset || startOffset === 0) {
-      audioSource.start(0, currentTime % bufferLength)
-      setStartOffset(audioContext.currentTime)
-    } else {
-      audioSource.start(
-        0,
-        (currentTime + audioContext.currentTime - startOffset) % bufferLength
-      )
-    }
-  }
-
-  // Async loading of audio files
   useEffect(() => {
     let scopedAudioContext = null
     const AudioContext =
@@ -127,18 +89,61 @@ const AudioPlayerController = ({
     if (hasPlayedOnce && !loadingStarted) hydrateAudioState()
   }, [hasPlayedOnce])
 
-  // Handle play/pause/loading action
+  /**
+   * -------------------------------------------------------------
+   * PLAYBACK HANDLING
+   * -------------------------------------------------------------
+   */
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying)
+
+    if (audioContext?.state === "suspended") {
+      audioContext.resume().then(() => {
+        setHasPlayedOnce(true)
+      })
+    }
+  }
+
+  const playTrack = presetId => {
+    const { audioBuffer } = audioData.find(({ id }) => id === presetId)
+    const audioSource = audioContext.createBufferSource()
+    audioSource.buffer = audioBuffer
+    audioSource.loop = true
+    audioSource.connect(audioContext.destination)
+
+    if (currentPlayingSource) {
+      currentPlayingSource.stop()
+    }
+
+    setCurrentPlayingSource(audioSource)
+    const bufferLength = audioBuffer.length / audioBuffer.sampleRate
+
+    if (endOffset > startOffset || startOffset === 0) {
+      audioSource.start(0, currentTime % bufferLength)
+      setStartOffset(audioContext.currentTime)
+    } else {
+      audioSource.start(
+        0,
+        (currentTime + audioContext.currentTime - startOffset) % bufferLength
+      )
+    }
+  }
+
+  const stopTrack = () => {
+    currentPlayingSource.stop()
+    setCurrentPlayingSource(null)
+    setCurrentTime(
+      prevTime => prevTime + audioContext.currentTime - startOffset
+    )
+    setEndOffset(audioContext.currentTime)
+  }
+
   useEffect(() => {
     const activePresetId = isPedalOn ? activePreset.id : CLEAN_TONE
     if (isPlaying && audioData.length === presetsWithClean.length) {
       playTrack(activePresetId)
     } else if (currentPlayingSource) {
-      currentPlayingSource.stop()
-      setCurrentPlayingSource(null)
-      setCurrentTime(
-        prevTime => prevTime + audioContext.currentTime - startOffset
-      )
-      setEndOffset(audioContext.currentTime)
+      stopTrack()
     }
   }, [isPlaying, audioData, isPedalOn, activePreset])
 
