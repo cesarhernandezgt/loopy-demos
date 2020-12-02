@@ -23,6 +23,9 @@ const AudioPlayerController = ({
   const [currentPlayingSource, setCurrentPlayingSource] = useState(null)
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false)
   const [audioContext, setAudioContext] = useState(null)
+  const [startOffset, setStartOffset] = useState(0)
+  const [endOffset, setEndOffset] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
 
   const hydrateAudioState = () => {
     setLoadingStarted(true)
@@ -65,7 +68,22 @@ const AudioPlayerController = ({
     setCurrentPlayingSource(audioSource)
     const bufferLength = audioBuffer.length / audioBuffer.sampleRate
 
-    audioSource.start(0, audioContext.currentTime % bufferLength)
+    /**
+     * If endOffset is older than startOffset, the player was stopped manually.
+     * Then we simply rely on the currentTime state to presume playing.
+     * Otherwise, we are switching presets while playing, so use the last startOffset
+     * and the current time from the audio context to seemlessly play the
+     * other sound
+     */
+    if (endOffset > startOffset || startOffset === 0) {
+      audioSource.start(0, currentTime % bufferLength)
+      setStartOffset(audioContext.currentTime)
+    } else {
+      audioSource.start(
+        0,
+        (currentTime + audioContext.currentTime - startOffset) % bufferLength
+      )
+    }
   }
 
   // Async loading of audio files
@@ -117,6 +135,10 @@ const AudioPlayerController = ({
     } else if (currentPlayingSource) {
       currentPlayingSource.stop()
       setCurrentPlayingSource(null)
+      setCurrentTime(
+        prevTime => prevTime + audioContext.currentTime - startOffset
+      )
+      setEndOffset(audioContext.currentTime)
     }
   }, [isPlaying, audioData, isPedalOn, activePreset])
 
