@@ -8,12 +8,17 @@ const StyledPlayButton = styled.button`
   cursor: pointer;
   font-size: 2.5rem;
   color: var(--yellow);
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `
 
 const PlayButton = ({
   onClick = () => {},
   isLoading = false,
   isPlaying = false,
+  isDisabled = false,
 }) => {
   let Icon = () => <FontAwesomeIcon icon={faPlay} />
 
@@ -26,7 +31,7 @@ const PlayButton = ({
   }
 
   return (
-    <StyledPlayButton type="button" onClick={onClick}>
+    <StyledPlayButton type="button" onClick={onClick} disabled={isDisabled}>
       <Icon />
     </StyledPlayButton>
   )
