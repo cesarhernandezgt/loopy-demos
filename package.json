@@ -29,6 +29,7 @@
     "react-helmet": "^6.1.0",
     "sharp": "^0.26.2",
     "styled-components": "^5.2.0",
+    "typeface-jetbrains-mono": "^2.0.0",
     "typeface-sigmar-one": "^1.1.13",
     "typeface-source-sans-pro": "^1.1.13"
   },

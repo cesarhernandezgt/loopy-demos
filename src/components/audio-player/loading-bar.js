@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 const StyledLoadingBar = styled.div`
-  height: 1.2rem;
+  height: 0.5rem;
   border-radius: 12px;
   border: 2px solid var(--cyan);
   margin-top: 0.5rem;
@@ -10,6 +10,7 @@ const StyledLoadingBar = styled.div`
   overflow: hidden;
   width: 100%;
   max-width: 400px;
+  flex: 0 0 auto;
 
   :before {
     content: " ";

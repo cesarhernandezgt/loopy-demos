@@ -3,6 +3,7 @@
 workbox.routing.registerRoute(
   /.*\.mp3/,
   new workbox.strategies.CacheFirst({
+    cacheName: "audio-from-aws-cache",
     plugins: [
       new workbox.cacheableResponse.Plugin({ statuses: [200] }),
       new workbox.rangeRequests.Plugin(),

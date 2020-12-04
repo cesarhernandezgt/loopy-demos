@@ -3,6 +3,7 @@ import styled from "styled-components"
 import PlayButton from "./play-button"
 import DisplayText from "./display-text"
 import LoadingBar from "./loading-bar"
+import AudioVisualizer from "./audio-visualizer"
 
 const StyledPlayerContainer = styled.div`
   background: var(--purple);
@@ -21,26 +22,40 @@ const StyledPlayerContent = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   background: var(--dark);
   border-radius: 12px;
+  overflow: hidden;
+  border: 0.5rem solid var(--dark);
 
   > span {
     text-align: center;
     color: var(--cyan);
+    font-family: "JetBrains Mono", cursive;
+    font-size: 1rem;
+    line-height: 1.2rem;
   }
 `
 
 const AudioPlayer = ({
   presets = [],
   tracks = [],
-  activePreset = {},
   togglePlay = () => {},
   isPlaying = false,
-  isPedalOn = false,
   isDisabled = false,
 }) => {
   const tracksAreLoading = tracks.length < presets.length
+  const showLoadingBar = isPlaying && tracksAreLoading
+  const showVisualizer = isPlaying && !tracksAreLoading
+
+  const renderPlayerContent = () => {
+    if (showLoadingBar)
+      return <LoadingBar progress={(tracks.length / presets.length) * 100} />
+
+    if (showVisualizer) return <AudioVisualizer />
+
+    return <DisplayText isPlaying={isPlaying} isDisabled={isDisabled} />
+  }
 
   return (
     <>
@@ -53,18 +68,7 @@ const AudioPlayer = ({
           isLoading={isPlaying && tracksAreLoading}
           isDisabled={isDisabled}
         />
-        <StyledPlayerContent>
-          {isPlaying && tracksAreLoading ? (
-            <LoadingBar progress={(tracks.length / presets.length) * 100} />
-          ) : (
-            <DisplayText
-              activePreset={activePreset}
-              isPlaying={isPlaying}
-              isPedalOn={isPedalOn}
-              isDisabled={isDisabled}
-            />
-          )}
-        </StyledPlayerContent>
+        <StyledPlayerContent>{renderPlayerContent()}</StyledPlayerContent>
       </StyledPlayerContainer>
     </>
   )
