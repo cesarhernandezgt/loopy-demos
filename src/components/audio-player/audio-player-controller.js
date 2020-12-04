@@ -151,11 +151,8 @@ const AudioPlayerController = ({
     <AudioPlayerInterface
       presets={presetsWithClean}
       tracks={audioData}
-      activePreset={activePreset}
       togglePlay={togglePlay}
       isPlaying={isPlaying}
-      isPedalOn={isPedalOn}
-      audioContext={audioContext}
       isDisabled={!audioContext}
     />
   )

@@ -33,16 +33,15 @@ const StyledPlayerContent = styled.div`
     color: var(--cyan);
     font-family: "JetBrains Mono", cursive;
     font-size: 1rem;
+    line-height: 1.2rem;
   }
 `
 
 const AudioPlayer = ({
   presets = [],
   tracks = [],
-  activePreset = {},
   togglePlay = () => {},
   isPlaying = false,
-  isPedalOn = false,
   isDisabled = false,
 }) => {
   const tracksAreLoading = tracks.length < presets.length
@@ -55,14 +54,7 @@ const AudioPlayer = ({
 
     if (showVisualizer) return <AudioVisualizer />
 
-    return (
-      <DisplayText
-        activePreset={activePreset}
-        isPlaying={isPlaying}
-        isPedalOn={isPedalOn}
-        isDisabled={isDisabled}
-      />
-    )
+    return <DisplayText isPlaying={isPlaying} isDisabled={isDisabled} />
   }
 
   return (
