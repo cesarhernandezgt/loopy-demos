@@ -155,6 +155,7 @@ const AudioPlayerController = ({
       togglePlay={togglePlay}
       isPlaying={isPlaying}
       isPedalOn={isPedalOn}
+      audioContext={audioContext}
       isDisabled={!audioContext}
     />
   )
