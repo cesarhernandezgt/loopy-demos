@@ -1,9 +1,9 @@
-import React from "react"
+import React, { memo } from "react"
 import styled from "styled-components"
 
 const setAnimationDuration = index => `
   :nth-child(${index}) {
-    animation-duration: ${Math.random() * 200 + 300}ms;
+    animation-duration: ${Math.random() * 200 + 400}ms;
   }
 `
 
@@ -16,10 +16,12 @@ const StyledVisualizer = styled.div`
 
   @keyframes vizBar {
     from {
-      height: 70%;
+      height: 65%;
+      opacity: 0.9;
     }
     to {
-      height: 90%;
+      height: 80%;
+      opacity: 1;
     }
   }
 
@@ -33,14 +35,14 @@ const StyledVisualizer = styled.div`
     border-radius: 2px;
     flex: 0 0 0.5rem;
 
-    animation: vizBar -1000ms 0ms ease-out infinite alternate;
+    animation: vizBar -1000ms 0ms linear infinite alternate;
 
     ${({ elements }) => elements.map(index => setAnimationDuration(index + 1))}
   }
 `
 
 const AudioVisualizer = () => {
-  const elementArray = [...Array(50).keys()]
+  const elementArray = [...Array(60).keys()]
   return (
     <StyledVisualizer elements={elementArray}>
       {elementArray.map(idx => (
@@ -50,4 +52,4 @@ const AudioVisualizer = () => {
   )
 }
 
-export default AudioVisualizer
+export default memo(AudioVisualizer)
