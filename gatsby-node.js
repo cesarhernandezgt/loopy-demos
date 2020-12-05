@@ -11,6 +11,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             slug
             frontmatter {
               type
+              unpublished
             }
           }
         }
@@ -23,7 +24,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const demos = result.data.allMdx.edges
+
   demos
+    .filter(({ node }) => !node.frontmatter.unpublished)
     .filter(({ node }) => node.frontmatter.type === "demo")
     .forEach(({ node }) => {
       const pathname = `/demos/${node.slug}`
@@ -35,6 +38,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
 
   demos
+    .filter(({ node }) => !node.frontmatter.unpublished)
     .filter(({ node }) => node.frontmatter.type === "post")
     .forEach(({ node }) => {
       const pathname = `/posts/${node.slug}`
