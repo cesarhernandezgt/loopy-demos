@@ -53,6 +53,18 @@
       "audio": "high_gain.mp3"
     },
     {
+      "id": "lo_fi",
+      "label": "Lo-fi",
+      "settings": { "gain": 4, "bass": 1, "treble": 0, "bias": 3, "volume": 6 },
+      "audio": "lo_fi.mp3"
+    },
+    {
+      "id": "treble_boost",
+      "label": "Treble Boost",
+      "settings": { "bass": 3, "treble": 7, "volume": 9, "gain": 2 },
+      "audio": "treble_boost.mp3"
+    },
+    {
       "id": "gain_sweep",
       "label": "Gain Sweep",
       "isSweep": true,
@@ -61,24 +73,12 @@
       "initialValue": 0
     },
     {
-      "id": "lo_fi",
-      "label": "Lo-fi",
-      "settings": { "gain": 4, "bass": 1, "treble": 0, "bias": 3, "volume": 6 },
-      "audio": "lo_fi.mp3"
-    },
-    {
       "id": "bias_sweep",
       "label": "Bias Sweep",
       "isSweep": true,
       "target": "bias",
       "values": [0, 2, 3, 5, 7, 9],
       "initialValue": 3
-    },
-    {
-      "id": "treble_boost",
-      "label": "Treble Boost",
-      "settings": { "bass": 3, "treble": 7, "volume": 9, "gain": 2 },
-      "audio": "treble_boost.mp3"
     }
   ]
 }

@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import PlayButton from "./play-button"
 import DisplayText from "./display-text"
-import LoadingBar from "./loading-bar"
 import AudioVisualizer from "./audio-visualizer"
 
 const StyledPlayerContainer = styled.div`
@@ -28,7 +27,7 @@ const StyledPlayerContent = styled.div`
   overflow: hidden;
   border: 0.5rem solid var(--dark);
 
-  > span {
+  span {
     text-align: center;
     color: var(--cyan);
     font-family: "JetBrains Mono", cursive;
@@ -38,40 +37,32 @@ const StyledPlayerContent = styled.div`
 `
 
 const AudioPlayer = ({
-  presets = [],
-  tracks = [],
   togglePlay = () => {},
   isPlaying = false,
   isDisabled = false,
-}) => {
-  const tracksAreLoading = tracks.length < presets.length
-  const showLoadingBar = isPlaying && tracksAreLoading
-  const showVisualizer = isPlaying && !tracksAreLoading
-
-  const renderPlayerContent = () => {
-    if (showLoadingBar)
-      return <LoadingBar progress={(tracks.length / presets.length) * 100} />
-
-    if (showVisualizer) return <AudioVisualizer />
-
-    return <DisplayText isPlaying={isPlaying} isDisabled={isDisabled} />
-  }
-
-  return (
-    <>
-      <StyledPlayerContainer>
-        <PlayButton
-          onClick={() => {
-            togglePlay()
-          }}
+  isLoading = true,
+}) => (
+  <StyledPlayerContainer>
+    <PlayButton
+      onClick={() => {
+        togglePlay()
+      }}
+      isPlaying={isPlaying}
+      isLoading={isPlaying && isLoading}
+      isDisabled={isDisabled}
+    />
+    <StyledPlayerContent>
+      {isPlaying && !isLoading ? (
+        <AudioVisualizer />
+      ) : (
+        <DisplayText
           isPlaying={isPlaying}
-          isLoading={isPlaying && tracksAreLoading}
+          isLoading={isLoading}
           isDisabled={isDisabled}
         />
-        <StyledPlayerContent>{renderPlayerContent()}</StyledPlayerContent>
-      </StyledPlayerContainer>
-    </>
-  )
-}
+      )}
+    </StyledPlayerContent>
+  </StyledPlayerContainer>
+)
 
 export default AudioPlayer

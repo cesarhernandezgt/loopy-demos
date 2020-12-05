@@ -6,9 +6,14 @@ const DemoContextProvider = ({ children = null, presets = [] }) => {
   const [isPedalOn, setIsPedalOn] = useState(false)
   const [activePreset, setActivePreset] = useState(presets[0] || {})
   const [sweepSetting, setSweepSetting] = useState({})
+  const [presetsLoaded, setPresetsLoaded] = useState([])
 
   const selectPreset = selectedId => {
     setActivePreset(presets.find(({ id }) => id === selectedId))
+  }
+
+  const addPresetsLoaded = id => {
+    setPresetsLoaded(prevState => [...prevState, id])
   }
 
   useEffect(() => {
@@ -27,9 +32,11 @@ const DemoContextProvider = ({ children = null, presets = [] }) => {
         isPedalOn,
         activePreset,
         sweepSetting,
+        presetsLoaded,
         setIsPedalOn,
         selectPreset,
         setSweepSetting,
+        addPresetsLoaded,
       }}
     >
       {children}

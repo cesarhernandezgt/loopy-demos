@@ -9,14 +9,17 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const {
     isPedalOn,
     activePreset,
-    // sweepSetting
+    sweepSetting,
+    presetsLoaded,
+    addPresetsLoaded,
   } = useDemoState()
 
-  // TODO: decide what to do with sweep
   const presetsWithClean = [
     ...presets,
     { id: CLEAN_TONE, audio: "clean.mp3" },
   ].filter(({ isSweep }) => !isSweep)
+
+  const sweepPresets = presets.filter(({ isSweep }) => isSweep)
 
   const [isPlaying, setIsPlaying] = useState(false)
   const [loadingStarted, setLoadingStarted] = useState(false)
@@ -35,18 +38,69 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
    */
   const hydrateAudioState = () => {
     setLoadingStarted(true)
-    presetsWithClean.forEach(({ audio, id }) => {
-      const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
-      fetch(url)
-        .then(data => data.arrayBuffer())
-        .then(buffer =>
-          audioContext.decodeAudioData(buffer, audioBuffer => {
-            setAudioData(prevAudioData => [
-              ...prevAudioData,
-              { id, audioBuffer },
-            ])
+    // First, load presets
+    Promise.all(
+      presetsWithClean.map(({ audio, id }) => {
+        const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
+        return fetch(url)
+          .then(response => {
+            if (!response.ok) {
+              throw Error(response.statusText)
+            }
+            return response
+          })
+          .then(data => data.arrayBuffer())
+          .then(buffer =>
+            audioContext.decodeAudioData(buffer, audioBuffer => {
+              setAudioData(prevAudioData => [
+                ...prevAudioData,
+                { id, audioBuffer },
+              ])
+            })
+          )
+          .then(() => {
+            addPresetsLoaded(id)
+          })
+          .catch(error => {
+            console.error(error)
+            return Promise.reject()
+          })
+      })
+    ).then(() => {
+      // Fetch the sweeps afterwards to prioritize normal presets
+      sweepPresets.forEach(({ id, values }) => {
+        Promise.all(
+          values.map(value => {
+            const url = `${MEDIA_ROOT_URL}/${slug}/${id}_${value}.mp3`
+            return fetch(url)
+              .then(response => {
+                if (!response.ok) {
+                  throw Error(response.statusText)
+                }
+                return response
+              })
+              .then(data => data.arrayBuffer())
+              .then(buffer =>
+                audioContext.decodeAudioData(buffer, audioBuffer => {
+                  setAudioData(prevAudioData => [
+                    ...prevAudioData,
+                    { id: `${id}_${value}`, audioBuffer },
+                  ])
+                })
+              )
+              .catch(error => {
+                console.error(error)
+                return Promise.reject()
+              })
           })
         )
+          .then(() => {
+            addPresetsLoaded(id)
+          })
+          .catch(() => {
+            console.log(`Well ... cannot load all audio for ${id} ¯\\_(ツ)_/¯`)
+          })
+      })
     })
   }
 
@@ -106,7 +160,14 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }
 
   const playTrack = presetId => {
-    const { audioBuffer } = audioData.find(({ id }) => id === presetId)
+    const selectedAudioData = audioData.find(({ id }) => id === presetId)
+
+    // If the audio is not loaded yet, exit
+    if (!selectedAudioData) {
+      return
+    }
+
+    const { audioBuffer } = selectedAudioData
     const audioSource = audioContext.createBufferSource()
     audioSource.buffer = audioBuffer
     audioSource.loop = true
@@ -140,21 +201,29 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }
 
   useEffect(() => {
-    const activePresetId = isPedalOn ? activePreset.id : CLEAN_TONE
-    if (isPlaying && audioData.length === presetsWithClean.length) {
+    let activePresetId = CLEAN_TONE
+
+    if (isPedalOn) {
+      activePresetId = activePreset.id
+    }
+
+    if (activePreset.isSweep) {
+      activePresetId += `_${sweepSetting}`
+    }
+
+    if (isPlaying) {
       playTrack(activePresetId)
     } else if (currentPlayingSource) {
       stopTrack()
     }
-  }, [isPlaying, audioData, isPedalOn, activePreset])
+  }, [isPlaying, audioData, isPedalOn, activePreset, sweepSetting])
 
   return (
     <AudioPlayerInterface
-      presets={presetsWithClean}
-      tracks={audioData}
       togglePlay={togglePlay}
       isPlaying={isPlaying}
       isDisabled={!audioContext}
+      isLoading={!presetsLoaded.includes(CLEAN_TONE) && !isPedalOn}
     />
   )
 }
