@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import useDemoState from "../helpers/use-demo-state"
 
 import BakelitKnob from "./svg/bakelit-knob"
 import OffsetKnob from "./svg/offset-knob"
@@ -77,32 +78,36 @@ const Knob = ({
   size = 64,
   level = 5,
   type = "bakelit",
-  onSelectOption = () => {},
   levelOptions = [],
-}) => (
-  <StyledKnobContainer
-    rotation={levelToRotationMap[level]}
-    id={id}
-    isSweep={levelOptions.length > 0}
-  >
-    {
+}) => {
+  const { setSweepSetting, setIsPedalOn } = useDemoState()
+
+  return (
+    <StyledKnobContainer
+      rotation={levelToRotationMap[level]}
+      id={id}
+      isSweep={levelOptions.length > 0}
+    >
       {
-        bakelit: <BakelitKnob size={size} />,
-        offset: <OffsetKnob size={size} />,
-        walrus: <WalrusAudioKnob size={size} />,
-      }[type]
-    }
-    {levelOptions.map(levelOption => (
-      <StyledDotButton
-        key={levelOption}
-        parentSize={size}
-        onClick={() => {
-          onSelectOption({ [id]: levelOption })
-        }}
-        level={levelToRotationMap[levelOption]}
-      />
-    ))}
-  </StyledKnobContainer>
-)
+        {
+          bakelit: <BakelitKnob size={size} />,
+          offset: <OffsetKnob size={size} />,
+          walrus: <WalrusAudioKnob size={size} />,
+        }[type]
+      }
+      {levelOptions.map(levelOption => (
+        <StyledDotButton
+          key={levelOption}
+          parentSize={size}
+          onClick={() => {
+            setSweepSetting({ [id]: levelOption })
+            setIsPedalOn(true)
+          }}
+          level={levelToRotationMap[levelOption]}
+        />
+      ))}
+    </StyledKnobContainer>
+  )
+}
 
 export default Knob

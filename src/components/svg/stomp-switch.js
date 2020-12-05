@@ -41,7 +41,13 @@ const StompSwitch = ({
         />
         <circle cx="32" cy="32" r="16" fill="url(#gradient2)" />
         {!isOn && (
-          <StyledBlinkingCircle cx="32" cy="32" r="6" fill={COLORS.cyan} />
+          <StyledBlinkingCircle
+            cx="32"
+            cy="32"
+            r="26"
+            fill="none"
+            stroke={COLORS.cyan}
+          />
         )}
       </g>
     </svg>

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react"
 import AudioPlayerInterface from "./audio-player-interface"
+import useDemoState from "../../helpers/use-demo-state"
 
 const CLEAN_TONE = "CLEAN_TONE"
 const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
-const AudioPlayerController = ({
-  presets = [],
-  activePreset = {},
-  // sweepSetting = {},
-  isPedalOn = false,
-  slug = "",
-}) => {
+const AudioPlayerController = ({ presets = [], slug = "" }) => {
+  const {
+    isPedalOn,
+    activePreset,
+    // sweepSetting
+  } = useDemoState()
+
   // TODO: decide what to do with sweep
   const presetsWithClean = [
     ...presets,
