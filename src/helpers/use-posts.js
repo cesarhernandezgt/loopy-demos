@@ -6,7 +6,11 @@ const usePosts = () => {
   } = useStaticQuery(
     graphql`
       query {
-        allMdx(filter: { frontmatter: { type: { eq: "post" } } }) {
+        allMdx(
+          filter: {
+            frontmatter: { unpublished: { ne: true }, type: { eq: "post" } }
+          }
+        ) {
           edges {
             node {
               excerpt

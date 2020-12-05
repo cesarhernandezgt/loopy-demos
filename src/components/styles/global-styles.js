@@ -60,6 +60,10 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  p {
+    white-space: pre-line;
+  }
+
   strong {
     font-weight: 900;
   }

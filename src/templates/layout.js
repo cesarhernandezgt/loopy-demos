@@ -27,24 +27,27 @@ const StyledMain = styled.main`
   padding: 0 1rem;
 `
 
-const Layout = ({ children = null, location = {}, title = "" }) => {
-  return (
-    <>
-      <GlobalStyles />
-      <SEO title={title} />
-      <Header pathname={location.pathname} />
-      <StyledMain>
-        <MDXProvider
-          components={{
-            a: MarkdownLink,
-          }}
-        >
-          {children}
-        </MDXProvider>
-      </StyledMain>
-      <Footer />
-    </>
-  )
-}
+const Layout = ({
+  children = null,
+  location = {},
+  title = "",
+  pageContext = {},
+}) => (
+  <>
+    <GlobalStyles />
+    <SEO title={title || pageContext?.frontmatter?.title} />
+    <Header pathname={location.pathname} />
+    <StyledMain>
+      <MDXProvider
+        components={{
+          a: MarkdownLink,
+        }}
+      >
+        {children}
+      </MDXProvider>
+    </StyledMain>
+    <Footer />
+  </>
+)
 
 export default Layout

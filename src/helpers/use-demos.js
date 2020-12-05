@@ -6,7 +6,11 @@ const useDemos = () => {
   } = useStaticQuery(
     graphql`
       query {
-        allMdx(filter: { frontmatter: { type: { eq: "demo" } } }) {
+        allMdx(
+          filter: {
+            frontmatter: { unpublished: { ne: true }, type: { eq: "demo" } }
+          }
+        ) {
           edges {
             node {
               slug
