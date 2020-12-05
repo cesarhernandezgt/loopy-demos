@@ -9,7 +9,7 @@ const StyledPlayerContainer = styled.div`
   background: var(--purple);
   border-radius: 12px;
   width: 100%;
-  height: 78px;
+  height: 64px;
   margin-bottom: 0.5rem;
   display: flex;
   padding: 4px 4px 4px 0;

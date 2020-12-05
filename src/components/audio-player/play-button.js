@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlay, faPause, faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 const StyledPlayButton = styled.button`
-  width: 70px;
+  width: 64px;
+  font-size: 36px;
   cursor: pointer;
-  font-size: 2.5rem;
   color: var(--yellow);
 
   &:disabled {
