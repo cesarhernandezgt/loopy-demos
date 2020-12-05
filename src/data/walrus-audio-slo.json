@@ -38,7 +38,7 @@
       ],
       "leds": [
         {
-          "id": "on_status",
+          "id": "on_led",
           "size": 44,
           "socket": true,
           "position": { "top": 241, "left": 20 },
@@ -51,7 +51,7 @@
       ],
       "switches": [
         {
-          "id": "bypass",
+          "id": "bypass_switch",
           "size": 60,
           "position": { "top": 278, "left": 15 }
         },

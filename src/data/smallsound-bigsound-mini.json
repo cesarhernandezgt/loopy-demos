@@ -13,14 +13,14 @@
       ],
       "leds": [
         {
-          "id": "on_status",
+          "id": "on_led",
           "size": 36,
           "position": { "top": 138, "left": 89 }
         }
       ],
       "switches": [
         {
-          "id": "on_switch",
+          "id": "bypass_switch",
           "size": 72,
           "position": { "top": 268, "left": 71 }
         }
