@@ -205,12 +205,12 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
 
     if (isPedalOn) {
       activePresetId = activePreset.id
-    }
 
-    if (activePreset.isSweep) {
-      const { target, initialValue } = activePreset
-      const level = sweepSetting[target] || initialValue
-      activePresetId += `_${level}`
+      if (activePreset.isSweep) {
+        const { target, initialValue } = activePreset
+        const level = sweepSetting[target] || initialValue
+        activePresetId += `_${level}`
+      }
     }
 
     if (isPlaying) {
