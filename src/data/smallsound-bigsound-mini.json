@@ -69,7 +69,7 @@
       "label": "Gain Sweep",
       "isSweep": true,
       "target": "gain",
-      "values": [0, 3, 5, 7, 8, 10],
+      "values": [0, 2, 3, 4, 5, 7, 8, 10],
       "initialValue": 0
     },
     {
@@ -77,8 +77,8 @@
       "label": "Bias Sweep",
       "isSweep": true,
       "target": "bias",
-      "values": [0, 2, 3, 5, 7, 9],
-      "initialValue": 3
+      "values": [0, 2, 4, 5, 8, 10],
+      "initialValue": 0
     }
   ]
 }

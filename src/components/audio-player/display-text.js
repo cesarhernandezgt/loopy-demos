@@ -8,7 +8,7 @@ const DisplayText = ({
   let text = ``
 
   if (isLoading) {
-    text = `Loading my clean tone. Maybe click a preset below ⬇?`
+    text = `Loading my clean tone. Try a preset below?`
   }
 
   if (!isPlaying) {
@@ -16,7 +16,7 @@ const DisplayText = ({
   }
 
   if (isDisabled) {
-    text = `Sorry, your browser sucks and won't let you play this audio ¯\\_(ツ)_/¯`
+    text = `Sorry, your browser sucks ¯\\_(ツ)_/¯`
   }
 
   return <span>{text}</span>

@@ -80,7 +80,7 @@ const Title = styled(Link)`
     text-shadow: 2px 3px var(--yellow);
 
     @media (max-width: 400px) {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       text-shadow: 1px 2px var(--yellow);
     }
   }
