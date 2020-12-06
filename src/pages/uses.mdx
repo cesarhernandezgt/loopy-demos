@@ -3,6 +3,8 @@ title: Uses
 type: page
 ---
 
+import Img from "gatsby-image"
+
 # Uses
 
 This is a living document of the tools I use to create this website and record my demo loops.
@@ -10,6 +12,14 @@ This is a living document of the tools I use to create this website and record m
 ## Guitar
 
 My trusty K'mo Memphis Standard in open pore metallic blue. It's a T-style guitar completely handmade by [Moe, a luthier from Berlin](https://berlin-guitars.de/kmoguitars/).
+
+<Img
+  fixed={props.data.allFile.edges[0].node.childImageSharp.fixed}
+  style={{
+    margin: "0 auto",
+    display: "block",
+  }}
+/>
 
 Plays like butter, looks stunning and has that classic Telecaster sound. Very versatile.
 
@@ -55,4 +65,20 @@ I don't keep all the pedals that I'm demoing. Very often, I'm just curious about
 
 I use this pedalboard for band projects and it most represents what _my_ personal sound at the moment is like:
 
-¯\_(ツ)\_/¯
+¯\\\_(ツ)\_/¯
+
+export const pageQuery = graphql`
+  query {
+    allFile(filter: { relativePath: { eq: "kmo-memphis.png" } }) {
+      edges {
+        node {
+          childImageSharp {
+            fixed(width: 200) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
+    }
+  }
+`

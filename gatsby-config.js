@@ -1,3 +1,5 @@
+const { faBorderNone } = require("@fortawesome/free-solid-svg-icons")
+
 module.exports = {
   siteMetadata: {
     title: `Loopy Demos`,
@@ -47,6 +49,8 @@ module.exports = {
         path: `${__dirname}/src/posts`,
       },
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
@@ -55,8 +59,6 @@ module.exports = {
         },
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
