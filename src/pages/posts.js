@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../templates/layout"
 import usePosts from "../helpers/use-posts"
+import DateTag from "../components/date-tag"
 
 const Post = styled.article`
   :not(:first-child) {
@@ -16,13 +17,8 @@ const Post = styled.article`
     margin-bottom: 0.5rem;
   }
 
-  span,
   p {
     color: white;
-  }
-
-  span.date {
-    color: lightslategray;
   }
 `
 
@@ -37,12 +33,6 @@ const BottomRow = styled.div`
   }
 `
 
-const formatDate = dateString => {
-  const date = new Date(dateString)
-
-  return date.toDateString()
-}
-
 const Posts = ({ location = {} }) => (
   <Layout location={location} title="Posts">
     <section>
@@ -50,7 +40,7 @@ const Posts = ({ location = {} }) => (
         <Post id={slug} key={slug}>
           <Link to={`/posts/${slug}`}>
             <h3>{title}</h3>
-            <span className="date">{formatDate(date)}</span>
+            <DateTag date={date} />
             <p>{excerpt}</p>
             <BottomRow>
               <div>
