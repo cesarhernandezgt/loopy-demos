@@ -30,7 +30,7 @@ const StyledPlayerContent = styled.div`
   span {
     text-align: center;
     color: var(--cyan);
-    font-family: "JetBrains Mono", cursive;
+    font-family: "JetBrains Mono", monospace;
     font-size: 0.9rem;
     line-height: 1.2rem;
   }
