@@ -3,12 +3,13 @@ import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "./layout"
 import Breadcrumb from "./breadcrumb"
+import DateTag from "../components/date-tag"
 
 const PostLayout = ({
   data: {
     mdx: {
       body,
-      frontmatter: { title },
+      frontmatter: { title, date },
     },
   } = {
     mdx: {
@@ -22,6 +23,7 @@ const PostLayout = ({
     <Layout location={location} title={title}>
       <Breadcrumb label="All posts" />
       <h1>{title}</h1>
+      <DateTag date={date} />
       <MDXRenderer>{body}</MDXRenderer>
     </Layout>
   )
@@ -33,6 +35,7 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
+        date
       }
     }
   }

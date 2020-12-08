@@ -31,8 +31,7 @@ const StyledFooter = styled.footer`
 const Footer = () => (
   <StyledFooter>
     <div className="footerRow">
-      <Link to="/imprint">Imprint</Link>
-      <Link to="/privacy">Privacy Policy</Link>
+      <Link to="/imprint">Imprint and Privacy Policy</Link>
       <span>© Loopy Demos ∞</span>
     </div>
     <div className="footerRow">

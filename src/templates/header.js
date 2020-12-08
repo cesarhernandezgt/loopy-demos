@@ -5,17 +5,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInstagram } from "@fortawesome/free-brands-svg-icons"
 import Logo from "../components/svg/logo"
 import MenuIcon from "../components/svg/menu-icon"
+// import useScrollPosition from "../helpers/use-scroll-position"
 
 const HeaderContainer = styled.header`
   background: var(--dark);
   width: 100%;
   z-index: 100;
-  position: sticky;
-  top: 0;
   margin-bottom: 1rem;
 
   @media (min-width: 600px) {
     margin-bottom: 2rem;
+  }
+
+  @media (max-width: 599px) {
+    position: sticky;
+    top: 0;
+    /* transform: ${props =>
+      props.hideHeader ? "translateY(-100%)" : "translateY(0)"};
+    transition: transform 0.3s
+      ${props => (props.hideHeader ? "ease-out" : "ease-in")}; */
   }
 
   ul {
@@ -80,7 +88,7 @@ const Title = styled(Link)`
     text-shadow: 2px 3px var(--yellow);
 
     @media (max-width: 400px) {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       text-shadow: 1px 2px var(--yellow);
     }
   }
@@ -231,10 +239,20 @@ const renderNavList = (pathname = "") => (
 
 const Header = ({ pathname = "" }) => {
   const [showSideNav, setShowSideNav] = useState(false)
+  // const [hideHeader, setHideHeader] = useState(false)
+
+  // useScrollPosition(
+  //   ({ prevPos, currPos }) => {
+  //     const isShow = currPos.y < prevPos.y
+  //     if (isShow !== hideHeader) setHideHeader(isShow)
+  //   },
+  //   [hideHeader]
+  // )
 
   return (
     <>
       <GlobalOverflow showSideNav={showSideNav} />
+      {/* <HeaderContainer hideHeader={hideHeader}> */}
       <HeaderContainer>
         <HeaderContent>
           <Link to="/" id="logo">

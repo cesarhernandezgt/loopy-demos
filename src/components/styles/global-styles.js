@@ -52,11 +52,11 @@ const GlobalStyles = createGlobalStyle`
 
   p, ul, a, span {
     font-size: 1.2rem;
-    line-height: 1.5rem;
+    line-height: 1.6rem;
 
     @media (min-width: 600px) {
         font-size: 1.3rem;
-        line-height: 1.6rem;
+        line-height: 1.8rem;
     }
   }
 
