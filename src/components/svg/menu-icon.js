@@ -42,7 +42,7 @@ const MenuIcon = ({ open = false }) => (
         stroke={COLORS.pink}
         strokeWidth="4"
         strokeLinecap="round"
-        dx={open ? 28 : 0}
+        dx={open ? 8 : 20}
       />
       <line
         x1="4"
@@ -80,7 +80,7 @@ const MenuIcon = ({ open = false }) => (
         stroke={COLORS.pink}
         strokeWidth="4"
         strokeLinecap="round"
-        dx={open ? 30 : 0}
+        dx={open ? 0 : 30}
       />
     </g>
   </ResponsiveSvg>
