@@ -45,7 +45,7 @@ const Pedal = ({
   const settings = activePreset.settings || sweepSetting
 
   return (
-    <Enclosure width={width} height={height}>
+    <Enclosure width={width || 350} height={height || 350}>
       <Img
         fluid={image}
         style={{
