@@ -1,6 +1,5 @@
 {
   "pedal": {
-    "offline": true,
     "slug": "walrus_audio_slo",
     "controls": {
       "knobs": [
@@ -65,39 +64,55 @@
   },
   "presets": [
     {
-      "id": "dont_know_yet",
-      "label": "Don't know yet",
+      "id": "subtle_swell",
+      "label": "Subtle Swell",
       "settings": {
         "decay": 6,
-        "filter": 7,
+        "filter": 2,
+        "mix": 6,
+        "x": 4,
+        "depth": 6,
+        "mode": 2,
+        "wave": "sink"
+      }
+    },
+    {
+      "id": "deep_dark_and_looming",
+      "label": "Deep Dark and Looming",
+      "settings": {
+        "decay": 6,
+        "filter": 4,
+        "mix": 7,
+        "x": 10,
+        "depth": 7,
+        "mode": 1,
+        "wave": "warp"
+      }
+    },
+    {
+      "id": "spooky_nightmare",
+      "label": "Spooky Nightmare",
+      "settings": {
+        "decay": 4,
+        "filter": 6,
+        "mix": 6,
+        "x": 4,
+        "depth": 8,
+        "mode": 3,
+        "wave": "warp"
+      }
+    },
+    {
+      "id": "pad_reverb_with_latch",
+      "label": "Pad Reverb with Latch",
+      "settings": {
+        "decay": 6,
+        "filter": 5,
         "mix": 4,
-        "x": 2,
-        "depth": 4,
-        "mode": 1
-      }
-    },
-    {
-      "id": "another_one",
-      "label": "Another one",
-      "settings": {
-        "decay": 4,
-        "filter": 3,
-        "mix": 7,
-        "x": 8,
-        "depth": 7,
-        "mode": 2
-      }
-    },
-    {
-      "id": "one_more",
-      "label": "One more",
-      "settings": {
-        "decay": 4,
-        "filter": 3,
-        "mix": 7,
-        "x": 8,
-        "depth": 7,
-        "mode": 3
+        "x": 0,
+        "depth": 0,
+        "mode": 3,
+        "wave": "does not matter"
       }
     }
   ]
