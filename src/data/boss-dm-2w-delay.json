@@ -1,0 +1,70 @@
+{
+  "pedal": {
+    "offline": true,
+    "slug": "boss_dm_2w_delay",
+    "controls": {
+      "knobs": [
+        { "id": "rate", "size": 56, "position": { "top": 21, "left": 102 } },
+        {
+          "id": "echo",
+          "size": 42,
+          "position": { "top": 65, "left": 154 },
+          "type": "knurled"
+        },
+        {
+          "id": "intensity",
+          "size": 56,
+          "position": { "top": 21, "left": 194 }
+        }
+      ],
+      "leds": [
+        {
+          "id": "on_led",
+          "size": 36,
+          "position": { "top": 7, "left": 158 }
+        }
+      ],
+      "switches": [
+        {
+          "id": "mode",
+          "type": "slide",
+          "size": 26,
+          "position": { "top": 34, "left": 163 }
+        }
+      ]
+    }
+  },
+  "presets": [
+    {
+      "id": "slap_back",
+      "label": "Slap Back",
+      "settings": { "rate": 6, "echo": 7, "intensity": 4, "mode": 1 }
+    },
+    {
+      "id": "dotted_eighth",
+      "label": "Dotted 8th",
+      "settings": { "rate": 6, "echo": 7, "intensity": 4, "mode": 2 }
+    },
+    {
+      "id": "bathroom_delay",
+      "label": "Bathroom Delay",
+      "settings": { "rate": 10, "echo": 7, "intensity": 4, "mode": 1 }
+    },
+    {
+      "id": "rate_sweep_standard",
+      "label": "Rate Sweep Standard Mode",
+      "isSweep": true,
+      "target": "rate",
+      "initialValue": 0,
+      "values": [0, 2, 4, 6, 8, 10]
+    },
+    {
+      "id": "rate_sweep_custom",
+      "label": "Rate Sweep Custom Mode",
+      "isSweep": true,
+      "target": "rate",
+      "initialValue": 0,
+      "values": [0, 2, 4, 6, 8, 10]
+    }
+  ]
+}
