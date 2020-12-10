@@ -35,7 +35,7 @@ const Pedal = ({
     knobs: [],
     switches: [],
     leds: [],
-    width: 200,
+    width: 350,
     height: 350,
   },
   image = {},
