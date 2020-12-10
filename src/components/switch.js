@@ -1,6 +1,7 @@
 import React from "react"
 import StompSwitch from "./svg/stomp-switch"
 import ToggleSwitch from "./svg/toggle-switch"
+import SlideSwitch from "./svg/slide-switch"
 
 const Switch = ({
   id = "",
@@ -15,6 +16,7 @@ const Switch = ({
       {
         stomp: <StompSwitch size={size} onClick={onClick} isOn={isOn} />,
         toggle: <ToggleSwitch size={size} state={state} />,
+        slide: <SlideSwitch size={size} state={state} />,
       }[type]
     }
   </div>

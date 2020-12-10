@@ -3,6 +3,7 @@ import styled from "styled-components"
 import useDemoState from "../helpers/use-demo-state"
 
 import BakelitKnob from "./svg/bakelit-knob"
+import KnurledKnob from "./svg/knurled-knob"
 import OffsetKnob from "./svg/offset-knob"
 import WalrusAudioKnob from "./svg/walrus-audio-knob"
 
@@ -91,6 +92,7 @@ const Knob = ({
       {
         {
           bakelit: <BakelitKnob size={size} />,
+          knurled: <KnurledKnob size={size} />,
           offset: <OffsetKnob size={size} />,
           walrus: <WalrusAudioKnob size={size} />,
         }[type]
