@@ -105,7 +105,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
               addPresetsLoaded(id)
             })
             .catch(() => {
-              console.log(
+              console.error(
                 `Well ... cannot load all audio for ${id} ¯\\_(ツ)_/¯`
               )
             })
