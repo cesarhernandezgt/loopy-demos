@@ -12,7 +12,6 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     sweepSetting,
     presetsLoaded,
     addPresetsLoaded,
-    setAudioState,
   } = useDemoState()
 
   // We trigger play/stop by changing the state and listen on it
@@ -134,7 +133,6 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }, [])
 
   useEffect(() => {
-    setAudioState(audioContext?.state)
     if (audioContext?.state === "suspended") {
       audioContext
         .resume()
@@ -161,7 +159,6 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
    * -------------------------------------------------------------
    */
   const togglePlay = () => {
-    setAudioState(audioContext?.state)
     setIsPlaying(!isPlaying)
 
     if (["suspended", "closed", "interrupted"].includes(audioContext?.state)) {
