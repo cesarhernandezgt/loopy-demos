@@ -67,11 +67,11 @@
       "id": "subtle_swell",
       "label": "Subtle Swell",
       "settings": {
-        "decay": 6,
-        "filter": 2,
-        "mix": 6,
-        "x": 4,
-        "depth": 6,
+        "decay": 5,
+        "filter": 5,
+        "mix": 7,
+        "x": 6,
+        "depth": 5,
         "mode": 2,
         "wave": "sink"
       }
@@ -84,9 +84,9 @@
         "filter": 4,
         "mix": 7,
         "x": 10,
-        "depth": 7,
+        "depth": 5,
         "mode": 1,
-        "wave": "warp"
+        "wave": "sine"
       }
     },
     {
@@ -97,22 +97,35 @@
         "filter": 6,
         "mix": 6,
         "x": 4,
-        "depth": 8,
+        "depth": 7,
         "mode": 3,
         "wave": "warp"
       }
     },
     {
-      "id": "pad_reverb_with_latch",
-      "label": "Pad Reverb with Latch",
+      "id": "swell_reverb_with_sustain",
+      "label": "Swell Reverb with Sustain",
       "settings": {
-        "decay": 6,
+        "decay": 5,
         "filter": 5,
-        "mix": 4,
-        "x": 0,
-        "depth": 0,
+        "mix": 7,
+        "x": 5,
+        "depth": 5,
+        "mode": 2,
+        "wave": "sine"
+      }
+    },
+    {
+      "id": "latching_dream",
+      "label": "Latching Dream",
+      "settings": {
+        "decay": 5,
+        "filter": 4,
+        "mix": 7,
+        "x": 5,
+        "depth": 6,
         "mode": 3,
-        "wave": "does not matter"
+        "wave": "warp"
       }
     }
   ]
