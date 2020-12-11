@@ -11,11 +11,12 @@ const StyledContainer = styled.div`
 
 const StyledLabel = styled.span`
   position: absolute;
-  top: ${props => props.top - LINE_CAP_RADIUS}px;
+  top: ${props => props.top - LINE_CAP_RADIUS / 2}px;
   left: ${props => props.left}px;
-  margin: 0 1rem;
+  margin: 0 0.75rem;
   transform: translate(${props => (props.isRightAligned ? 0 : -200)}%, -50%);
   color: ${props => props.color};
+  font-size: 1rem;
 `
 const LineLabel = ({
   id = "",
