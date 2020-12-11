@@ -6,14 +6,11 @@ import AudioPlayer from "./audio-player"
 
 import { DemoContextProvider } from "../helpers/use-demo-state"
 
-const DemoContainer = ({
-  config: { presets, pedal } = { presets: [], pedal: {} },
-  image = {},
-}) => (
+const DemoContainer = ({ presets = [], pedal = {}, image = {} }) => (
   <DemoContextProvider presets={presets}>
-    <AudioPlayer presets={presets} slug={pedal.slug} />
+    {!pedal.offline && <AudioPlayer presets={presets} slug={pedal.slug} />}
     <Presets presets={presets} />
-    <Pedal config={pedal.controls} image={image} />
+    <Pedal {...pedal.controls} image={image} />
   </DemoContextProvider>
 )
 

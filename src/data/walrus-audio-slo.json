@@ -2,37 +2,35 @@
   "pedal": {
     "slug": "walrus_audio_slo",
     "controls": {
-      "width": 184,
-      "height": 350,
       "knobs": [
         {
           "id": "decay",
           "size": 46,
-          "position": { "top": 28, "left": 12 },
+          "position": { "top": 28, "left": 95 },
           "type": "walrus"
         },
         {
           "id": "filter",
           "size": 46,
-          "position": { "top": 28, "left": 72 },
+          "position": { "top": 28, "left": 155 },
           "type": "walrus"
         },
         {
           "id": "mix",
           "size": 46,
-          "position": { "top": 28, "left": 128 },
+          "position": { "top": 28, "left": 211 },
           "type": "walrus"
         },
         {
           "id": "x",
           "size": 46,
-          "position": { "top": 105, "left": 12 },
+          "position": { "top": 105, "left": 95 },
           "type": "walrus"
         },
         {
           "id": "depth",
           "size": 46,
-          "position": { "top": 105, "left": 128 },
+          "position": { "top": 105, "left": 211 },
           "type": "walrus"
         }
       ],
@@ -41,7 +39,7 @@
           "id": "on_led",
           "size": 44,
           "socket": true,
-          "position": { "top": 241, "left": 20 },
+          "position": { "top": 241, "left": 103 },
           "colors": {
             "off": "#d2e1e9a1",
             "on": "#d4f9ff",
@@ -53,52 +51,88 @@
         {
           "id": "bypass_switch",
           "size": 60,
-          "position": { "top": 278, "left": 15 }
+          "position": { "top": 278, "left": 98 }
         },
         {
           "id": "mode",
           "size": 30,
           "type": "toggle",
-          "position": { "top": 110, "left": 78 }
+          "position": { "top": 110, "left": 161 }
+        }
+      ],
+      "labels": [
+        {
+          "id": "wave",
+          "position": { "top": 140, "left": 200 },
+          "labelPosition": { "top": 250, "left": 280 }
         }
       ]
     }
   },
   "presets": [
     {
-      "id": "dont_know_yet",
-      "label": "Don't know yet",
+      "id": "deep_dark_and_looming",
+      "label": "Deep Dark and Looming",
       "settings": {
         "decay": 6,
-        "filter": 7,
-        "mix": 4,
-        "x": 2,
-        "depth": 4,
-        "mode": 1
+        "filter": 4,
+        "mix": 7,
+        "x": 10,
+        "depth": 5,
+        "mode": 1,
+        "wave": "sine"
       }
     },
     {
-      "id": "another_one",
-      "label": "Another one",
+      "id": "subtle_swell",
+      "label": "Subtle Swell",
       "settings": {
-        "decay": 4,
-        "filter": 3,
+        "decay": 5,
+        "filter": 5,
         "mix": 7,
-        "x": 8,
-        "depth": 7,
-        "mode": 2
+        "x": 6,
+        "depth": 5,
+        "mode": 2,
+        "wave": "sink"
       }
     },
     {
-      "id": "one_more",
-      "label": "One more",
+      "id": "spooky_nightmare",
+      "label": "Spooky Nightmare",
       "settings": {
         "decay": 4,
-        "filter": 3,
-        "mix": 7,
-        "x": 8,
+        "filter": 6,
+        "mix": 6,
+        "x": 4,
         "depth": 7,
-        "mode": 3
+        "mode": 3,
+        "wave": "warp"
+      }
+    },
+    {
+      "id": "swell_reverb_with_sustain",
+      "label": "Swell Reverb with Sustain",
+      "settings": {
+        "decay": 5,
+        "filter": 5,
+        "mix": 7,
+        "x": 5,
+        "depth": 5,
+        "mode": 2,
+        "wave": "sine"
+      }
+    },
+    {
+      "id": "latching_dream",
+      "label": "Latching Dream",
+      "settings": {
+        "decay": 5,
+        "filter": 4,
+        "mix": 7,
+        "x": 5,
+        "depth": 6,
+        "mode": 3,
+        "wave": "warp"
       }
     }
   ]

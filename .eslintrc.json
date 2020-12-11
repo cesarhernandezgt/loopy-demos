@@ -25,6 +25,7 @@
         "prettier/prettier": "error",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".mdx"] }],
         "react/jsx-key": 2,
-        "react/jsx-props-no-spreading": 0
+        "react/jsx-props-no-spreading": 0,
+        "no-console": ["warn", { "allow": ["warn", "error"] }]
     }
 }

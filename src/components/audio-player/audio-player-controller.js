@@ -14,19 +14,19 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     addPresetsLoaded,
   } = useDemoState()
 
-  const presetsWithClean = [
-    ...presets,
-    { id: CLEAN_TONE, audio: "clean.mp3" },
-  ].filter(({ isSweep }) => !isSweep)
-
-  const sweepPresets = presets.filter(({ isSweep }) => isSweep)
-
+  // We trigger play/stop by changing the state and listen on it
+  // in a useEffect, treating the playback as a sideeffect
   const [isPlaying, setIsPlaying] = useState(false)
   const [loadingStarted, setLoadingStarted] = useState(false)
+  // we hydrate the actual audio data with a fetch on mount or after
+  // the user hit 'play' the first time
   const [audioData, setAudioData] = useState([])
-  const [currentPlayingSource, setCurrentPlayingSource] = useState(null)
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false)
+  // We need to keep track of the currently playing sourcenode
+  // to delete it after the next track started playing
+  const [currentPlayingSource, setCurrentPlayingSource] = useState(null)
   const [audioContext, setAudioContext] = useState(null)
+  // We need these to keep the tracks in sync with the audio context
   const [startOffset, setStartOffset] = useState(0)
   const [endOffset, setEndOffset] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -40,67 +40,76 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     setLoadingStarted(true)
     // First, load presets
     Promise.all(
-      presetsWithClean.map(({ audio, id }) => {
-        const url = `${MEDIA_ROOT_URL}/${slug}/${audio}`
-        return fetch(url)
-          .then(response => {
-            if (!response.ok) {
-              throw Error(response.statusText)
-            }
-            return response
-          })
-          .then(data => data.arrayBuffer())
-          .then(buffer =>
-            audioContext.decodeAudioData(buffer, audioBuffer => {
-              setAudioData(prevAudioData => [
-                ...prevAudioData,
-                { id, audioBuffer },
-              ])
+      [...presets, { id: CLEAN_TONE }]
+        .filter(({ isSweep }) => !isSweep)
+        .map(({ id }) => {
+          const url = `${MEDIA_ROOT_URL}/${slug}/${
+            id === CLEAN_TONE ? "clean" : id
+          }.mp3`
+
+          return fetch(url)
+            .then(response => {
+              if (!response.ok) {
+                throw Error(response.statusText)
+              }
+              return response
             })
-          )
-          .then(() => {
-            addPresetsLoaded(id)
-          })
-          .catch(error => {
-            console.error(error)
-            return Promise.reject()
-          })
-      })
+            .then(data => data.arrayBuffer())
+            .then(buffer =>
+              audioContext.decodeAudioData(buffer, audioBuffer => {
+                setAudioData(prevAudioData => [
+                  ...prevAudioData,
+                  { id, audioBuffer },
+                ])
+              })
+            )
+            .then(() => {
+              addPresetsLoaded(id)
+            })
+            .catch(error => {
+              console.error(error)
+              return Promise.reject()
+            })
+        })
     ).then(() => {
       // Fetch the sweeps afterwards to prioritize normal presets
-      sweepPresets.forEach(({ id, values }) => {
-        Promise.all(
-          values.map(value => {
-            const url = `${MEDIA_ROOT_URL}/${slug}/${id}_${value}.mp3`
-            return fetch(url)
-              .then(response => {
-                if (!response.ok) {
-                  throw Error(response.statusText)
-                }
-                return response
-              })
-              .then(data => data.arrayBuffer())
-              .then(buffer =>
-                audioContext.decodeAudioData(buffer, audioBuffer => {
-                  setAudioData(prevAudioData => [
-                    ...prevAudioData,
-                    { id: `${id}_${value}`, audioBuffer },
-                  ])
+      presets
+        .filter(({ isSweep }) => isSweep)
+        .forEach(({ id, values }) => {
+          Promise.all(
+            values.map(value => {
+              const url = `${MEDIA_ROOT_URL}/${slug}/${id}_${value}.mp3`
+              return fetch(url)
+                .then(response => {
+                  if (!response.ok) {
+                    throw Error(response.statusText)
+                  }
+                  return response
                 })
+                .then(data => data.arrayBuffer())
+                .then(buffer =>
+                  audioContext.decodeAudioData(buffer, audioBuffer => {
+                    setAudioData(prevAudioData => [
+                      ...prevAudioData,
+                      { id: `${id}_${value}`, audioBuffer },
+                    ])
+                  })
+                )
+                .catch(error => {
+                  console.error(error)
+                  return Promise.reject()
+                })
+            })
+          )
+            .then(() => {
+              addPresetsLoaded(id)
+            })
+            .catch(() => {
+              console.error(
+                `Well ... cannot load all audio for ${id} ¯\\_(ツ)_/¯`
               )
-              .catch(error => {
-                console.error(error)
-                return Promise.reject()
-              })
-          })
-        )
-          .then(() => {
-            addPresetsLoaded(id)
-          })
-          .catch(() => {
-            console.log(`Well ... cannot load all audio for ${id} ¯\\_(ツ)_/¯`)
-          })
-      })
+            })
+        })
     })
   }
 
@@ -135,7 +144,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
         })
     }
 
-    if (audioContext && audioContext?.state !== "suspended") {
+    if (audioContext && audioContext.state !== "suspended") {
       hydrateAudioState()
     }
   }, [audioContext])
@@ -152,7 +161,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const togglePlay = () => {
     setIsPlaying(!isPlaying)
 
-    if (audioContext?.state === "suspended") {
+    if (["suspended", "closed", "interrupted"].includes(audioContext?.state)) {
       audioContext.resume().then(() => {
         setHasPlayedOnce(true)
       })

@@ -32,7 +32,7 @@ const DemoLayout = ({
     <Layout location={location} title={title}>
       <Breadcrumb label="All demos" />
       <h1>{title}</h1>
-      <Demo image={image?.childImageSharp?.fluid} config={configData} />
+      <Demo image={image?.childImageSharp?.fluid} {...configData} />
       <MDXRenderer>{body}</MDXRenderer>
     </Layout>
   )
