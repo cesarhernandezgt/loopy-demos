@@ -12,6 +12,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     sweepSetting,
     presetsLoaded,
     addPresetsLoaded,
+    setAudioState,
   } = useDemoState()
 
   const [isPlaying, setIsPlaying] = useState(false)
@@ -126,6 +127,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }, [])
 
   useEffect(() => {
+    setAudioState(audioContext?.state)
     if (audioContext?.state === "suspended") {
       audioContext
         .resume()
@@ -137,7 +139,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
         })
     }
 
-    if (audioContext && audioContext?.state !== "suspended") {
+    if (audioContext && audioContext.state !== "suspended") {
       hydrateAudioState()
     }
   }, [audioContext])
@@ -153,6 +155,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
    */
   const togglePlay = () => {
     setIsPlaying(!isPlaying)
+    setAudioState(audioContext?.state)
 
     if (audioContext?.state === "suspended") {
       audioContext.resume().then(() => {
