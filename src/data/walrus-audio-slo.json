@@ -59,23 +59,17 @@
           "type": "toggle",
           "position": { "top": 110, "left": 161 }
         }
+      ],
+      "labels": [
+        {
+          "id": "wave",
+          "position": { "top": 140, "left": 200 },
+          "labelPosition": { "top": 250, "left": 300 }
+        }
       ]
     }
   },
   "presets": [
-    {
-      "id": "subtle_swell",
-      "label": "Subtle Swell",
-      "settings": {
-        "decay": 5,
-        "filter": 5,
-        "mix": 7,
-        "x": 6,
-        "depth": 5,
-        "mode": 2,
-        "wave": "sink"
-      }
-    },
     {
       "id": "deep_dark_and_looming",
       "label": "Deep Dark and Looming",
@@ -87,6 +81,19 @@
         "depth": 5,
         "mode": 1,
         "wave": "sine"
+      }
+    },
+    {
+      "id": "subtle_swell",
+      "label": "Subtle Swell",
+      "settings": {
+        "decay": 5,
+        "filter": 5,
+        "mix": 7,
+        "x": 6,
+        "depth": 5,
+        "mode": 2,
+        "wave": "sink"
       }
     },
     {
