@@ -4,6 +4,7 @@ import styled from "styled-components"
 import Knob from "./knob"
 import Led from "./svg/led"
 import Switch from "./switch"
+import LineLabel from "./line-label"
 import useDemoState from "../helpers/use-demo-state"
 
 const Enclosure = styled.div`
@@ -31,10 +32,11 @@ const ControlsLayout = styled.div`
 `
 
 const Pedal = ({
-  config: { knobs, switches, leds, width, height } = {
+  config: { knobs, switches, leds, labels, width, height } = {
     knobs: [],
     switches: [],
     leds: [],
+    labels: [],
     width: 350,
     height: 350,
   },
@@ -60,7 +62,7 @@ const Pedal = ({
           objectFit: "contain",
         }}
       />
-      <ControlsLayout controls={[...knobs, ...switches, ...leds]}>
+      <ControlsLayout controls={[...knobs, ...switches, ...leds, ...labels]}>
         {knobs.map(({ size, id, type }) => (
           <Knob
             id={id}
@@ -94,6 +96,15 @@ const Pedal = ({
               }
             }}
             isOn={id === "bypass_switch" && isPedalOn}
+          />
+        ))}
+        {labels.map(({ id, position, labelPosition }) => (
+          <LineLabel
+            key={id}
+            id={id}
+            start={position}
+            end={labelPosition}
+            label={settings[id]}
           />
         ))}
       </ControlsLayout>
