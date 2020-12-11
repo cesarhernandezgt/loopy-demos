@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-const END_CIRCLE_RADIUS = 3
+const LINE_CAP_RADIUS = 3
 
 const StyledContainer = styled.div`
   --translateX: ${props => (props.isRightAligned ? 0 : -100)}%;
@@ -11,10 +11,11 @@ const StyledContainer = styled.div`
 
 const StyledLabel = styled.span`
   position: absolute;
-  top: ${props => props.top - END_CIRCLE_RADIUS}px;
+  top: ${props => props.top - LINE_CAP_RADIUS}px;
   left: ${props => props.left}px;
   margin: 0 1rem;
   transform: translate(${props => (props.isRightAligned ? 0 : -200)}%, -50%);
+  color: ${props => props.color};
 `
 const LineLabel = ({
   id = "",
@@ -23,19 +24,17 @@ const LineLabel = ({
   label = "",
   color = "#fff",
 }) => {
-  const width = Math.max(Math.abs(start.left - end.left), END_CIRCLE_RADIUS * 2)
-  const height = Math.max(Math.abs(start.top - end.top), END_CIRCLE_RADIUS * 2)
+  const width = Math.max(Math.abs(start.left - end.left), LINE_CAP_RADIUS * 2)
+  const height = Math.max(Math.abs(start.top - end.top), LINE_CAP_RADIUS * 2)
 
   const isRightAligned = start.left <= end.left
   const isTopDown = start.top <= end.top
 
-  console.table(id)
+  const startX = isRightAligned ? LINE_CAP_RADIUS : width - LINE_CAP_RADIUS
+  const startY = isTopDown ? LINE_CAP_RADIUS : height - LINE_CAP_RADIUS
 
-  const startX = isRightAligned ? END_CIRCLE_RADIUS : width - END_CIRCLE_RADIUS
-  const startY = isTopDown ? END_CIRCLE_RADIUS : height - END_CIRCLE_RADIUS
-
-  const endX = isRightAligned ? width - END_CIRCLE_RADIUS : END_CIRCLE_RADIUS
-  const endY = isTopDown ? height - END_CIRCLE_RADIUS : END_CIRCLE_RADIUS
+  const endX = isRightAligned ? width - LINE_CAP_RADIUS : LINE_CAP_RADIUS
+  const endY = isTopDown ? height - LINE_CAP_RADIUS : LINE_CAP_RADIUS
 
   const bendX = width / 2
 
@@ -60,11 +59,16 @@ const LineLabel = ({
             strokeWidth="2"
             points={`${startX} ${startY} ${bendX} ${endY} ${endX} ${endY}`}
           />
-          <circle cx={startX} cy={startY} r={END_CIRCLE_RADIUS} fill={color} />
-          <circle cx={endX} cy={endY} r={END_CIRCLE_RADIUS} fill={color} />
+          <circle cx={startX} cy={startY} r={LINE_CAP_RADIUS} fill={color} />
+          <circle cx={endX} cy={endY} r={LINE_CAP_RADIUS} fill={color} />
         </g>
       </svg>
-      <StyledLabel top={endY} left={endX} isRightAligned={isRightAligned}>
+      <StyledLabel
+        top={endY}
+        left={endX}
+        isRightAligned={isRightAligned}
+        color={color}
+      >
         {label}
       </StyledLabel>
     </StyledContainer>

@@ -32,14 +32,12 @@ const ControlsLayout = styled.div`
 `
 
 const Pedal = ({
-  config: { knobs, switches, leds, labels, width, height } = {
-    knobs: [],
-    switches: [],
-    leds: [],
-    labels: [],
-    width: 350,
-    height: 350,
-  },
+  knobs = [],
+  switches = [],
+  leds = [],
+  labels = [],
+  width = 350,
+  height = 350,
   image = {},
 }) => {
   const { isPedalOn, setIsPedalOn, activePreset, sweepSetting } = useDemoState()
@@ -47,7 +45,7 @@ const Pedal = ({
   const settings = activePreset.settings || sweepSetting
 
   return (
-    <Enclosure width={width || 350} height={height || 350}>
+    <Enclosure width={width} height={height}>
       <Img
         fluid={image}
         style={{

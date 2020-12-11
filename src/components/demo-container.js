@@ -13,7 +13,7 @@ const DemoContainer = ({
   <DemoContextProvider presets={presets}>
     {!pedal.offline && <AudioPlayer presets={presets} slug={pedal.slug} />}
     <Presets presets={presets} />
-    <Pedal config={pedal.controls} image={image} />
+    <Pedal {...pedal.controls} image={image} />
   </DemoContextProvider>
 )
 
