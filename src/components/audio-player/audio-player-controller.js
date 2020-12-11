@@ -15,12 +15,19 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     setAudioState,
   } = useDemoState()
 
+  // We trigger play/stop by changing the state and listen on it
+  // in a useEffect, treating the playback as a sideeffect
   const [isPlaying, setIsPlaying] = useState(false)
   const [loadingStarted, setLoadingStarted] = useState(false)
+  // we hydrate the actual audio data with a fetch on mount or after
+  // the user hit 'play' the first time
   const [audioData, setAudioData] = useState([])
-  const [currentPlayingSource, setCurrentPlayingSource] = useState(null)
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false)
+  // We need to keep track of the currently playing sourcenode
+  // to delete it after the next track started playing
+  const [currentPlayingSource, setCurrentPlayingSource] = useState(null)
   const [audioContext, setAudioContext] = useState(null)
+  // We need these to keep the tracks in sync with the audio context
   const [startOffset, setStartOffset] = useState(0)
   const [endOffset, setEndOffset] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -154,10 +161,10 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
    * -------------------------------------------------------------
    */
   const togglePlay = () => {
-    setIsPlaying(!isPlaying)
     setAudioState(audioContext?.state)
+    setIsPlaying(!isPlaying)
 
-    if (audioContext?.state === "suspended") {
+    if (["suspended", "closed", "interrupted"].includes(audioContext?.state)) {
       audioContext.resume().then(() => {
         setHasPlayedOnce(true)
       })
