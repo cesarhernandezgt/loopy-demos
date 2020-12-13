@@ -16,11 +16,11 @@ const StyledVisualizer = styled.div`
 
   @keyframes vizBar {
     from {
-      height: 65%;
+      transform: scaleY(1);
       opacity: 0.9;
     }
     to {
-      height: 80%;
+      transform: scaleY(1.2);
       opacity: 1;
     }
   }
@@ -31,6 +31,7 @@ const StyledVisualizer = styled.div`
     }
 
     width: 0.5rem;
+    height: 60%;
     background: var(--cyan);
     border-radius: 2px;
     flex: 0 0 0.5rem;

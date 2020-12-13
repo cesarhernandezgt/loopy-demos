@@ -181,7 +181,10 @@ const SideNav = styled.aside`
 
     li {
       margin-bottom: 1rem;
+
       a {
+        display: inline-block;
+        width: 100%;
         color: var(--pink);
         font-family: var(--headlineFont);
         font-size: 1.5rem;
