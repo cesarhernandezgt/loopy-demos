@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React, { memo, useRef, useEffect, useState } from "react"
 import styled from "styled-components"
 
 const setAnimationDuration = index => `
@@ -43,10 +43,19 @@ const StyledVisualizer = styled.div`
 `
 
 const AudioVisualizer = () => {
-  const elementArray = [...Array(60).keys()]
+  const [barArray, setBarArray] = useState([])
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const containerWidth = containerRef.current.offsetWidth
+    // one bar is 8px + 2px margin
+    const numberOfBars = Math.ceil(containerWidth / 10)
+    setBarArray([...Array(numberOfBars).keys()])
+  }, [])
+
   return (
-    <StyledVisualizer elements={elementArray}>
-      {elementArray.map(idx => (
+    <StyledVisualizer elements={barArray} ref={containerRef}>
+      {barArray.map(idx => (
         <div key={idx} className="bar" />
       ))}
     </StyledVisualizer>
