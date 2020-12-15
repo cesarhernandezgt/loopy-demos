@@ -43,35 +43,28 @@ const StyledKnobContainer = styled.div`
 
 const StyledDotButton = styled.div`
   --parentSize: ${({ parentSize }) => parentSize}px;
-  --dotSize: 0.5rem;
+  --dotSize: 18px;
   --rotation: ${({ level }) => level};
-  border-radius: 50%;
+  --spreadRadius: 28px;
+
   width: var(--dotSize);
   height: var(--dotSize);
-  background: var(--cyan);
-  position: absolute;
-  top: calc((var(--dotSize) / 2) - 1rem);
-  left: calc(50% - (var(--dotSize) / 2));
-  transform-origin: calc(var(--dotSize) / 2)
-    calc((var(--parentSize) - var(--dotSize)) / 2 + 1rem);
-  transform: rotate(var(--rotation));
+  box-sizing: border-box;
   cursor: pointer;
   z-index: 99;
+  border: 4px solid var(--cyan);
+  border-radius: 50%;
 
-  :after {
-    content: " ";
-    border-radius: 50%;
-    width: 1rem;
-    height: 1rem;
-    border: 2px solid var(--cyan);
-    box-sizing: border-box;
-    position: absolute;
-    top: -0.25rem;
-    left: -0.25rem;
-    animation: var(--blinkAnimation);
-    animation-iteration-count: 3;
-    z-index: 99;
-  }
+  background: ${props => (props.isActive ? "var(--cyan)" : "none")};
+  transition: background 200ms ease;
+  animation: var(--blinkAnimation);
+
+  position: absolute;
+  top: calc((var(--dotSize) / 2) - var(--spreadRadius));
+  left: calc(50% - (var(--dotSize) / 2));
+  transform-origin: calc(var(--dotSize) / 2)
+    calc((var(--parentSize) - var(--dotSize)) / 2 + var(--spreadRadius));
+  transform: rotate(var(--rotation));
 `
 
 const Knob = ({
@@ -81,7 +74,7 @@ const Knob = ({
   type = "bakelit",
   levelOptions = [],
 }) => {
-  const { setSweepSetting, setIsPedalOn } = useDemoState()
+  const { sweepSetting, setSweepSetting, setIsPedalOn } = useDemoState()
 
   return (
     <StyledKnobContainer
@@ -101,6 +94,7 @@ const Knob = ({
         <StyledDotButton
           key={levelOption}
           parentSize={size}
+          isActive={levelOption === sweepSetting[id]}
           onClick={() => {
             setSweepSetting({ [id]: levelOption })
             setIsPedalOn(true)

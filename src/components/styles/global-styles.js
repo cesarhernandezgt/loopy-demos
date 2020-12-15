@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   :root {
-    --blinkAnimation: blink 1.3s ease-in-out infinite;
+    --blinkAnimation: blink 400ms ease-in-out 3;
     --spinAnimation: spin 1s linear infinite;
     --headlineFont: 'Sigmar One', Arial, Helvetica, sans-serif;
     --pageWidth: 720px;
