@@ -35,6 +35,7 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
   const {
     isPedalOn,
     activePreset,
+    hasLoadingStarted,
     presetsLoaded,
     selectPreset,
     setIsPedalOn,
@@ -57,7 +58,9 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
       }}
     >
       <span>{label}</span>
-      {!loaded && <FontAwesomeIcon icon={faSpinner} spin />}
+      {!loaded && hasLoadingStarted && (
+        <FontAwesomeIcon icon={faSpinner} spin />
+      )}
     </StyledPresetTag>
   )
 }

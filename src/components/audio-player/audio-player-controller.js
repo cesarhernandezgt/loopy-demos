@@ -11,13 +11,14 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     activePreset,
     sweepSetting,
     presetsLoaded,
+    hasLoadingStarted,
+    setHasLoadingStarted,
     addPresetsLoaded,
   } = useDemoState()
 
   // We trigger play/stop by changing the state and listen on it
   // in a useEffect, treating the playback as a sideeffect
   const [isPlaying, setIsPlaying] = useState(false)
-  const [loadingStarted, setLoadingStarted] = useState(false)
   // we hydrate the actual audio data with a fetch on mount or after
   // the user hit 'play' the first time
   const [audioData, setAudioData] = useState([])
@@ -37,7 +38,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
    * -------------------------------------------------------------
    */
   const hydrateAudioState = () => {
-    setLoadingStarted(true)
+    setHasLoadingStarted(true)
     // First, load presets
     Promise.all(
       [...presets, { id: CLEAN_TONE }]
@@ -150,7 +151,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }, [audioContext])
 
   useEffect(() => {
-    if (hasPlayedOnce && !loadingStarted) hydrateAudioState()
+    if (hasPlayedOnce && !hasLoadingStarted) hydrateAudioState()
   }, [hasPlayedOnce])
 
   /**
