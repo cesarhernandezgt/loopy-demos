@@ -2,24 +2,21 @@ import { useRef, useLayoutEffect } from "react"
 
 const isBrowser = typeof window !== `undefined`
 
-function getScrollPosition({ element, useWindow }) {
+function getScrollPosition() {
   if (!isBrowser) return { x: 0, y: 0 }
 
-  const target = element ? element.current : document.body
-  const position = target.getBoundingClientRect()
+  const position = document.body.getBoundingClientRect()
 
-  return useWindow
-    ? { x: window.scrollX, y: window.scrollY }
-    : { x: position.left, y: position.top }
+  return { x: position.left, y: position.top }
 }
 
-const useScrollPosition = (effect, deps, element, useWindow, wait) => {
-  const position = useRef(getScrollPosition({ useWindow }))
+const useScrollPosition = (effect, deps) => {
+  const position = useRef(getScrollPosition())
 
   let throttleTimeout = null
 
   const callBack = () => {
-    const currPos = getScrollPosition({ element, useWindow })
+    const currPos = getScrollPosition()
     effect({ prevPos: position.current, currPos })
     position.current = currPos
     throttleTimeout = null
@@ -27,12 +24,8 @@ const useScrollPosition = (effect, deps, element, useWindow, wait) => {
 
   useLayoutEffect(() => {
     const handleScroll = () => {
-      if (wait) {
-        if (throttleTimeout === null) {
-          throttleTimeout = setTimeout(callBack, wait)
-        }
-      } else {
-        callBack()
+      if (throttleTimeout === null) {
+        throttleTimeout = setTimeout(callBack, 200)
       }
     }
 
