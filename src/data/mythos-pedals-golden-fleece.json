@@ -1,0 +1,45 @@
+{
+  "externalControls": [
+    {
+      "id": "guitar_volume",
+      "label": "Guitar Volume",
+      "initialValue": 10,
+      "values": [2, 4, 6, 8, 10],
+      "type": "slider"
+    }
+  ],
+  "pedal": {
+    "offline": true,
+    "slug": "mythos_golden_fleece",
+    "controls": {
+      "knobs": [
+        { "id": "more", "size": 56, "position": { "top": 21, "left": 102 } }
+      ],
+      "leds": [
+        {
+          "id": "on_led",
+          "size": 36,
+          "position": { "top": 7, "left": 158 }
+        }
+      ],
+      "switches": [
+        {
+          "id": "bypass_switch",
+          "size": 72,
+          "position": { "top": 268, "left": 140 }
+        }
+      ]
+    }
+  },
+  "presets": [
+    {
+      "id": "guitar_volume_sweep",
+      "label": "Guitar Volume Sweep",
+      "isSweep": true,
+      "isHidden": true,
+      "target": "rate",
+      "initialValue": 0,
+      "values": [0, 2, 4, 6, 8, 10]
+    }
+  ]
+}

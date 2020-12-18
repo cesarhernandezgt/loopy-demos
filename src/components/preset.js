@@ -31,7 +31,7 @@ const StyledPresetTag = styled.button`
   }
 `
 
-const Preset = ({ id = "", label = "", isSweep = false }) => {
+const Preset = ({ id = "", label = "", isSweep = false, isHidden = false }) => {
   const {
     isPedalOn,
     activePreset,
@@ -40,8 +40,11 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     selectPreset,
     setIsPedalOn,
   } = useDemoState()
+  if (isHidden) return null
+
   const isActive = id === activePreset.id && isPedalOn
   const loaded = presetsLoaded.includes(id)
+
   return (
     <StyledPresetTag
       active={isActive}
