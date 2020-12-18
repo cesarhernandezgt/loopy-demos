@@ -37,7 +37,7 @@ const StyledSlider = styled.input`
   --progress: ${props => props.progress}%;
 
   ::-webkit-slider-thumb {
-    margin-top: -5px;
+    margin-top: -8px;
     -webkit-appearance: none;
     ${sliderThumb}
   }
