@@ -69,7 +69,7 @@ const findClosestValue = (value, valueArray) =>
 
 const Slider = ({ id = "", initialValue = 0, values = [], label = "" }) => {
   const [currentValue, setCurrentValue] = useState(initialValue)
-  console.table({ currentValue })
+  const [timeoutRef, setTimeoutRef] = useState(null)
 
   return (
     <SliderContainer>
@@ -78,12 +78,16 @@ const Slider = ({ id = "", initialValue = 0, values = [], label = "" }) => {
         id={id}
         min={0}
         max={10}
-        step="1"
-        list={`${id}_values`}
+        step="0.1"
         value={currentValue}
         onChange={e => {
+          clearTimeout(timeoutRef)
+          setCurrentValue(e.target.value)
           const val = findClosestValue(e.target.value, values)
-          setCurrentValue(val)
+          const timeoutId = setTimeout(() => {
+            setCurrentValue(val)
+          }, 100)
+          setTimeoutRef(timeoutId)
         }}
         progress={(currentValue / 10) * 100}
       />
