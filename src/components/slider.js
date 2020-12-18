@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled, { css } from "styled-components"
+import useDemoState from "../helpers/use-demo-state"
 
 const SliderContainer = styled.div`
   display: flex;
@@ -7,8 +8,8 @@ const SliderContainer = styled.div`
 `
 
 const sliderThumb = css`
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 24px;
+  width: 24px;
   border-radius: 50%;
   border: none;
   background: var(--cyan);
@@ -17,7 +18,7 @@ const sliderThumb = css`
 
 const sliderTrack = css`
   width: 100%;
-  height: 6px;
+  height: 8px;
   background: linear-gradient(
     to right,
     var(--pink) var(--progress),
@@ -56,7 +57,7 @@ const StyledSlider = styled.input`
 
 const StyledLabel = styled.label`
   font-size: 1.3rem;
-  margin-left: 1rem;
+  margin-right: 1rem;
 `
 
 const findClosestValue = (value, valueArray) =>
@@ -70,28 +71,29 @@ const findClosestValue = (value, valueArray) =>
 const Slider = ({ id = "", initialValue = 0, values = [], label = "" }) => {
   const [currentValue, setCurrentValue] = useState(initialValue)
   const [timeoutRef, setTimeoutRef] = useState(null)
+  const { setSweepSetting } = useDemoState()
 
   return (
     <SliderContainer>
+      <StyledLabel htmlFor={id}>{label}</StyledLabel>
       <StyledSlider
         type="range"
         id={id}
         min={0}
         max={10}
-        step="0.1"
+        step="0.5"
         value={currentValue}
         onChange={e => {
           clearTimeout(timeoutRef)
           setCurrentValue(e.target.value)
           const val = findClosestValue(e.target.value, values)
           const timeoutId = setTimeout(() => {
-            setCurrentValue(val)
+            setSweepSetting({ [id]: val })
           }, 100)
           setTimeoutRef(timeoutId)
         }}
         progress={(currentValue / 10) * 100}
       />
-      <StyledLabel htmlFor={id}>{label}</StyledLabel>
     </SliderContainer>
   )
 }

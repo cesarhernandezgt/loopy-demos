@@ -37,8 +37,8 @@
       "label": "Guitar Volume Sweep",
       "isSweep": true,
       "isHidden": true,
-      "target": "rate",
-      "initialValue": 0,
+      "target": "guitar_volume",
+      "initialValue": 10,
       "values": [0, 2, 4, 6, 8, 10]
     }
   ]

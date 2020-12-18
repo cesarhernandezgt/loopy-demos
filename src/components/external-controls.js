@@ -9,8 +9,6 @@ const ExternalControls = ({ controls = [] }) => {
   const toggles = controls.filter(({ type }) => type === "toggle")
   const sliders = controls.filter(({ type }) => type === "slider")
 
-  console.log({ sliders })
-
   return (
     <>
       <div>
