@@ -74,7 +74,7 @@ const Knob = ({
   type = "bakelit",
   levelOptions = [],
 }) => {
-  const { sweepSetting, setSweepSetting, setIsPedalOn } = useDemoState()
+  const { sweepSetting, selectSweepSetting, setIsPedalOn } = useDemoState()
 
   return (
     <StyledKnobContainer
@@ -96,7 +96,7 @@ const Knob = ({
           parentSize={size}
           isActive={levelOption === sweepSetting[id]}
           onClick={() => {
-            setSweepSetting({ [id]: levelOption })
+            selectSweepSetting(id, levelOption)
             setIsPedalOn(true)
           }}
           level={levelToRotationMap[levelOption]}

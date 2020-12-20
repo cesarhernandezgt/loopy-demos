@@ -17,14 +17,8 @@ const ExternalControls = ({ controls = [] }) => {
         ))}
       </div>
       <div>
-        {sliders.map(({ id, values, initialValue, label }) => (
-          <Slider
-            values={values}
-            initialValue={initialValue}
-            label={label}
-            id={id}
-            key={id}
-          />
+        {sliders.map(({ id, label }) => (
+          <Slider label={label} id={id} key={id} />
         ))}
       </div>
     </>
