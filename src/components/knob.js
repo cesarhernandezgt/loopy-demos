@@ -7,19 +7,7 @@ import KnurledKnob from "./svg/knurled-knob"
 import OffsetKnob from "./svg/offset-knob"
 import WalrusAudioKnob from "./svg/walrus-audio-knob"
 
-const levelToRotationMap = [
-  "-150deg",
-  "-120deg",
-  "-90deg",
-  "-60deg",
-  "-30deg",
-  "0deg",
-  "30deg",
-  "60deg",
-  "90deg",
-  "120deg",
-  "150deg",
-]
+const levelToRotationFunc = level => `${30 * level - 150}deg`
 
 const StyledKnobContainer = styled.div`
   --rotation: ${({ rotation }) => rotation};
@@ -78,7 +66,7 @@ const Knob = ({
 
   return (
     <StyledKnobContainer
-      rotation={levelToRotationMap[level]}
+      rotation={levelToRotationFunc(level)}
       id={id}
       isSweep={levelOptions.length > 0}
     >
@@ -99,7 +87,7 @@ const Knob = ({
             selectSweepSetting(id, levelOption)
             setIsPedalOn(true)
           }}
-          level={levelToRotationMap[levelOption]}
+          level={levelToRotationFunc(levelOption)}
         />
       ))}
     </StyledKnobContainer>

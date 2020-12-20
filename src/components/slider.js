@@ -1,59 +1,12 @@
 import React, { useState, useEffect } from "react"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import useDemoState from "../helpers/use-demo-state"
 import Knob from "./knob"
 
 const SweepControlContainer = styled.div`
   display: flex;
   align-items: center;
-`
-
-const sliderThumb = css`
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  border: none;
-  background: var(--cyan);
-  cursor: pointer;
-`
-
-const sliderTrack = css`
-  width: 100%;
-  height: 8px;
-  background: linear-gradient(
-    to right,
-    var(--pink) var(--progress),
-    var(--dark) var(--progress)
-  );
-  border-radius: 3px;
-  border: none;
-  cursor: pointer;
-`
-
-const StyledSlider = styled.input`
-  flex-grow: 1;
-  -webkit-appearance: none;
-  background: none;
-  outline: 0;
-  --progress: ${props => props.progress}%;
-
-  ::-webkit-slider-thumb {
-    margin-top: -8px;
-    -webkit-appearance: none;
-    ${sliderThumb}
-  }
-
-  ::-moz-range-thumb {
-    ${sliderThumb}
-  }
-
-  ::-webkit-slider-runnable-track {
-    ${sliderTrack}
-  }
-
-  ::-moz-range-track {
-    ${sliderTrack}
-  }
+  touch-action: none;
 `
 
 const StyledLabel = styled.label`
@@ -83,15 +36,16 @@ const Slider = ({ id = "", label = "" }) => {
 
   const startDrag = downEvent => {
     if (!isBrowser) return
-    let moveStart = downEvent.pageY
+    downEvent.preventDefault()
+
+    let moveStart = downEvent.pageY || downEvent.touches[0].pageY
     let skip = false
     let hasSkipped = 0
 
-    const handleMouseMove = moveEvent => {
+    const handleDrag = moveEvent => {
       moveEvent.preventDefault()
       if (skip) {
         hasSkipped += 1
-        console.log("skipping")
         if (hasSkipped > 4) {
           hasSkipped = 0
           skip = false
@@ -99,26 +53,26 @@ const Slider = ({ id = "", label = "" }) => {
         return
       }
       skip = true
-      const moveY = moveStart - moveEvent.pageY
-      moveStart = moveEvent.pageY
+      const moveTo = moveEvent.pageY || moveEvent.touches[0].pageY
+      const moveY = moveStart - moveTo
+      moveStart = moveTo
       setLevel(prevLevel => {
-        let nextLevel = prevLevel + Math.sign(moveY)
+        let nextLevel = prevLevel + moveY / 10
         nextLevel = Math.min(10, nextLevel)
         nextLevel = Math.max(0, nextLevel)
-        nextLevel = Math.round(nextLevel)
 
         return nextLevel
       })
     }
-    window.addEventListener("mousemove", handleMouseMove)
-    window.addEventListener("touchmove", handleMouseMove, {
+    window.addEventListener("mousemove", handleDrag)
+    window.addEventListener("touchmove", handleDrag, {
       passive: false,
     })
     window.addEventListener("mouseup", () => {
-      window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("mousemove", handleDrag)
     })
     window.addEventListener("touchend", () => {
-      window.removeEventListener("touchmove", handleMouseMove)
+      window.removeEventListener("touchmove", handleDrag)
     })
   }
 
@@ -126,24 +80,6 @@ const Slider = ({ id = "", label = "" }) => {
     <SweepControlContainer onMouseDown={startDrag} onTouchStart={startDrag}>
       <Knob level={level} size={100} />
       <StyledLabel htmlFor={id}>{label}</StyledLabel>
-      {/* <StyledSlider
-        type="range"
-        id={id}
-        min={0}
-        max={10}
-        step="0.5"
-        value={currentValue}
-        onChange={e => {
-          clearTimeout(timeoutRef)
-          const val = e.target.value
-          setCurrentValue(val)
-          const timeoutId = setTimeout(() => {
-            selectSweepSetting(id, val)
-          }, 100)
-          setTimeoutRef(timeoutId)
-        }}
-        progress={(currentValue / 10) * 100}
-      /> */}
     </SweepControlContainer>
   )
 }
