@@ -20,7 +20,7 @@ const StyledKnobContainer = styled.div`
   svg g {
     transform: rotate(var(--rotation));
     transform-origin: 50% 50%;
-    transition: transform 0.2s ease-in;
+    ${props => !props.noTransition && `transition: transform 0.2s ease-in;`}
   }
 
   > span {
@@ -61,6 +61,7 @@ const Knob = ({
   level = 5,
   type = "bakelit",
   levelOptions = [],
+  noTransition = false,
 }) => {
   const { sweepSetting, selectSweepSetting, setIsPedalOn } = useDemoState()
 
@@ -69,6 +70,7 @@ const Knob = ({
       rotation={levelToRotationFunc(level)}
       id={id}
       isSweep={levelOptions.length > 0}
+      noTransition={noTransition}
     >
       {
         {

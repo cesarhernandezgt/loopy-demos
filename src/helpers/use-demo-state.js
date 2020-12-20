@@ -25,6 +25,7 @@ const DemoContextProvider = ({ children = null, presets = [] }) => {
     if (!activePreset.isSweep) return
 
     const closestVal = findClosestValue(value, activePreset.values)
+    console.log({ closestVal })
 
     setSweepSetting({ [selectedId]: closestVal })
   }

@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
+import { throttle } from "lodash"
 import styled from "styled-components"
 import useDemoState from "../helpers/use-demo-state"
+import useDebouncedEffect from "../helpers/use-debounced-effect"
 import Knob from "./knob"
+
+const rotationToLevel = angle => (angle + 150) / 30
 
 const SweepControlContainer = styled.div`
   display: flex;
@@ -24,61 +28,62 @@ const Slider = ({ id = "", label = "" }) => {
       : 0
   )
 
-  const [timeoutRef, setTimeoutRef] = useState(null)
-
-  useEffect(() => {
-    clearTimeout(timeoutRef)
-    const timeoutId = setTimeout(() => {
-      selectSweepSetting(id, level)
-    }, 100)
-    setTimeoutRef(timeoutId)
-  }, [level])
-
   const startDrag = downEvent => {
     if (!isBrowser) return
     downEvent.preventDefault()
 
-    let moveStart = downEvent.pageY || downEvent.touches[0].pageY
-    let skip = false
-    let hasSkipped = 0
+    const {
+      left,
+      top,
+      bottom,
+      right,
+    } = downEvent.target.getBoundingClientRect()
+
+    const centerX = (right + left) / 2
+    const centerY = (bottom + top) / 2
 
     const handleDrag = moveEvent => {
       moveEvent.preventDefault()
-      if (skip) {
-        hasSkipped += 1
-        if (hasSkipped > 4) {
-          hasSkipped = 0
-          skip = false
-        }
-        return
-      }
-      skip = true
-      const moveTo = moveEvent.pageY || moveEvent.touches[0].pageY
-      const moveY = moveStart - moveTo
-      moveStart = moveTo
-      setLevel(prevLevel => {
-        let nextLevel = prevLevel + moveY / 10
-        nextLevel = Math.min(10, nextLevel)
-        nextLevel = Math.max(0, nextLevel)
+      const clientX = moveEvent.clientX || moveEvent.touches[0].clientX
+      const clientY = moveEvent.clientY || moveEvent.touches[0].clientY
 
-        return nextLevel
-      })
+      const modifier =
+        clientY > centerY ? 180 * Math.sign(clientX - centerX) : 0
+
+      let angle =
+        (Math.atan((clientX - centerX) / (centerY - clientY)) * 180) / Math.PI +
+        modifier
+
+      angle = Math.min(150, angle)
+      angle = Math.max(-150, angle)
+      const nextLevel = rotationToLevel(angle)
+      setLevel(nextLevel)
     }
-    window.addEventListener("mousemove", handleDrag)
-    window.addEventListener("touchmove", handleDrag, {
+
+    const throttledHandleDrag = throttle(handleDrag, 100)
+    window.addEventListener("mousemove", throttledHandleDrag)
+    window.addEventListener("touchmove", throttledHandleDrag, {
       passive: false,
     })
     window.addEventListener("mouseup", () => {
-      window.removeEventListener("mousemove", handleDrag)
+      window.removeEventListener("mousemove", throttledHandleDrag)
     })
     window.addEventListener("touchend", () => {
-      window.removeEventListener("touchmove", handleDrag)
+      window.removeEventListener("touchmove", throttledHandleDrag)
     })
   }
 
+  useDebouncedEffect(
+    () => {
+      selectSweepSetting(id, level)
+    },
+    [level],
+    100
+  )
+
   return (
     <SweepControlContainer onMouseDown={startDrag} onTouchStart={startDrag}>
-      <Knob level={level} size={100} />
+      <Knob level={level} size={100} noTransition />
       <StyledLabel htmlFor={id}>{label}</StyledLabel>
     </SweepControlContainer>
   )
