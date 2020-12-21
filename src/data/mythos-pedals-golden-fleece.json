@@ -1,19 +1,21 @@
 {
-  "externalControls": [
-    {
-      "id": "guitar_volume",
-      "label": "Guitar Volume",
-      "type": "slider"
-    }
-  ],
   "pedal": {
     "slug": "mythos_pedals_golden_fleece",
+    "alignment": "left",
     "controls": {
+      "knobs": [
+        {
+          "id": "guitar_volume",
+          "label": "Guitar Volume",
+          "type": "witchhat",
+          "position": { "top": 120, "left": 210 }
+        }
+      ],
       "leds": [
         {
           "id": "on_led",
           "size": 39,
-          "position": { "top": 116, "left": 197 },
+          "position": { "top": 116, "left": 109 },
           "colors": { "on": "#ff7300", "off": "#57575711" }
         }
       ],
@@ -21,7 +23,7 @@
         {
           "id": "bypass_switch",
           "size": 78,
-          "position": { "top": 270, "left": 136 }
+          "position": { "top": 270, "left": 48 }
         }
       ]
     }
@@ -31,7 +33,6 @@
       "id": "guitar_volume_sweep",
       "label": "Guitar Volume Sweep",
       "isSweep": true,
-      "isHidden": true,
       "target": "guitar_volume",
       "initialValue": 10,
       "values": [1, 2, 3, 4, 5, 7, 8, 9, 10]
