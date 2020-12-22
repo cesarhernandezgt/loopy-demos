@@ -88,6 +88,8 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
     const startX = downEvent.clientX || downEvent.touches[0].clientX
     const startY = downEvent.clientY || downEvent.touches[0].clientY
 
+    const isTouch = Boolean(downEvent.touches)
+
     const centerX = (right + left) / 2
     const centerY = (bottom + top) / 2
 
@@ -106,14 +108,18 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
     }
 
     const throttledHandleDrag = throttle(handleDrag, 100)
-    document.addEventListener("mousemove", throttledHandleDrag)
-    document.addEventListener("touchmove", throttledHandleDrag)
-    document.addEventListener("mouseup", () => {
-      document.removeEventListener("mousemove", throttledHandleDrag)
-    })
-    document.addEventListener("touchend", () => {
-      document.removeEventListener("touchmove", throttledHandleDrag)
-    })
+
+    if (isTouch) {
+      document.addEventListener("touchmove", throttledHandleDrag)
+      document.addEventListener("touchend", () => {
+        document.removeEventListener("touchmove", throttledHandleDrag)
+      })
+    } else {
+      document.addEventListener("mousemove", throttledHandleDrag)
+      document.addEventListener("mouseup", () => {
+        document.removeEventListener("mousemove", throttledHandleDrag)
+      })
+    }
   }
 
   return (
