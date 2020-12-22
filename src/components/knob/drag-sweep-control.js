@@ -110,7 +110,7 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
     window.addEventListener("mouseup", () => {
       window.removeEventListener("mousemove", throttledHandleDrag)
     })
-    window.addEventListener("touchend touchcancel", () => {
+    window.addEventListener("touchend", () => {
       window.removeEventListener("touchmove", throttledHandleDrag)
     })
   }
