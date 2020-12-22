@@ -7,8 +7,9 @@
         {
           "id": "guitar_volume",
           "label": "Guitar Volume",
-          "type": "witchhat",
-          "position": { "top": 120, "left": 210 }
+          "type": "offset",
+          "size": 80,
+          "position": { "top": 110, "left": 210 }
         }
       ],
       "leds": [

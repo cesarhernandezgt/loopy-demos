@@ -11,8 +11,12 @@ const levelToRotationFunc = level => `${30 * level - 150}deg`
 
 const StyledKnobContainer = styled.div`
   --rotation: ${({ rotation }) => rotation};
+  --size: ${({ size }) => size}px;
   position: relative;
   z-index: 0;
+
+  width: var(--size);
+  height: var(--size);
 
   svg g {
     transform: rotate(var(--rotation));
@@ -21,18 +25,34 @@ const StyledKnobContainer = styled.div`
   }
 `
 
+const StyledPositionContainer = styled.div`
+  z-index: 0;
+  width: ${props => props.size}px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+`
+
+const StyledLabel = styled.span`
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-top: 0.7rem;
+  text-align: center;
+`
+
 const Knob = ({
   id = "",
   size = 64,
   level = 5,
   type = "bakelit",
   isSweep = false,
+  label = "",
 }) => {
   const renderKnob = internalLevel => (
     <StyledKnobContainer
       rotation={levelToRotationFunc(internalLevel)}
-      id={id}
       noTransition={isSweep}
+      size={size}
     >
       {
         {
@@ -40,16 +60,20 @@ const Knob = ({
           knurled: <KnurledKnob size={size} />,
           offset: <OffsetKnob size={size} />,
           walrus: <WalrusAudioKnob size={size} />,
-          witchhat: <WalrusAudioKnob size={size} />,
         }[type]
       }
     </StyledKnobContainer>
   )
 
-  return isSweep ? (
-    <DragSweepControl id={id} render={renderKnob} />
-  ) : (
-    renderKnob(level)
+  return (
+    <StyledPositionContainer id={id} size={size}>
+      {isSweep ? (
+        <DragSweepControl id={id} render={renderKnob} size={size} />
+      ) : (
+        renderKnob(level)
+      )}
+      {label.length > 0 && <StyledLabel>{label}</StyledLabel>}
+    </StyledPositionContainer>
   )
 }
 

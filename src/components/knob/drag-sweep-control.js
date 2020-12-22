@@ -21,16 +21,20 @@ const calcAngle = (centerX, centerY, clientX, clientY) => {
 
 const SweepControlContainer = styled.div`
   touch-action: none;
+  position: relative;
   z-index: 0;
   --glow: ${props => (props.inactive ? "lightslategray" : "var(--pink)")};
+  --size: ${props => props.size}px;
+  width: var(--size);
+  height: var(--size);
 
   &:after {
     position: absolute;
     top: -12px;
     left: -12px;
     content: " ";
-    width: calc(100% + 24px);
-    height: calc(100% + 24px);
+    width: calc(var(--size) + 24px);
+    height: calc(var(--size) + 24px);
     background: radial-gradient(var(--glow) 47%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     z-index: -1;
@@ -39,7 +43,7 @@ const SweepControlContainer = styled.div`
 
 const isBrowser = typeof window !== `undefined`
 
-const DragSweepControl = ({ id = "", render = () => {} }) => {
+const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
   const {
     activePreset,
     presetsLoaded,
@@ -113,10 +117,10 @@ const DragSweepControl = ({ id = "", render = () => {} }) => {
 
   return (
     <SweepControlContainer
-      id={id}
       inactive={!isSweepPresetLoaded}
       onMouseDown={startDrag}
       onTouchStart={startDrag}
+      size={size}
     >
       {render(level)}
     </SweepControlContainer>
