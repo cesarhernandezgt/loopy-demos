@@ -30,12 +30,15 @@ const SweepControlContainer = styled.div`
 
   &:after {
     position: absolute;
-    top: -12px;
-    left: -12px;
+    top: -16px;
+    left: -16px;
     content: " ";
-    width: calc(var(--size) + 24px);
-    height: calc(var(--size) + 24px);
-    background: radial-gradient(var(--glow) 47%, rgba(0, 0, 0, 0) 70%);
+    width: calc(var(--size) + 32px);
+    height: calc(var(--size) + 32px);
+    background: radial-gradient(
+      var(--glow) calc(var(--size) / 2),
+      rgba(0, 0, 0, 0) calc((var(--size) + 32px) / 2)
+    );
     border-radius: 50%;
     z-index: -1;
   }
@@ -103,15 +106,13 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
     }
 
     const throttledHandleDrag = throttle(handleDrag, 100)
-    window.addEventListener("mousemove", throttledHandleDrag)
-    window.addEventListener("touchmove", throttledHandleDrag, {
-      passive: false,
+    document.addEventListener("mousemove", throttledHandleDrag)
+    document.addEventListener("touchmove", throttledHandleDrag)
+    document.addEventListener("mouseup", () => {
+      document.removeEventListener("mousemove", throttledHandleDrag)
     })
-    window.addEventListener("mouseup", () => {
-      window.removeEventListener("mousemove", throttledHandleDrag)
-    })
-    window.addEventListener("touchend", () => {
-      window.removeEventListener("touchmove", throttledHandleDrag)
+    document.addEventListener("touchend", () => {
+      document.removeEventListener("touchmove", throttledHandleDrag)
     })
   }
 
