@@ -19,7 +19,6 @@ const HeaderContainer = styled.header`
 
   @media (max-width: 599px) {
     position: sticky;
-    /* top: 0; */
     top: ${props => (props.hideHeader ? 0 : -64)}px;
     transition: top 0.3s ease;
   }

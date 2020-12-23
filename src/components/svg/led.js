@@ -5,7 +5,11 @@ const Led = ({
   socket = false,
   id = "",
   size = 36,
-  colors = { on: "#D50000", off: "#800000a1", socket: "gray" },
+  colors = {
+    on: "#D50000",
+    off: "#800000a1",
+    socket: "gray",
+  },
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

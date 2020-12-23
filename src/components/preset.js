@@ -40,8 +40,10 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     selectPreset,
     setIsPedalOn,
   } = useDemoState()
+
   const isActive = id === activePreset.id && isPedalOn
   const loaded = presetsLoaded.includes(id)
+
   return (
     <StyledPresetTag
       active={isActive}

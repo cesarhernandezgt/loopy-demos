@@ -11,12 +11,13 @@ const StyledPresetsContainer = styled.div`
 
 const Presets = ({ presets = [] }) => (
   <StyledPresetsContainer>
-    {presets.map(({ label, settings, id, isSweep }) => (
+    {presets.map(({ label, settings, id, isSweep, isHidden }) => (
       <Preset
         key={id}
         id={id}
         label={label}
         isSweep={isSweep}
+        isHidden={isHidden}
         settings={settings}
       />
     ))}

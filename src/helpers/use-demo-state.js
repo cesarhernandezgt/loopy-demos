@@ -1,5 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from "react"
 
+const findClosestValue = (value, valueArray) =>
+  valueArray.reduce((acc, curr) => {
+    const lastDistance = Math.abs(value - acc)
+    const currDistance = Math.abs(value - curr)
+
+    return lastDistance <= currDistance ? acc : curr
+  }, valueArray[0])
+
 const DemoContext = createContext(null)
 
 const DemoContextProvider = ({ children = null, presets = [] }) => {
@@ -11,6 +19,14 @@ const DemoContextProvider = ({ children = null, presets = [] }) => {
 
   const selectPreset = selectedId => {
     setActivePreset(presets.find(({ id }) => id === selectedId))
+  }
+
+  const selectSweepSetting = (selectedId, value) => {
+    if (!activePreset.isSweep) return
+
+    const closestVal = findClosestValue(value, activePreset.values)
+
+    setSweepSetting({ [selectedId]: closestVal })
   }
 
   const addPresetsLoaded = id => {
@@ -38,7 +54,7 @@ const DemoContextProvider = ({ children = null, presets = [] }) => {
         setHasLoadingStarted,
         setIsPedalOn,
         selectPreset,
-        setSweepSetting,
+        selectSweepSetting,
         addPresetsLoaded,
       }}
     >

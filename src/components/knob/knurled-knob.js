@@ -3,13 +3,15 @@ import styled from "styled-components"
 
 const StyledGradientBackground = styled.div`
   position: relative;
-  --size: ${props => props.size - 4}px;
+  --size: ${props => props.size}px;
+  width: var(--size);
+  height: var(--size);
 
   &:before {
     position: absolute;
     content: " ";
-    width: var(--size);
-    height: var(--size);
+    width: calc(var(--size) - 4px);
+    height: calc(var(--size) - 4px);
     top: 2px;
     left: 2px;
     background: conic-gradient(

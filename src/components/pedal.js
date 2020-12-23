@@ -39,6 +39,7 @@ const Pedal = ({
   width = 350,
   height = 350,
   image = {},
+  alignment = "center",
 }) => {
   const { isPedalOn, setIsPedalOn, activePreset, sweepSetting } = useDemoState()
   const sweep = activePreset.isSweep && activePreset
@@ -49,11 +50,11 @@ const Pedal = ({
       <Img
         fluid={image}
         style={{
-          width: "100%",
           height: "100%",
           position: "absolute",
           top: "0",
-          left: "0",
+          width: ["left", "right"].includes(alignment) ? "50%" : "100%",
+          [alignment === "right" ? "right" : "left"]: "0",
           zIndex: "0",
         }}
         imgStyle={{
@@ -61,14 +62,15 @@ const Pedal = ({
         }}
       />
       <ControlsLayout controls={[...knobs, ...switches, ...leds, ...labels]}>
-        {knobs.map(({ size, id, type }) => (
+        {knobs.map(({ size, id, type, label }) => (
           <Knob
             id={id}
             key={id}
             size={size}
             level={settings[id]}
             type={type}
-            levelOptions={sweep?.target === id ? sweep.values : []}
+            isSweep={sweep?.target === id}
+            label={label}
           />
         ))}
         {leds.map(({ id, socket, colors, size }) => (
