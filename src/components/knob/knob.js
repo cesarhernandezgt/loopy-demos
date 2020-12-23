@@ -13,7 +13,7 @@ const StyledKnobContainer = styled.div`
   --rotation: ${({ rotation }) => rotation};
   --size: ${({ size }) => size}px;
   position: relative;
-  z-index: 0;
+  z-index: ${props => (props.isSweep ? 10 : 0)};
 
   width: var(--size);
   height: var(--size);
@@ -21,7 +21,7 @@ const StyledKnobContainer = styled.div`
   svg g {
     transform: rotate(var(--rotation));
     transform-origin: 50% 50%;
-    ${props => !props.noTransition && `transition: transform 0.2s ease-in;`}
+    ${props => !props.isSweep && `transition: transform 0.2s ease-in;`}
   }
 `
 
@@ -51,7 +51,7 @@ const Knob = ({
   const renderKnob = internalLevel => (
     <StyledKnobContainer
       rotation={levelToRotationFunc(internalLevel)}
-      noTransition={isSweep}
+      isSweep={isSweep}
       size={size}
     >
       {

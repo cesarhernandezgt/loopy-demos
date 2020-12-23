@@ -44,9 +44,10 @@ const StompSwitch = ({
           <StyledBlinkingCircle
             cx="32"
             cy="32"
-            r="26"
+            r="28"
             fill="none"
             stroke={COLORS.cyan}
+            strokeWidth="4"
           />
         )}
       </g>
