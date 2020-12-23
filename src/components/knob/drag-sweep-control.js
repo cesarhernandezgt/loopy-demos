@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import { throttle } from "lodash"
 import styled from "styled-components"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHandPointUp } from "@fortawesome/free-solid-svg-icons"
 import useDemoState from "../../helpers/use-demo-state"
 import useDebouncedEffect from "../../helpers/use-debounced-effect"
 
@@ -27,10 +25,8 @@ const SweepControlContainer = styled.div`
   z-index: 1;
   --glow: ${props => (props.inactive ? "lightslategray" : "var(--pink)")};
   --size: ${props => props.size}px;
-  --rotation: ${props => (props.reverseInitAnimation ? "30deg" : "-30deg")};
   width: var(--size);
   height: var(--size);
-  animation: wiggle 2s linear 1 forwards;
 
   &:after {
     position: absolute;
@@ -45,69 +41,6 @@ const SweepControlContainer = styled.div`
     );
     border-radius: 50%;
     z-index: -1;
-  }
-
-  @keyframes wiggle {
-    0% {
-      transform: rotate(0deg);
-    }
-    16% {
-      transform: rotate(var(--rotation));
-    }
-    33% {
-      transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(var(--rotation));
-    }
-    66% {
-      transform: rotate(0deg);
-    }
-    82% {
-      transform: rotate(var(--rotation));
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-`
-
-const AnimatedIcon = styled(FontAwesomeIcon)`
-  position: absolute;
-  bottom: -1rem;
-  ${props => props.alignment}: 0.5rem;
-  font-size: 2rem;
-  color: var(--cyan);
-  animation: bounce 2s linear 1 forwards;
-  z-index: 10;
-  --rotation: ${props => (props.alignment === "right" ? "30deg" : "-30deg")};
-
-  @keyframes bounce {
-    0% {
-      transform: translateY(0px);
-    }
-    16% {
-      transform: translateY(-8px) rotate(var(--rotation));
-    }
-    33% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-8px) rotate(var(--rotation));
-    }
-    66% {
-      transform: translateY(0px);
-    }
-    82% {
-      transform: translateY(-8px) rotate(var(--rotation));
-    }
-    95% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(0px);
-      opacity: 0;
-    }
   }
 `
 
@@ -196,10 +129,6 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
       reverseInitAnimation={initialValue < 5}
     >
       {render(level)}
-      <AnimatedIcon
-        icon={faHandPointUp}
-        alignment={initialValue < 5 ? "left" : "right"}
-      />
     </SweepControlContainer>
   )
 }
