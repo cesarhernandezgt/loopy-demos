@@ -11,7 +11,7 @@ const Enclosure = styled.div`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
   box-sizing: border-box;
-  margin: 1rem auto 1rem;
+  margin: 1rem auto 2rem;
   position: relative;
 `
 
