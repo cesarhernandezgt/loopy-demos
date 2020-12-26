@@ -9,11 +9,13 @@ const DemoLayout = ({
   data: {
     mdx: {
       body,
+      excerpt,
       frontmatter: { image, builder, model, config },
     },
   } = {
     mdx: {
       body: "",
+      excerpt: "",
       frontmatter: {
         image: {},
         builder: "",
@@ -29,7 +31,7 @@ const DemoLayout = ({
   const title = `${builder} - ${model}`
 
   return (
-    <Layout location={location} title={title}>
+    <Layout location={location} title={title} description={excerpt}>
       <Breadcrumb label="All demos" />
       <h1>{title}</h1>
       <Demo image={image?.childImageSharp?.fluid} {...configData} />
@@ -45,6 +47,7 @@ export const pageQuery = graphql`
     mdx(id: { eq: $id }) {
       id
       body
+      excerpt
       frontmatter {
         builder
         model

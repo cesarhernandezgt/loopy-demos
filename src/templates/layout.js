@@ -32,10 +32,14 @@ const Layout = ({
   location = {},
   title = "",
   pageContext = {},
+  description = "",
 }) => (
   <>
     <GlobalStyles />
-    <SEO title={title || pageContext?.frontmatter?.title} />
+    <SEO
+      title={title || pageContext?.frontmatter?.title}
+      description={description}
+    />
     <Header pathname={location.pathname} />
     <StyledMain>
       <MDXProvider

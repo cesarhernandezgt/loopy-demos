@@ -68,7 +68,7 @@ const Demos = ({ location = {} }) => {
   const demos = useDemos()
 
   return (
-    <Layout location={location} title="Demos">
+    <Layout location={location}>
       <h1>Latest Demos</h1>
       <StyledDemosList>
         {demos.map(({ model, builder, slug, image }) => (

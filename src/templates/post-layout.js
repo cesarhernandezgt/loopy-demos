@@ -10,17 +10,19 @@ const PostLayout = ({
     mdx: {
       body,
       frontmatter: { title, date },
+      excerpt,
     },
   } = {
     mdx: {
       body: "",
       frontmatter: { title: "" },
+      excerpt: "",
     },
   },
   location = {},
 }) => {
   return (
-    <Layout location={location} title={title}>
+    <Layout location={location} title={title} description={excerpt}>
       <Breadcrumb label="All posts" />
       <h1>{title}</h1>
       <DateTag date={date} />
@@ -33,6 +35,7 @@ export const pageQuery = graphql`
   query($id: String!) {
     mdx(id: { eq: $id }) {
       body
+      excerpt
       frontmatter {
         title
         date
