@@ -9,14 +9,14 @@
           "label": "Guitar Volume",
           "type": "offset",
           "size": 80,
-          "position": { "top": 110, "left": 210 }
+          "position": { "top": 110, "left": 205 }
         }
       ],
       "leds": [
         {
           "id": "on_led",
           "size": 39,
-          "position": { "top": 116, "left": 109 },
+          "position": { "top": 116, "left": 104 },
           "colors": { "on": "#ff7300", "off": "#57575711" }
         }
       ],
@@ -24,7 +24,7 @@
         {
           "id": "bypass_switch",
           "size": 78,
-          "position": { "top": 270, "left": 48 }
+          "position": { "top": 270, "left": 46 }
         }
       ]
     }
