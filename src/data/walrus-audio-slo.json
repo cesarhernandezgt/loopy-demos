@@ -6,31 +6,31 @@
         {
           "id": "decay",
           "size": 46,
-          "position": { "top": 28, "left": 90 },
+          "position": { "top": 28, "left": 70 },
           "type": "walrus"
         },
         {
           "id": "filter",
           "size": 46,
-          "position": { "top": 28, "left": 150 },
+          "position": { "top": 28, "left": 130 },
           "type": "walrus"
         },
         {
           "id": "mix",
           "size": 46,
-          "position": { "top": 28, "left": 206 },
+          "position": { "top": 28, "left": 186 },
           "type": "walrus"
         },
         {
           "id": "x",
           "size": 46,
-          "position": { "top": 105, "left": 90 },
+          "position": { "top": 105, "left": 70 },
           "type": "walrus"
         },
         {
           "id": "depth",
           "size": 46,
-          "position": { "top": 105, "left": 206 },
+          "position": { "top": 105, "left": 186 },
           "type": "walrus"
         }
       ],
@@ -39,7 +39,7 @@
           "id": "on_led",
           "size": 44,
           "socket": true,
-          "position": { "top": 241, "left": 98 },
+          "position": { "top": 241, "left": 78 },
           "colors": {
             "off": "#d2e1e9a1",
             "on": "#d4f9ff",
@@ -51,20 +51,20 @@
         {
           "id": "bypass_switch",
           "size": 60,
-          "position": { "top": 278, "left": 92 }
+          "position": { "top": 278, "left": 72 }
         },
         {
           "id": "mode",
           "size": 30,
           "type": "toggle",
-          "position": { "top": 111, "left": 156 }
+          "position": { "top": 111, "left": 136 }
         }
       ],
       "labels": [
         {
           "id": "wave",
-          "position": { "top": 140, "left": 195 },
-          "labelPosition": { "top": 250, "left": 275 }
+          "position": { "top": 140, "left": 175 },
+          "labelPosition": { "top": 250, "left": 255 }
         }
       ]
     }
@@ -110,19 +110,6 @@
       }
     },
     {
-      "id": "swell_reverb_with_sustain",
-      "label": "Swell Reverb with Sustain",
-      "settings": {
-        "decay": 5,
-        "filter": 5,
-        "mix": 7,
-        "x": 5,
-        "depth": 5,
-        "mode": 2,
-        "wave": "sine"
-      }
-    },
-    {
       "id": "latching_dream",
       "label": "Latching Dream",
       "settings": {
@@ -133,6 +120,19 @@
         "depth": 6,
         "mode": 3,
         "wave": "warp"
+      }
+    },
+    {
+      "id": "swell_reverb_with_sustain",
+      "label": "Swell Reverb with Sustain",
+      "settings": {
+        "decay": 5,
+        "filter": 5,
+        "mix": 7,
+        "x": 5,
+        "depth": 5,
+        "mode": 2,
+        "wave": "sine"
       }
     }
   ]

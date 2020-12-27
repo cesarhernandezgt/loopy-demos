@@ -1,83 +1,201 @@
 {
   "pedal": {
-    "offline": true,
     "slug": "strymon_iridium",
     "controls": {
+      "width": 300,
       "knobs": [
-        { "id": "gain", "size": 72, "position": { "top": 4, "left": 22 } },
-        { "id": "volume", "size": 72, "position": { "top": 4, "left": 124 } },
-        { "id": "bias", "size": 56, "position": { "top": 67, "left": 80 } },
-        { "id": "bass", "size": 56, "position": { "top": 125, "left": 30 } },
-        { "id": "treble", "size": 56, "position": { "top": 127, "left": 131 } }
+        {
+          "id": "drive",
+          "size": 54,
+          "position": {
+            "top": 44,
+            "left": 24
+          }
+        },
+        {
+          "id": "level",
+          "size": 54,
+          "position": {
+            "top": 44,
+            "left": 224
+          }
+        },
+        {
+          "id": "bass",
+          "size": 54,
+          "position": {
+            "top": 122,
+            "left": 24
+          }
+        },
+        {
+          "id": "middle",
+          "size": 54,
+          "position": {
+            "top": 100,
+            "left": 87
+          }
+        },
+        {
+          "id": "treble",
+          "size": 54,
+          "position": {
+            "top": 100,
+            "left": 160
+          }
+        },
+        {
+          "id": "room",
+          "size": 54,
+          "position": {
+            "top": 122,
+            "left": 224
+          }
+        }
       ],
       "leds": [
         {
           "id": "on_led",
-          "size": 36,
-          "position": { "top": 138, "left": 89 }
+          "size": 30,
+          "position": {
+            "top": 214,
+            "left": 225
+          }
         }
       ],
       "switches": [
         {
+          "id": "amp",
+          "size": 30,
+          "position": {
+            "left": 114,
+            "top": 56
+          },
+          "type": "toggle"
+        },
+        {
+          "id": "cab",
+          "size": 30,
+          "position": {
+            "top": 56,
+            "left": 157
+          },
+          "type": "toggle"
+        },
+        {
           "id": "bypass_switch",
-          "size": 72,
-          "position": { "top": 268, "left": 71 }
+          "size": 56,
+          "position": {
+            "top": 245,
+            "left": 212
+          }
+        }
+      ],
+      "labels": [
+        {
+          "id": "room_size",
+          "labelPosition": { "left": 270, "top": 230 },
+          "position": { "left": 228, "top": 154 }
         }
       ]
     }
   },
   "presets": [
     {
-      "id": "spitty_starved",
-      "label": "Spitty Starved",
-      "settings": { "gain": 6, "treble": 7, "bass": 4, "bias": 2, "volume": 4 },
-      "audio": "spitty_starved.mp3"
-    },
-    {
-      "id": "low_gain_sparkle",
-      "label": "Low Gain Sparkle",
-      "settings": { "gain": 4, "treble": 7 },
-      "audio": "low_gain_sparkle.mp3"
-    },
-    {
-      "id": "high_gain",
-      "label": "High Gain",
+      "id": "crunchy_vox",
+      "label": "Crunchy Vox",
       "settings": {
-        "gain": 10,
-        "bass": 8,
+        "drive": 6,
+        "level": 4,
+        "bass": 6,
+        "middle": 4,
         "treble": 6,
-        "bias": 6,
-        "volume": 4
+        "room": 2,
+        "room_size": "small room",
+        "amp": 2,
+        "cab": 1
+      }
+    },
+    {
+      "id": "vox_treble_cut_sweep",
+      "label": "Vox Treble Cut Sweep",
+      "isSweep": true,
+      "target": "middle",
+      "settings": {
+        "level": 4,
+        "room_size": "small room",
+        "amp": 2,
+        "cab": 2
       },
-      "audio": "high_gain.mp3"
+      "values": [0, 1, 4, 5, 7, 8, 10],
+      "initialValue": 5
     },
     {
-      "id": "lo_fi",
-      "label": "Lo-fi",
-      "settings": { "gain": 4, "bass": 1, "treble": 0, "bias": 3, "volume": 6 },
-      "audio": "lo_fi.mp3"
+      "id": "fender_clean",
+      "label": "Fender Clean",
+      "settings": {
+        "bass": 4,
+        "middle": 4,
+        "treble": 7,
+        "room": 5,
+        "room_size": "small room",
+        "amp": 1,
+        "cab": 1
+      }
     },
     {
-      "id": "treble_boost",
-      "label": "Treble Boost",
-      "settings": { "bass": 3, "treble": 7, "volume": 9, "gain": 2 },
-      "audio": "treble_boost.mp3"
-    },
-    {
-      "id": "gain_sweep",
-      "label": "Gain Sweep",
+      "id": "fender_middle_sweep",
+      "label": "Fender Middle Sweep",
       "isSweep": true,
-      "target": "gain",
-      "values": [0, 2, 3, 4, 5, 7, 8, 10],
-      "initialValue": 0
+      "target": "middle",
+      "values": [0, 2, 4, 5, 7, 8, 9, 10],
+      "initialValue": 5
     },
     {
-      "id": "bias_sweep",
-      "label": "Bias Sweep",
+      "id": "marshall_crunch",
+      "label": "Marshall Crunch",
+      "settings": {
+        "drive": 6,
+        "level": 4,
+        "bass": 4,
+        "middle": 4,
+        "treble": 7,
+        "room": 2,
+        "room_size": "small room",
+        "amp": 3,
+        "cab": 3
+      }
+    },
+    {
+      "id": "vox_ambient",
+      "label": "Vox Ambient Clean",
+      "settings": {
+        "level": 4,
+        "bass": 4,
+        "middle": 5,
+        "treble": 6,
+        "room": 8,
+        "room_size": "large room",
+        "amp": 2,
+        "cab": 2
+      }
+    },
+    {
+      "id": "marshall_gain_sweep",
+      "label": "Marshall Gain Sweep",
       "isSweep": true,
-      "target": "bias",
-      "values": [0, 2, 4, 5, 8, 10],
-      "initialValue": 0
+      "target": "drive",
+      "settings": {
+        "level": 4,
+        "bass": 4,
+        "middle": 6,
+        "room": 3,
+        "room_size": "small room",
+        "amp": 3,
+        "cab": 1
+      },
+      "values": [0, 2, 4, 5, 6, 7, 8, 9, 10],
+      "initialValue": 5
     }
   ]
 }

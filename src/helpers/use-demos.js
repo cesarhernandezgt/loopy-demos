@@ -10,6 +10,7 @@ const useDemos = () => {
           filter: {
             frontmatter: { unpublished: { ne: true }, type: { eq: "demo" } }
           }
+          sort: { fields: frontmatter___date, order: DESC }
         ) {
           edges {
             node {
