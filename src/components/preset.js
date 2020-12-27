@@ -21,7 +21,17 @@ const StyledPresetTag = styled.button`
     font-size: 1.2rem;
   }
 
-  span:not(:last-child) {
+  > span {
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 600px) {
+    > span {
+      font-size: 1.2rem;
+    }
+  }
+
+  > span:not(:last-child) {
     margin-right: 0.5rem;
   }
 
