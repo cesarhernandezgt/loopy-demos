@@ -4,13 +4,14 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "./layout"
 import Demo from "../components/demo-container"
 import Breadcrumb from "./breadcrumb"
+import DateTag from "../components/date-tag"
 
 const DemoLayout = ({
   data: {
     mdx: {
       body,
       excerpt,
-      frontmatter: { image, builder, model, config },
+      frontmatter: { image, builder, model, config, date },
     },
   } = {
     mdx: {
@@ -21,6 +22,7 @@ const DemoLayout = ({
         builder: "",
         model: "",
         config: {},
+        date: "",
       },
     },
   },
@@ -34,6 +36,7 @@ const DemoLayout = ({
     <Layout location={location} title={title} description={excerpt}>
       <Breadcrumb label="All demos" />
       <h1>{title}</h1>
+      <DateTag date={date} />
       <Demo image={image?.childImageSharp?.fluid} {...configData} />
       <MDXRenderer>{body}</MDXRenderer>
     </Layout>
@@ -49,6 +52,7 @@ export const pageQuery = graphql`
       body
       excerpt
       frontmatter {
+        date
         builder
         model
         image {

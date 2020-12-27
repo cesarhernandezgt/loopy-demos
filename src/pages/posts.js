@@ -40,7 +40,7 @@ const Posts = ({ location = {} }) => (
         <Post id={slug} key={slug}>
           <Link to={`/posts/${slug}`}>
             <h3>{title}</h3>
-            <DateTag date={date} />
+            <DateTag date={date} noMargin />
             <p>{excerpt}</p>
             <BottomRow>
               <div>
