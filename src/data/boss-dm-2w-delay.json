@@ -4,24 +4,24 @@
     "slug": "boss_dm_2w_delay",
     "controls": {
       "knobs": [
-        { "id": "rate", "size": 56, "position": { "top": 21, "left": 102 } },
+        { "id": "rate", "size": 56, "position": { "top": 21, "left": 77 } },
         {
           "id": "echo",
           "size": 42,
-          "position": { "top": 65, "left": 154 },
+          "position": { "top": 65, "left": 129 },
           "type": "knurled"
         },
         {
           "id": "intensity",
           "size": 56,
-          "position": { "top": 21, "left": 194 }
+          "position": { "top": 21, "left": 169 }
         }
       ],
       "leds": [
         {
           "id": "on_led",
           "size": 36,
-          "position": { "top": 7, "left": 158 }
+          "position": { "top": 7, "left": 133 }
         }
       ],
       "switches": [
@@ -29,7 +29,7 @@
           "id": "mode",
           "type": "slide",
           "size": 26,
-          "position": { "top": 34, "left": 163 }
+          "position": { "top": 34, "left": 138 }
         }
       ]
     }
