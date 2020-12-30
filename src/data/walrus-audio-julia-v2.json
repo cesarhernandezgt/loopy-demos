@@ -94,18 +94,6 @@
   },
   "presets": [
     {
-      "id": "seasick_vibrato",
-      "label": "Seasick Vibrato",
-      "settings": {
-        "rate": 6,
-        "depth": 10,
-        "lag": 8,
-        "mix": 7,
-        "waveform": 1,
-        "rate_led": 400
-      }
-    },
-    {
       "id": "everything_at_noon_sine",
       "label": "Everything at Noon (sine)",
       "settings": {
@@ -122,6 +110,18 @@
       }
     },
     {
+      "id": "seasick_vibrato",
+      "label": "Seasick Vibrato",
+      "settings": {
+        "rate": 6,
+        "depth": 10,
+        "lag": 8,
+        "mix": 7,
+        "waveform": 1,
+        "rate_led": 350
+      }
+    },
+    {
       "id": "maximum_vibrato",
       "label": "Maximum Vibrato",
       "settings": {
@@ -130,7 +130,7 @@
         "lag": 10,
         "mix": 10,
         "waveform": 3,
-        "rate_led": 400
+        "rate_led": 200
       }
     },
     {
@@ -141,7 +141,7 @@
         "depth": 8,
         "lag": 6,
         "waveform": 1,
-        "rate_led": 400
+        "rate_led": 800
       }
     },
     {
@@ -153,7 +153,7 @@
         "lag": 7,
         "mix": 7,
         "waveform": 1,
-        "rate_led": 400
+        "rate_led": 350
       }
     },
     {
