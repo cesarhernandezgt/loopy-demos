@@ -1,6 +1,5 @@
 {
   "pedal": {
-    "offline": "true",
     "slug": "walrus_audio_julia",
     "controls": {
       "knobs": [
@@ -99,10 +98,73 @@
       "label": "Seasick Vibrato",
       "settings": {
         "rate": 6,
-        "depth": 4,
-        "lag": 7,
-        "mix": 10,
+        "depth": 10,
+        "lag": 8,
+        "mix": 7,
         "waveform": 1,
+        "rate_led": 400
+      }
+    },
+    {
+      "id": "everything_at_noon_sine",
+      "label": "Everything at Noon (sine)",
+      "settings": {
+        "waveform": 1,
+        "rate_led": 400
+      }
+    },
+    {
+      "id": "everything_at_noon_triangle",
+      "label": "Everything at Noon (triangle)",
+      "settings": {
+        "waveform": 3,
+        "rate_led": 400
+      }
+    },
+    {
+      "id": "maximum_vibrato",
+      "label": "Maximum Vibrato",
+      "settings": {
+        "rate": 10,
+        "depth": 10,
+        "lag": 10,
+        "mix": 10,
+        "waveform": 3,
+        "rate_led": 400
+      }
+    },
+    {
+      "id": "subtle_and_lush",
+      "label": "Subtle and Lush",
+      "settings": {
+        "rate": 1,
+        "depth": 8,
+        "lag": 6,
+        "waveform": 1,
+        "rate_led": 400
+      }
+    },
+    {
+      "id": "bubbly_chorus",
+      "label": "Bubbly Chorus",
+      "settings": {
+        "rate": 6,
+        "depth": 6,
+        "lag": 7,
+        "mix": 7,
+        "waveform": 1,
+        "rate_led": 400
+      }
+    },
+    {
+      "id": "lag_sweep",
+      "label": "Lag Sweep",
+      "isSweep": "true",
+      "target": "lag",
+      "initialValue": 5,
+      "values": [0, 1, 2, 4, 5, 6, 7, 8, 9, 10],
+      "settings": {
+        "depth": 8,
         "rate_led": 400
       }
     }
