@@ -51,7 +51,7 @@
         {
           "id": "bypass_switch",
           "size": 60,
-          "position": { "top": 278, "left": 72 }
+          "position": { "top": 277, "left": 70 }
         },
         {
           "id": "mode",

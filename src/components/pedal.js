@@ -73,14 +73,16 @@ const Pedal = ({
             label={label}
           />
         ))}
-        {leds.map(({ id, socket, colors, size }) => (
+        {leds.map(({ id, socket, colors, size, isBlinking }) => (
           <Led
             key={id}
-            isOn={id === "on_led" ? isPedalOn : settings[id]}
+            isOn={id === "on_led" && isPedalOn}
             id={id}
             socket={socket}
             colors={colors}
             size={size}
+            isBlinking={isBlinking}
+            blinkTime={settings[id]}
           />
         ))}
         {switches.map(({ id, size, type }) => (
