@@ -2,7 +2,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 const usePosts = () => {
   const {
-    allMdx: { edges: demos },
+    allMdx: { edges: posts },
   } = useStaticQuery(
     graphql`
       query {
@@ -18,6 +18,13 @@ const usePosts = () => {
               frontmatter {
                 title
                 date
+                featuredImage {
+                  childImageSharp {
+                    fluid(maxWidth: 200) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
               }
             }
           }
@@ -26,18 +33,19 @@ const usePosts = () => {
     `
   )
 
-  return demos.map(
+  return posts.map(
     ({
       node: {
         excerpt,
         slug,
-        frontmatter: { title, date },
+        frontmatter: { title, date, featuredImage },
       },
     }) => ({
       slug,
       title,
       excerpt,
       date,
+      image: featuredImage?.childImageSharp?.fluid,
     })
   )
 }
