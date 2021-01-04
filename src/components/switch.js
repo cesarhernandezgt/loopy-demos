@@ -27,6 +27,8 @@ const Switch = ({
     presetsLoaded.includes(activePreset.id)
 
   const onToggleSweepClick = () => {
+    if (!isSweepPresetLoaded) return
+
     const numValues = activePreset.values.length
     const currentValIndex = activePreset.values.findIndex(val => val === state)
     const nextIndex = (currentValIndex + 1) % numValues
@@ -60,6 +62,7 @@ const Switch = ({
               size={size}
               isHidden={!isSweep}
               color={isSweepPresetLoaded ? "pink" : "gray"}
+              disabled={!isSweepPresetLoaded}
               onClick={onToggleSweepClick}
             >
               <ToggleSwitch
