@@ -1,17 +1,6 @@
 import React from "react"
-import styled from "styled-components"
-import COLORS from "../styles/colors"
 
-const StyledBlinkingCircle = styled.circle`
-  animation: var(--blinkAnimation);
-`
-
-const StompSwitch = ({
-  onClick = () => {},
-  isOn = false,
-  id = "",
-  size = 64,
-}) => (
+const StompSwitch = ({ onClick = () => {}, id = "", size = 64 }) => (
   <button type="button" onClick={onClick} id={id}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -40,16 +29,6 @@ const StompSwitch = ({
           transform="rotate(90 32 32)"
         />
         <circle cx="32" cy="32" r="16" fill="url(#gradient2)" />
-        {!isOn && (
-          <StyledBlinkingCircle
-            cx="32"
-            cy="32"
-            r="28"
-            fill="none"
-            stroke={COLORS.cyan}
-            strokeWidth="4"
-          />
-        )}
       </g>
     </svg>
   </button>

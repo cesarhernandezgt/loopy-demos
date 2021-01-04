@@ -50,7 +50,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
 
-  p, ul, a, span {
+  p, ul, a, span, ol li::marker {
     font-size: 1.2rem;
     line-height: 1.6rem;
 
@@ -121,6 +121,15 @@ const GlobalStyles = createGlobalStyle`
       }
     }
 
+  }
+
+  main ol {
+    margin: 0;
+    padding: 0 0 0 2rem;
+
+    li {
+      padding-left: 0.5rem;
+    }
   }
 `
 

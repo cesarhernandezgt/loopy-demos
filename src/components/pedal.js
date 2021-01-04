@@ -41,9 +41,10 @@ const Pedal = ({
   image = {},
   alignment = "center",
 }) => {
-  const { isPedalOn, setIsPedalOn, activePreset, sweepSetting } = useDemoState()
+  const { isPedalOn, activePreset, sweepSetting } = useDemoState()
   const sweep = activePreset.isSweep && activePreset
-  const settings = activePreset.settings || sweepSetting
+
+  const getSettings = id => activePreset.settings[id] || sweepSetting[id]
 
   return (
     <Enclosure width={width} height={height}>
@@ -67,7 +68,7 @@ const Pedal = ({
             id={id}
             key={id}
             size={size}
-            level={settings[id]}
+            level={getSettings(id)}
             type={type}
             isSweep={sweep?.target === id}
             label={label}
@@ -82,22 +83,18 @@ const Pedal = ({
             colors={colors}
             size={size}
             isBlinking={isBlinking}
-            blinkTime={settings[id]}
+            blinkTime={getSettings(id)}
           />
         ))}
-        {switches.map(({ id, size, type }) => (
+        {switches.map(({ id, size, type, orientation }) => (
           <Switch
             key={id}
             id={id}
             type={type}
             size={size}
-            state={settings[id]}
-            onClick={() => {
-              if (id === "bypass_switch") {
-                setIsPedalOn(!isPedalOn)
-              }
-            }}
-            isOn={id === "bypass_switch" && isPedalOn}
+            orientation={orientation}
+            state={getSettings(id)}
+            isSweep={sweep?.target === id}
           />
         ))}
         {labels.map(({ id, position, labelPosition }) => (
@@ -106,7 +103,7 @@ const Pedal = ({
             id={id}
             start={position}
             end={labelPosition}
-            label={settings[id]}
+            label={getSettings(id)}
           />
         ))}
       </ControlsLayout>
