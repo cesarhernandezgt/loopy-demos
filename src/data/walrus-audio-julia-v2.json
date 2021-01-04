@@ -74,10 +74,10 @@
       "switches": [
         {
           "id": "bypass_switch",
-          "size": 62,
+          "size": 50,
           "position": {
-            "top": 273,
-            "left": 119
+            "top": 279,
+            "left": 125
           }
         },
         {
