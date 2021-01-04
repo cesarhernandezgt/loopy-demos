@@ -74,10 +74,10 @@
       "switches": [
         {
           "id": "bypass_switch",
-          "size": 62,
+          "size": 50,
           "position": {
-            "top": 273,
-            "left": 119
+            "top": 279,
+            "left": 125
           }
         },
         {
@@ -94,18 +94,24 @@
   },
   "presets": [
     {
-      "id": "everything_at_noon_sine",
-      "label": "Everything at Noon (sine)",
+      "id": "subtle_and_lush",
+      "label": "Subtle and Lush",
       "settings": {
+        "rate": 1,
+        "depth": 8,
+        "lag": 6,
         "waveform": 1,
-        "rate_led": 400
+        "rate_led": 800
       }
     },
     {
-      "id": "everything_at_noon_triangle",
-      "label": "Everything at Noon (triangle)",
+      "id": "waveform_sweep",
+      "label": "Sine vs Triangle",
+      "isSweep": true,
+      "target": "waveform",
+      "initialValue": 1,
+      "values": [1, 3],
       "settings": {
-        "waveform": 3,
         "rate_led": 400
       }
     },
@@ -131,17 +137,6 @@
         "mix": 10,
         "waveform": 3,
         "rate_led": 200
-      }
-    },
-    {
-      "id": "subtle_and_lush",
-      "label": "Subtle and Lush",
-      "settings": {
-        "rate": 1,
-        "depth": 8,
-        "lag": 6,
-        "waveform": 1,
-        "rate_led": 800
       }
     },
     {

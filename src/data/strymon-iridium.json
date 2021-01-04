@@ -84,10 +84,10 @@
         },
         {
           "id": "bypass_switch",
-          "size": 60,
+          "size": 48,
           "position": {
-            "top": 242,
-            "left": 209
+            "top": 249,
+            "left": 216
           }
         }
       ],
