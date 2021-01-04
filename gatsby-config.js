@@ -1,12 +1,12 @@
-const { faBorderNone } = require("@fortawesome/free-solid-svg-icons")
-
 module.exports = {
   siteMetadata: {
     title: `Loopy Demos`,
     description: `Interactive guitar pedal demos`,
     author: `@silvb`,
+    siteUrl: `https://loopydemos.com`,
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
