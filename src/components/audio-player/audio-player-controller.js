@@ -218,7 +218,10 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
 
       if (activePreset.isSweep) {
         const { target, initialValue } = activePreset
-        const level = sweepSetting[target] || initialValue
+        const level =
+          typeof sweepSetting[target] === "undefined"
+            ? initialValue
+            : sweepSetting[target]
         activePresetId += `_${level}`
       }
     }

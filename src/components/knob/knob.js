@@ -8,6 +8,7 @@ import BakelitKnob from "./bakelit-knob"
 import KnurledKnob from "./knurled-knob"
 import OffsetKnob from "./offset-knob"
 import WalrusAudioKnob from "./walrus-audio-knob"
+import JhsKnob from "./jhs-knob"
 import useDemoState from "../../helpers/use-demo-state"
 
 const levelToRotationFunc = level => `${30 * level - 150}deg`
@@ -115,6 +116,7 @@ const Knob = ({
   type = "bakelit",
   isSweep = false,
   label = "",
+  colors = {},
 }) => {
   const { activePreset } = useDemoState()
   const { initialValue } = activePreset
@@ -133,6 +135,7 @@ const Knob = ({
             knurled: <KnurledKnob size={size} />,
             offset: <OffsetKnob size={size} />,
             walrus: <WalrusAudioKnob size={size} />,
+            jhs: <JhsKnob size={size} colors={colors} />,
           }[type]
         }
       </StyledKnobContainer>
