@@ -14,7 +14,7 @@
           },
           "position": {
             "top": 57,
-            "left": 82
+            "left": 83
           }
         },
         {
@@ -28,7 +28,7 @@
           },
           "position": {
             "top": 57,
-            "left": 152
+            "left": 156
           }
         }
       ],
@@ -71,6 +71,15 @@
     }
   },
   "presets": [
+    {
+      "id": "broken_speaker_fuzz",
+      "label": "Broken Speaker Fuzz",
+      "settings": {
+        "volume": 5,
+        "fuzz": 6,
+        "mode": 3
+      }
+    },
     {
       "id": "plus_mode_fuzz_sweep",
       "label": "High Gain Fuzz Sweep",

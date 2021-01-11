@@ -11,9 +11,11 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     activePreset,
     sweepSetting,
     presetsLoaded,
+    presetLoadingErrors,
     hasLoadingStarted,
     setHasLoadingStarted,
     addPresetsLoaded,
+    addPresetLoadingError,
   } = useDemoState()
 
   // We trigger play/stop by changing the state and listen on it
@@ -68,8 +70,8 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
               addPresetsLoaded(id)
             })
             .catch(error => {
+              addPresetLoadingError(id)
               console.error(error)
-              return Promise.reject()
             })
         })
     ).then(() => {
@@ -97,8 +99,8 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
                   })
                 )
                 .catch(error => {
+                  addPresetLoadingError(id)
                   console.error(error)
-                  return Promise.reject()
                 })
             })
           )
@@ -239,6 +241,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
       isPlaying={isPlaying}
       isDisabled={!audioContext}
       isLoading={!presetsLoaded.includes(CLEAN_TONE) && !isPedalOn}
+      hasError={presetLoadingErrors.length > 0}
     />
   )
 }
