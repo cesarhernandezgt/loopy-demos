@@ -17,13 +17,7 @@ const OffsetKnob = ({ size = 64 }) => (
         transform="rotate(30 66 66) translate(-11 -10.073)"
       />
       <rect width="4" height="40" x="64" y="20" fill="#FFFDFE" />
-      <circle
-        cx="66"
-        cy="6"
-        r="4"
-        fill="#FFFDFE"
-        // transform="matrix(-1 0 0 1 154 0)"
-      />
+      <circle cx="66" cy="6" r="4" fill="#FFFDFE" />
     </g>
   </svg>
 )

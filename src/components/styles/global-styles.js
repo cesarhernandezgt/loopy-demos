@@ -21,11 +21,14 @@ const GlobalStyles = createGlobalStyle`
     --pageWidth: 720px;
     --headerHeight: 64px;
     --yellow: ${COLORS.yellow};
+    --green: ${COLORS.green};
+    --red: ${COLORS.red};
     --pink: ${COLORS.pink};
     --cyan: ${COLORS.cyan};
     --purple: ${COLORS.purple};
     --darkPurple: ${COLORS.darkPurple};
     --dark: ${COLORS.dark};
+    --gray: ${COLORS.gray};
   }
 
   ::selection {

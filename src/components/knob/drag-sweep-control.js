@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { throttle } from "lodash"
 import useDemoState from "../../helpers/use-demo-state"
 import useDebouncedEffect from "../../helpers/use-debounced-effect"
@@ -37,6 +37,10 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
     activePreset.isSweep &&
     activePreset.target === id &&
     presetsLoaded.includes(activePreset.id)
+
+  useEffect(() => {
+    setLevel(activePreset.initialValue)
+  }, [activePreset])
 
   useDebouncedEffect(
     () => {
@@ -97,7 +101,9 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
 
   return (
     <InteractionContainer
-      color={isSweepPresetLoaded ? "pink" : "gray"}
+      color={
+        isSweepPresetLoaded ? activePreset.highlightColor || "pink" : "gray"
+      }
       size={size}
       extraCSS="touch-action: none;"
       onMouseDown={startDrag}

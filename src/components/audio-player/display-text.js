@@ -4,6 +4,7 @@ const DisplayText = ({
   isPlaying = false,
   isDisabled = false,
   isLoading = true,
+  hasError = false,
 }) => {
   let text = ``
 
@@ -17,6 +18,10 @@ const DisplayText = ({
 
   if (isDisabled) {
     text = `Sorry, your browser sucks ¯\\_(ツ)_/¯`
+  }
+
+  if (hasError) {
+    text = `Error loading sounds. Try reloading the page.*`
   }
 
   return <span>{text}</span>
