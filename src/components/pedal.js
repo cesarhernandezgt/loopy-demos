@@ -98,15 +98,17 @@ const Pedal = ({
             isSweep={sweep?.target === id}
           />
         ))}
-        {labels.map(({ id, position, labelPosition }) => (
-          <LineLabel
-            key={id}
-            id={id}
-            start={position}
-            end={labelPosition}
-            label={getSettings(id)}
-          />
-        ))}
+        {labels
+          .filter(({ id }) => Boolean(getSettings(id)))
+          .map(({ id, position, labelPosition }) => (
+            <LineLabel
+              key={id}
+              id={id}
+              start={position}
+              end={labelPosition}
+              label={getSettings(id)}
+            />
+          ))}
       </ControlsLayout>
     </Enclosure>
   )
