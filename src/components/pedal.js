@@ -63,7 +63,7 @@ const Pedal = ({
         }}
       />
       <ControlsLayout controls={[...knobs, ...switches, ...leds, ...labels]}>
-        {knobs.map(({ size, id, type, label }) => (
+        {knobs.map(({ size, id, type, label, colors }) => (
           <Knob
             id={id}
             key={id}
@@ -72,6 +72,7 @@ const Pedal = ({
             type={type}
             isSweep={sweep?.target === id}
             label={label}
+            colors={colors}
           />
         ))}
         {leds.map(({ id, socket, colors, size, isBlinking }) => (
@@ -97,15 +98,17 @@ const Pedal = ({
             isSweep={sweep?.target === id}
           />
         ))}
-        {labels.map(({ id, position, labelPosition }) => (
-          <LineLabel
-            key={id}
-            id={id}
-            start={position}
-            end={labelPosition}
-            label={getSettings(id)}
-          />
-        ))}
+        {labels
+          .filter(({ id }) => Boolean(getSettings(id)))
+          .map(({ id, position, labelPosition }) => (
+            <LineLabel
+              key={id}
+              id={id}
+              start={position}
+              end={labelPosition}
+              label={getSettings(id)}
+            />
+          ))}
       </ControlsLayout>
     </Enclosure>
   )

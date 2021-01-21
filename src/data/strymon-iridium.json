@@ -149,6 +149,7 @@
       "isSweep": true,
       "target": "middle",
       "values": [0, 2, 4, 5, 7, 8, 9, 10],
+      "settings": { "room_size": "small room" },
       "initialValue": 5
     },
     {
