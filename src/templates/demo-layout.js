@@ -11,7 +11,7 @@ const DemoLayout = ({
     mdx: {
       body,
       excerpt,
-      frontmatter: { image, builder, model, config, date },
+      frontmatter: { image, builder, model, config, date, slug },
     },
   } = {
     mdx: {
@@ -23,6 +23,7 @@ const DemoLayout = ({
         model: "",
         config: {},
         date: "",
+        slug: "",
       },
     },
   },
@@ -30,6 +31,10 @@ const DemoLayout = ({
 }) => {
   const configData =
     config?.internal?.content && JSON.parse(config.internal.content)
+  const { pedals, presets } = configData
+  const pedal = pedals[0]
+  pedal.image = image?.childImageSharp?.fluid
+
   const title = `${builder} - ${model}`
 
   return (
@@ -37,7 +42,7 @@ const DemoLayout = ({
       <Breadcrumb label="All demos" />
       <h1>{title}</h1>
       <DateTag date={date} />
-      <Demo image={image?.childImageSharp?.fluid} {...configData} />
+      <Demo presets={presets} pedals={[pedal]} slug={slug} />
       <MDXRenderer>{body}</MDXRenderer>
     </Layout>
   )
@@ -55,6 +60,7 @@ export const pageQuery = graphql`
         date
         builder
         model
+        slug
         image {
           childImageSharp {
             fluid(maxHeight: 350) {
