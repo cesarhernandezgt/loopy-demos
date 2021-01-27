@@ -72,7 +72,17 @@ const Switch = ({
               />
             </InteractionContainer>
           ),
-          slide: <SlideSwitch size={size} state={state} />,
+          slide: (
+            <InteractionContainer
+              size={size}
+              isHidden={!isSweep}
+              color={isSweepPresetLoaded ? "pink" : "gray"}
+              disabled={!isSweepPresetLoaded}
+              onClick={onToggleSweepClick}
+            >
+              <SlideSwitch size={size} state={state} />,
+            </InteractionContainer>
+          ),
         }[type]
       }
     </div>

@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 const AnimatedCircle = styled.circle`
-  transition: transform 0.2s ease-in;
+  transition: transform 0.1s ease-in;
   transform: translateX(${props => (props.state === 1 ? 10 : 50)}%);
 `
 

@@ -44,7 +44,11 @@ const Pedal = ({
   const { isPedalOn, activePreset, sweepSetting } = useDemoState()
   const sweep = activePreset.isSweep && activePreset
 
-  const getSettings = id => activePreset?.settings?.[id] || sweepSetting?.[id]
+  const getSettings = id => {
+    const activeValue = activePreset?.settings?.[id]
+
+    return typeof activeValue !== "undefined" ? activeValue : sweepSetting?.[id]
+  }
 
   return (
     <Enclosure width={width} height={height}>
