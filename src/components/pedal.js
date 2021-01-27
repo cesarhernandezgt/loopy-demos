@@ -11,7 +11,6 @@ const Enclosure = styled.div`
   width: ${props => props.width * props.scale}px;
   height: ${props => props.height * props.scale}px;
   box-sizing: border-box;
-  margin: 1rem auto 2rem;
   position: relative;
 `
 
@@ -41,6 +40,7 @@ const Pedal = ({
   image = {},
   alignment = "center",
   scale = 1,
+  name = "",
 }) => {
   const { isPedalOn, activePreset, sweepSetting } = useDemoState()
   const sweep = activePreset.isSweep && activePreset
@@ -82,7 +82,7 @@ const Pedal = ({
         {leds.map(({ id, socket, colors, size, isBlinking }) => (
           <Led
             key={id}
-            isOn={id === "on_led" && isPedalOn}
+            isOn={id === "on_led" && isPedalOn(name)}
             id={id}
             socket={socket}
             colors={colors}

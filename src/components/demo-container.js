@@ -1,24 +1,20 @@
 import React from "react"
-
-import Pedal from "./pedal"
 import Presets from "./presets"
 import AudioPlayer from "./audio-player"
+import PedalsWrapper from "./pedal-wrapper"
 
 import { DemoContextProvider } from "../helpers/use-demo-state"
 
-const DemoContainer = ({ presets = [], pedals = [], slug = "" }) => (
-  <DemoContextProvider presets={presets}>
+const DemoContainer = ({
+  presets = [],
+  pedals = [],
+  slug = "",
+  type = "single",
+}) => (
+  <DemoContextProvider presets={presets} pedals={pedals}>
     <AudioPlayer presets={presets} slug={slug} />
     <Presets presets={presets} />
-    {pedals.map(({ name, controls, image, alignment }) => (
-      <Pedal
-        key={name}
-        name={name}
-        {...controls}
-        image={image}
-        alignment={alignment}
-      />
-    ))}
+    <PedalsWrapper type={type} pedals={pedals} />
   </DemoContextProvider>
 )
 

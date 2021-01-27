@@ -22,7 +22,7 @@ const PostLayout = ({
   },
   location = {},
 }) => {
-  const featuredImgFluid = featuredImage.childImageSharp.fluid
+  const featuredImgFluid = featuredImage?.childImageSharp?.fluid
   return (
     <Layout location={location} title={title} description={excerpt}>
       <Breadcrumb label="All posts" />
