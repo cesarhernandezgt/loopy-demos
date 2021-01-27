@@ -29,40 +29,58 @@ const StyledPlayerContent = styled.div`
 
   span {
     text-align: center;
-    color: var(--cyan);
+    color: ${props => (props.hasError ? "var(--red)" : "var(--cyan)")};
     font-family: "JetBrains Mono", monospace;
     font-size: 0.9rem;
     line-height: 1.2rem;
   }
 `
 
-const AudioPlayer = ({
+const StyledErrorCaption = styled.p`
+  font-size: 1rem;
+  line-height: 1rem;
+  font-style: italic;
+  color: var(--gray);
+  margin: 0 0 0.5rem 0;
+`
+
+const AudioPlayerInterface = ({
   togglePlay = () => {},
   isPlaying = false,
   isDisabled = false,
   isLoading = true,
+  hasError = false,
 }) => (
-  <StyledPlayerContainer>
-    <PlayButton
-      onClick={() => {
-        togglePlay()
-      }}
-      isPlaying={isPlaying}
-      isLoading={isPlaying && isLoading}
-      isDisabled={isDisabled}
-    />
-    <StyledPlayerContent>
-      {isPlaying && !isLoading ? (
-        <AudioVisualizer />
-      ) : (
-        <DisplayText
-          isPlaying={isPlaying}
-          isLoading={isLoading}
-          isDisabled={isDisabled}
-        />
-      )}
-    </StyledPlayerContent>
-  </StyledPlayerContainer>
+  <>
+    <StyledPlayerContainer>
+      <PlayButton
+        onClick={() => {
+          togglePlay()
+        }}
+        isPlaying={isPlaying}
+        isLoading={isPlaying && isLoading}
+        isDisabled={isDisabled}
+      />
+      <StyledPlayerContent hasError={hasError}>
+        {isPlaying && !isLoading ? (
+          <AudioVisualizer />
+        ) : (
+          <DisplayText
+            isPlaying={isPlaying}
+            isLoading={isLoading}
+            isDisabled={isDisabled}
+            hasError={hasError}
+          />
+        )}
+      </StyledPlayerContent>
+    </StyledPlayerContainer>
+    {hasError && (
+      <StyledErrorCaption>
+        *Maybe your ad blocker prevents the sounds from loading. Whitelist this
+        page. Promise and pinky-swear: I will never run ads on this site.
+      </StyledErrorCaption>
+    )}
+  </>
 )
 
-export default AudioPlayer
+export default AudioPlayerInterface

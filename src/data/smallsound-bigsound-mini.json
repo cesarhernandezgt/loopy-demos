@@ -19,8 +19,8 @@
       "switches": [
         {
           "id": "bypass_switch",
-          "size": 72,
-          "position": { "top": 268, "left": 115 }
+          "size": 59,
+          "position": { "top": 275, "left": 122 }
         }
       ]
     }

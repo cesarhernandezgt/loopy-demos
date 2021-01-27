@@ -1,83 +1,145 @@
 {
   "pedal": {
-    "offline": true,
     "slug": "earthquaker_devices_plumes",
     "controls": {
       "knobs": [
-        { "id": "gain", "size": 72, "position": { "top": 4, "left": 22 } },
-        { "id": "volume", "size": 72, "position": { "top": 4, "left": 124 } },
-        { "id": "bias", "size": 56, "position": { "top": 67, "left": 80 } },
-        { "id": "bass", "size": 56, "position": { "top": 125, "left": 30 } },
-        { "id": "treble", "size": 56, "position": { "top": 127, "left": 131 } }
+        {
+          "id": "level",
+          "size": 56,
+          "position": {
+            "top": 50,
+            "left": 68
+          }
+        },
+        {
+          "id": "tone",
+          "size": 60,
+          "position": {
+            "top": 106,
+            "left": 122
+          }
+        },
+        {
+          "id": "gain",
+          "size": 60,
+          "position": {
+            "top": 48,
+            "left": 176
+          }
+        }
       ],
       "leds": [
         {
           "id": "on_led",
-          "size": 36,
-          "position": { "top": 138, "left": 89 }
+          "size": 38,
+          "position": {
+            "top": 252,
+            "left": 78
+          },
+          "colors": {
+            "off": "#d2e1e9a1",
+            "on": "#d4f9ff"
+          }
         }
       ],
       "switches": [
         {
           "id": "bypass_switch",
-          "size": 72,
-          "position": { "top": 268, "left": 71 }
+          "size": 48,
+          "position": {
+            "top": 246,
+            "left": 126
+          }
+        },
+        {
+          "id": "mode",
+          "size": 32,
+          "orientation": "horizontal",
+          "position": {
+            "top": 64,
+            "left": 134
+          },
+          "type": "toggle"
         }
       ]
     }
   },
   "presets": [
     {
-      "id": "spitty_starved",
-      "label": "Spitty Starved",
-      "settings": { "gain": 6, "treble": 7, "bass": 4, "bias": 2, "volume": 4 },
-      "audio": "spitty_starved.mp3"
-    },
-    {
-      "id": "low_gain_sparkle",
-      "label": "Low Gain Sparkle",
-      "settings": { "gain": 4, "treble": 7 },
-      "audio": "low_gain_sparkle.mp3"
-    },
-    {
-      "id": "high_gain",
-      "label": "High Gain",
+      "id": "chewy_not_muffled",
+      "label": "Chewy not Muffled",
       "settings": {
+        "level": 3,
+        "tone": 7,
+        "gain": 4,
+        "mode": 3
+      }
+    },
+    {
+      "id": "mode_sweep",
+      "label": "Clipping Modes",
+      "isSweep": true,
+      "target": "mode",
+      "values": [1, 2, 3],
+      "initialValue": 1,
+      "settings": {
+        "level": 2,
+        "tone": 6,
+        "gain": 7
+      }
+    },
+    {
+      "id": "gainy_but_clear",
+      "label": "Gainy but Clear",
+      "settings": {
+        "level": 2,
+        "tone": 6,
         "gain": 10,
-        "bass": 8,
-        "treble": 6,
-        "bias": 6,
-        "volume": 4
-      },
-      "audio": "high_gain.mp3"
+        "mode": 1
+      }
     },
     {
-      "id": "lo_fi",
-      "label": "Lo-fi",
-      "settings": { "gain": 4, "bass": 1, "treble": 0, "bias": 3, "volume": 6 },
-      "audio": "lo_fi.mp3"
+      "id": "edge_of_breakup",
+      "label": "Edge of Breakup",
+      "settings": {
+        "level": 5,
+        "tone": 7,
+        "gain": 2,
+        "mode": 3
+      }
     },
     {
-      "id": "treble_boost",
-      "label": "Treble Boost",
-      "settings": { "bass": 3, "treble": 7, "volume": 9, "gain": 2 },
-      "audio": "treble_boost.mp3"
+      "id": "sparkly_dirt",
+      "label": "Sparkly Dirt",
+      "settings": {
+        "level": 3,
+        "tone": 5,
+        "gain": 5,
+        "mode": 1
+      }
     },
     {
-      "id": "gain_sweep",
-      "label": "Gain Sweep",
+      "id": "meaty_op_amp",
+      "label": "Meaty OpAmp",
+      "settings": {
+        "level": 2,
+        "tone": 3,
+        "gain": 10,
+        "mode": 2
+      }
+    },
+    {
+      "id": "tone_sweep",
+      "label": "Tone Sweep",
       "isSweep": true,
-      "target": "gain",
-      "values": [0, 2, 3, 4, 5, 7, 8, 10],
-      "initialValue": 0
-    },
-    {
-      "id": "bias_sweep",
-      "label": "Bias Sweep",
-      "isSweep": true,
-      "target": "bias",
-      "values": [0, 2, 4, 5, 8, 10],
-      "initialValue": 0
+      "target": "tone",
+      "values": [0, 2, 4, 6, 8, 10],
+      "initialValue": 0,
+      "settings": {
+        "level": 2,
+        "tone": 6,
+        "gain": 7
+      }
     }
   ]
 }

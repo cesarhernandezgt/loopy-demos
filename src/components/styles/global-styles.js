@@ -21,11 +21,14 @@ const GlobalStyles = createGlobalStyle`
     --pageWidth: 720px;
     --headerHeight: 64px;
     --yellow: ${COLORS.yellow};
+    --green: ${COLORS.green};
+    --red: ${COLORS.red};
     --pink: ${COLORS.pink};
     --cyan: ${COLORS.cyan};
     --purple: ${COLORS.purple};
     --darkPurple: ${COLORS.darkPurple};
     --dark: ${COLORS.dark};
+    --gray: ${COLORS.gray};
   }
 
   ::selection {
@@ -50,7 +53,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
 
-  p, ul, a, span {
+  p, ul, a, span, ol li::marker {
     font-size: 1.2rem;
     line-height: 1.6rem;
 
@@ -121,6 +124,15 @@ const GlobalStyles = createGlobalStyle`
       }
     }
 
+  }
+
+  main ol {
+    margin: 0;
+    padding: 0 0 0 2rem;
+
+    li {
+      padding-left: 0.5rem;
+    }
   }
 `
 

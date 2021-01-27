@@ -1,58 +1,69 @@
-import React from "react"
-import styled from "styled-components"
-import COLORS from "../styles/colors"
+import React, { useState } from "react"
 
-const StyledBlinkingCircle = styled.circle`
-  animation: var(--blinkAnimation);
-`
+const StompSwitch = ({ onClick = () => {}, id = "", size = 64 }) => {
+  const [isDown, setIsDown] = useState(false)
 
-const StompSwitch = ({
-  onClick = () => {},
-  isOn = false,
-  id = "",
-  size = 64,
-}) => (
-  <button type="button" onClick={onClick} id={id}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      id={id}
+      style={{ margin: 0 }}
+      onMouseDown={() => {
+        setIsDown(true)
+      }}
+      onTouchStart={() => {
+        setIsDown(true)
+      }}
+      onMouseUp={() => {
+        setIsDown(false)
+      }}
+      onTouchEnd={() => {
+        setIsDown(false)
+      }}
     >
-      <defs>
-        <radialGradient id="gradient1">
-          <stop offset="0%" stopColor="aliceblue" />
-          <stop offset="70%" stopColor="aliceblue" />
-          <stop offset="95%" stopColor="lightslategray" />
-        </radialGradient>
-        <radialGradient id="gradient2">
-          <stop offset="0%" stopColor="aliceblue" />
-          <stop offset="80%" stopColor="aliceblue" />
-          <stop offset="100%" stopColor="#a3bbd2" />
-        </radialGradient>
-      </defs>
-      <g fill="none">
-        <circle cx="32" cy="32" r="26" fill="url(#gradient1)" />
-        <polygon
-          fill="url(#gradient1)"
-          stroke="slategray"
-          points="32 8 52.785 20 52.785 44 32 56 11.215 44 11.215 20"
-          transform="rotate(90 32 32)"
-        />
-        <circle cx="32" cy="32" r="16" fill="url(#gradient2)" />
-        {!isOn && (
-          <StyledBlinkingCircle
-            cx="32"
-            cy="32"
-            r="28"
-            fill="none"
-            stroke={COLORS.cyan}
-            strokeWidth="4"
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={size}
+        height={size}
+        viewBox="0 0 52 52"
+      >
+        <defs>
+          <radialGradient id="gradient1">
+            <stop offset="0%" stopColor="aliceblue" />
+            <stop offset="70%" stopColor="aliceblue" />
+            <stop offset="95%" stopColor="lightslategray" />
+          </radialGradient>
+          <radialGradient id="gradient2">
+            <stop offset="0%" stopColor="aliceblue" />
+            <stop offset="80%" stopColor="aliceblue" />
+            <stop offset="100%" stopColor="#a3bbd2" />
+          </radialGradient>
+        </defs>
+        <g fill="none">
+          <circle cx="26" cy="26" r="26" fill="url(#gradient1)" />
+          <polygon
+            fill="url(#gradient1)"
+            stroke="slategray"
+            points="32 8 52.785 20 52.785 44 32 56 11.215 44 11.215 20"
+            transform="rotate(90 32 32) translate(-6, 6)"
           />
-        )}
-      </g>
-    </svg>
-  </button>
-)
+          <circle
+            cx="26"
+            cy={`${isDown ? 27 : 26}`}
+            r={`${isDown ? 15 : 16}`}
+            fill="slategray"
+          />
+          <circle
+            cx="26"
+            cy={`${isDown ? 26 : 24}`}
+            r={`${isDown ? 15 : 16}`}
+            fill="url(#gradient2)"
+          />
+        </g>
+      </svg>
+    </button>
+  )
+}
 
 export default StompSwitch

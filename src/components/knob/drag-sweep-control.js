@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { throttle } from "lodash"
-import styled from "styled-components"
 import useDemoState from "../../helpers/use-demo-state"
 import useDebouncedEffect from "../../helpers/use-debounced-effect"
+import InteractionContainer from "../interaction-container"
 
 const rotationToLevel = angle => (angle + 150) / 30
 
@@ -18,31 +18,6 @@ const calcAngle = (centerX, centerY, clientX, clientY) => {
 
   return angle
 }
-
-const SweepControlContainer = styled.div`
-  touch-action: none;
-  position: relative;
-  z-index: 1;
-  --glow: ${props => (props.inactive ? "lightslategray" : "var(--pink)")};
-  --size: ${props => props.size}px;
-  width: var(--size);
-  height: var(--size);
-
-  &:after {
-    position: absolute;
-    top: -16px;
-    left: -16px;
-    content: " ";
-    width: calc(var(--size) + 32px);
-    height: calc(var(--size) + 32px);
-    background: radial-gradient(
-      var(--glow) calc(var(--size) / 2),
-      rgba(0, 0, 0, 0) calc((var(--size) + 32px) / 2)
-    );
-    border-radius: 50%;
-    z-index: -1;
-  }
-`
 
 const isBrowser = typeof window !== `undefined`
 
@@ -62,6 +37,10 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
     activePreset.isSweep &&
     activePreset.target === id &&
     presetsLoaded.includes(activePreset.id)
+
+  useEffect(() => {
+    setLevel(activePreset.initialValue)
+  }, [activePreset])
 
   useDebouncedEffect(
     () => {
@@ -121,15 +100,17 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
   }
 
   return (
-    <SweepControlContainer
-      inactive={!isSweepPresetLoaded}
+    <InteractionContainer
+      color={
+        isSweepPresetLoaded ? activePreset.highlightColor || "pink" : "gray"
+      }
+      size={size}
+      extraCSS="touch-action: none;"
       onMouseDown={startDrag}
       onTouchStart={startDrag}
-      size={size}
-      reverseInitAnimation={initialValue < 5}
     >
       {render(level)}
-    </SweepControlContainer>
+    </InteractionContainer>
   )
 }
 export default DragSweepControl

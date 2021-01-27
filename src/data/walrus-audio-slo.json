@@ -50,8 +50,8 @@
       "switches": [
         {
           "id": "bypass_switch",
-          "size": 60,
-          "position": { "top": 278, "left": 72 }
+          "size": 48,
+          "position": { "top": 284, "left": 78 }
         },
         {
           "id": "mode",

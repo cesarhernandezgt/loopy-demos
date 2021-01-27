@@ -41,9 +41,10 @@ const Pedal = ({
   image = {},
   alignment = "center",
 }) => {
-  const { isPedalOn, setIsPedalOn, activePreset, sweepSetting } = useDemoState()
+  const { isPedalOn, activePreset, sweepSetting } = useDemoState()
   const sweep = activePreset.isSweep && activePreset
-  const settings = activePreset.settings || sweepSetting
+
+  const getSettings = id => activePreset?.settings?.[id] || sweepSetting?.[id]
 
   return (
     <Enclosure width={width} height={height}>
@@ -62,51 +63,52 @@ const Pedal = ({
         }}
       />
       <ControlsLayout controls={[...knobs, ...switches, ...leds, ...labels]}>
-        {knobs.map(({ size, id, type, label }) => (
+        {knobs.map(({ size, id, type, label, colors }) => (
           <Knob
             id={id}
             key={id}
             size={size}
-            level={settings[id]}
+            level={getSettings(id)}
             type={type}
             isSweep={sweep?.target === id}
             label={label}
+            colors={colors}
           />
         ))}
-        {leds.map(({ id, socket, colors, size }) => (
+        {leds.map(({ id, socket, colors, size, isBlinking }) => (
           <Led
             key={id}
-            isOn={id === "on_led" ? isPedalOn : settings[id]}
+            isOn={id === "on_led" && isPedalOn}
             id={id}
             socket={socket}
             colors={colors}
             size={size}
+            isBlinking={isBlinking}
+            blinkTime={getSettings(id)}
           />
         ))}
-        {switches.map(({ id, size, type }) => (
+        {switches.map(({ id, size, type, orientation }) => (
           <Switch
             key={id}
             id={id}
             type={type}
             size={size}
-            state={settings[id]}
-            onClick={() => {
-              if (id === "bypass_switch") {
-                setIsPedalOn(!isPedalOn)
-              }
-            }}
-            isOn={id === "bypass_switch" && isPedalOn}
+            orientation={orientation}
+            state={getSettings(id)}
+            isSweep={sweep?.target === id}
           />
         ))}
-        {labels.map(({ id, position, labelPosition }) => (
-          <LineLabel
-            key={id}
-            id={id}
-            start={position}
-            end={labelPosition}
-            label={settings[id]}
-          />
-        ))}
+        {labels
+          .filter(({ id }) => Boolean(getSettings(id)))
+          .map(({ id, position, labelPosition }) => (
+            <LineLabel
+              key={id}
+              id={id}
+              start={position}
+              end={labelPosition}
+              label={getSettings(id)}
+            />
+          ))}
       </ControlsLayout>
     </Enclosure>
   )

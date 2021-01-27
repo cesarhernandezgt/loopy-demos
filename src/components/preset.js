@@ -1,7 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+import {
+  faSpinner,
+  faExclamationTriangle,
+} from "@fortawesome/free-solid-svg-icons"
 import useDemoState from "../helpers/use-demo-state"
 
 const StyledPresetTag = styled.button`
@@ -13,7 +16,7 @@ const StyledPresetTag = styled.button`
   padding: 0.5rem;
   margin: 0 0.25rem 0.25rem 0;
   cursor: pointer;
-  opacity: ${props => (props.active ? 1 : 0.4)};
+  opacity: ${props => (props.active || props.hasError ? 1 : 0.4)};
 
   transition: opacity 0.2s ease-in, background-color 0.2s ease-in;
 
@@ -36,7 +39,8 @@ const StyledPresetTag = styled.button`
   }
 
   :disabled {
-    background-color: lightslategray;
+    background-color: ${props =>
+      props.hasError ? "var(--red)" : "var(--gray)"};
     cursor: progress;
   }
 `
@@ -47,19 +51,34 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     activePreset,
     hasLoadingStarted,
     presetsLoaded,
+    presetLoadingErrors,
     selectPreset,
     setIsPedalOn,
   } = useDemoState()
 
   const isActive = id === activePreset.id && isPedalOn
   const loaded = presetsLoaded.includes(id)
+  const hasError = presetLoadingErrors.includes(id)
+
+  const renderIcon = () => {
+    if (hasError) {
+      return <FontAwesomeIcon icon={faExclamationTriangle} />
+    }
+
+    if (!loaded && hasLoadingStarted) {
+      return <FontAwesomeIcon icon={faSpinner} spin />
+    }
+
+    return null
+  }
 
   return (
     <StyledPresetTag
       active={isActive}
       isSweep={isSweep}
+      hasError={hasError}
       type="button"
-      disabled={!loaded}
+      disabled={!loaded || hasError}
       onClick={() => {
         if (isActive) {
           setIsPedalOn(false)
@@ -70,9 +89,7 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
       }}
     >
       <span>{label}</span>
-      {!loaded && hasLoadingStarted && (
-        <FontAwesomeIcon icon={faSpinner} spin />
-      )}
+      {renderIcon()}
     </StyledPresetTag>
   )
 }
