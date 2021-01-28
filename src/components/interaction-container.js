@@ -7,6 +7,8 @@ const StyledInteractionContainer = styled.div`
   z-index: 1;
   --glow: ${props => props.color};
   --size: ${props => props.size}px;
+  --scaleX: ${props => props.aspectRatio.x};
+  --scaleY: ${props => props.aspectRatio.y};
   width: var(--size);
   height: var(--size);
 
@@ -23,6 +25,7 @@ const StyledInteractionContainer = styled.div`
     );
     border-radius: 50%;
     z-index: -1;
+    transform: scale(var(--scaleX), var(--scaleY));
   }
 
   ${props => props.extraCSS}
@@ -34,6 +37,7 @@ const InteractionContainer = ({
   extraCSS = "",
   children = null,
   isHidden = false,
+  aspectRatio = { x: 1, y: 1 },
   ...rest
 }) =>
   isHidden ? (
@@ -43,6 +47,7 @@ const InteractionContainer = ({
       size={size}
       color={COLORS[color]}
       extraCSS={extraCSS}
+      aspectRatio={aspectRatio}
       {...rest}
     >
       {children}

@@ -23,7 +23,7 @@ const Led = ({
   id = "",
   size = 36,
   colors = {
-    on: "#D50000",
+    on: "#f73333",
     off: "#800000a1",
     socket: "gray",
   },
