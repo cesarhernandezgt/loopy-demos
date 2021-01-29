@@ -36,6 +36,7 @@ const Pedal = ({
   switches = [],
   leds = [],
   labels = [],
+  dependencies = [],
   width = 300,
   height = 350,
   image = {},
@@ -48,6 +49,19 @@ const Pedal = ({
     const activeValue = activePreset?.settings?.[id]
 
     return typeof activeValue !== "undefined" ? activeValue : sweepSetting?.[id]
+  }
+
+  const getDependencyValue = (id, property) => {
+    if (dependencies.length === 0) return null
+
+    const dependency = dependencies.find(({ target }) => target.id === id)
+    const sourceId = dependency.source
+    const currentSourceValue = getSettings(sourceId)
+    const dependencyValue = dependency.target.values.find(
+      ({ sourceValue }) => sourceValue === currentSourceValue
+    )
+
+    return dependencyValue?.[property]
   }
 
   return (
@@ -85,7 +99,7 @@ const Pedal = ({
             isOn={id === "on_led" && isPedalOn}
             id={id}
             socket={socket}
-            colors={colors}
+            colors={getDependencyValue(id, "colors") || colors}
             size={size}
             isBlinking={isBlinking}
             blinkTime={getSettings(id)}
