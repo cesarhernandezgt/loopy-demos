@@ -37,6 +37,10 @@ const Switch = ({
     setIsPedalOn(true)
   }
 
+  const interactionColor = isSweepPresetLoaded
+    ? activePreset.highlightColor || "pink"
+    : "gray"
+
   return (
     <div id={id}>
       {
@@ -61,7 +65,7 @@ const Switch = ({
             <InteractionContainer
               size={size}
               isHidden={!isSweep}
-              color={isSweepPresetLoaded ? "pink" : "gray"}
+              color={interactionColor}
               disabled={!isSweepPresetLoaded}
               onClick={onToggleSweepClick}
             >
@@ -72,7 +76,18 @@ const Switch = ({
               />
             </InteractionContainer>
           ),
-          slide: <SlideSwitch size={size} state={state} />,
+          slide: (
+            <InteractionContainer
+              size={size}
+              isHidden={!isSweep}
+              color={interactionColor}
+              disabled={!isSweepPresetLoaded}
+              onClick={onToggleSweepClick}
+              aspectRatio={{ x: 1, y: 0.6 }}
+            >
+              <SlideSwitch size={size} state={state} />,
+            </InteractionContainer>
+          ),
         }[type]
       }
     </div>
