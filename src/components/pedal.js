@@ -48,7 +48,21 @@ const Pedal = ({
   const getSettings = id => {
     const activeValue = activePreset?.settings?.[id]
 
-    return typeof activeValue !== "undefined" ? activeValue : sweepSetting?.[id]
+    const hasSideEffects = activePreset?.sideEffects?.length > 0
+
+    const effect =
+      hasSideEffects &&
+      activePreset.sideEffects.find(sideEffect => sideEffect.id === id)
+
+    if (effect) {
+      const activeSweepValueIndex = sweep.values.indexOf(
+        sweepSetting[sweep.target]
+      )
+
+      return effect.values[activeSweepValueIndex]
+    }
+
+    return typeof activeValue === "undefined" ? sweepSetting?.[id] : activeValue
   }
 
   const getDependencyValue = (id, property) => {
