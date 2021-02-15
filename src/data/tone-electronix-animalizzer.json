@@ -144,7 +144,7 @@
         "fuzz": 10,
         "pre_gain": 5,
         "stage_i": 3,
-        "stage_ii": 1
+        "stage_ii": 4
       }
     },
     {
@@ -158,7 +158,7 @@
         "depth": 6,
         "fuzz": 7,
         "pre_gain": 10,
-        "stage_i": 1,
+        "stage_i": 3,
         "stage_ii": 3
       }
     },
@@ -193,27 +193,22 @@
       }
     },
     {
-      "id": "stage_2_sweep",
-      "label": "Stage II Clipping",
+      "id": "mid_sweep",
+      "label": "Mid Sweep",
       "isSweep": true,
       "highlightColor": "cyan",
-      "target": "stage_ii",
-      "initialValue": 4,
-      "values": [1, 2, 3, 4],
-      "sideEffects": [
-        {
-          "id": "volume",
-          "values": [4, 6, 4, 6]
-        }
-      ],
+      "target": "mid",
+      "initialValue": 0,
+      "values": [0, 1, 2, 3, 4, 5, 7, 8, 10],
       "settings": {
-        "bass": 4,
-        "mid": 4,
-        "treble": 6,
-        "depth": 4,
+        "bass": 5,
+        "treble": 5,
+        "volume": 6,
+        "depth": 5,
         "fuzz": 10,
-        "pre_gain": 0,
-        "stage_i": 3
+        "pre_gain": 5,
+        "stage_i": 3,
+        "stage_ii": 4
       }
     },
     {
@@ -236,22 +231,27 @@
       }
     },
     {
-      "id": "mid_sweep",
-      "label": "Mid Sweep",
+      "id": "stage_2_sweep",
+      "label": "Stage II Clipping",
       "isSweep": true,
       "highlightColor": "cyan",
-      "target": "mid",
-      "initialValue": 0,
-      "values": [0, 1, 2, 3, 4, 5, 7, 8, 10],
+      "target": "stage_ii",
+      "initialValue": 4,
+      "values": [1, 2, 3, 4],
+      "sideEffects": [
+        {
+          "id": "volume",
+          "values": [4, 6, 4, 6]
+        }
+      ],
       "settings": {
-        "bass": 5,
-        "treble": 5,
-        "volume": 6,
-        "depth": 5,
+        "bass": 4,
+        "mid": 4,
+        "treble": 6,
+        "depth": 4,
         "fuzz": 10,
-        "pre_gain": 5,
-        "stage_i": 3,
-        "stage_ii": 4
+        "pre_gain": 0,
+        "stage_i": 3
       }
     },
     {
