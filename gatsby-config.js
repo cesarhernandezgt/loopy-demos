@@ -73,13 +73,12 @@ module.exports = {
     },
     `gatsby-plugin-styled-components`,
     `gatsby-transformer-json`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        appendScript: require.resolve(`./sw-audio-request-handler.js`),
-      },
-    },
+    `gatsby-plugin-remove-serviceworker`,
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     appendScript: require.resolve(`./sw-audio-request-handler.js`),
+    //   },
+    // },
   ],
 }

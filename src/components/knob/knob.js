@@ -12,8 +12,6 @@ import JhsKnob from "./jhs-knob"
 import SimpleKnob from "./simple-knob"
 import useDemoState from "../../helpers/use-demo-state"
 
-const levelToRotationFunc = level => `${30 * level - 150}deg`
-
 const StyledKnobContainer = styled.div`
   --rotation: ${({ rotation }) => rotation};
   --animRotation: ${props => (props.reverseInitAnimation ? "30deg" : "-30deg")};
@@ -24,12 +22,18 @@ const StyledKnobContainer = styled.div`
   width: var(--size);
   height: var(--size);
 
-  ${props => (props.isSweep ? "animation: wiggle 2s linear 1 forwards;" : "")}
+  ${props =>
+    props.isSweep && !props.isRotary
+      ? "animation: wiggle 2s linear 1 forwards;"
+      : ""}
 
   svg g {
     transform: rotate(var(--rotation));
     transform-origin: 50% 50%;
-    ${props => !props.isSweep && `transition: transform 0.2s ease-in;`}
+    ${props =>
+      !props.isSweep &&
+      !props.isRotary &&
+      `transition: transform 0.2s ease-in;`}
   }
 
   @keyframes wiggle {
@@ -109,6 +113,8 @@ const AnimatedIcon = styled(FontAwesomeIcon)`
     }
   }
 `
+const levelToRotationFunc = ({ level, isRotary, rotaryAngles }) =>
+  isRotary ? `${rotaryAngles[level - 1]}deg` : `${30 * level - 150}deg`
 
 const Knob = ({
   id = "",
@@ -117,6 +123,8 @@ const Knob = ({
   type = "bakelit",
   isSweep = false,
   label = "",
+  isRotary = false,
+  rotaryAngles = [],
   ...rest
 }) => {
   const { activePreset } = useDemoState()
@@ -125,9 +133,14 @@ const Knob = ({
   const renderKnob = internalLevel => (
     <>
       <StyledKnobContainer
-        rotation={levelToRotationFunc(internalLevel)}
+        rotation={levelToRotationFunc({
+          level: internalLevel,
+          isRotary,
+          rotaryAngles,
+        })}
         isSweep={isSweep}
         size={size}
+        isRotary={isRotary}
         reverseInitAnimation={initialValue < 5}
       >
         {
@@ -141,7 +154,7 @@ const Knob = ({
           }[type]
         }
       </StyledKnobContainer>
-      {isSweep && (
+      {isSweep && !isRotary && (
         <AnimatedIcon
           icon={faHandPointUp}
           alignment={initialValue < 5 ? "left" : "right"}
@@ -158,6 +171,7 @@ const Knob = ({
           render={renderKnob}
           size={size}
           initialValue={activePreset.initialValue}
+          isRotary={isRotary}
         />
       ) : (
         renderKnob(level)

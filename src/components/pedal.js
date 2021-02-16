@@ -48,7 +48,21 @@ const Pedal = ({
   const getSettings = id => {
     const activeValue = activePreset?.settings?.[id]
 
-    return typeof activeValue !== "undefined" ? activeValue : sweepSetting?.[id]
+    const hasSideEffects = activePreset?.sideEffects?.length > 0
+
+    const effect =
+      hasSideEffects &&
+      activePreset.sideEffects.find(sideEffect => sideEffect.id === id)
+
+    if (effect) {
+      const activeSweepValueIndex = sweep.values.indexOf(
+        sweepSetting[sweep.target]
+      )
+
+      return effect.values[activeSweepValueIndex]
+    }
+
+    return typeof activeValue === "undefined" ? sweepSetting?.[id] : activeValue
   }
 
   const getDependencyValue = (id, property) => {
@@ -81,7 +95,7 @@ const Pedal = ({
         }}
       />
       <ControlsLayout controls={[...knobs, ...switches, ...leds, ...labels]}>
-        {knobs.map(({ size, id, type, label, colors }) => (
+        {knobs.map(({ size, id, type, label, colors, ...rest }) => (
           <Knob
             id={id}
             key={id}
@@ -91,6 +105,7 @@ const Pedal = ({
             isSweep={sweep?.target === id}
             label={label}
             colors={colors}
+            {...rest}
           />
         ))}
         {leds.map(({ id, socket, colors, size, isBlinking }) => (
