@@ -1,0 +1,159 @@
+{
+  "pedal": {
+    "slug": "crazy-tube-circuits-falcon",
+    "controls": {
+      "knobs": [
+        {
+          "id": "output",
+          "size": 74,
+          "position": {
+            "top": 30,
+            "left": 55
+          },
+          "type": "chicken",
+          "colors": {
+            "tick": "#1F1B1C",
+            "primary": "#FFFDFE",
+            "background": "#2B1A19"
+          }
+        },
+        {
+          "id": "tone",
+          "size": 75,
+          "position": {
+            "top": 116,
+            "left": 114
+          },
+          "type": "chicken",
+          "colors": {
+            "tick": "#1F1B1C",
+            "primary": "#FFFDFE",
+            "background": "#2B1A19"
+          }
+        },
+        {
+          "id": "volume",
+          "size": 75,
+          "position": {
+            "top": 31,
+            "left": 172
+          },
+          "type": "chicken",
+          "colors": {
+            "tick": "#1F1B1C",
+            "primary": "#FFFDFE",
+            "background": "#2B1A19"
+          }
+        }
+      ],
+      "leds": [
+        {
+          "id": "on_led",
+          "size": 32,
+          "position": {
+            "top": 308,
+            "left": 190
+          },
+          "colors": {
+            "on": "#d4f9ff",
+            "off": "#DCD65Da1"
+          }
+        }
+      ],
+      "switches": [
+        {
+          "id": "bypass_switch",
+          "size": 60,
+          "position": {
+            "top": 289,
+            "left": 122
+          }
+        },
+        {
+          "id": "mode",
+          "type": "toggle",
+          "size": 24,
+          "position": {
+            "top": 12,
+            "left": 138
+          },
+          "orientation": "horizontal"
+        }
+      ]
+    }
+  },
+  "presets": [
+    {
+      "id": "crunchy_tweed",
+      "label": "Crunchy Tweed",
+      "settings": {
+        "output": 4,
+        "tone": 5,
+        "volume": 8,
+        "mode": 1
+      }
+    },
+    {
+      "id": "light_tweed",
+      "label": "Light Tweed",
+      "settings": {
+        "output": 4,
+        "tone": 7,
+        "volume": 4,
+        "mode": 1
+      }
+    },
+    {
+      "id": "tone_sweep",
+      "label": "Tone Sweep",
+      "isSweep": true,
+      "target": "tone",
+      "initialValue": 0,
+      "values": [0, 2, 4, 6, 8, 10],
+      "settings": {
+        "output": 4,
+        "volume": 7,
+        "mode": 1
+      }
+    },
+    {
+      "id": "mode_toggle",
+      "label": "'55 vs. '61",
+      "isSweep": true,
+      "target": "mode",
+      "initialValue": 1,
+      "values": [1, 3],
+      "settings": {
+        "output": 4,
+        "volume": 6,
+        "tone": 6
+      }
+    },
+    {
+      "id": "princeton_gain_sweep",
+      "label": "Princeton Gain Sweep",
+      "isSweep": true,
+      "target": "volume",
+      "initialValue": 0,
+      "values": [0, 2, 4, 6, 8, 10],
+      "settings": {
+        "output": 4,
+        "tone": 7,
+        "mode": 3
+      }
+    },
+    {
+      "id": "tweed_gain_sweep",
+      "label": "Tweed Gain Sweep",
+      "isSweep": true,
+      "target": "volume",
+      "initialValue": 0,
+      "values": [0, 2, 4, 6, 8, 10],
+      "settings": {
+        "output": 4,
+        "tone": 7,
+        "mode": 1
+      }
+    }
+  ]
+}
