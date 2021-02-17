@@ -10,6 +10,7 @@ import OffsetKnob from "./offset-knob"
 import WalrusAudioKnob from "./walrus-audio-knob"
 import JhsKnob from "./jhs-knob"
 import SimpleKnob from "./simple-knob"
+import ChickenHeadKnob from "./chicken-head-knob"
 import useDemoState from "../../helpers/use-demo-state"
 
 const StyledKnobContainer = styled.div`
@@ -151,6 +152,7 @@ const Knob = ({
             walrus: <WalrusAudioKnob size={size} {...rest} />,
             jhs: <JhsKnob size={size} {...rest} />,
             simple: <SimpleKnob size={size} {...rest} />,
+            chicken: <ChickenHeadKnob size={size} {...rest} />,
           }[type]
         }
       </StyledKnobContainer>
