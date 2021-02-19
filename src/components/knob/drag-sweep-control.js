@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { throttle } from "lodash"
 import useDemoState from "../../helpers/use-demo-state"
-import useDebouncedEffect from "../../helpers/use-debounced-effect"
+import useThrottledEffect from "../../helpers/use-throttled-effect"
 import InteractionContainer from "../interaction-container"
 
 const rotationToLevel = angle => (angle + 150) / 30
@@ -48,13 +48,13 @@ const DragSweepControl = ({
     setLevel(activePreset.initialValue)
   }, [activePreset])
 
-  useDebouncedEffect(
+  useThrottledEffect(
     () => {
       selectSweepSetting(id, level)
       if (isSweepPresetLoaded) setIsPedalOn(true)
     },
     [level],
-    100
+    1000
   )
 
   const startDrag = downEvent => {

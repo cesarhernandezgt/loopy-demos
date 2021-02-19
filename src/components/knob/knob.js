@@ -106,10 +106,12 @@ const AnimatedIcon = styled(FontAwesomeIcon)`
     }
     95% {
       opacity: 1;
+      z-index: 10;
     }
     100% {
       transform: translateY(0px);
       opacity: 0;
+      z-index: -99;
     }
   }
 `
