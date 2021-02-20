@@ -25,7 +25,7 @@ const StyledKnobContainer = styled.div`
 
   ${props =>
     props.isSweep && !props.isRotary
-      ? "animation: wiggle 2s linear 1 forwards;"
+      ? "animation: wiggle 1s linear 1 forwards;"
       : ""}
 
   svg g {
@@ -41,19 +41,13 @@ const StyledKnobContainer = styled.div`
     0% {
       transform: rotate(0deg);
     }
-    16% {
+    25% {
       transform: rotate(var(--animRotation));
-    }
-    33% {
-      transform: rotate(0deg);
     }
     50% {
-      transform: rotate(var(--animRotation));
-    }
-    66% {
       transform: rotate(0deg);
     }
-    82% {
+    75% {
       transform: rotate(var(--animRotation));
     }
     100% {
@@ -83,34 +77,30 @@ const AnimatedIcon = styled(FontAwesomeIcon)`
   ${props => props.alignment}: 0rem;
   font-size: 2rem;
   color: var(--cyan);
-  animation: bounce 2s linear 1 forwards;
+  animation: bounce 1s linear 1 forwards;
   z-index: 10;
 
   @keyframes bounce {
     0% {
       transform: translateY(0px);
     }
-    16% {
+    25% {
       transform: translateY(-8px);
-    }
-    33% {
-      transform: translateY(0px);
     }
     50% {
-      transform: translateY(-8px);
-    }
-    66% {
       transform: translateY(0px);
     }
-    82% {
+    75% {
       transform: translateY(-8px);
     }
     95% {
       opacity: 1;
+      z-index: 10;
     }
     100% {
       transform: translateY(0px);
       opacity: 0;
+      z-index: -99;
     }
   }
 `

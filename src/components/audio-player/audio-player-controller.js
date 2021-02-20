@@ -136,24 +136,9 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }, [])
 
   useEffect(() => {
-    if (audioContext?.state === "suspended") {
-      audioContext
-        .resume()
-        .then(() => {
-          hydrateAudioState()
-        })
-        .catch(() => {
-          console.warn("That didn't work ...")
-        })
-    }
-
-    if (audioContext && audioContext.state !== "suspended") {
+    if (hasPlayedOnce && !hasLoadingStarted) {
       hydrateAudioState()
     }
-  }, [audioContext])
-
-  useEffect(() => {
-    if (hasPlayedOnce && !hasLoadingStarted) hydrateAudioState()
   }, [hasPlayedOnce])
 
   /**
@@ -168,6 +153,8 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
       audioContext.resume().then(() => {
         setHasPlayedOnce(true)
       })
+    } else {
+      setHasPlayedOnce(true)
     }
   }
 
