@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import AudioPlayerInterface from "./audio-player-interface"
 import useDemoState from "../../helpers/use-demo-state"
 
@@ -33,46 +33,77 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const [startOffset, setStartOffset] = useState(0)
   const [endOffset, setEndOffset] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+  const decoding = useRef(0)
 
   /**
    * -------------------------------------------------------------
    * LOADING OF AUDIO DATA
    * -------------------------------------------------------------
    */
+
+  const decodeAudio = async ({ id, buffer, setLoaded }) => {
+    /**
+     * Prevent decoding more than 5 files at once. This should prevent
+     * crashing in mobile browsers and keeps the crackling at bay
+     */
+    if (decoding.current >= 5) {
+      await new Promise(resolve =>
+        setTimeout(() => {
+          resolve()
+        }, 1000)
+      )
+      return decodeAudio({ id, buffer, setLoaded })
+    }
+
+    return new Promise((resolve, reject) => {
+      decoding.current += 1
+      audioContext.decodeAudioData(
+        buffer,
+        audioBuffer => {
+          setAudioData(prevAudioData => [...prevAudioData, { id, audioBuffer }])
+          decoding.current -= 1
+          if (setLoaded) {
+            addPresetsLoaded(id)
+          }
+          resolve()
+        },
+        ({ err }) => {
+          reject()
+          throw Error(err)
+        }
+      )
+    }).catch(error => {
+      addPresetLoadingError(id)
+      console.error(error)
+    })
+  }
+
   const hydrateAudioState = () => {
     setHasLoadingStarted(true)
     // First, load presets
     Promise.all(
       [...presets, { id: CLEAN_TONE }]
         .filter(({ isSweep }) => !isSweep)
-        .map(({ id }) => {
+        .map(async ({ id }) => {
           const url = `${MEDIA_ROOT_URL}/${slug}/${
             id === CLEAN_TONE ? "clean" : id
           }.mp3`
 
-          return fetch(url)
-            .then(response => {
-              if (!response.ok) {
-                throw Error(response.statusText)
-              }
-              return response
-            })
-            .then(data => data.arrayBuffer())
-            .then(buffer =>
-              audioContext.decodeAudioData(buffer, audioBuffer => {
-                setAudioData(prevAudioData => [
-                  ...prevAudioData,
-                  { id, audioBuffer },
-                ])
-              })
-            )
-            .then(() => {
-              addPresetsLoaded(id)
-            })
-            .catch(error => {
-              addPresetLoadingError(id)
-              console.error(error)
-            })
+          try {
+            const response = await fetch(url)
+
+            if (!response.ok) {
+              throw Error(response.statusText)
+            }
+
+            const arrayBuffer = await response.arrayBuffer()
+
+            return decodeAudio({ id, buffer: arrayBuffer, setLoaded: true })
+          } catch (error) {
+            addPresetLoadingError(id)
+            console.error(error)
+            return null
+          }
         })
     ).then(() => {
       // Fetch the sweeps afterwards to prioritize normal presets
@@ -80,28 +111,25 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
         .filter(({ isSweep }) => isSweep)
         .forEach(({ id, values }) => {
           Promise.all(
-            values.map(value => {
+            values.map(async value => {
               const url = `${MEDIA_ROOT_URL}/${slug}/${id}_${value}.mp3`
-              return fetch(url)
-                .then(response => {
-                  if (!response.ok) {
-                    throw Error(response.statusText)
-                  }
-                  return response
+
+              try {
+                const response = await fetch(url)
+                if (!response.ok) {
+                  throw Error(response.statusText)
+                }
+
+                const arrayBuffer = await response.arrayBuffer()
+                return decodeAudio({
+                  id: `${id}_${value}`,
+                  buffer: arrayBuffer,
                 })
-                .then(data => data.arrayBuffer())
-                .then(buffer =>
-                  audioContext.decodeAudioData(buffer, audioBuffer => {
-                    setAudioData(prevAudioData => [
-                      ...prevAudioData,
-                      { id: `${id}_${value}`, audioBuffer },
-                    ])
-                  })
-                )
-                .catch(error => {
-                  addPresetLoadingError(id)
-                  console.error(error)
-                })
+              } catch (error) {
+                addPresetLoadingError(id)
+                console.error(error)
+                return null
+              }
             })
           )
             .then(() => {
