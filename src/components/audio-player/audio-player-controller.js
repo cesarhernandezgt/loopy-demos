@@ -43,10 +43,10 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
 
   const decodeAudio = async ({ id, buffer, setLoaded }) => {
     /**
-     * Prevent decoding more than 5 files at once. This should prevent
+     * Prevent decoding more than 3 files at once. This should prevent
      * crashing in mobile browsers and keeps the crackling at bay
      */
-    if (decoding.current >= 5) {
+    if (decoding.current >= 3) {
       await new Promise(resolve =>
         setTimeout(() => {
           resolve()
