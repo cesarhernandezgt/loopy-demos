@@ -41,7 +41,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
    * -------------------------------------------------------------
    */
 
-  const decodeAudio = async ({ id, buffer, setLoaded }) => {
+  const decodeAudio = async ({ id, response, setLoaded }) => {
     /**
      * Prevent decoding more than 3 files at once. This should prevent
      * crashing in mobile browsers and keeps the crackling at bay
@@ -52,9 +52,10 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
           resolve()
         }, 1000)
       )
-      return decodeAudio({ id, buffer, setLoaded })
+      return decodeAudio({ id, response, setLoaded })
     }
 
+    const buffer = await response.arrayBuffer()
     return new Promise((resolve, reject) => {
       decoding.current += 1
       audioContext.decodeAudioData(
@@ -96,9 +97,9 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
               throw Error(response.statusText)
             }
 
-            const arrayBuffer = await response.arrayBuffer()
+            // const arrayBuffer = await response.arrayBuffer()
 
-            return decodeAudio({ id, buffer: arrayBuffer, setLoaded: true })
+            return decodeAudio({ id, response, setLoaded: true })
           } catch (error) {
             addPresetLoadingError(id)
             console.error(error)
@@ -120,10 +121,10 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
                   throw Error(response.statusText)
                 }
 
-                const arrayBuffer = await response.arrayBuffer()
+                // const arrayBuffer = await response.arrayBuffer()
                 return decodeAudio({
                   id: `${id}_${value}`,
-                  buffer: arrayBuffer,
+                  response,
                 })
               } catch (error) {
                 addPresetLoadingError(id)
