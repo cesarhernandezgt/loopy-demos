@@ -33,6 +33,8 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const [startOffset, setStartOffset] = useState(0)
   const [endOffset, setEndOffset] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+  // we count the number of currently decoding audio files and delay
+  // other decoding jobs to limit memory overflow and crackling
   const decoding = useRef(0)
 
   /**
@@ -97,8 +99,6 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
               throw Error(response.statusText)
             }
 
-            // const arrayBuffer = await response.arrayBuffer()
-
             return decodeAudio({ id, response, setLoaded: true })
           } catch (error) {
             addPresetLoadingError(id)
@@ -121,7 +121,6 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
                   throw Error(response.statusText)
                 }
 
-                // const arrayBuffer = await response.arrayBuffer()
                 return decodeAudio({
                   id: `${id}_${value}`,
                   response,
