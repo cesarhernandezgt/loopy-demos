@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faSpinner,
@@ -15,7 +15,7 @@ const StyledPresetTag = styled.button`
   font-weight: 700;
   padding: 0.5rem;
   margin: 0 0.25rem 0.25rem 0;
-  cursor: pointer;
+  cursor: ${props => (props.isLoading ? "progress" : "pointer")};
   opacity: ${props => (props.active || props.hasError ? 1 : 0.4)};
 
   transition: opacity 0.2s ease-in, background-color 0.2s ease-in;
@@ -41,7 +41,7 @@ const StyledPresetTag = styled.button`
   :disabled {
     background-color: ${props =>
       props.hasError ? "var(--red)" : "var(--gray)"};
-    cursor: progress;
+    cursor: ${props => (props.isLoading ? "progress" : "not-allowed")};
   }
 `
 
@@ -79,6 +79,7 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
       hasError={hasError}
       type="button"
       disabled={!loaded || hasError}
+      isLoading={!loaded && hasLoadingStarted}
       onClick={() => {
         if (isActive) {
           setIsPedalOn(false)
