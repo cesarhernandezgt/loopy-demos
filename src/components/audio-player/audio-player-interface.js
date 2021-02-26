@@ -36,7 +36,7 @@ const StyledPlayerContent = styled.div`
   }
 `
 
-const StyledErrorCaption = styled.p`
+const StyledCaption = styled.p`
   font-size: 1rem;
   line-height: 1rem;
   font-style: italic;
@@ -50,37 +50,51 @@ const AudioPlayerInterface = ({
   isDisabled = false,
   isLoading = true,
   hasError = false,
-}) => (
-  <>
-    <StyledPlayerContainer>
-      <PlayButton
-        onClick={() => {
-          togglePlay()
-        }}
-        isPlaying={isPlaying}
-        isLoading={isPlaying && isLoading}
-        isDisabled={isDisabled}
-      />
-      <StyledPlayerContent hasError={hasError}>
-        {isPlaying && !isLoading ? (
-          <AudioVisualizer />
-        ) : (
-          <DisplayText
-            isPlaying={isPlaying}
-            isLoading={isLoading}
-            isDisabled={isDisabled}
-            hasError={hasError}
-          />
-        )}
-      </StyledPlayerContent>
-    </StyledPlayerContainer>
-    {hasError && (
-      <StyledErrorCaption>
-        *Maybe your ad blocker prevents the sounds from loading. Whitelist this
-        page. Promise and pinky-swear: I will never run ads on this site.
-      </StyledErrorCaption>
-    )}
-  </>
-)
+  isPedalOn = false,
+}) => {
+  // https://stackoverflow.com/a/58065241
+  const isIOS =
+    /iPad|iPhone|iPod/.test(navigator?.platform) ||
+    (navigator?.platform === "MacIntel" && navigator?.maxTouchPoints > 1)
+
+  return (
+    <>
+      <StyledPlayerContainer>
+        <PlayButton
+          onClick={() => {
+            togglePlay()
+          }}
+          isPlaying={isPlaying}
+          isLoading={isPlaying && isLoading}
+          isDisabled={isDisabled}
+        />
+        <StyledPlayerContent hasError={hasError}>
+          {isPlaying && !isLoading && isPedalOn ? (
+            <AudioVisualizer />
+          ) : (
+            <DisplayText
+              isPlaying={isPlaying}
+              isLoading={isLoading}
+              isDisabled={isDisabled}
+              isPedalOn={isPedalOn}
+              hasError={hasError}
+            />
+          )}
+        </StyledPlayerContent>
+      </StyledPlayerContainer>
+      {hasError && (
+        <StyledCaption>
+          *Maybe your ad blocker prevents the sounds from loading. Whitelist
+          this page. Promise and pinky-swear: I will never run ads on this site.
+        </StyledCaption>
+      )}
+      {isIOS && isPlaying && (
+        <StyledCaption>
+          On iOS, turn off silent mode or use headphones.
+        </StyledCaption>
+      )}
+    </>
+  )
+}
 
 export default AudioPlayerInterface
