@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -65,8 +65,6 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
   const loaded = presetsLoaded.includes(id)
   const hasError = presetLoadingErrors.includes(id)
 
-  const itemRef = useRef(null)
-
   const renderIcon = () => {
     if (hasError) {
       return <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -97,7 +95,6 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
       disabled={!loaded || hasError}
       isLoading={!loaded && hasLoadingStarted}
       onClick={handleClick}
-      ref={itemRef}
     >
       <span>{label}</span>
       {renderIcon()}
