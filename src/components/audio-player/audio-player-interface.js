@@ -52,10 +52,11 @@ const AudioPlayerInterface = ({
   hasError = false,
   isPedalOn = false,
 }) => {
+  const navObj = typeof window === "undefined" ? {} : window.navigator
   // https://stackoverflow.com/a/58065241
   const isIOS =
-    /iPad|iPhone|iPod/.test(navigator?.platform) ||
-    (navigator?.platform === "MacIntel" && navigator?.maxTouchPoints > 1)
+    /iPad|iPhone|iPod/.test(navObj.platform) ||
+    (navObj.platform === "MacIntel" && navObj.maxTouchPoints > 1)
 
   return (
     <>
