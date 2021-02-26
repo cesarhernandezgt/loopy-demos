@@ -8,11 +8,13 @@ const StyledPresetsContainer = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   height: 42px;
+  box-shadow: 0px 0px 0 10px var(--darkPurple) inset;
 
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overflow-x: auto;
-  scrollbar-width: 0;
+  scrollbar-width: none;
+}
   scrollbar-color: transparent transparent;
 
   ::-webkit-scrollbar {
