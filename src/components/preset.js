@@ -18,7 +18,7 @@ const StyledPresetTag = styled.button`
   font-size: 1rem;
   font-weight: 700;
   padding: 0.5rem;
-  margin-right: 0.25rem;
+  margin-right: 2px;
   cursor: ${props => (props.isLoading ? "progress" : "pointer")};
   opacity: ${props => (props.active || props.hasError ? 1 : 0.4)};
 
