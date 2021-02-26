@@ -23,7 +23,6 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   // we hydrate the actual audio data with a fetch on mount or after
   // the user hit 'play' the first time
-  const [audioData, setAudioData] = useState([])
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false)
   // We need to keep track of the currently playing sourcenode
   // to delete it after the next track started playing
@@ -36,6 +35,9 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   // we count the number of currently decoding audio files and delay
   // other decoding jobs to limit memory overflow and crackling
   const decoding = useRef(0)
+  // we hold the decoded audio in a mutable object for the lifetime
+  // of the component
+  const audioData = useRef([])
 
   /**
    * -------------------------------------------------------------
@@ -63,7 +65,7 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
       audioContext.decodeAudioData(
         buffer,
         audioBuffer => {
-          setAudioData(prevAudioData => [...prevAudioData, { id, audioBuffer }])
+          audioData.current.push({ id, audioBuffer })
           decoding.current -= 1
           if (setLoaded) {
             addPresetsLoaded(id)
@@ -187,7 +189,9 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }
 
   const playTrack = presetId => {
-    const selectedAudioData = audioData.find(({ id }) => id === presetId)
+    const selectedAudioData = audioData.current.find(
+      ({ id }) => id === presetId
+    )
 
     // If the audio is not loaded yet, exit
     if (!selectedAudioData) {
@@ -248,15 +252,18 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     } else if (currentPlayingSource) {
       stopTrack()
     }
-  }, [isPlaying, audioData, isPedalOn, activePreset, sweepSetting])
+  }, [isPlaying, presetsLoaded, isPedalOn, activePreset, sweepSetting])
 
   return (
     <AudioPlayerInterface
       togglePlay={togglePlay}
       isPlaying={isPlaying}
       isDisabled={!audioContext}
-      isLoading={!presetsLoaded.includes(CLEAN_TONE) && !isPedalOn}
+      isLoading={
+        !presetsLoaded.includes(isPedalOn ? activePreset.id : CLEAN_TONE)
+      }
       hasError={presetLoadingErrors.length > 0}
+      isPedalOn={isPedalOn}
     />
   )
 }

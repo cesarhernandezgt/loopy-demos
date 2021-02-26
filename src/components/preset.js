@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -8,27 +8,32 @@ import {
 import useDemoState from "../helpers/use-demo-state"
 
 const StyledPresetTag = styled.button`
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+
   background-color: ${props => (props.isSweep ? "var(--pink)" : "var(--cyan)")};
   color: black;
   border-radius: 3px;
-  font-size: 1rem;
   font-weight: 700;
-  padding: 0.5rem;
-  margin: 0 0.25rem 0.25rem 0;
-  cursor: pointer;
+  padding: 0 0.5rem;
+  margin: 0 4px 4px 0;
+  cursor: ${props => (props.isLoading ? "progress" : "pointer")};
   opacity: ${props => (props.active || props.hasError ? 1 : 0.4)};
 
   transition: opacity 0.2s ease-in, background-color 0.2s ease-in;
 
-  @media (min-width: 600px) {
-    font-size: 1.2rem;
-  }
+  font-size: 1rem;
+  height: 36px;
 
   > span {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   @media (min-width: 600px) {
+    font-size: 1.2rem;
+    height: 42px;
+
     > span {
       font-size: 1.2rem;
     }
@@ -41,7 +46,7 @@ const StyledPresetTag = styled.button`
   :disabled {
     background-color: ${props =>
       props.hasError ? "var(--red)" : "var(--gray)"};
-    cursor: progress;
+    cursor: ${props => (props.isLoading ? "progress" : "not-allowed")};
   }
 `
 
@@ -60,6 +65,8 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
   const loaded = presetsLoaded.includes(id)
   const hasError = presetLoadingErrors.includes(id)
 
+  const itemRef = useRef(null)
+
   const renderIcon = () => {
     if (hasError) {
       return <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -72,6 +79,15 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     return null
   }
 
+  const handleClick = () => {
+    if (isActive) {
+      setIsPedalOn(false)
+    } else {
+      selectPreset(id)
+      setIsPedalOn(true)
+    }
+  }
+
   return (
     <StyledPresetTag
       active={isActive}
@@ -79,14 +95,9 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
       hasError={hasError}
       type="button"
       disabled={!loaded || hasError}
-      onClick={() => {
-        if (isActive) {
-          setIsPedalOn(false)
-        } else {
-          selectPreset(id)
-          setIsPedalOn(true)
-        }
-      }}
+      isLoading={!loaded && hasLoadingStarted}
+      onClick={handleClick}
+      ref={itemRef}
     >
       <span>{label}</span>
       {renderIcon()}

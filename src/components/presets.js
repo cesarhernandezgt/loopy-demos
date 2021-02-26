@@ -6,20 +6,13 @@ import Preset from "./preset"
 const StyledPresetsContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
+  margin: 0;
 `
 
 const Presets = ({ presets = [] }) => (
   <StyledPresetsContainer>
-    {presets.map(({ label, settings, id, isSweep, isHidden }) => (
-      <Preset
-        key={id}
-        id={id}
-        label={label}
-        isSweep={isSweep}
-        isHidden={isHidden}
-        settings={settings}
-      />
+    {presets.map(({ label, id, isSweep }) => (
+      <Preset key={id} id={id} label={label} isSweep={isSweep} />
     ))}
   </StyledPresetsContainer>
 )

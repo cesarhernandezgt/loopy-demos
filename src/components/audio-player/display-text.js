@@ -4,12 +4,13 @@ const DisplayText = ({
   isPlaying = false,
   isDisabled = false,
   isLoading = true,
+  isPedalOn = false,
   hasError = false,
 }) => {
   let text = ``
 
   if (isLoading) {
-    text = `Loading my clean tone. Try a preset below?`
+    text = `Loading sounds. Try a preset below?`
   }
 
   if (!isPlaying) {
@@ -18,6 +19,10 @@ const DisplayText = ({
 
   if (isDisabled) {
     text = `Sorry, your browser sucks ¯\\_(ツ)_/¯`
+  }
+
+  if (isPlaying && !isLoading && !isPedalOn) {
+    text = `Here's my clean tone. Turn the pedal on.`
   }
 
   if (hasError) {
