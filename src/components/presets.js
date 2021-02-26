@@ -5,21 +5,8 @@ import Preset from "./preset"
 
 const StyledPresetsContainer = styled.div`
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  height: 42px;
-  box-shadow: 0px 0px 0 10px var(--darkPurple) inset;
-
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-  scrollbar-color: transparent transparent;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  flex-flow: row wrap;
+  margin: 0;
 `
 
 const Presets = ({ presets = [] }) => (

@@ -8,31 +8,32 @@ import {
 import useDemoState from "../helpers/use-demo-state"
 
 const StyledPresetTag = styled.button`
-  flex: 1 0 auto;
-  height: 42px;
-  scroll-snap-align: start;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
 
   background-color: ${props => (props.isSweep ? "var(--pink)" : "var(--cyan)")};
   color: black;
   border-radius: 3px;
-  font-size: 1rem;
   font-weight: 700;
-  padding: 0.5rem;
-  margin: 0 0 0 4px;
+  padding: 0 0.5rem;
+  margin: 0 4px 4px 0;
   cursor: ${props => (props.isLoading ? "progress" : "pointer")};
   opacity: ${props => (props.active || props.hasError ? 1 : 0.4)};
 
   transition: opacity 0.2s ease-in, background-color 0.2s ease-in;
 
-  @media (min-width: 600px) {
-    font-size: 1.2rem;
-  }
+  font-size: 1rem;
+  height: 36px;
 
   > span {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   @media (min-width: 600px) {
+    font-size: 1.2rem;
+    height: 42px;
+
     > span {
       font-size: 1.2rem;
     }
@@ -85,12 +86,6 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
       selectPreset(id)
       setIsPedalOn(true)
     }
-
-    itemRef.current.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    })
   }
 
   return (
