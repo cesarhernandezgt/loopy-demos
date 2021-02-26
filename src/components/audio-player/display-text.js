@@ -22,7 +22,7 @@ const DisplayText = ({
   }
 
   if (isPlaying && !isLoading && !isPedalOn) {
-    text = `Here's my clean tone. Go ahead and turn the pedal on.`
+    text = `Here's my clean tone. Turn the pedal on.`
   }
 
   if (hasError) {
