@@ -5,37 +5,37 @@
       "knobs": [
         {
           "id": "dwell",
-          "size": 40,
+          "size": 48,
           "position": {
-            "top": 23,
-            "left": 75
+            "top": 24,
+            "left": 72
           },
           "type": "simpledot"
         },
         {
           "id": "tone",
-          "size": 40,
+          "size": 48,
           "position": {
-            "top": 21,
-            "left": 181
+            "top": 24,
+            "left": 177
           },
           "type": "simpledot"
         },
         {
           "id": "mix",
-          "size": 40,
+          "size": 48,
           "position": {
             "top": 92,
-            "left": 78
+            "left": 72
           },
           "type": "simpledot"
         },
         {
           "id": "volume",
-          "size": 40,
+          "size": 48,
           "position": {
-            "top": 91,
-            "left": 182
+            "top": 92,
+            "left": 177
           },
           "type": "simpledot"
         }
