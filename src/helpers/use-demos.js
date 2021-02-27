@@ -20,7 +20,7 @@ const useDemos = () => {
                 model
                 image {
                   childImageSharp {
-                    fluid(maxWidth: 200) {
+                    fluid(maxWidth: 188) {
                       ...GatsbyImageSharpFluid
                     }
                   }

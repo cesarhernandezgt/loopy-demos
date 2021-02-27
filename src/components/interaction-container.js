@@ -26,6 +26,13 @@ const StyledInteractionContainer = styled.div`
     border-radius: 50%;
     z-index: -1;
     transform: scale(var(--scaleX), var(--scaleY));
+    transition: opacity 0.2s ease-in;
+  }
+
+  &:hover {
+    &:after {
+      opacity: 0.5;
+    }
   }
 
   ${props => props.extraCSS}

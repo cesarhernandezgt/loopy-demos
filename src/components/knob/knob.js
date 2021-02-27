@@ -10,9 +10,9 @@ import OffsetKnob from "./offset-knob"
 import WalrusAudioKnob from "./walrus-audio-knob"
 import JhsKnob from "./jhs-knob"
 import SimpleKnob from "./simple-knob"
+import SimpleDotKnob from "./simple-dot-knob"
+import ChickenHeadKnob from "./chicken-head-knob"
 import useDemoState from "../../helpers/use-demo-state"
-
-const levelToRotationFunc = level => `${30 * level - 150}deg`
 
 const StyledKnobContainer = styled.div`
   --rotation: ${({ rotation }) => rotation};
@@ -24,31 +24,31 @@ const StyledKnobContainer = styled.div`
   width: var(--size);
   height: var(--size);
 
-  ${props => (props.isSweep ? "animation: wiggle 2s linear 1 forwards;" : "")}
+  ${props =>
+    props.isSweep && !props.isRotary
+      ? "animation: wiggle 1s linear 1 forwards;"
+      : ""}
 
   svg g {
     transform: rotate(var(--rotation));
     transform-origin: 50% 50%;
-    ${props => !props.isSweep && `transition: transform 0.2s ease-in;`}
+    ${props =>
+      !props.isSweep &&
+      !props.isRotary &&
+      `transition: transform 0.2s ease-in;`}
   }
 
   @keyframes wiggle {
     0% {
       transform: rotate(0deg);
     }
-    16% {
+    25% {
       transform: rotate(var(--animRotation));
-    }
-    33% {
-      transform: rotate(0deg);
     }
     50% {
-      transform: rotate(var(--animRotation));
-    }
-    66% {
       transform: rotate(0deg);
     }
-    82% {
+    75% {
       transform: rotate(var(--animRotation));
     }
     100% {
@@ -78,37 +78,35 @@ const AnimatedIcon = styled(FontAwesomeIcon)`
   ${props => props.alignment}: 0rem;
   font-size: 2rem;
   color: var(--cyan);
-  animation: bounce 2s linear 1 forwards;
+  animation: bounce 1s linear 1 forwards;
   z-index: 10;
 
   @keyframes bounce {
     0% {
       transform: translateY(0px);
     }
-    16% {
+    25% {
       transform: translateY(-8px);
-    }
-    33% {
-      transform: translateY(0px);
     }
     50% {
-      transform: translateY(-8px);
-    }
-    66% {
       transform: translateY(0px);
     }
-    82% {
+    75% {
       transform: translateY(-8px);
     }
     95% {
       opacity: 1;
+      z-index: 10;
     }
     100% {
       transform: translateY(0px);
       opacity: 0;
+      z-index: -99;
     }
   }
 `
+const levelToRotationFunc = ({ level, isRotary, rotaryAngles }) =>
+  isRotary ? `${rotaryAngles[level - 1]}deg` : `${30 * level - 150}deg`
 
 const Knob = ({
   id = "",
@@ -117,6 +115,8 @@ const Knob = ({
   type = "bakelit",
   isSweep = false,
   label = "",
+  isRotary = false,
+  rotaryAngles = [],
   ...rest
 }) => {
   const { activePreset } = useDemoState()
@@ -125,9 +125,14 @@ const Knob = ({
   const renderKnob = internalLevel => (
     <>
       <StyledKnobContainer
-        rotation={levelToRotationFunc(internalLevel)}
+        rotation={levelToRotationFunc({
+          level: internalLevel,
+          isRotary,
+          rotaryAngles,
+        })}
         isSweep={isSweep}
         size={size}
+        isRotary={isRotary}
         reverseInitAnimation={initialValue < 5}
       >
         {
@@ -138,10 +143,12 @@ const Knob = ({
             walrus: <WalrusAudioKnob size={size} {...rest} />,
             jhs: <JhsKnob size={size} {...rest} />,
             simple: <SimpleKnob size={size} {...rest} />,
+            simpledot: <SimpleDotKnob size={size} {...rest} />,
+            chicken: <ChickenHeadKnob size={size} {...rest} />,
           }[type]
         }
       </StyledKnobContainer>
-      {isSweep && (
+      {isSweep && !isRotary && (
         <AnimatedIcon
           icon={faHandPointUp}
           alignment={initialValue < 5 ? "left" : "right"}
@@ -158,6 +165,7 @@ const Knob = ({
           render={renderKnob}
           size={size}
           initialValue={activePreset.initialValue}
+          isRotary={isRotary}
         />
       ) : (
         renderKnob(level)

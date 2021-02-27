@@ -21,10 +21,16 @@ const calcAngle = (centerX, centerY, clientX, clientY) => {
 
 const isBrowser = typeof window !== `undefined`
 
-const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
+const DragSweepControl = ({
+  id = "",
+  render = () => {},
+  size = 64,
+  isRotary = false,
+}) => {
   const {
     activePreset,
     presetsLoaded,
+    sweepSetting,
     selectSweepSetting,
     setIsPedalOn,
   } = useDemoState()
@@ -52,7 +58,7 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
   )
 
   const startDrag = downEvent => {
-    if (!isBrowser) return
+    if (!isBrowser || isRotary) return
     downEvent.preventDefault()
 
     const {
@@ -99,6 +105,21 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
     }
   }
 
+  const handleClick = () => {
+    if (!isRotary || !isSweepPresetLoaded) return
+
+    const numValues = activePreset.values.length
+    const currentValIndex = activePreset.values.findIndex(
+      val => val === sweepSetting[id]
+    )
+
+    const nextIndex = (currentValIndex + 1) % numValues
+    const nextValue = activePreset.values[nextIndex]
+    selectSweepSetting(id, nextValue)
+    setLevel(nextValue)
+    setIsPedalOn(true)
+  }
+
   return (
     <InteractionContainer
       color={
@@ -108,6 +129,7 @@ const DragSweepControl = ({ id = "", render = () => {}, size = 64 }) => {
       extraCSS="touch-action: none;"
       onMouseDown={startDrag}
       onTouchStart={startDrag}
+      onClick={handleClick}
     >
       {render(level)}
     </InteractionContainer>

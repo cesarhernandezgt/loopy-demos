@@ -83,6 +83,7 @@ const Demos = ({ location = {} }) => {
                 imgStyle={{
                   objectFit: "contain",
                 }}
+                durationFadeIn={200}
               />
               <div className="title">
                 <span>{model}</span>
