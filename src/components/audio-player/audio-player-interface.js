@@ -26,6 +26,7 @@ const StyledPlayerContent = styled.div`
   border-radius: 12px;
   overflow: hidden;
   border: 0.5rem solid var(--dark);
+  position: relative;
 
   span {
     text-align: center;
@@ -58,6 +59,8 @@ const AudioPlayerInterface = ({
     /iPad|iPhone|iPod/.test(navObj.platform) ||
     (navObj.platform === "MacIntel" && navObj.maxTouchPoints > 1)
 
+  const hideVisualizer = !isPlaying || isLoading || !isPedalOn
+
   return (
     <>
       <StyledPlayerContainer>
@@ -70,9 +73,8 @@ const AudioPlayerInterface = ({
           isDisabled={isDisabled}
         />
         <StyledPlayerContent hasError={hasError}>
-          {isPlaying && !isLoading && isPedalOn ? (
-            <AudioVisualizer />
-          ) : (
+          <AudioVisualizer hide={hideVisualizer} />
+          {hideVisualizer && (
             <DisplayText
               isPlaying={isPlaying}
               isLoading={isLoading}

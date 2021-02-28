@@ -54,6 +54,7 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
   const {
     isPedalOn,
     activePreset,
+    activePedal,
     hasLoadingStarted,
     presetsLoaded,
     presetLoadingErrors,
@@ -61,7 +62,7 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     setIsPedalOn,
   } = useDemoState()
 
-  const isActive = id === activePreset.id && isPedalOn
+  const isActive = id === activePreset.id && isPedalOn(activePedal)
   const loaded = presetsLoaded.includes(id)
   const hasError = presetLoadingErrors.includes(id)
 
@@ -79,10 +80,10 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
 
   const handleClick = () => {
     if (isActive) {
-      setIsPedalOn(false)
+      setIsPedalOn(activePedal, false)
     } else {
       selectPreset(id)
-      setIsPedalOn(true)
+      setIsPedalOn(activePedal, true)
     }
   }
 

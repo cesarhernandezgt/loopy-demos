@@ -103,6 +103,7 @@ const Pedal = ({
           <Knob
             id={id}
             key={id}
+            pedalName={name}
             size={size * scale}
             level={getSettings(id)}
             type={type}
@@ -117,6 +118,7 @@ const Pedal = ({
             key={id}
             isOn={id === "on_led" && isPedalOn(name)}
             id={id}
+            pedalName={name}
             socket={socket}
             size={size * scale}
             colors={getDependencyValue(id, "colors") || colors}
@@ -128,6 +130,7 @@ const Pedal = ({
           <Switch
             key={id}
             id={id}
+            pedalName={name}
             type={type}
             size={size * scale}
             orientation={orientation}
@@ -141,6 +144,7 @@ const Pedal = ({
             <LineLabel
               key={id}
               id={id}
+              pedalName={name}
               start={position}
               end={labelPosition}
               label={getSettings(id)}

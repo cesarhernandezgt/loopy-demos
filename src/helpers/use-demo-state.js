@@ -14,8 +14,8 @@ const DemoContextProvider = ({
   children = null,
   presets = [],
   pedals = [],
+  // type = "single",
 }) => {
-  // const [isPedalOn, setIsPedalOn] = useState(false)
   const [activePedal, setActivePedal] = useState(pedals[0]?.name)
   const [pedalsOn, setPedalsOn] = useState([])
   const [activePreset, setActivePreset] = useState(presets[0] || {})
@@ -48,9 +48,9 @@ const DemoContextProvider = ({
 
   const setIsPedalOn = (name, isOn) => {
     if (isOn) {
-      setPedalsOn(prev => prev.filter(pedal => pedal !== name))
-    } else {
       setPedalsOn(prev => [...prev, name])
+    } else {
+      setPedalsOn(prev => prev.filter(pedal => pedal !== name))
     }
   }
 
@@ -68,6 +68,7 @@ const DemoContextProvider = ({
     <DemoContext.Provider
       value={{
         isPedalOn,
+        pedalsOn,
         activePreset,
         sweepSetting,
         presetsLoaded,

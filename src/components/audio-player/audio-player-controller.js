@@ -7,7 +7,9 @@ const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
 const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const {
-    isPedalOn,
+    // isPedalOn,
+    pedalsOn,
+    activePedal,
     activePreset,
     sweepSetting,
     presetsLoaded,
@@ -26,7 +28,10 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false)
   // We need to keep track of the currently playing sourcenode
   // to delete it after the next track started playing
-  const [currentPlayingSource, setCurrentPlayingSource] = useState(null)
+  const [currentPlaying, setCurrentPlaying] = useState({
+    source: null,
+    id: "",
+  })
   const [audioContext, setAudioContext] = useState(null)
   // We need these to keep the tracks in sync with the audio context
   const [startOffset, setStartOffset] = useState(0)
@@ -193,8 +198,10 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
       ({ id }) => id === presetId
     )
 
-    // If the audio is not loaded yet, exit
-    if (!selectedAudioData) {
+    // If the audio is not loaded yet
+    // or we are already playing it,
+    // exit
+    if (!selectedAudioData || currentPlaying.id === presetId) {
       return
     }
 
@@ -204,11 +211,11 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     audioSource.loop = true
     audioSource.connect(audioContext.destination)
 
-    if (currentPlayingSource) {
-      currentPlayingSource.stop()
+    if (currentPlaying.source) {
+      currentPlaying.source.stop()
     }
 
-    setCurrentPlayingSource(audioSource)
+    setCurrentPlaying({ id: presetId, source: audioSource })
     const bufferLength = audioBuffer.length / audioBuffer.sampleRate
 
     if (endOffset > startOffset || startOffset === 0) {
@@ -223,8 +230,8 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }
 
   const stopTrack = () => {
-    currentPlayingSource.stop()
-    setCurrentPlayingSource(null)
+    currentPlaying.source.stop()
+    setCurrentPlaying({ id: "", source: null })
     setCurrentTime(
       prevTime => prevTime + audioContext.currentTime - startOffset
     )
@@ -232,27 +239,34 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }
 
   useEffect(() => {
-    let activePresetId = CLEAN_TONE
-
-    if (isPedalOn) {
-      activePresetId = activePreset.id
-
-      if (activePreset.isSweep) {
-        const { target, initialValue } = activePreset
-        const level =
-          typeof sweepSetting[target] === "undefined"
-            ? initialValue
-            : sweepSetting[target]
-        activePresetId += `_${level}`
-      }
-    }
-
     if (isPlaying) {
+      let activePresetId = CLEAN_TONE
+
+      if (pedalsOn.length > 0) {
+        activePresetId = activePreset.id
+
+        if (activePreset.isSweep) {
+          const { target, initialValue } = activePreset
+          const level =
+            typeof sweepSetting[target] === "undefined"
+              ? initialValue
+              : sweepSetting[target]
+          activePresetId += `_${level}`
+        }
+      }
+
       playTrack(activePresetId)
-    } else if (currentPlayingSource) {
+    } else if (currentPlaying.source) {
       stopTrack()
     }
-  }, [isPlaying, presetsLoaded, isPedalOn, activePreset, sweepSetting])
+  }, [
+    isPlaying,
+    presetsLoaded,
+    pedalsOn,
+    activePedal,
+    activePreset,
+    sweepSetting,
+  ])
 
   return (
     <AudioPlayerInterface
@@ -260,10 +274,12 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
       isPlaying={isPlaying}
       isDisabled={!audioContext}
       isLoading={
-        !presetsLoaded.includes(isPedalOn ? activePreset.id : CLEAN_TONE)
+        !presetsLoaded.includes(
+          pedalsOn.length > 0 ? activePreset.id : CLEAN_TONE
+        )
       }
       hasError={presetLoadingErrors.length > 0}
-      isPedalOn={isPedalOn}
+      isPedalOn={pedalsOn.length > 0}
     />
   )
 }
