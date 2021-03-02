@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 
@@ -46,13 +46,26 @@ const CombinationWrapper = styled.div`
     flex: 1 0 auto;
   }
 `
+
 const ComparisonThumbnailRow = styled.ul`
   display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
   margin: 0;
   padding: 0;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: 0;
+  scrollbar-color: transparent transparent;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
-const ThumbnailItem = styled.li`
+const StyledThumbnailItem = styled.li`
   list-style: none;
   flex: 0 0 100px;
   height: 100px;
@@ -62,7 +75,8 @@ const ThumbnailItem = styled.li`
   opacity: ${props => (props.active ? 1 : 0.3)};
   margin-right: 4px;
   border-radius: 4px;
-  padding: 8px;
+  padding: 0.5rem;
+  scroll-snap-align: start;
 
   button {
     height: 100%;
@@ -82,26 +96,45 @@ const calcPedalPosition = (pedals = [], activePedalName = "") => {
   return `-${leftShift}px`
 }
 
-const ComparisonWrapper = ({ children = null, pedals = [] }) => {
+const ThumbnailItem = ({ image = {}, name = "" }) => {
   const { activePedal, setActivePedal } = useDemoState()
+  const itemRef = useRef(null)
+
+  const handleClick = () => {
+    setActivePedal(name)
+    itemRef.current.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    })
+  }
+
+  return (
+    <StyledThumbnailItem key={name} active={activePedal === name} ref={itemRef}>
+      <button type="button" onClick={handleClick}>
+        <Img
+          fluid={image}
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
+          imgStyle={{
+            objectFit: "contain",
+          }}
+        />
+      </button>
+    </StyledThumbnailItem>
+  )
+}
+
+const ComparisonWrapper = ({ children = null, pedals = [] }) => {
+  const { activePedal } = useDemoState()
+
   return (
     <LayoutWrapper>
       <ComparisonThumbnailRow>
         {pedals.map(({ image, name }) => (
-          <ThumbnailItem key={name} active={activePedal === name}>
-            <button type="button" onClick={() => setActivePedal(name)}>
-              <Img
-                fluid={image}
-                style={{
-                  height: "100%",
-                  width: "100%",
-                }}
-                imgStyle={{
-                  objectFit: "contain",
-                }}
-              />
-            </button>
-          </ThumbnailItem>
+          <ThumbnailItem key={name} image={image} name={name} />
         ))}
       </ComparisonThumbnailRow>
       <ComparisonOuterWrapper>
