@@ -74,7 +74,7 @@ const GatedFuzzComparison = () => {
           id: "tamed",
           label: "Tamed",
           "tone-electronix-animalizzer": {
-            id: "aggressive_animalizzer",
+            id: "animalizzer_tamed",
             settings: {
               bass: 3,
               mid: 4,
@@ -88,7 +88,7 @@ const GatedFuzzComparison = () => {
             },
           },
           "jhs-pedals-mini-foot-fuzz-v2": {
-            id: "jhs_mini_foot_fuzz_aggressive",
+            id: "jhs_mini_foot_fuzz_tamed",
             settings: {
               volume: 6,
               fuzz: 7,
@@ -96,7 +96,7 @@ const GatedFuzzComparison = () => {
             },
           },
           "smallsound-bigsound-mini": {
-            id: "ssbs_mini_aggressive",
+            id: "ssbs_mini_tamed",
             settings: { gain: 7, bass: 10, treble: 7, bias: 2, volume: 4 },
           },
         },

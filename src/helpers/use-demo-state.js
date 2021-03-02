@@ -17,7 +17,7 @@ const DemoContextProvider = ({
   type = "single",
 }) => {
   const [activePedal, setActivePedal] = useState(pedals[0]?.name)
-  const [pedalsOn, setPedalsOn] = useState([])
+  const [pedalsOn, setPedalsOn] = useState(pedals.map(({ name }) => name))
   const [activePreset, setActivePreset] = useState(presets[0] || {})
   const [sweepSetting, setSweepSetting] = useState({})
   const [presetsLoaded, setPresetsLoaded] = useState([])

@@ -5,9 +5,11 @@ import useDemoState from "../../helpers/use-demo-state"
 const CLEAN_TONE = "CLEAN_TONE"
 const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
-const AudioPlayerController = ({ presets = [], slug = "" }) => {
+const AudioPlayerController = ({ presets = [], slug = "", pedals = [] }) => {
   const {
+    demoType,
     pedalsOn,
+    getIsPedalOn,
     activePedal,
     activePreset,
     sweepSetting,
@@ -88,10 +90,25 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
   }
 
   const hydrateAudioState = () => {
+    const presetList =
+      demoType === "comparison"
+        ? pedals
+            .reduce(
+              (acc, pedal) => [
+                ...acc,
+                ...presets.map(preset => ({
+                  isSweep: Boolean(preset.isSweep),
+                  id: preset[pedal?.name]?.id,
+                })),
+              ],
+              []
+            )
+            .filter(({ id }) => Boolean(id))
+        : presets
     setHasLoadingStarted(true)
     // First, load presets
     Promise.all(
-      [...presets, { id: CLEAN_TONE }]
+      [...presetList, { id: CLEAN_TONE }]
         .filter(({ isSweep }) => !isSweep)
         .map(async ({ id }) => {
           const url = `${MEDIA_ROOT_URL}/${slug}/${
@@ -241,8 +258,9 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     if (isPlaying) {
       let activePresetId = CLEAN_TONE
 
-      if (pedalsOn.length > 0) {
-        activePresetId = activePreset.id
+      if (getIsPedalOn(activePedal)) {
+        activePresetId =
+          demoType === "single" ? activePreset.id : activePreset[activePedal].id
 
         if (activePreset.isSweep) {
           const { target, initialValue } = activePreset
@@ -267,18 +285,21 @@ const AudioPlayerController = ({ presets = [], slug = "" }) => {
     sweepSetting,
   ])
 
+  let activePresetId = CLEAN_TONE
+
+  if (getIsPedalOn(activePedal)) {
+    activePresetId =
+      demoType === "single" ? activePreset.id : activePreset[activePedal].id
+  }
+
   return (
     <AudioPlayerInterface
       togglePlay={togglePlay}
       isPlaying={isPlaying}
       isDisabled={!audioContext}
-      isLoading={
-        !presetsLoaded.includes(
-          pedalsOn.length > 0 ? activePreset.id : CLEAN_TONE
-        )
-      }
+      isLoading={!presetsLoaded.includes(activePresetId)}
       hasError={presetLoadingErrors.length > 0}
-      isPedalOn={pedalsOn.length > 0}
+      isPedalOn={getIsPedalOn(activePedal)}
     />
   )
 }

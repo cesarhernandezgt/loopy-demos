@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import useDemoState from "../helpers/use-demo-state"
 
 import Preset from "./preset"
 
@@ -9,12 +10,17 @@ const StyledPresetsContainer = styled.div`
   margin: 0;
 `
 
-const Presets = ({ presets = [] }) => (
-  <StyledPresetsContainer>
-    {presets.map(({ label, id, isSweep }) => (
-      <Preset key={id} id={id} label={label} isSweep={isSweep} />
-    ))}
-  </StyledPresetsContainer>
-)
+const Presets = ({ presets = [] }) => {
+  const { demoType, activePedal } = useDemoState()
+  return (
+    <StyledPresetsContainer>
+      {presets
+        .filter(preset => demoType === "single" || Boolean(preset[activePedal]))
+        .map(({ label, id, isSweep, ...rest }) => (
+          <Preset key={id} id={id} label={label} isSweep={isSweep} {...rest} />
+        ))}
+    </StyledPresetsContainer>
+  )
+}
 
 export default Presets

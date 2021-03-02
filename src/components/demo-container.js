@@ -12,7 +12,7 @@ const DemoContainer = ({
   type = "single",
 }) => (
   <DemoContextProvider presets={presets} pedals={pedals} type={type}>
-    <AudioPlayer presets={presets} slug={slug} />
+    <AudioPlayer presets={presets} slug={slug} pedals={pedals} />
     <Presets presets={presets} />
     <PedalsWrapper type={type} pedals={pedals} />
   </DemoContextProvider>

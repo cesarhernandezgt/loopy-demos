@@ -50,8 +50,9 @@ const StyledPresetTag = styled.button`
   }
 `
 
-const Preset = ({ id = "", label = "", isSweep = false }) => {
+const Preset = ({ id = "", label = "", isSweep = false, ...rest }) => {
   const {
+    demoType,
     getIsPedalOn,
     activePreset,
     activePedal,
@@ -62,9 +63,11 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     setIsPedalOn,
   } = useDemoState()
 
+  const audioRelevantId = demoType === "single" ? id : rest[activePedal].id
+
   const isActive = id === activePreset.id && getIsPedalOn(activePedal)
-  const loaded = presetsLoaded.includes(id)
-  const hasError = presetLoadingErrors.includes(id)
+  const loaded = presetsLoaded.includes(audioRelevantId)
+  const hasError = presetLoadingErrors.includes(audioRelevantId)
 
   const renderIcon = () => {
     if (hasError) {
