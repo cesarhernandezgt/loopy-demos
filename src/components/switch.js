@@ -17,7 +17,7 @@ const Switch = ({
   const {
     activePreset,
     presetsLoaded,
-    isPedalOn,
+    getIsPedalOn,
     selectSweepSetting,
     setIsPedalOn,
   } = useDemoState()
@@ -50,13 +50,13 @@ const Switch = ({
             <InteractionContainer
               size={size}
               color="cyan"
-              isHidden={isPedalOn(pedalName) || id !== "bypass_switch"}
+              isHidden={getIsPedalOn(pedalName) || id !== "bypass_switch"}
             >
               <StompSwitch
                 size={size}
                 onClick={() => {
                   if (id === "bypass_switch") {
-                    setIsPedalOn(pedalName, !isPedalOn(pedalName))
+                    setIsPedalOn(pedalName, !getIsPedalOn(pedalName))
                   }
                 }}
               />

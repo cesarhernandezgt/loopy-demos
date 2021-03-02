@@ -7,7 +7,6 @@ const MEDIA_ROOT_URL = "https://loopydemos.s3.us-east-2.amazonaws.com"
 
 const AudioPlayerController = ({ presets = [], slug = "" }) => {
   const {
-    // isPedalOn,
     pedalsOn,
     activePedal,
     activePreset,

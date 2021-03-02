@@ -43,11 +43,14 @@ const Pedal = ({
   scale = 1,
   name = "",
 }) => {
-  const { isPedalOn, activePreset, sweepSetting } = useDemoState()
+  const { demoType, getIsPedalOn, activePreset, sweepSetting } = useDemoState()
   const sweep = activePreset.isSweep && activePreset
 
   const getSettings = id => {
-    const activeValue = activePreset?.settings?.[id]
+    const activeValue =
+      demoType === "single"
+        ? activePreset?.settings?.[id]
+        : activePreset?.[name]?.settings?.[id]
 
     const hasSideEffects = activePreset?.sideEffects?.length > 0
 
@@ -116,7 +119,7 @@ const Pedal = ({
         {leds.map(({ id, socket, colors, size, isBlinking }) => (
           <Led
             key={id}
-            isOn={id === "on_led" && isPedalOn(name)}
+            isOn={id === "on_led" && getIsPedalOn(name)}
             id={id}
             pedalName={name}
             socket={socket}

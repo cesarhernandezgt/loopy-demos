@@ -39,7 +39,68 @@ const GatedFuzzComparison = () => {
     <Demo
       slug="velcro-fuzz-shootout"
       type="comparison"
-      presets={[]}
+      presets={[
+        {
+          id: "aggressive",
+          label: "Aggressive",
+          "tone-electronix-animalizzer": {
+            id: "animalizer_aggressive",
+            settings: {
+              bass: 3,
+              mid: 4,
+              treble: 9,
+              volume: 4,
+              depth: 10,
+              fuzz: 10,
+              pre_gain: 10,
+              stage_i: 2,
+              stage_ii: 1,
+            },
+          },
+          "jhs-pedals-mini-foot-fuzz-v2": {
+            id: "jhs_mini_foot_fuzz_aggressive",
+            settings: {
+              volume: 6,
+              fuzz: 10,
+              mode: 3,
+            },
+          },
+          "smallsound-bigsound-mini": {
+            id: "ssbs_mini_aggressive",
+            settings: { gain: 10, bass: 7, treble: 8, bias: 3, volume: 4 },
+          },
+        },
+        {
+          id: "tamed",
+          label: "Tamed",
+          "tone-electronix-animalizzer": {
+            id: "aggressive_animalizzer",
+            settings: {
+              bass: 3,
+              mid: 4,
+              treble: 9,
+              volume: 4,
+              depth: 10,
+              fuzz: 7,
+              pre_gain: 7,
+              stage_i: 2,
+              stage_ii: 1,
+            },
+          },
+          "jhs-pedals-mini-foot-fuzz-v2": {
+            id: "jhs_mini_foot_fuzz_aggressive",
+            settings: {
+              volume: 6,
+              fuzz: 7,
+              mode: 3,
+            },
+          },
+          "smallsound-bigsound-mini": {
+            id: "ssbs_mini_aggressive",
+            settings: { gain: 7, bass: 10, treble: 7, bias: 2, volume: 4 },
+          },
+        },
+      ]}
       pedals={[
         {
           name: "tone-electronix-animalizzer",

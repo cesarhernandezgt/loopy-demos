@@ -52,7 +52,7 @@ const StyledPresetTag = styled.button`
 
 const Preset = ({ id = "", label = "", isSweep = false }) => {
   const {
-    isPedalOn,
+    getIsPedalOn,
     activePreset,
     activePedal,
     hasLoadingStarted,
@@ -62,7 +62,7 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     setIsPedalOn,
   } = useDemoState()
 
-  const isActive = id === activePreset.id && isPedalOn(activePedal)
+  const isActive = id === activePreset.id && getIsPedalOn(activePedal)
   const loaded = presetsLoaded.includes(id)
   const hasError = presetLoadingErrors.includes(id)
 
