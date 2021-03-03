@@ -23,6 +23,7 @@ const isBrowser = typeof window !== `undefined`
 
 const DragSweepControl = ({
   id = "",
+  pedalName = "",
   render = () => {},
   size = 64,
   isRotary = false,
@@ -51,7 +52,7 @@ const DragSweepControl = ({
   useDebouncedEffect(
     () => {
       selectSweepSetting(id, level)
-      if (isSweepPresetLoaded) setIsPedalOn(true)
+      if (isSweepPresetLoaded) setIsPedalOn(pedalName, true)
     },
     [level],
     100
@@ -117,7 +118,7 @@ const DragSweepControl = ({
     const nextValue = activePreset.values[nextIndex]
     selectSweepSetting(id, nextValue)
     setLevel(nextValue)
-    setIsPedalOn(true)
+    setIsPedalOn(pedalName, true)
   }
 
   return (

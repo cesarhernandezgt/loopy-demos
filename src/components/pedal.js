@@ -8,19 +8,18 @@ import LineLabel from "./line-label"
 import useDemoState from "../helpers/use-demo-state"
 
 const Enclosure = styled.div`
-  width: ${props => props.width}px;
-  height: ${props => props.height}px;
+  width: ${props => props.width * props.scale}px;
+  height: ${props => props.height * props.scale}px;
   box-sizing: border-box;
-  margin: 1rem auto 2rem;
   position: relative;
 `
 
-const setPositions = ({ id, position }) =>
+const setPositions = ({ id, position }, scale) =>
   `
     > #${id} {
       position: absolute;
-      top: ${position?.top || 0}px;
-      left: ${position?.left || 0}px;
+      top: ${position?.top * scale || 0}px;
+      left: ${position?.left * scale || 0}px;
     }
   `
 
@@ -28,7 +27,7 @@ const ControlsLayout = styled.div`
   width: 100%;
   position: relative;
 
-  ${({ controls }) => controls.map(el => setPositions(el))}
+  ${({ controls, scale }) => controls.map(el => setPositions(el, scale))}
 `
 
 const Pedal = ({
@@ -41,12 +40,17 @@ const Pedal = ({
   height = 350,
   image = {},
   alignment = "center",
+  scale = 1,
+  name = "",
 }) => {
-  const { isPedalOn, activePreset, sweepSetting } = useDemoState()
+  const { demoType, getIsPedalOn, activePreset, sweepSetting } = useDemoState()
   const sweep = activePreset.isSweep && activePreset
 
   const getSettings = id => {
-    const activeValue = activePreset?.settings?.[id]
+    const activeValue =
+      demoType === "single"
+        ? activePreset?.settings?.[id]
+        : activePreset?.[name]?.settings?.[id]
 
     const hasSideEffects = activePreset?.sideEffects?.length > 0
 
@@ -79,7 +83,7 @@ const Pedal = ({
   }
 
   return (
-    <Enclosure width={width} height={height}>
+    <Enclosure width={width} height={height} scale={scale}>
       <Img
         fluid={image}
         style={{
@@ -94,12 +98,16 @@ const Pedal = ({
           objectFit: "contain",
         }}
       />
-      <ControlsLayout controls={[...knobs, ...switches, ...leds, ...labels]}>
+      <ControlsLayout
+        controls={[...knobs, ...switches, ...leds, ...labels]}
+        scale={scale}
+      >
         {knobs.map(({ size, id, type, label, colors, ...rest }) => (
           <Knob
             id={id}
             key={id}
-            size={size}
+            pedalName={name}
+            size={size * scale}
             level={getSettings(id)}
             type={type}
             isSweep={sweep?.target === id}
@@ -111,11 +119,12 @@ const Pedal = ({
         {leds.map(({ id, socket, colors, size, isBlinking }) => (
           <Led
             key={id}
-            isOn={id === "on_led" && isPedalOn}
+            isOn={id === "on_led" && getIsPedalOn(name)}
             id={id}
+            pedalName={name}
             socket={socket}
+            size={size * scale}
             colors={getDependencyValue(id, "colors") || colors}
-            size={size}
             isBlinking={isBlinking}
             blinkTime={getSettings(id)}
           />
@@ -124,8 +133,9 @@ const Pedal = ({
           <Switch
             key={id}
             id={id}
+            pedalName={name}
             type={type}
-            size={size}
+            size={size * scale}
             orientation={orientation}
             state={getSettings(id)}
             isSweep={sweep?.target === id}
@@ -137,6 +147,7 @@ const Pedal = ({
             <LineLabel
               key={id}
               id={id}
+              pedalName={name}
               start={position}
               end={labelPosition}
               label={getSettings(id)}

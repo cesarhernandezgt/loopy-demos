@@ -8,6 +8,7 @@ import useDemoState from "../helpers/use-demo-state"
 const Switch = ({
   id = "",
   size = 64,
+  pedalName = "",
   type = "stomp",
   isSweep = false,
   state = 1,
@@ -16,7 +17,7 @@ const Switch = ({
   const {
     activePreset,
     presetsLoaded,
-    isPedalOn,
+    getIsPedalOn,
     selectSweepSetting,
     setIsPedalOn,
   } = useDemoState()
@@ -34,7 +35,7 @@ const Switch = ({
     const nextIndex = (currentValIndex + 1) % numValues
     const nextValue = activePreset.values[nextIndex]
     selectSweepSetting(id, nextValue)
-    setIsPedalOn(true)
+    setIsPedalOn(pedalName, true)
   }
 
   const interactionColor = isSweepPresetLoaded
@@ -49,13 +50,13 @@ const Switch = ({
             <InteractionContainer
               size={size}
               color="cyan"
-              isHidden={isPedalOn || id !== "bypass_switch"}
+              isHidden={getIsPedalOn(pedalName) || id !== "bypass_switch"}
             >
               <StompSwitch
                 size={size}
                 onClick={() => {
                   if (id === "bypass_switch") {
-                    setIsPedalOn(!isPedalOn)
+                    setIsPedalOn(pedalName, !getIsPedalOn(pedalName))
                   }
                 }}
               />

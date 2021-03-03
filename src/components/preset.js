@@ -50,10 +50,12 @@ const StyledPresetTag = styled.button`
   }
 `
 
-const Preset = ({ id = "", label = "", isSweep = false }) => {
+const Preset = ({ id = "", label = "", isSweep = false, ...rest }) => {
   const {
-    isPedalOn,
+    demoType,
+    getIsPedalOn,
     activePreset,
+    activePedal,
     hasLoadingStarted,
     presetsLoaded,
     presetLoadingErrors,
@@ -61,9 +63,11 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
     setIsPedalOn,
   } = useDemoState()
 
-  const isActive = id === activePreset.id && isPedalOn
-  const loaded = presetsLoaded.includes(id)
-  const hasError = presetLoadingErrors.includes(id)
+  const audioRelevantId = demoType === "single" ? id : rest[activePedal].id
+
+  const isActive = id === activePreset.id && getIsPedalOn(activePedal)
+  const loaded = presetsLoaded.includes(audioRelevantId)
+  const hasError = presetLoadingErrors.includes(audioRelevantId)
 
   const renderIcon = () => {
     if (hasError) {
@@ -79,10 +83,10 @@ const Preset = ({ id = "", label = "", isSweep = false }) => {
 
   const handleClick = () => {
     if (isActive) {
-      setIsPedalOn(false)
+      setIsPedalOn(activePedal, false)
     } else {
       selectPreset(id)
-      setIsPedalOn(true)
+      setIsPedalOn(activePedal, true)
     }
   }
 

@@ -27,6 +27,24 @@ const StyledMain = styled.main`
   padding: 0 1rem;
 `
 
+const StyledList = styled.ul`
+  list-style: none;
+
+  li {
+    padding-bottom: 0.5rem;
+
+    &:before {
+      content: "\\2022";
+      color: var(--purple);
+      font-weight: bold;
+      display: inline-block;
+      width: 1.5rem;
+      margin-left: -1.5rem;
+      font-size: 1.6rem;
+    }
+  }
+`
+
 const Layout = ({
   children = null,
   location = {},
@@ -45,6 +63,7 @@ const Layout = ({
       <MDXProvider
         components={{
           a: MarkdownLink,
+          ul: StyledList,
         }}
       >
         {children}

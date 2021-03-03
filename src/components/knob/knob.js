@@ -111,6 +111,7 @@ const levelToRotationFunc = ({ level, isRotary, rotaryAngles }) =>
 const Knob = ({
   id = "",
   size = 64,
+  pedalName = "",
   level = 5,
   type = "bakelit",
   isSweep = false,
@@ -162,6 +163,7 @@ const Knob = ({
       {isSweep ? (
         <DragSweepControl
           id={id}
+          pedalName={pedalName}
           render={renderKnob}
           size={size}
           initialValue={activePreset.initialValue}

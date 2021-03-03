@@ -10,8 +10,14 @@ const findClosestValue = (value, valueArray) =>
 
 const DemoContext = createContext(null)
 
-const DemoContextProvider = ({ children = null, presets = [] }) => {
-  const [isPedalOn, setIsPedalOn] = useState(false)
+const DemoContextProvider = ({
+  children = null,
+  presets = [],
+  pedals = [],
+  type = "single",
+}) => {
+  const [activePedal, setActivePedal] = useState(pedals[0]?.name)
+  const [pedalsOn, setPedalsOn] = useState(pedals.map(({ name }) => name))
   const [activePreset, setActivePreset] = useState(presets[0] || {})
   const [sweepSetting, setSweepSetting] = useState({})
   const [presetsLoaded, setPresetsLoaded] = useState([])
@@ -38,6 +44,16 @@ const DemoContextProvider = ({ children = null, presets = [] }) => {
     setPresetLoadingErrors(prevState => [...prevState, id])
   }
 
+  const getIsPedalOn = name => pedalsOn.includes(name)
+
+  const setIsPedalOn = (name, isOn) => {
+    if (isOn) {
+      setPedalsOn(prev => [...prev, name])
+    } else {
+      setPedalsOn(prev => prev.filter(pedal => pedal !== name))
+    }
+  }
+
   useEffect(() => {
     if (activePreset.isSweep) {
       setSweepSetting({
@@ -51,18 +67,22 @@ const DemoContextProvider = ({ children = null, presets = [] }) => {
   return (
     <DemoContext.Provider
       value={{
-        isPedalOn,
+        pedalsOn,
         activePreset,
         sweepSetting,
         presetsLoaded,
         hasLoadingStarted,
         presetLoadingErrors,
+        activePedal,
+        demoType: type,
+        getIsPedalOn,
         setHasLoadingStarted,
         setIsPedalOn,
         selectPreset,
         selectSweepSetting,
         addPresetsLoaded,
         addPresetLoadingError,
+        setActivePedal,
       }}
     >
       {children}

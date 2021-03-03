@@ -1,105 +1,107 @@
 {
-  "pedal": {
-    "slug": "strymon_iridium",
-    "controls": {
-      "width": 300,
-      "knobs": [
-        {
-          "id": "drive",
-          "size": 54,
-          "position": {
-            "top": 44,
-            "left": 24
-          }
-        },
-        {
-          "id": "level",
-          "size": 54,
-          "position": {
-            "top": 44,
-            "left": 224
-          }
-        },
-        {
-          "id": "bass",
-          "size": 54,
-          "position": {
-            "top": 122,
-            "left": 24
-          }
-        },
-        {
-          "id": "middle",
-          "size": 54,
-          "position": {
-            "top": 100,
-            "left": 87
-          }
-        },
-        {
-          "id": "treble",
-          "size": 54,
-          "position": {
-            "top": 100,
-            "left": 160
-          }
-        },
-        {
-          "id": "room",
-          "size": 54,
-          "position": {
-            "top": 122,
-            "left": 224
-          }
-        }
-      ],
-      "leds": [
-        {
-          "id": "on_led",
-          "size": 30,
-          "position": {
-            "top": 214,
-            "left": 225
-          }
-        }
-      ],
-      "switches": [
-        {
-          "id": "amp",
-          "size": 30,
-          "position": {
-            "left": 114,
-            "top": 56
+  "pedals": [
+    {
+      "name": "strymon_iridium",
+      "controls": {
+        "width": 300,
+        "knobs": [
+          {
+            "id": "drive",
+            "size": 54,
+            "position": {
+              "top": 44,
+              "left": 24
+            }
           },
-          "type": "toggle"
-        },
-        {
-          "id": "cab",
-          "size": 30,
-          "position": {
-            "top": 56,
-            "left": 157
+          {
+            "id": "level",
+            "size": 54,
+            "position": {
+              "top": 44,
+              "left": 224
+            }
           },
-          "type": "toggle"
-        },
-        {
-          "id": "bypass_switch",
-          "size": 48,
-          "position": {
-            "top": 249,
-            "left": 216
+          {
+            "id": "bass",
+            "size": 54,
+            "position": {
+              "top": 122,
+              "left": 24
+            }
+          },
+          {
+            "id": "middle",
+            "size": 54,
+            "position": {
+              "top": 100,
+              "left": 87
+            }
+          },
+          {
+            "id": "treble",
+            "size": 54,
+            "position": {
+              "top": 100,
+              "left": 160
+            }
+          },
+          {
+            "id": "room",
+            "size": 54,
+            "position": {
+              "top": 122,
+              "left": 224
+            }
           }
-        }
-      ],
-      "labels": [
-        {
-          "id": "room_size",
-          "labelPosition": { "left": 270, "top": 230 },
-          "position": { "left": 228, "top": 154 }
-        }
-      ]
+        ],
+        "leds": [
+          {
+            "id": "on_led",
+            "size": 30,
+            "position": {
+              "top": 214,
+              "left": 225
+            }
+          }
+        ],
+        "switches": [
+          {
+            "id": "amp",
+            "size": 30,
+            "position": {
+              "left": 114,
+              "top": 56
+            },
+            "type": "toggle"
+          },
+          {
+            "id": "cab",
+            "size": 30,
+            "position": {
+              "top": 56,
+              "left": 157
+            },
+            "type": "toggle"
+          },
+          {
+            "id": "bypass_switch",
+            "size": 48,
+            "position": {
+              "top": 249,
+              "left": 216
+            }
+          }
+        ],
+        "labels": [
+          {
+            "id": "room_size",
+            "labelPosition": { "left": 270, "top": 230 },
+            "position": { "left": 228, "top": 154 }
+          }
+        ]
+      }
     }
-  },
+  ],
   "presets": [
     {
       "id": "crunchy_vox",

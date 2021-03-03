@@ -10,33 +10,41 @@ const PostLayout = ({
   data: {
     mdx: {
       body,
-      frontmatter: { title, date, featuredImage },
+      frontmatter: { title, date, featuredImage, hideHeroImage },
       excerpt,
     },
   } = {
     mdx: {
       body: "",
-      frontmatter: { title: "", featuredImage: {}, date: "" },
+      frontmatter: {
+        title: "",
+        featuredImage: {},
+        date: "",
+        hideHeroImage: false,
+      },
       excerpt: "",
     },
   },
   location = {},
 }) => {
-  const featuredImgFluid = featuredImage.childImageSharp.fluid
+  const featuredImgFluid = featuredImage?.childImageSharp?.fluid
   return (
     <Layout location={location} title={title} description={excerpt}>
       <Breadcrumb label="All posts" />
       <h1>{title}</h1>
       <DateTag date={date} />
-      <Img
-        fluid={featuredImgFluid}
-        style={{
-          margin: "1rem auto 0",
-          display: "block",
-          maxHeight: "400px",
-        }}
-        imgStyle={{ objectFit: "contain" }}
-      />
+      {!hideHeroImage && (
+        <Img
+          fluid={featuredImgFluid}
+          style={{
+            margin: "1rem auto 0",
+            display: "block",
+            maxHeight: "400px",
+          }}
+          imgStyle={{ objectFit: "contain" }}
+        />
+      )}
+
       <MDXRenderer>{body}</MDXRenderer>
     </Layout>
   )
@@ -50,6 +58,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date
+        hideHeroImage
         featuredImage {
           childImageSharp {
             fluid(maxWidth: 700) {

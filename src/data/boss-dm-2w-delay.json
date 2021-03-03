@@ -1,38 +1,40 @@
 {
-  "pedal": {
-    "slug": "boss-dm-2w-delay",
-    "controls": {
-      "knobs": [
-        { "id": "rate", "size": 56, "position": { "top": 21, "left": 77 } },
-        {
-          "id": "echo",
-          "size": 42,
-          "position": { "top": 65, "left": 129 },
-          "type": "knurled"
-        },
-        {
-          "id": "intensity",
-          "size": 56,
-          "position": { "top": 21, "left": 169 }
-        }
-      ],
-      "leds": [
-        {
-          "id": "on_led",
-          "size": 36,
-          "position": { "top": 7, "left": 133 }
-        }
-      ],
-      "switches": [
-        {
-          "id": "mode",
-          "type": "slide",
-          "size": 26,
-          "position": { "top": 34, "left": 138 }
-        }
-      ]
+  "pedals": [
+    {
+      "name": "boss-dm-2w-delay",
+      "controls": {
+        "knobs": [
+          { "id": "rate", "size": 56, "position": { "top": 21, "left": 77 } },
+          {
+            "id": "echo",
+            "size": 42,
+            "position": { "top": 65, "left": 129 },
+            "type": "knurled"
+          },
+          {
+            "id": "intensity",
+            "size": 56,
+            "position": { "top": 21, "left": 169 }
+          }
+        ],
+        "leds": [
+          {
+            "id": "on_led",
+            "size": 36,
+            "position": { "top": 7, "left": 133 }
+          }
+        ],
+        "switches": [
+          {
+            "id": "mode",
+            "type": "slide",
+            "size": 26,
+            "position": { "top": 34, "left": 138 }
+          }
+        ]
+      }
     }
-  },
+  ],
   "presets": [
     {
       "id": "eighth_note",

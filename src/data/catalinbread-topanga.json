@@ -1,71 +1,73 @@
 {
-  "pedal": {
-    "slug": "catalinbread-topanga",
-    "controls": {
-      "knobs": [
-        {
-          "id": "dwell",
-          "size": 48,
-          "position": {
-            "top": 24,
-            "left": 72
+  "pedals": [
+    {
+      "name": "catalinbread-topanga",
+      "controls": {
+        "knobs": [
+          {
+            "id": "dwell",
+            "size": 48,
+            "position": {
+              "top": 24,
+              "left": 72
+            },
+            "type": "simpledot"
           },
-          "type": "simpledot"
-        },
-        {
-          "id": "tone",
-          "size": 48,
-          "position": {
-            "top": 24,
-            "left": 177
+          {
+            "id": "tone",
+            "size": 48,
+            "position": {
+              "top": 24,
+              "left": 177
+            },
+            "type": "simpledot"
           },
-          "type": "simpledot"
-        },
-        {
-          "id": "mix",
-          "size": 48,
-          "position": {
-            "top": 92,
-            "left": 72
+          {
+            "id": "mix",
+            "size": 48,
+            "position": {
+              "top": 92,
+              "left": 72
+            },
+            "type": "simpledot"
           },
-          "type": "simpledot"
-        },
-        {
-          "id": "volume",
-          "size": 48,
-          "position": {
-            "top": 92,
-            "left": 177
-          },
-          "type": "simpledot"
-        }
-      ],
-      "leds": [
-        {
-          "id": "on_led",
-          "size": 60,
-          "position": {
-            "top": 96,
-            "left": 118
-          },
-          "colors": {
-            "on": "#e08e57",
-            "off": "#818C9Aaa"
+          {
+            "id": "volume",
+            "size": 48,
+            "position": {
+              "top": 92,
+              "left": 177
+            },
+            "type": "simpledot"
           }
-        }
-      ],
-      "switches": [
-        {
-          "id": "bypass_switch",
-          "size": 56,
-          "position": {
-            "top": 210,
-            "left": 121
+        ],
+        "leds": [
+          {
+            "id": "on_led",
+            "size": 60,
+            "position": {
+              "top": 96,
+              "left": 118
+            },
+            "colors": {
+              "on": "#e08e57",
+              "off": "#818C9Aaa"
+            }
           }
-        }
-      ]
+        ],
+        "switches": [
+          {
+            "id": "bypass_switch",
+            "size": 56,
+            "position": {
+              "top": 210,
+              "left": 121
+            }
+          }
+        ]
+      }
     }
-  },
+  ],
   "presets": [
     {
       "id": "drippy_wet",

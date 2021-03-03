@@ -1,18 +1,28 @@
 import React, { memo, useRef, useEffect, useState } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
-const setAnimationDuration = index => `
+const setAnimationDuration = index => css`
   :nth-child(${index}) {
     animation-duration: ${Math.random() * 200 + 400}ms;
   }
 `
 
 const StyledVisualizer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+  background: var(--dark);
+
+  ${({ hide }) =>
+    hide &&
+    css`
+      z-index: -1;
+    `}
 
   @keyframes vizBar {
     from {
@@ -36,13 +46,17 @@ const StyledVisualizer = styled.div`
     border-radius: 2px;
     flex: 0 0 0.5rem;
 
-    animation: vizBar -1000ms 0ms linear infinite alternate;
+    ${({ hide }) =>
+      !hide &&
+      css`
+        animation: vizBar -1000ms 0ms linear infinite alternate;
+      `}
 
     ${({ elements }) => elements.map(index => setAnimationDuration(index + 1))}
   }
 `
 
-const AudioVisualizer = () => {
+const AudioVisualizer = ({ hide = true }) => {
   const [barArray, setBarArray] = useState([])
   const containerRef = useRef(null)
 
@@ -54,7 +68,7 @@ const AudioVisualizer = () => {
   }, [])
 
   return (
-    <StyledVisualizer elements={barArray} ref={containerRef}>
+    <StyledVisualizer elements={barArray} ref={containerRef} hide={hide}>
       {barArray.map(idx => (
         <div key={idx} className="bar" />
       ))}

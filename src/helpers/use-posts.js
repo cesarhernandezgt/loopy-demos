@@ -10,6 +10,7 @@ const usePosts = () => {
           filter: {
             frontmatter: { unpublished: { ne: true }, type: { eq: "post" } }
           }
+          sort: { fields: frontmatter___date, order: DESC }
         ) {
           edges {
             node {
