@@ -48,12 +48,12 @@
           {
             "id": "flerb_joke",
             "position": {
-              "top": 90,
-              "left": 90
+              "top": 96,
+              "left": 98
             },
             "labelPosition": {
               "top": 50,
-              "left": 25
+              "left": 48
             }
           }
         ]
