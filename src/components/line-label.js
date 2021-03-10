@@ -18,7 +18,7 @@ const StyledLabel = styled.span`
   color: ${props => props.color};
   font-size: 1rem;
   line-height: 1rem;
-  text-align: center;
+  text-align: left;
 `
 const LineLabel = ({
   id = "",
