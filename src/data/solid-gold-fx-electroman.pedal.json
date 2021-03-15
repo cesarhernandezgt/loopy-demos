@@ -1,0 +1,109 @@
+{
+  "name": "solid-gold-fx-electroman",
+  "controls": {
+    "knobs": [
+      {
+        "id": "level",
+        "type": "simple",
+        "size": 42,
+        "position": {
+          "top": 74,
+          "left": 12
+        }
+      },
+      {
+        "id": "repeat",
+        "type": "simple",
+        "size": 42,
+        "position": {
+          "top": 74,
+          "left": 64
+        }
+      },
+      {
+        "id": "color",
+        "type": "simple",
+        "size": 42,
+        "position": {
+          "top": 74,
+          "left": 118
+        }
+      },
+      {
+        "id": "flutter",
+        "type": "simple",
+        "size": 42,
+        "position": {
+          "top": 73,
+          "left": 173
+        }
+      },
+      {
+        "id": "time",
+        "type": "simple",
+        "size": 42,
+        "position": {
+          "top": 73,
+          "left": 227
+        }
+      }
+    ],
+    "leds": [
+      {
+        "id": "on_led",
+        "size": 32,
+        "colors": {
+          "off": "#d2e1e9a1",
+          "on": "#d4f9ff"
+        },
+        "position": {
+          "top": 126,
+          "left": 205
+        }
+      }
+    ],
+    "switches": [
+      {
+        "id": "bypass_switch",
+        "size": 42,
+        "position": {
+          "top": 224,
+          "left": 212
+        }
+      },
+      {
+        "id": "mode",
+        "type": "toggle",
+        "orientation": "horizontal",
+        "size": 28,
+        "position": {
+          "top": 145,
+          "left": 77
+        }
+      },
+      {
+        "id": "speed",
+        "type": "toggle",
+        "orientation": "horizontal",
+        "size": 28,
+        "position": {
+          "top": 145,
+          "left": 147
+        }
+      }
+    ],
+    "labels": [
+      {
+        "id": "fxloop",
+        "position": {
+          "top": 110,
+          "left": 0
+        },
+        "labelPosition": {
+          "top": 300,
+          "left": 130
+        }
+      }
+    ]
+  }
+}

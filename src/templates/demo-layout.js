@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { config } from "@fortawesome/fontawesome-svg-core"
 import Layout from "./layout"
 import Demo from "../components/demo-container"
 import Breadcrumb from "./breadcrumb"
@@ -11,7 +12,15 @@ const DemoLayout = ({
     mdx: {
       body,
       excerpt,
-      frontmatter: { image, builder, model, config, date, slug },
+      frontmatter: {
+        image,
+        builder,
+        model,
+        pedalData,
+        presetsData,
+        date,
+        slug,
+      },
     },
   } = {
     mdx: {
@@ -21,7 +30,8 @@ const DemoLayout = ({
         image: {},
         builder: "",
         model: "",
-        config: {},
+        pedalData: {},
+        presetsData: {},
         date: "",
         slug: "",
       },
@@ -29,10 +39,11 @@ const DemoLayout = ({
   },
   location = {},
 }) => {
-  const configData =
-    config?.internal?.content && JSON.parse(config.internal.content)
-  const { pedals, presets } = configData
-  const pedal = pedals[0]
+  const pedal =
+    pedalData?.internal?.content && JSON.parse(pedalData.internal.content)
+  const { presets } =
+    presetsData?.internal?.content && JSON.parse(presetsData.internal.content)
+
   pedal.image = image?.childImageSharp?.fluid
 
   const title = `${builder} - ${model}`
@@ -68,7 +79,12 @@ export const pageQuery = graphql`
             }
           }
         }
-        config {
+        pedalData {
+          internal {
+            content
+          }
+        }
+        presetsData {
           internal {
             content
           }

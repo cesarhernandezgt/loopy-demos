@@ -1,0 +1,83 @@
+{
+  "name": "crazy-tube-circuits-falcon",
+  "controls": {
+    "knobs": [
+      {
+        "id": "output",
+        "size": 74,
+        "position": {
+          "top": 30,
+          "left": 55
+        },
+        "type": "chicken",
+        "colors": {
+          "tick": "#1F1B1C",
+          "primary": "#FFFDFE",
+          "background": "#2B1A19"
+        }
+      },
+      {
+        "id": "tone",
+        "size": 75,
+        "position": {
+          "top": 116,
+          "left": 114
+        },
+        "type": "chicken",
+        "colors": {
+          "tick": "#1F1B1C",
+          "primary": "#FFFDFE",
+          "background": "#2B1A19"
+        }
+      },
+      {
+        "id": "volume",
+        "size": 75,
+        "position": {
+          "top": 31,
+          "left": 172
+        },
+        "type": "chicken",
+        "colors": {
+          "tick": "#1F1B1C",
+          "primary": "#FFFDFE",
+          "background": "#2B1A19"
+        }
+      }
+    ],
+    "leds": [
+      {
+        "id": "on_led",
+        "size": 32,
+        "position": {
+          "top": 308,
+          "left": 190
+        },
+        "colors": {
+          "on": "#d4f9ff",
+          "off": "#DCD65Da1"
+        }
+      }
+    ],
+    "switches": [
+      {
+        "id": "bypass_switch",
+        "size": 60,
+        "position": {
+          "top": 289,
+          "left": 122
+        }
+      },
+      {
+        "id": "mode",
+        "type": "toggle",
+        "size": 24,
+        "position": {
+          "top": 12,
+          "left": 138
+        },
+        "orientation": "horizontal"
+      }
+    ]
+  }
+}

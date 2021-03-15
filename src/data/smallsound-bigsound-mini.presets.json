@@ -1,36 +1,4 @@
 {
-  "pedals": [
-    {
-      "name": "smallsound_bigsound_mini",
-      "controls": {
-        "knobs": [
-          { "id": "gain", "size": 72, "position": { "top": 4, "left": 66 } },
-          { "id": "volume", "size": 72, "position": { "top": 4, "left": 168 } },
-          { "id": "bias", "size": 56, "position": { "top": 67, "left": 124 } },
-          { "id": "bass", "size": 56, "position": { "top": 125, "left": 74 } },
-          {
-            "id": "treble",
-            "size": 56,
-            "position": { "top": 127, "left": 175 }
-          }
-        ],
-        "leds": [
-          {
-            "id": "on_led",
-            "size": 36,
-            "position": { "top": 138, "left": 133 }
-          }
-        ],
-        "switches": [
-          {
-            "id": "bypass_switch",
-            "size": 59,
-            "position": { "top": 275, "left": 122 }
-          }
-        ]
-      }
-    }
-  ],
   "presets": [
     {
       "id": "spitty_starved",
