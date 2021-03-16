@@ -73,8 +73,6 @@ const VelcroFuzzShootout = () => {
 
   const { presets } = JSON.parse(data.presets.edges[0].node.internal.content)
 
-  console.log({ presets })
-
   return (
     <Demo
       slug="velcro-fuzz-shootout"
