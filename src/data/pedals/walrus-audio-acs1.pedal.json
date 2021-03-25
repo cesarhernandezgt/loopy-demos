@@ -1,0 +1,124 @@
+{
+  "name": "walrus-audio-acs1",
+  "controls": {
+    "knobs": [
+      {
+        "id": "bass",
+        "size": 46,
+        "position": {
+          "top": 23,
+          "left": 68
+        },
+        "type": "knurled"
+      },
+      {
+        "id": "mid",
+        "size": 46,
+        "position": {
+          "top": 23,
+          "left": 126
+        },
+        "type": "knurled"
+      },
+      {
+        "id": "treb",
+        "size": 46,
+        "position": {
+          "top": 23,
+          "left": 185
+        },
+        "type": "knurled"
+      },
+      {
+        "id": "vol",
+        "size": 46,
+        "position": {
+          "top": 100,
+          "left": 185
+        },
+        "type": "knurled"
+      },
+      {
+        "id": "gain",
+        "size": 46,
+        "position": {
+          "top": 100,
+          "left": 185
+        },
+        "type": "knurled"
+      },
+      {
+        "id": "room",
+        "size": 46,
+        "position": {
+          "top": 100,
+          "left": 185
+        },
+        "type": "knurled"
+      }
+    ],
+    "leds": [
+      {
+        "id": "on_led",
+        "size": 44,
+        "socket": true,
+        "position": {
+          "top": 241,
+          "left": 78
+        },
+        "colors": {
+          "off": "#d2e1e9a1",
+          "on": "#d4f9ff",
+          "socket": "black"
+        }
+      }
+    ],
+    "switches": [
+      {
+        "id": "bypass_switch",
+        "size": 50,
+        "position": {
+          "top": 279,
+          "left": 125
+        }
+      },
+      {
+        "id": "cab",
+        "size": 30,
+        "type": "toggle",
+        "orientation": "horizontal",
+        "position": {
+          "top": 108,
+          "left": 77
+        }
+      },
+      {
+        "id": "amp",
+        "size": 30,
+        "type": "toggle",
+        "orientation": "horizontal",
+        "position": {
+          "top": 108,
+          "left": 77
+        }
+      }
+    ],
+    "labels": [
+      {
+        "id": "left_label",
+        "position": { "top": 140, "left": 175 },
+        "labelPosition": { "top": 250, "left": 255 }
+      },
+      {
+        "id": "right_label",
+        "position": { "top": 140, "left": 175 },
+        "labelPosition": { "top": 250, "left": 255 }
+      },
+      {
+        "id": "cab_label",
+        "position": { "top": 140, "left": 175 },
+        "labelPosition": { "top": 250, "left": 255 }
+      }
+    ]
+  }
+}
