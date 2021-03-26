@@ -4,56 +4,38 @@
     "knobs": [
       {
         "id": "bass",
-        "size": 46,
-        "position": {
-          "top": 23,
-          "left": 68
-        },
+        "size": 44,
+        "position": { "left": 75, "top": 18 },
         "type": "knurled"
       },
       {
         "id": "mid",
-        "size": 46,
-        "position": {
-          "top": 23,
-          "left": 126
-        },
+        "size": 44,
+        "position": { "left": 133, "top": 18 },
         "type": "knurled"
       },
       {
         "id": "treb",
-        "size": 46,
-        "position": {
-          "top": 23,
-          "left": 185
-        },
+        "size": 44,
+        "position": { "left": 191, "top": 18 },
         "type": "knurled"
       },
       {
         "id": "vol",
-        "size": 46,
-        "position": {
-          "top": 100,
-          "left": 185
-        },
+        "size": 44,
+        "position": { "left": 73, "top": 86 },
         "type": "knurled"
       },
       {
         "id": "gain",
-        "size": 46,
-        "position": {
-          "top": 100,
-          "left": 185
-        },
+        "size": 44,
+        "position": { "left": 130, "top": 87 },
         "type": "knurled"
       },
       {
         "id": "room",
-        "size": 46,
-        "position": {
-          "top": 100,
-          "left": 185
-        },
+        "size": 44,
+        "position": { "left": 188, "top": 86 },
         "type": "knurled"
       }
     ],
@@ -62,62 +44,46 @@
         "id": "on_led",
         "size": 44,
         "socket": true,
-        "position": {
-          "top": 241,
-          "left": 78
-        },
-        "colors": {
-          "off": "#d2e1e9a1",
-          "on": "#d4f9ff",
-          "socket": "black"
-        }
+        "position": { "left": 78, "top": 241 },
+        "colors": { "off": "#d2e1e9a1", "on": "#d4f9ff", "socket": "black" }
       }
     ],
     "switches": [
       {
         "id": "bypass_switch",
-        "size": 50,
-        "position": {
-          "top": 279,
-          "left": 125
-        }
+        "size": 48,
+        "position": { "left": 75, "top": 280 }
       },
       {
         "id": "cab",
-        "size": 30,
+        "size": 32,
         "type": "toggle",
         "orientation": "horizontal",
-        "position": {
-          "top": 108,
-          "left": 77
-        }
+        "position": { "left": 80, "top": 148 }
       },
       {
         "id": "amp",
-        "size": 30,
+        "size": 32,
         "type": "toggle",
         "orientation": "horizontal",
-        "position": {
-          "top": 108,
-          "left": 77
-        }
+        "position": { "left": 191, "top": 148 }
       }
     ],
     "labels": [
       {
         "id": "left_label",
-        "position": { "top": 140, "left": 175 },
-        "labelPosition": { "top": 250, "left": 255 }
+        "position": { "left": 134, "top": 172 },
+        "labelPosition": { "left": 48, "top": 134 }
       },
       {
         "id": "right_label",
-        "position": { "top": 140, "left": 175 },
-        "labelPosition": { "top": 250, "left": 255 }
+        "position": { "left": 170, "top": 172 },
+        "labelPosition": { "left": 256, "top": 134 }
       },
       {
         "id": "cab_label",
-        "position": { "top": 140, "left": 175 },
-        "labelPosition": { "top": 250, "left": 255 }
+        "position": { "left": 99, "top": 187 },
+        "labelPosition": { "left": 47, "top": 221 }
       }
     ]
   }
