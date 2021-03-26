@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 
 import Pedal from "./pedal"
+import PedalConfigInjector from "./pedal-config-injector"
 
 import useDemoState from "../helpers/use-demo-state"
 
@@ -157,16 +158,26 @@ const PedalsWrapper = ({ type = "single", pedals = [] }) => {
 
   return (
     <Wrapper pedals={pedals}>
-      {pedals.map(({ name, controls, image, alignment, scale }) => (
-        <Pedal
-          key={name}
-          name={name}
-          {...controls}
-          image={image}
-          alignment={alignment}
-          scale={scale}
-        />
-      ))}
+      {pedals.map(({ name, controls, image, alignment, scale, isDevMode }) => {
+        const HydratedPedal = props => (
+          <Pedal
+            key={name}
+            name={name}
+            {...controls}
+            image={image}
+            alignment={alignment}
+            scale={scale}
+            {...props}
+          />
+        )
+        return isDevMode ? (
+          <PedalConfigInjector key={name} config={controls}>
+            <HydratedPedal />
+          </PedalConfigInjector>
+        ) : (
+          <HydratedPedal />
+        )
+      })}
     </Wrapper>
   )
 }
