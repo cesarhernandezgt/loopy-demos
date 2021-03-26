@@ -161,7 +161,6 @@ const PedalsWrapper = ({ type = "single", pedals = [] }) => {
       {pedals.map(({ name, controls, image, alignment, scale, isDevMode }) => {
         const HydratedPedal = props => (
           <Pedal
-            key={name}
             name={name}
             {...controls}
             image={image}
@@ -175,7 +174,7 @@ const PedalsWrapper = ({ type = "single", pedals = [] }) => {
             <HydratedPedal />
           </PedalConfigInjector>
         ) : (
-          <HydratedPedal />
+          <HydratedPedal key={name} />
         )
       })}
     </Wrapper>
