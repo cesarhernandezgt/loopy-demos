@@ -34,9 +34,9 @@ const VelcroFuzzShootout = () => {
         filter: {
           relativePath: {
             in: [
-              "tone-electronix-animalizzer.pedal.json"
-              "smallsound-bigsound-mini.pedal.json"
-              "jhs-pedals-mini-foot-fuzz-v2.pedal.json"
+              "pedals/tone-electronix-animalizzer.pedal.json"
+              "pedals/smallsound-bigsound-mini.pedal.json"
+              "pedals/jhs-pedals-mini-foot-fuzz-v2.pedal.json"
             ]
           }
         }
@@ -50,7 +50,9 @@ const VelcroFuzzShootout = () => {
         }
       }
       presets: allFile(
-        filter: { relativePath: { eq: "velcro-fuzz-shootout.presets.json" } }
+        filter: {
+          relativePath: { eq: "presets/velcro-fuzz-shootout.presets.json" }
+        }
       ) {
         edges {
           node {

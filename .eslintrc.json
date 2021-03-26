@@ -1,31 +1,32 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:mdx/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "prettier",
-        "prettier/react",
-        "plugin:mdx/recommended"
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".mdx"] }
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "prettier"
-    ],
-    "rules": {
-        "prettier/prettier": "error",
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".mdx"] }],
-        "react/jsx-key": 2,
-        "react/jsx-props-no-spreading": 0,
-        "no-console": ["warn", { "allow": ["warn", "error"] }]
-    }
+    "react/jsx-key": 2,
+    "react/jsx-props-no-spreading": 0,
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" }]
+  }
 }

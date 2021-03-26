@@ -86,7 +86,7 @@ const Switch = ({
               onClick={onToggleSweepClick}
               aspectRatio={{ x: 1, y: 0.6 }}
             >
-              <SlideSwitch size={size} state={state} />,
+              <SlideSwitch size={size} state={state} />
             </InteractionContainer>
           ),
         }[type]
