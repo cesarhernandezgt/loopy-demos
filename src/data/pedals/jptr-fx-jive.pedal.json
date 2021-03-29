@@ -1,6 +1,5 @@
 {
   "name": "jptr-fx-jive",
-  "isDevMode": true,
   "controls": {
     "knobs": [
       {
@@ -12,7 +11,7 @@
       {
         "id": "gain",
         "size": 72,
-        "position": { "left": 67, "top": 126 },
+        "position": { "left": 67, "top": 125 },
         "type": "arrow"
       }
     ],
@@ -21,7 +20,7 @@
         "id": "on_led",
         "size": 43,
         "socket": true,
-        "position": { "left": 131, "top": 233 },
+        "position": { "left": 130, "top": 233 },
         "colors": { "off": "#d2e1e9a1", "on": "#d4f9ff", "socket": "black" }
       }
     ],
@@ -29,7 +28,7 @@
       {
         "id": "bypass_switch",
         "size": 50,
-        "position": { "left": 127, "top": 268 }
+        "position": { "left": 126, "top": 269 }
       },
       {
         "id": "toggle_a",
