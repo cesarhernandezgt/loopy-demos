@@ -1,0 +1,57 @@
+{
+  "name": "jptr-fx-jive",
+  "isDevMode": true,
+  "controls": {
+    "knobs": [
+      {
+        "id": "vol",
+        "size": 72,
+        "position": { "left": 67, "top": 43 },
+        "type": "arrow"
+      },
+      {
+        "id": "gain",
+        "size": 72,
+        "position": { "left": 67, "top": 126 },
+        "type": "arrow"
+      }
+    ],
+    "leds": [
+      {
+        "id": "on_led",
+        "size": 43,
+        "socket": true,
+        "position": { "left": 131, "top": 233 },
+        "colors": { "off": "#d2e1e9a1", "on": "#d4f9ff", "socket": "black" }
+      }
+    ],
+    "switches": [
+      {
+        "id": "bypass_switch",
+        "size": 50,
+        "position": { "left": 127, "top": 268 }
+      },
+      {
+        "id": "toggle_a",
+        "size": 38,
+        "type": "toggle",
+        "orientation": "horizontal",
+        "position": { "left": 150, "top": 48 }
+      },
+      {
+        "id": "toggle_b",
+        "size": 38,
+        "type": "toggle",
+        "orientation": "horizontal",
+        "position": { "left": 150, "top": 102 }
+      },
+      {
+        "id": "toggle_c",
+        "size": 38,
+        "type": "toggle",
+        "orientation": "horizontal",
+        "position": { "left": 150, "top": 155 }
+      }
+    ]
+  }
+}
