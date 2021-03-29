@@ -1,6 +1,6 @@
 import React from "react"
 
-const SimpleKnob = ({
+const ChickenHeadKnob = ({
   size = 64,
   colors = {
     tick: "#1F1B1C",
@@ -39,4 +39,4 @@ const SimpleKnob = ({
   </svg>
 )
 
-export default SimpleKnob
+export default ChickenHeadKnob

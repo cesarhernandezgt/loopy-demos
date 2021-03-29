@@ -61,8 +61,8 @@ const InputWrapper = styled.label`
     width: 1.5rem;
     height: 1.5rem;
     position: absolute;
-    top: Number(0.2rem, 2);
-    left: Number(0.15rem, 2);
+    top: 0.2rem;
+    left: 0.15rem;
     color: ${COLORS.green};
   }
 
@@ -210,7 +210,7 @@ const PedalConfigurator = ({
           </div>
         ))}
         <h2>Switches</h2>
-        {modifiedConfig?.switches.map(
+        {modifiedConfig?.switches?.map(
           ({ size, position, orientation, id, type }) => (
             <div key={id}>
               <h3>{id}</h3>
@@ -274,7 +274,7 @@ const PedalConfigurator = ({
           )
         )}
         <h2>LEDs</h2>
-        {modifiedConfig?.leds.map(({ id, position, size, socket, colors }) => (
+        {modifiedConfig?.leds?.map(({ id, position, size, socket, colors }) => (
           <div key={id}>
             <h3>{id}</h3>
             <InputRow>
@@ -354,7 +354,7 @@ const PedalConfigurator = ({
           </div>
         ))}
         <h2>Labels</h2>
-        {modifiedConfig?.labels.map(({ id, position, labelPosition }) => (
+        {modifiedConfig?.labels?.map(({ id, position, labelPosition }) => (
           <div key={id}>
             <h3>{id}</h3>
             <InputRow>
