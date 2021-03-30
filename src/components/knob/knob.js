@@ -12,6 +12,7 @@ import JhsKnob from "./jhs-knob"
 import SimpleKnob from "./simple-knob"
 import SimpleDotKnob from "./simple-dot-knob"
 import ChickenHeadKnob from "./chicken-head-knob"
+import ArrowKnob from "./arrow-knob"
 import useDemoState from "../../helpers/use-demo-state"
 
 const StyledKnobContainer = styled.div`
@@ -146,6 +147,7 @@ const Knob = ({
             simple: <SimpleKnob size={size} {...rest} />,
             simpledot: <SimpleDotKnob size={size} {...rest} />,
             chicken: <ChickenHeadKnob size={size} {...rest} />,
+            arrow: <ArrowKnob size={size} {...rest} />,
           }[type]
         }
       </StyledKnobContainer>
